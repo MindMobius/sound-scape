@@ -1,0 +1,12 @@
+{
+  "name": "sound-scape",
+  "private": true,
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "npm --prefix prototypes/emotional-player run dev --",
+    "build": "npm --prefix prototypes/emotional-player run build",
+    "build:optical": "npm --prefix prototypes/optical-membrane-field run build",
+    "validate:assets": "node tools/validate-static-assets.mjs",
+    "check": "npm run validate:assets && npm run build"
+  }
+}
