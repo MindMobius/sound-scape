@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="zh-CN" data-variant="A">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#f0edeb" />
+    <meta name="description" content="声景模型母版运动实验" />
+    <title>声景 · 模型母版运动实验</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <!--
+      THESIS: Preserve Image 2 pixels as the material; refuse procedural reconstruction.
+      OWN-WORLD: Paper white, stippled translucent membranes, cool mineral neutrals, one coral field, restrained black controls.
+      STORY: A listener enters one sound world and can pause it without leaving the scene.
+      FIRST VIEWPORT: Full-bleed authored membrane field, product identity at the top, scene title in the image's negative space, compact playback controls below.
+      FORM: Pinned-reference motion prototype; A tests one-master drift and B tests adjacent model frames.
+      FINISH: this throwaway build ends with a visual review and an explicit A/B verdict.
+    -->
+    <main class="surface" id="surface">
+      <div class="motion-stack" id="motion-stack" aria-hidden="true">
+        <img
+          class="frame frame-base"
+          src="../../assets/brand/backgrounds/hero-background-light-right-v1.png"
+          width="1774"
+          height="887"
+          alt=""
+          decoding="sync"
+          fetchpriority="high"
+        />
+        <video
+          class="motion-video"
+          id="motion-video"
+          src="../../assets/experiments/motion/hero-loop-optical-v1.mp4"
+          poster="../../assets/brand/backgrounds/hero-background-light-right-v1.png"
+          width="1600"
+          height="800"
+          autoplay
+          muted
+          loop
+          playsinline
+          preload="auto"
+          aria-hidden="true"
+        ></video>
+      </div>
+
+      <header class="topbar">
+        <a class="brand" href="../../../" aria-label="声景首页">
+          <span class="brand-mark" aria-hidden="true">声</span>
+          <span class="brand-name">声景</span>
+          <span class="brand-latin">Soundscape</span>
+        </a>
+        <p class="local-time">雨夜 · 07:42</p>
+      </header>
+
+      <section class="scene-copy" aria-labelledby="scene-title">
+        <p class="scene-state"><span class="state-pulse" aria-hidden="true"></span>正在聆听</p>
+        <h1 id="scene-title">雷雨夜里，<br />点燃篝火的木屋</h1>
+        <p class="scene-elements">雨檐 · 远雷 · 松木火 · 夜风</p>
+      </section>
+
+      <section class="player" aria-label="播放控制">
+        <button class="play-button" id="play-button" type="button" aria-label="暂停" title="暂停">
+          <span class="pause-icon" aria-hidden="true"><i></i><i></i></span>
+          <span class="play-icon" aria-hidden="true"></span>
+        </button>
+        <div class="volume-control">
+          <span class="volume-label">音量</span>
+          <input id="volume" type="range" min="0" max="100" value="68" aria-label="总音量" />
+          <output id="volume-output" for="volume">68</output>
+        </div>
+      </section>
+
+      <nav class="prototype-switcher" aria-label="运动样片">
+        <button id="previous-variant" type="button" aria-label="上一个样片" title="上一个样片">
+          <span class="chevron chevron-left" aria-hidden="true"></span>
+        </button>
+        <p id="variant-label" aria-live="polite"></p>
+        <button id="next-variant" type="button" aria-label="下一个样片" title="下一个样片">
+          <span class="chevron chevron-right" aria-hidden="true"></span>
+        </button>
+      </nav>
+    </main>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

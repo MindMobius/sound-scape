@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#eeebe7" />
+    <meta
+      name="description"
+      content="声景产品界面原型：用一句自然语言生成并持续聆听可调节的声音环境。"
+    />
+    <title>声景 · 产品界面原型</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <!--
+      THESIS: 声音不是一张封面，而是一组仍在呼吸的材料关系；拒绝居中播放键加风景照的冥想播放器模板。
+      OWN-WORLD: 暖灰纸面、炭黑、矿物灰绿、雾蓝和余烬珊瑚；精密细线、平直分区与 Image 2 半透明膜片共同构成界面。
+      STORY: 用户先继续听当前声景，再用一句话后台生成；新声景就绪后明确决定是否切换，高级层次始终可达但不抢占默认体验。
+      FIRST VIEWPORT: 三个结构分别以安静场域、暗夜沉浸和声音图层为主角，主播放动作固定可见，生成状态不遮挡当前播放。
+      FORM: 已确定视觉世界中的产品表面探索，三个结构来自 surface seed 7529301c，A 为本轮 lead。
+      FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
+    -->
+
+    <svg class="icon-library" aria-hidden="true">
+      <symbol id="icon-play" viewBox="0 0 24 24">
+        <path d="m6 3 14 9-14 9z" />
+      </symbol>
+      <symbol id="icon-pause" viewBox="0 0 24 24">
+        <path d="M8 5v14M16 5v14" />
+      </symbol>
+      <symbol id="icon-volume" viewBox="0 0 24 24">
+        <path d="M11 5 6 9H2v6h4l5 4zM15.5 8.5a5 5 0 0 1 0 7M18 6a8 8 0 0 1 0 12" />
+      </symbol>
+      <symbol id="icon-settings" viewBox="0 0 24 24">
+        <path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z" />
+        <path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-2.83 2.83-.06-.06a1.7 1.7 0 0 0-1.88-.34 1.7 1.7 0 0 0-1.03 1.56V21h-4v-.08A1.7 1.7 0 0 0 8.95 19.4a1.7 1.7 0 0 0-1.88.34l-.06.06-2.83-2.83.06-.06A1.7 1.7 0 0 0 4.58 15 1.7 1.7 0 0 0 3 14H3v-4h.08A1.7 1.7 0 0 0 4.6 8.95a1.7 1.7 0 0 0-.34-1.88l-.06-.06 2.83-2.83.06.06A1.7 1.7 0 0 0 9 4.58 1.7 1.7 0 0 0 10 3V3h4v.08A1.7 1.7 0 0 0 15.05 4.6a1.7 1.7 0 0 0 1.88-.34l.06-.06 2.83 2.83-.06.06A1.7 1.7 0 0 0 19.42 9 1.7 1.7 0 0 0 21 10h.08v4H21a1.7 1.7 0 0 0-1.6 1Z" />
+      </symbol>
+      <symbol id="icon-sparkles" viewBox="0 0 24 24">
+        <path d="m12 3-1.1 3.1L8 7.2l2.9 1.1L12 11.5l1.1-3.2L16 7.2l-2.9-1.1zM5.5 12.5l-.9 2.3-2.1.9 2.1.8.9 2.4.9-2.4 2.1-.8-2.1-.9zM17.5 13l-1.2 3.2-3.1 1.2 3.1 1.2 1.2 3.1 1.2-3.1 3.1-1.2-3.1-1.2z" />
+      </symbol>
+      <symbol id="icon-chevron-left" viewBox="0 0 24 24">
+        <path d="m15 18-6-6 6-6" />
+      </symbol>
+      <symbol id="icon-chevron-right" viewBox="0 0 24 24">
+        <path d="m9 18 6-6-6-6" />
+      </symbol>
+      <symbol id="icon-check" viewBox="0 0 24 24">
+        <path d="m5 12 4 4L19 6" />
+      </symbol>
+      <symbol id="icon-plus" viewBox="0 0 24 24">
+        <path d="M12 5v14M5 12h14" />
+      </symbol>
+      <symbol id="icon-more" viewBox="0 0 24 24">
+        <circle cx="5" cy="12" r="1" />
+        <circle cx="12" cy="12" r="1" />
+        <circle cx="19" cy="12" r="1" />
+      </symbol>
+      <symbol id="icon-layers" viewBox="0 0 24 24">
+        <path d="m12 2 9 5-9 5-9-5zM3 12l9 5 9-5M3 17l9 5 9-5" />
+      </symbol>
+    </svg>
+
+    <div class="prototype" data-variant="A" data-playing="true">
+      <header class="topbar">
+        <button class="brand" type="button" data-go-variant="A" aria-label="返回默认聆听界面">
+          <span class="brand-name">声景</span>
+          <span class="brand-rule" aria-hidden="true"></span>
+          <span class="brand-tagline">一句话，用声音描述世界。</span>
+        </button>
+
+        <div class="now-indicator" aria-live="polite">
+          <span class="now-dot" aria-hidden="true"></span>
+          <span data-play-status>正在播放</span>
+        </div>
+
+        <div class="topbar-actions">
+          <button class="text-button library-button" type="button" data-go-variant="C">
+            声景库
+          </button>
+          <button
+            class="icon-button"
+            type="button"
+            data-go-variant="C"
+            aria-label="打开高级编排"
+            title="高级编排"
+          >
+            <svg aria-hidden="true"><use href="#icon-settings"></use></svg>
+          </button>
+        </div>
+      </header>
+
+      <main class="variant-stage">
+        <section class="screen screen-a" aria-label="方案 A，安静聆听场域">
+          <div class="a-layout">
+            <div class="a-main">
+              <div class="a-scene-visual scene-motion" aria-label="当前声景">
+                <div class="a-scene-copy">
+                  <p class="eyebrow"><span class="eyebrow-line" aria-hidden="true"></span>当前声景</p>
+                  <h1 class="scene-title">雷雨夜里，点燃篝火的木屋</h1>
+                  <p class="scene-description">檐雨由远及近，炉火在木墙之间缓慢起伏</p>
+                  <div class="sound-source-list" aria-label="当前声音层">
+                    <span>远雷</span><span>檐雨</span><span>炉火</span><span>木屋回响</span>
+                  </div>
+                </div>
+                <div class="scene-coordinate" aria-hidden="true">
+                  <span>FIELD 04</span><span>23:18 / 深夜</span>
+                </div>
+              </div>
+
+              <div class="a-transport transport">
+                <button class="play-button" type="button" data-play aria-label="暂停" title="暂停">
+                  <svg data-icon-play hidden aria-hidden="true"><use href="#icon-play"></use></svg>
+                  <svg data-icon-pause aria-hidden="true"><use href="#icon-pause"></use></svg>
+                </button>
+                <div class="transport-scene">
+                  <strong class="scene-title">雷雨夜里，点燃篝火的木屋</strong>
+                  <span>连续声景 · 自然演化中</span>
+                </div>
+                <span class="time-label" data-elapsed>12:48</span>
+                <input
+                  class="timeline"
+                  type="range"
+                  min="0"
+                  max="2700"
+                  value="768"
+                  data-progress
+                  aria-label="播放进度"
+                />
+                <span class="time-label">45:00</span>
+              </div>
+            </div>
+
+            <aside class="a-rail" aria-label="生成与整体感受">
+              <section class="rail-section prompt-section">
+                <div class="section-heading">
+                  <div>
+                    <p class="section-kicker">下一处声音</p>
+                    <h2>描述你想听见的世界</h2>
+                  </div>
+                  <span class="job-behavior">后台生成</span>
+                </div>
+                <label class="prompt-box">
+                  <span class="sr-only">新的声景描述</span>
+                  <textarea data-prompt rows="3">雨停后的松林，远处传来钟声</textarea>
+                </label>
+                <button class="generate-button" type="button" data-generate>
+                  <svg aria-hidden="true"><use href="#icon-sparkles"></use></svg>
+                  <span data-generate-label>生成声景</span>
+                </button>
+              </section>
+
+              <div class="generation-panel" data-generation data-mode="idle" aria-live="polite">
+                <div class="generation-idle" data-generation-idle>
+                  <span class="status-glyph" aria-hidden="true"></span>
+                  <div><strong>当前播放不会中断</strong><span>新声景完成后再由你决定是否切换</span></div>
+                </div>
+                <div class="generation-working" data-generation-working>
+                  <div class="generation-line">
+                    <strong data-generation-state>正在理解场景</strong><span data-generation-percent>0%</span>
+                  </div>
+                  <div class="job-meter" aria-hidden="true"><i data-generation-progress></i></div>
+                  <span class="generation-note">当前声景继续播放</span>
+                </div>
+                <div class="generation-ready" data-generation-ready>
+                  <div class="ready-mark"><svg aria-hidden="true"><use href="#icon-check"></use></svg></div>
+                  <div class="ready-copy"><span>新声景已就绪</span><strong data-ready-title>雨停后的松林，远处传来钟声</strong></div>
+                  <button type="button" data-switch-ready>切换</button>
+                </div>
+              </div>
+
+              <section class="rail-section feeling-section">
+                <div class="section-heading compact-heading">
+                  <h2>整体感受</h2><span>即时生效</span>
+                </div>
+                <label class="range-row">
+                  <span class="range-label"><svg aria-hidden="true"><use href="#icon-volume"></use></svg>音量</span>
+                  <input type="range" min="0" max="100" value="72" data-control="volume" />
+                  <output data-output="volume">72%</output>
+                </label>
+                <div class="choice-row">
+                  <span>力度</span>
+                  <div class="segmented" role="group" aria-label="力度">
+                    <button type="button" data-setting="intensity" data-value="light">轻</button>
+                    <button class="is-selected" type="button" data-setting="intensity" data-value="heavy">重</button>
+                  </div>
+                </div>
+                <div class="choice-row">
+                  <span>层次</span>
+                  <div class="segmented" role="group" aria-label="层次">
+                    <button class="is-selected" type="button" data-setting="complexity" data-value="simple">简</button>
+                    <button type="button" data-setting="complexity" data-value="rich">繁</button>
+                  </div>
+                </div>
+              </section>
+            </aside>
+          </div>
+        </section>
+
+        <section class="screen screen-b" aria-label="方案 B，暗夜沉浸播放器">
+          <div class="b-visual scene-motion">
+            <div class="b-scene-copy">
+              <p class="eyebrow"><span class="eyebrow-line" aria-hidden="true"></span>此刻正在听</p>
+              <h1 class="scene-title">雷雨夜里，点燃篝火的木屋</h1>
+              <p class="scene-description">远雷在屋外移动，雨水沿着木檐落下，火星偶尔爆裂</p>
+            </div>
+
+            <aside class="b-compose" aria-label="生成下一处声景">
+              <p class="section-kicker">下一处声音</p>
+              <label class="b-prompt">
+                <span class="sr-only">新的声景描述</span>
+                <textarea data-prompt rows="3">雨停后的松林，远处传来钟声</textarea>
+              </label>
+              <button class="generate-button light-button" type="button" data-generate>
+                <svg aria-hidden="true"><use href="#icon-sparkles"></use></svg>
+                <span data-generate-label>在后台生成</span>
+              </button>
+
+              <div class="generation-panel dark-generation" data-generation data-mode="idle" aria-live="polite">
+                <div class="generation-idle" data-generation-idle>
+                  <span class="status-glyph" aria-hidden="true"></span>
+                  <div><strong>当前声景保持播放</strong><span>生成完成后不会自动切换</span></div>
+                </div>
+                <div class="generation-working" data-generation-working>
+                  <div class="generation-line">
+                    <strong data-generation-state>正在理解场景</strong><span data-generation-percent>0%</span>
+                  </div>
+                  <div class="job-meter" aria-hidden="true"><i data-generation-progress></i></div>
+                  <span class="generation-note">不中断当前声音</span>
+                </div>
+                <div class="generation-ready" data-generation-ready>
+                  <div class="ready-mark"><svg aria-hidden="true"><use href="#icon-check"></use></svg></div>
+                  <div class="ready-copy"><span>下一处声景已就绪</span><strong data-ready-title>雨停后的松林，远处传来钟声</strong></div>
+                  <button type="button" data-switch-ready>切换</button>
+                </div>
+              </div>
+            </aside>
+
+            <div class="b-depth" aria-label="当前声音组成">
+              <span><i style="--depth: 84%"></i>雨檐</span>
+              <span><i style="--depth: 63%"></i>炉火</span>
+              <span><i style="--depth: 42%"></i>远雷</span>
+              <span><i style="--depth: 28%"></i>木屋</span>
+            </div>
+          </div>
+
+          <div class="b-dock transport">
+            <button class="play-button light-play" type="button" data-play aria-label="暂停" title="暂停">
+              <svg data-icon-play hidden aria-hidden="true"><use href="#icon-play"></use></svg>
+              <svg data-icon-pause aria-hidden="true"><use href="#icon-pause"></use></svg>
+            </button>
+            <div class="b-now">
+              <span>当前声景</span><strong class="scene-title">雷雨夜里，点燃篝火的木屋</strong>
+            </div>
+            <span class="time-label" data-elapsed>12:48</span>
+            <input class="timeline" type="range" min="0" max="2700" value="768" data-progress aria-label="播放进度" />
+            <label class="dock-volume">
+              <svg aria-hidden="true"><use href="#icon-volume"></use></svg>
+              <input type="range" min="0" max="100" value="72" data-control="volume" aria-label="音量" />
+              <output data-output="volume">72%</output>
+            </label>
+            <div class="segmented dark-segmented" role="group" aria-label="力度">
+              <button type="button" data-setting="intensity" data-value="light">轻</button>
+              <button class="is-selected" type="button" data-setting="intensity" data-value="heavy">重</button>
+            </div>
+            <div class="segmented dark-segmented" role="group" aria-label="层次">
+              <button class="is-selected" type="button" data-setting="complexity" data-value="simple">简</button>
+              <button type="button" data-setting="complexity" data-value="rich">繁</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="screen screen-c" aria-label="方案 C，声音图层工作区">
+          <div class="c-workspace">
+            <aside class="scene-library" aria-label="声景库">
+              <div class="library-heading">
+                <div><p class="section-kicker">SCENES</p><h2>声景库</h2></div>
+                <button class="icon-button small-icon" type="button" aria-label="新建声景" title="新建声景" data-focus-prompt>
+                  <svg aria-hidden="true"><use href="#icon-plus"></use></svg>
+                </button>
+              </div>
+              <div class="scene-list">
+                <button class="scene-item is-active" type="button" data-scene="雷雨夜里，点燃篝火的木屋" data-description="檐雨由远及近，炉火在木墙之间缓慢起伏">
+                  <span class="scene-swatch swatch-storm" aria-hidden="true"></span>
+                  <span><strong>雷雨木屋</strong><small>正在播放 · 4 层</small></span>
+                </button>
+                <button class="scene-item" type="button" data-scene="雾里的清晨渡口" data-description="水面轻拍木桩，远处的船笛被雾气拉长">
+                  <span class="scene-swatch swatch-fog" aria-hidden="true"></span>
+                  <span><strong>清晨渡口</strong><small>收藏 · 3 层</small></span>
+                </button>
+                <button class="scene-item" type="button" data-scene="风吹过空旷的剧场" data-description="幕布、木椅与遥远的通风口形成缓慢回响">
+                  <span class="scene-swatch swatch-stage" aria-hidden="true"></span>
+                  <span><strong>空旷剧场</strong><small>收藏 · 5 层</small></span>
+                </button>
+              </div>
+              <button class="library-more" type="button" data-toast="更多收藏会在这里出现">
+                <svg aria-hidden="true"><use href="#icon-more"></use></svg>全部声景
+              </button>
+            </aside>
+
+            <section class="layer-workbench" aria-label="当前声景图层">
+              <header class="workbench-heading">
+                <div>
+                  <p class="eyebrow"><span class="eyebrow-line" aria-hidden="true"></span>当前编排</p>
+                  <h1 class="scene-title">雷雨夜里，点燃篝火的木屋</h1>
+                  <p class="scene-description">檐雨由远及近，炉火在木墙之间缓慢起伏</p>
+                </div>
+                <div class="workbench-status"><span class="now-dot" aria-hidden="true"></span><span data-play-status>正在播放</span></div>
+              </header>
+
+              <div class="layer-board">
+                <div class="layer-board-head" aria-hidden="true">
+                  <span>声音层</span><span>距离与存在感</span><span>输出</span>
+                </div>
+                <article class="layer-row" data-layer-row>
+                  <div class="layer-identity"><span class="layer-thumb layer-rain" aria-hidden="true"></span><span><strong>檐下的雨</strong><small>近处 · 宽声场</small></span></div>
+                  <label class="layer-range"><span class="sr-only">檐下的雨存在感</span><input type="range" min="0" max="100" value="82" data-layer /></label>
+                  <button class="layer-toggle" type="button" data-layer-toggle aria-pressed="true">开启</button>
+                </article>
+                <article class="layer-row" data-layer-row>
+                  <div class="layer-identity"><span class="layer-thumb layer-fire" aria-hidden="true"></span><span><strong>壁炉与木柴</strong><small>身旁 · 中央</small></span></div>
+                  <label class="layer-range"><span class="sr-only">壁炉与木柴存在感</span><input type="range" min="0" max="100" value="68" data-layer /></label>
+                  <button class="layer-toggle" type="button" data-layer-toggle aria-pressed="true">开启</button>
+                </article>
+                <article class="layer-row" data-layer-row>
+                  <div class="layer-identity"><span class="layer-thumb layer-thunder" aria-hidden="true"></span><span><strong>山谷远雷</strong><small>远处 · 缓慢移动</small></span></div>
+                  <label class="layer-range"><span class="sr-only">山谷远雷存在感</span><input type="range" min="0" max="100" value="47" data-layer /></label>
+                  <button class="layer-toggle" type="button" data-layer-toggle aria-pressed="true">开启</button>
+                </article>
+                <article class="layer-row" data-layer-row>
+                  <div class="layer-identity"><span class="layer-thumb layer-room" aria-hidden="true"></span><span><strong>木屋回响</strong><small>空间 · 短衰减</small></span></div>
+                  <label class="layer-range"><span class="sr-only">木屋回响存在感</span><input type="range" min="0" max="100" value="36" data-layer /></label>
+                  <button class="layer-toggle" type="button" data-layer-toggle aria-pressed="true">开启</button>
+                </article>
+              </div>
+
+              <div class="c-transport transport">
+                <button class="play-button" type="button" data-play aria-label="暂停" title="暂停">
+                  <svg data-icon-play hidden aria-hidden="true"><use href="#icon-play"></use></svg>
+                  <svg data-icon-pause aria-hidden="true"><use href="#icon-pause"></use></svg>
+                </button>
+                <span class="time-label" data-elapsed>12:48</span>
+                <input class="timeline" type="range" min="0" max="2700" value="768" data-progress aria-label="播放进度" />
+                <span class="time-label">45:00</span>
+              </div>
+            </section>
+
+            <aside class="c-inspector" aria-label="整体控制与生成">
+              <section class="inspector-section">
+                <div class="section-heading compact-heading"><h2>整体感受</h2><span>即时生效</span></div>
+                <label class="range-row inspector-range">
+                  <span class="range-label"><svg aria-hidden="true"><use href="#icon-volume"></use></svg>音量</span>
+                  <input type="range" min="0" max="100" value="72" data-control="volume" />
+                  <output data-output="volume">72%</output>
+                </label>
+                <div class="choice-row"><span>力度</span><div class="segmented" role="group" aria-label="力度"><button type="button" data-setting="intensity" data-value="light">轻</button><button class="is-selected" type="button" data-setting="intensity" data-value="heavy">重</button></div></div>
+                <div class="choice-row"><span>层次</span><div class="segmented" role="group" aria-label="层次"><button class="is-selected" type="button" data-setting="complexity" data-value="simple">简</button><button type="button" data-setting="complexity" data-value="rich">繁</button></div></div>
+              </section>
+
+              <section class="inspector-section inspector-compose">
+                <div class="section-heading compact-heading"><h2>生成下一处</h2><span>后台任务</span></div>
+                <label class="prompt-box compact-prompt">
+                  <span class="sr-only">新的声景描述</span>
+                  <textarea data-prompt rows="3">雨停后的松林，远处传来钟声</textarea>
+                </label>
+                <button class="generate-button" type="button" data-generate>
+                  <svg aria-hidden="true"><use href="#icon-sparkles"></use></svg>
+                  <span data-generate-label>生成声景</span>
+                </button>
+              </section>
+
+              <div class="generation-panel inspector-generation" data-generation data-mode="idle" aria-live="polite">
+                <div class="generation-idle" data-generation-idle><span class="status-glyph" aria-hidden="true"></span><div><strong>生成与播放彼此独立</strong><span>完成后等待你的切换</span></div></div>
+                <div class="generation-working" data-generation-working><div class="generation-line"><strong data-generation-state>正在理解场景</strong><span data-generation-percent>0%</span></div><div class="job-meter" aria-hidden="true"><i data-generation-progress></i></div><span class="generation-note">当前四个声音层继续运行</span></div>
+                <div class="generation-ready" data-generation-ready><div class="ready-mark"><svg aria-hidden="true"><use href="#icon-check"></use></svg></div><div class="ready-copy"><span>新声景已就绪</span><strong data-ready-title>雨停后的松林，远处传来钟声</strong></div><button type="button" data-switch-ready>切换</button></div>
+              </div>
+            </aside>
+          </div>
+        </section>
+      </main>
+
+      <nav class="variant-switcher" aria-label="产品界面方案切换">
+        <button type="button" data-previous-variant aria-label="上一个方案" title="上一个方案">
+          <svg aria-hidden="true"><use href="#icon-chevron-left"></use></svg>
+        </button>
+        <div>
+          <span class="variant-index" data-variant-index>A / 03</span>
+          <strong data-variant-label>安静聆听</strong>
+        </div>
+        <button type="button" data-next-variant aria-label="下一个方案" title="下一个方案">
+          <svg aria-hidden="true"><use href="#icon-chevron-right"></use></svg>
+        </button>
+      </nav>
+
+      <div class="toast" role="status" aria-live="polite" data-toast-output></div>
+    </div>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

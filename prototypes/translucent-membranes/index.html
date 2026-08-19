@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#ece9e2" />
+    <meta
+      name="description"
+      content="声景半透明有机膜片的程序化生成实验。"
+    />
+    <title>声景 · 膜片生成实验</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <!-- Three material-composition variants, switchable via ?variant=A/B/C. -->
+    <main class="prototype" data-variant="A">
+      <header class="topbar">
+        <a class="brand" href="./" aria-label="声景膜片生成实验首页">
+          <span class="brand-mark" aria-hidden="true">
+            <i></i><i></i>
+          </span>
+          <span class="brand-name">声景</span>
+          <span class="brand-divider" aria-hidden="true"></span>
+          <span class="brand-context">膜片生成实验</span>
+        </a>
+
+        <div class="topbar-actions">
+          <button class="button button-quiet" id="export-svg" type="button">
+            导出 SVG
+          </button>
+          <button class="button button-strong" id="export-png" type="button">
+            导出 PNG
+          </button>
+        </div>
+      </header>
+
+      <div class="workspace">
+        <aside class="controls" aria-label="生成参数">
+          <div class="control-heading">
+            <h1 id="variant-title">声场裁片</h1>
+            <p id="variant-description">自由叠层，用于观察透明材料的混色关系。</p>
+          </div>
+
+          <div class="seed-row">
+            <label for="seed">种子</label>
+            <input id="seed" inputmode="numeric" maxlength="8" value="24713" />
+            <button class="button button-regenerate" id="regenerate" type="button">
+              重新生成
+            </button>
+          </div>
+
+          <div class="control-list">
+            <label class="range-control" for="count">
+              <span>叠层数量</span>
+              <output id="count-value" for="count">5</output>
+              <input id="count" type="range" min="2" max="7" step="1" value="5" />
+            </label>
+
+            <label class="range-control" for="opacity">
+              <span>乳浊度</span>
+              <output id="opacity-value" for="opacity">46%</output>
+              <input id="opacity" type="range" min="18" max="72" step="1" value="46" />
+            </label>
+
+            <label class="range-control" for="overlap">
+              <span>重叠关系</span>
+              <output id="overlap-value" for="overlap">62%</output>
+              <input id="overlap" type="range" min="0" max="100" step="1" value="62" />
+            </label>
+
+            <label class="range-control" for="pores">
+              <span>微孔密度</span>
+              <output id="pores-value" for="pores">58%</output>
+              <input id="pores" type="range" min="0" max="100" step="1" value="58" />
+            </label>
+
+            <label class="range-control" for="shadow">
+              <span>接触阴影</span>
+              <output id="shadow-value" for="shadow">34%</output>
+              <input id="shadow" type="range" min="0" max="100" step="1" value="34" />
+            </label>
+          </div>
+
+          <div class="control-footer">
+            <label class="toggle" for="annotations">
+              <input id="annotations" type="checkbox" checked />
+              <span class="toggle-track" aria-hidden="true"><i></i></span>
+              <span>制图标记</span>
+            </label>
+            <p>可直接拖动任意膜片，重新组织叠层。</p>
+          </div>
+        </aside>
+
+        <section class="stage" aria-labelledby="variant-title">
+          <div class="stage-meta" aria-hidden="true">
+            <span id="stage-index">FIELD / 01</span>
+            <span id="stage-seed">SEED 24713</span>
+          </div>
+          <svg
+            id="composition"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 1200 760"
+            role="img"
+            aria-label="程序生成的半透明有机膜片构图"
+            preserveAspectRatio="xMidYMid meet"
+          ></svg>
+          <div class="stage-scale" aria-hidden="true">
+            <span></span><i></i><i></i><i></i><i></i><span></span>
+          </div>
+        </section>
+      </div>
+
+      <nav class="variant-switcher" aria-label="原型方案切换">
+        <button id="previous-variant" type="button" aria-label="上一个方案" title="上一个方案">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6" /></svg>
+        </button>
+        <span id="variant-label">A · 自由声场</span>
+        <button id="next-variant" type="button" aria-label="下一个方案" title="下一个方案">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6" /></svg>
+        </button>
+      </nav>
+
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    </main>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
