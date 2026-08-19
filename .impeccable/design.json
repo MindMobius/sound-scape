@@ -1,0 +1,187 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-19T12:18:11.9407531+08:00",
+  "title": "Design System: 声景",
+  "extensions": {
+    "colorMeta": {
+      "ground": { "role": "neutral", "displayName": "冷白工作台", "tonalRamp": ["oklch(15% 0.004 134.8)", "oklch(27% 0.004 134.8)", "oklch(39% 0.004 134.8)", "oklch(51% 0.004 134.8)", "oklch(63% 0.004 134.8)", "oklch(75% 0.004 134.8)", "oklch(87% 0.004 134.8)", "oklch(95% 0.004 134.8)"] },
+      "surface": { "role": "neutral", "displayName": "工作室表面", "tonalRamp": ["oklch(15% 0.004 121.6)", "oklch(27% 0.004 121.6)", "oklch(39% 0.004 121.6)", "oklch(51% 0.004 121.6)", "oklch(63% 0.004 121.6)", "oklch(75% 0.004 121.6)", "oklch(87% 0.004 121.6)", "oklch(95% 0.004 121.6)"] },
+      "surface-raised": { "role": "neutral", "displayName": "抬升白", "tonalRamp": ["oklch(15% 0.000 0.0)", "oklch(27% 0.000 0.0)", "oklch(39% 0.000 0.0)", "oklch(51% 0.000 0.0)", "oklch(63% 0.000 0.0)", "oklch(75% 0.000 0.0)", "oklch(87% 0.000 0.0)", "oklch(95% 0.000 0.0)"] },
+      "surface-muted": { "role": "neutral", "displayName": "矿物雾面", "tonalRamp": ["oklch(15% 0.008 151.9)", "oklch(27% 0.008 151.9)", "oklch(39% 0.008 151.9)", "oklch(51% 0.008 151.9)", "oklch(63% 0.008 151.9)", "oklch(75% 0.008 151.9)", "oklch(87% 0.008 151.9)", "oklch(95% 0.008 151.9)"] },
+      "surface-pressed": { "role": "neutral", "displayName": "按压矿物面", "tonalRamp": ["oklch(15% 0.012 153.7)", "oklch(27% 0.012 153.7)", "oklch(39% 0.012 153.7)", "oklch(51% 0.012 153.7)", "oklch(63% 0.012 153.7)", "oklch(75% 0.012 153.7)", "oklch(87% 0.012 153.7)", "oklch(95% 0.012 153.7)"] },
+      "ink": { "role": "neutral", "displayName": "工作室墨色", "tonalRamp": ["oklch(15% 0.013 160.3)", "oklch(27% 0.013 160.3)", "oklch(39% 0.013 160.3)", "oklch(51% 0.013 160.3)", "oklch(63% 0.013 160.3)", "oklch(75% 0.013 160.3)", "oklch(87% 0.013 160.3)", "oklch(95% 0.013 160.3)"] },
+      "ink-secondary": { "role": "neutral", "displayName": "次级矿物墨", "tonalRamp": ["oklch(15% 0.016 159.5)", "oklch(27% 0.016 159.5)", "oklch(39% 0.016 159.5)", "oklch(51% 0.016 159.5)", "oklch(63% 0.016 159.5)", "oklch(75% 0.016 159.5)", "oklch(87% 0.016 159.5)", "oklch(95% 0.016 159.5)"] },
+      "ink-tertiary": { "role": "neutral", "displayName": "三级矿物墨", "tonalRamp": ["oklch(15% 0.017 157.8)", "oklch(27% 0.017 157.8)", "oklch(39% 0.017 157.8)", "oklch(51% 0.017 157.8)", "oklch(63% 0.017 157.8)", "oklch(75% 0.017 157.8)", "oklch(87% 0.017 157.8)", "oklch(95% 0.017 157.8)"] },
+      "line": { "role": "neutral", "displayName": "精密分隔线", "tonalRamp": ["oklch(15% 0.010 155.1)", "oklch(27% 0.010 155.1)", "oklch(39% 0.010 155.1)", "oklch(51% 0.010 155.1)", "oklch(63% 0.010 155.1)", "oklch(75% 0.010 155.1)", "oklch(87% 0.010 155.1)", "oklch(95% 0.010 155.1)"] },
+      "line-strong": { "role": "neutral", "displayName": "强化分隔线", "tonalRamp": ["oklch(15% 0.015 155.5)", "oklch(27% 0.015 155.5)", "oklch(39% 0.015 155.5)", "oklch(51% 0.015 155.5)", "oklch(63% 0.015 155.5)", "oklch(75% 0.015 155.5)", "oklch(87% 0.015 155.5)", "oklch(95% 0.015 155.5)"] },
+      "accent": { "role": "primary", "displayName": "工作室珊瑚", "tonalRamp": ["oklch(15% 0.120 32.6)", "oklch(27% 0.120 32.6)", "oklch(39% 0.120 32.6)", "oklch(51% 0.120 32.6)", "oklch(63% 0.120 32.6)", "oklch(75% 0.120 32.6)", "oklch(87% 0.120 32.6)", "oklch(95% 0.120 32.6)"] },
+      "accent-hover": { "role": "primary", "displayName": "深工作室珊瑚", "tonalRamp": ["oklch(15% 0.120 32.1)", "oklch(27% 0.120 32.1)", "oklch(39% 0.120 32.1)", "oklch(51% 0.120 32.1)", "oklch(63% 0.120 32.1)", "oklch(75% 0.120 32.1)", "oklch(87% 0.120 32.1)", "oklch(95% 0.120 32.1)"] },
+      "accent-soft": { "role": "primary", "displayName": "柔和工作室珊瑚", "tonalRamp": ["oklch(15% 0.024 33.5)", "oklch(27% 0.024 33.5)", "oklch(39% 0.024 33.5)", "oklch(51% 0.024 33.5)", "oklch(63% 0.024 33.5)", "oklch(75% 0.024 33.5)", "oklch(87% 0.024 33.5)", "oklch(95% 0.024 33.5)"] },
+      "active": { "role": "secondary", "displayName": "矿物灰绿", "tonalRamp": ["oklch(15% 0.050 174.9)", "oklch(27% 0.050 174.9)", "oklch(39% 0.050 174.9)", "oklch(51% 0.050 174.9)", "oklch(63% 0.050 174.9)", "oklch(75% 0.050 174.9)", "oklch(87% 0.050 174.9)", "oklch(95% 0.050 174.9)"] },
+      "active-soft": { "role": "secondary", "displayName": "柔和矿物灰绿", "tonalRamp": ["oklch(15% 0.016 166.7)", "oklch(27% 0.016 166.7)", "oklch(39% 0.016 166.7)", "oklch(51% 0.016 166.7)", "oklch(63% 0.016 166.7)", "oklch(75% 0.016 166.7)", "oklch(87% 0.016 166.7)", "oklch(95% 0.016 166.7)"] },
+      "focus": { "role": "secondary", "displayName": "矿物焦点绿", "tonalRamp": ["oklch(15% 0.074 174.1)", "oklch(27% 0.074 174.1)", "oklch(39% 0.074 174.1)", "oklch(51% 0.074 174.1)", "oklch(63% 0.074 174.1)", "oklch(75% 0.074 174.1)", "oklch(87% 0.074 174.1)", "oklch(95% 0.074 174.1)"] },
+      "selection": { "role": "secondary", "displayName": "矿物选区", "tonalRamp": ["oklch(15% 0.019 166.3)", "oklch(27% 0.019 166.3)", "oklch(39% 0.019 166.3)", "oklch(51% 0.019 166.3)", "oklch(63% 0.019 166.3)", "oklch(75% 0.019 166.3)", "oklch(87% 0.019 166.3)", "oklch(95% 0.019 166.3)"] },
+      "dark-ground": { "role": "neutral", "displayName": "炭黑工作台", "tonalRamp": ["oklch(15% 0.008 182.1)", "oklch(27% 0.008 182.1)", "oklch(39% 0.008 182.1)", "oklch(51% 0.008 182.1)", "oklch(63% 0.008 182.1)", "oklch(75% 0.008 182.1)", "oklch(87% 0.008 182.1)", "oklch(95% 0.008 182.1)"] },
+      "dark-surface": { "role": "neutral", "displayName": "炭黑表面", "tonalRamp": ["oklch(15% 0.010 173.3)", "oklch(27% 0.010 173.3)", "oklch(39% 0.010 173.3)", "oklch(51% 0.010 173.3)", "oklch(63% 0.010 173.3)", "oklch(75% 0.010 173.3)", "oklch(87% 0.010 173.3)", "oklch(95% 0.010 173.3)"] },
+      "dark-surface-raised": { "role": "neutral", "displayName": "抬升炭黑", "tonalRamp": ["oklch(15% 0.011 167.8)", "oklch(27% 0.011 167.8)", "oklch(39% 0.011 167.8)", "oklch(51% 0.011 167.8)", "oklch(63% 0.011 167.8)", "oklch(75% 0.011 167.8)", "oklch(87% 0.011 167.8)", "oklch(95% 0.011 167.8)"] },
+      "dark-surface-muted": { "role": "neutral", "displayName": "深矿物雾面", "tonalRamp": ["oklch(15% 0.012 170.9)", "oklch(27% 0.012 170.9)", "oklch(39% 0.012 170.9)", "oklch(51% 0.012 170.9)", "oklch(63% 0.012 170.9)", "oklch(75% 0.012 170.9)", "oklch(87% 0.012 170.9)", "oklch(95% 0.012 170.9)"] },
+      "dark-surface-pressed": { "role": "neutral", "displayName": "深按压矿物面", "tonalRamp": ["oklch(15% 0.015 169.4)", "oklch(27% 0.015 169.4)", "oklch(39% 0.015 169.4)", "oklch(51% 0.015 169.4)", "oklch(63% 0.015 169.4)", "oklch(75% 0.015 169.4)", "oklch(87% 0.015 169.4)", "oklch(95% 0.015 169.4)"] },
+      "dark-ink": { "role": "neutral", "displayName": "深色主墨", "tonalRamp": ["oklch(15% 0.006 128.5)", "oklch(27% 0.006 128.5)", "oklch(39% 0.006 128.5)", "oklch(51% 0.006 128.5)", "oklch(63% 0.006 128.5)", "oklch(75% 0.006 128.5)", "oklch(87% 0.006 128.5)", "oklch(95% 0.006 128.5)"] },
+      "dark-ink-secondary": { "role": "neutral", "displayName": "深色次级墨", "tonalRamp": ["oklch(15% 0.015 155.5)", "oklch(27% 0.015 155.5)", "oklch(39% 0.015 155.5)", "oklch(51% 0.015 155.5)", "oklch(63% 0.015 155.5)", "oklch(75% 0.015 155.5)", "oklch(87% 0.015 155.5)", "oklch(95% 0.015 155.5)"] },
+      "dark-ink-tertiary": { "role": "neutral", "displayName": "深色三级墨", "tonalRamp": ["oklch(15% 0.016 158.1)", "oklch(27% 0.016 158.1)", "oklch(39% 0.016 158.1)", "oklch(51% 0.016 158.1)", "oklch(63% 0.016 158.1)", "oklch(75% 0.016 158.1)", "oklch(87% 0.016 158.1)", "oklch(95% 0.016 158.1)"] },
+      "dark-line": { "role": "neutral", "displayName": "深色精密线", "tonalRamp": ["oklch(15% 0.014 167.0)", "oklch(27% 0.014 167.0)", "oklch(39% 0.014 167.0)", "oklch(51% 0.014 167.0)", "oklch(63% 0.014 167.0)", "oklch(75% 0.014 167.0)", "oklch(87% 0.014 167.0)", "oklch(95% 0.014 167.0)"] },
+      "dark-line-strong": { "role": "neutral", "displayName": "深色强化线", "tonalRamp": ["oklch(15% 0.020 167.8)", "oklch(27% 0.020 167.8)", "oklch(39% 0.020 167.8)", "oklch(51% 0.020 167.8)", "oklch(63% 0.020 167.8)", "oklch(75% 0.020 167.8)", "oklch(87% 0.020 167.8)", "oklch(95% 0.020 167.8)"] },
+      "dark-accent": { "role": "primary", "displayName": "夜间工作室珊瑚", "tonalRamp": ["oklch(15% 0.120 33.8)", "oklch(27% 0.120 33.8)", "oklch(39% 0.120 33.8)", "oklch(51% 0.120 33.8)", "oklch(63% 0.120 33.8)", "oklch(75% 0.120 33.8)", "oklch(87% 0.120 33.8)", "oklch(95% 0.120 33.8)"] },
+      "dark-accent-hover": { "role": "primary", "displayName": "夜间亮珊瑚", "tonalRamp": ["oklch(15% 0.118 34.3)", "oklch(27% 0.118 34.3)", "oklch(39% 0.118 34.3)", "oklch(51% 0.118 34.3)", "oklch(63% 0.118 34.3)", "oklch(75% 0.118 34.3)", "oklch(87% 0.118 34.3)", "oklch(95% 0.118 34.3)"] },
+      "dark-accent-soft": { "role": "primary", "displayName": "夜间柔和珊瑚", "tonalRamp": ["oklch(15% 0.046 30.0)", "oklch(27% 0.046 30.0)", "oklch(39% 0.046 30.0)", "oklch(51% 0.046 30.0)", "oklch(63% 0.046 30.0)", "oklch(75% 0.046 30.0)", "oklch(87% 0.046 30.0)", "oklch(95% 0.046 30.0)"] },
+      "dark-active": { "role": "secondary", "displayName": "夜间矿物灰绿", "tonalRamp": ["oklch(15% 0.037 170.0)", "oklch(27% 0.037 170.0)", "oklch(39% 0.037 170.0)", "oklch(51% 0.037 170.0)", "oklch(63% 0.037 170.0)", "oklch(75% 0.037 170.0)", "oklch(87% 0.037 170.0)", "oklch(95% 0.037 170.0)"] },
+      "dark-active-soft": { "role": "secondary", "displayName": "夜间柔和矿物绿", "tonalRamp": ["oklch(15% 0.032 173.2)", "oklch(27% 0.032 173.2)", "oklch(39% 0.032 173.2)", "oklch(51% 0.032 173.2)", "oklch(63% 0.032 173.2)", "oklch(75% 0.032 173.2)", "oklch(87% 0.032 173.2)", "oklch(95% 0.032 173.2)"] },
+      "dark-focus": { "role": "secondary", "displayName": "夜间焦点绿", "tonalRamp": ["oklch(15% 0.066 173.6)", "oklch(27% 0.066 173.6)", "oklch(39% 0.066 173.6)", "oklch(51% 0.066 173.6)", "oklch(63% 0.066 173.6)", "oklch(75% 0.066 173.6)", "oklch(87% 0.066 173.6)", "oklch(95% 0.066 173.6)"] },
+      "dark-selection": { "role": "secondary", "displayName": "夜间矿物选区", "tonalRamp": ["oklch(15% 0.048 169.4)", "oklch(27% 0.048 169.4)", "oklch(39% 0.048 169.4)", "oklch(51% 0.048 169.4)", "oklch(63% 0.048 169.4)", "oklch(75% 0.048 169.4)", "oklch(87% 0.048 169.4)", "oklch(95% 0.048 169.4)"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "专注场景名", "purpose": "专注模式中的场景名；仅在沉浸状态使用。" },
+      "headline": { "displayName": "当前场景名", "purpose": "日常聆听中的当前声音世界名称。" },
+      "title": { "displayName": "页面标题", "purpose": "应用内一级视图标题。" },
+      "brand": { "displayName": "品牌字标", "purpose": "与正式位图品牌标记并置的产品名。" },
+      "body": { "displayName": "正文", "purpose": "界面正文、说明和默认文本。" },
+      "composer": { "displayName": "自然语言输入", "purpose": "创建声景时的大号描述文本。" },
+      "navigation": { "displayName": "导航", "purpose": "桌面侧栏与导航命令。" },
+      "action": { "displayName": "动作", "purpose": "主操作和明确命令。" },
+      "label": { "displayName": "标签", "purpose": "元数据、时间、状态和紧凑控件。" }
+    },
+    "shadows": [
+      { "name": "ambient-panel", "value": "0 14px 36px rgba(34, 47, 40, 0.12)", "purpose": "浅色输入面板、快速控制和通知。" },
+      { "name": "ambient-panel-dark", "value": "0 18px 46px rgba(0, 0, 0, 0.3)", "purpose": "深色主题中的抬升工具面。" },
+      { "name": "artwork-lift", "value": "0 18px 44px rgba(46, 58, 51, 0.14)", "purpose": "当前场景正式位图。" },
+      { "name": "caption-lift", "value": "0 8px 22px rgba(27, 35, 30, 0.16)", "purpose": "位图上的播放状态说明。" },
+      { "name": "compact-control", "value": "0 2px 8px rgba(37, 47, 41, 0.08)", "purpose": "选中的筛选项。" },
+      { "name": "range-thumb", "value": "0 2px 7px rgba(29, 36, 32, 0.24)", "purpose": "感受与音量滑杆拇指。" },
+      { "name": "focus-player", "value": "0 16px 38px rgba(23, 31, 26, 0.16)", "purpose": "专注模式播放器。" }
+    ],
+    "motion": [
+      { "name": "state-fast", "value": "180ms ease-out", "purpose": "按钮、导航、图标和颜色状态切换。" },
+      { "name": "theme-shift", "value": "240ms ease-out", "purpose": "浅色与深色场景主题切换。" },
+      { "name": "panel-reveal", "value": "240ms cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "通知与浮层的短距离出现。" },
+      { "name": "media-hover", "value": "420ms cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "场景卡片位图的 1.025 倍悬停缩放。" },
+      { "name": "field-reveal", "value": "760ms cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "专注模式实时膜片场加载完成后的淡入。" },
+      { "name": "live-breath", "value": "2800ms ease-in-out infinite", "purpose": "播放状态点的低幅呼吸。" },
+      { "name": "continuity-drift", "value": "13000ms linear infinite", "purpose": "持续播放轨道上的缓慢游标。" },
+      { "name": "scene-switch", "value": "180ms power2.out + 380ms expo.out", "purpose": "封面、标题和说明在换景时先退出再进入。" },
+      { "name": "focus-open", "value": "480ms/620ms expo.out", "purpose": "专注场与文字分层进入；reduced-motion 下停用。" },
+      { "name": "audio-crossfade", "value": "1300ms equal-power", "purpose": "播放中切换场景时保持听感连续。" }
+    ],
+    "breakpoints": [
+      { "name": "compact-desktop", "value": "1180px" },
+      { "name": "mobile", "value": "820px" },
+      { "name": "narrow-mobile", "value": "420px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Action",
+      "kind": "button",
+      "refersTo": "primary-action",
+      "description": "创建、确认和其他明确命令使用的紧凑主操作。",
+      "html": "<button class=\"ds-primary-action\" type=\"button\"><span>预演组成</span><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M7 17 17 7\"/><path d=\"M7 7h10v10\"/></svg></button>",
+      "css": ".ds-primary-action { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 46px; padding: 0 17px; border: 0; border-radius: 7px; background: var(--ink); color: var(--surface-raised); font-family: var(--font-body); font-size: 13px; font-weight: 660; letter-spacing: 0; transition: background-color 180ms ease-out, transform 180ms ease-out; } .ds-primary-action svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; } .ds-primary-action:hover { background: var(--active); } .ds-primary-action:active { transform: translateY(1px); } .ds-primary-action:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; } .ds-primary-action:disabled { cursor: not-allowed; opacity: 0.46; }"
+    },
+    {
+      "name": "Icon Button",
+      "kind": "button",
+      "refersTo": "icon-button",
+      "description": "工具动作使用的 40px 图标按钮。",
+      "html": "<button class=\"ds-icon-button\" type=\"button\" aria-label=\"声音细节\" title=\"声音细节\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M4 21v-7\"/><path d=\"M4 10V3\"/><path d=\"M12 21v-9\"/><path d=\"M12 8V3\"/><path d=\"M20 21v-5\"/><path d=\"M20 12V3\"/><path d=\"M1 14h6\"/><path d=\"M9 8h6\"/><path d=\"M17 16h6\"/></svg></button>",
+      "css": ".ds-icon-button { display: grid; width: 40px; height: 40px; padding: 0; place-items: center; border: 0; border-radius: 7px; background: transparent; color: var(--ink-secondary); transition: background-color 180ms ease-out, color 180ms ease-out; } .ds-icon-button svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; } .ds-icon-button:hover { background: var(--surface-muted); color: var(--ink); } .ds-icon-button:active { background: var(--surface-pressed); } .ds-icon-button:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }"
+    },
+    {
+      "name": "Navigation Item",
+      "kind": "nav",
+      "refersTo": "navigation-item-active",
+      "description": "桌面侧栏中带图标的当前视图入口。",
+      "html": "<button class=\"ds-nav-item ds-is-active\" type=\"button\" aria-current=\"page\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M4 14a8 8 0 0 1 16 0\"/><path d=\"M18 19c0 1.1-.9 2-2 2h-1v-7h3a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2Z\"/><path d=\"M6 19c-1.1 0-2-.9-2-2v-1a2 2 0 0 1 2-2h3v7H8a2 2 0 0 1-2-2Z\"/></svg><span>聆听</span></button>",
+      "css": ".ds-nav-item { display: flex; align-items: center; gap: 12px; width: 100%; height: 44px; padding: 0 12px; border: 0; border-radius: 7px; background: transparent; color: var(--ink-secondary); font-family: var(--font-body); font-size: 13px; font-weight: 590; letter-spacing: 0; text-align: left; transition: background-color 180ms ease-out, color 180ms ease-out; } .ds-nav-item svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; } .ds-nav-item:hover { background: var(--surface-muted); color: var(--ink); } .ds-nav-item.ds-is-active { background: var(--active-soft); color: var(--active); } .ds-nav-item:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }"
+    },
+    {
+      "name": "Filter Tabs",
+      "kind": "chip",
+      "refersTo": "filter-tab-selected",
+      "description": "场景分类与素材分类使用的紧凑分段筛选。",
+      "html": "<div class=\"ds-filter-tabs\" role=\"tablist\" aria-label=\"声景分类\"><button class=\"ds-filter-tab ds-is-selected\" type=\"button\" role=\"tab\" aria-selected=\"true\">全部</button><button class=\"ds-filter-tab\" type=\"button\" role=\"tab\" aria-selected=\"false\">自然</button><button class=\"ds-filter-tab\" type=\"button\" role=\"tab\" aria-selected=\"false\">室内</button></div>",
+      "css": ".ds-filter-tabs { display: inline-flex; align-items: center; gap: 3px; padding: 3px; border-radius: 7px; background: var(--surface-muted); } .ds-filter-tab { min-height: 30px; padding: 0 11px; border: 0; border-radius: 5px; background: transparent; color: var(--ink-secondary); font-family: var(--font-body); font-size: 11px; font-weight: 610; letter-spacing: 0; } .ds-filter-tab:hover { color: var(--ink); } .ds-filter-tab.ds-is-selected { background: var(--surface-raised); color: var(--ink); box-shadow: 0 2px 8px rgba(37, 47, 41, 0.08); } .ds-filter-tab:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }"
+    },
+    {
+      "name": "Prompt Composer",
+      "kind": "input",
+      "refersTo": "prompt-composer",
+      "description": "用自然语言描述声音世界的主创建输入。",
+      "html": "<form class=\"ds-composer\"><label class=\"ds-composer-field\"><span class=\"ds-composer-label\">你想听见什么？</span><textarea class=\"ds-composer-input\" rows=\"4\" maxlength=\"180\" placeholder=\"例如，雨停后的松林，湿润的树叶偶尔落下水滴。\"></textarea></label><div class=\"ds-composer-meta\"><span>0 / 180</span><button class=\"ds-composer-action\" type=\"button\">预演组成</button></div></form>",
+      "css": ".ds-composer { overflow: hidden; border-radius: 8px; background: var(--surface-raised); color: var(--ink); box-shadow: 0 14px 36px rgba(34, 47, 40, 0.12); } .ds-composer-field { display: block; padding: 27px 28px 10px; } .ds-composer-label { display: block; margin-bottom: 15px; color: var(--ink-secondary); font-family: var(--font-body); font-size: 12px; font-weight: 650; } .ds-composer-input { display: block; width: 100%; min-height: 150px; padding: 0; resize: vertical; border: 0; outline: 0; background: transparent; color: var(--ink); caret-color: var(--accent); font-family: var(--font-body); font-size: 20px; font-weight: 520; line-height: 1.65; letter-spacing: 0; } .ds-composer-input::placeholder { color: var(--ink-tertiary); opacity: 0.78; } .ds-composer-meta { display: flex; align-items: center; justify-content: space-between; gap: 18px; min-height: 72px; padding: 11px 14px 11px 28px; border-top: 1px solid var(--line); color: var(--ink-tertiary); font-family: var(--font-body); font-size: 11px; font-variant-numeric: tabular-nums; } .ds-composer-action { min-height: 46px; padding: 0 17px; border: 0; border-radius: 7px; background: var(--ink); color: var(--surface-raised); font-weight: 660; } .ds-composer-action:hover { background: var(--active); } .ds-composer-action:focus-visible, .ds-composer-input:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }"
+    },
+    {
+      "name": "Feeling Range",
+      "kind": "input",
+      "refersTo": "range-control",
+      "description": "以轻重、简繁等感受语言表达连续参数。",
+      "html": "<label class=\"ds-feeling-range\"><span>轻</span><input class=\"ds-range\" type=\"range\" min=\"0\" max=\"100\" value=\"52\" aria-label=\"轻重\"><span>重</span></label>",
+      "css": ".ds-feeling-range { display: grid; grid-template-columns: 22px minmax(0, 1fr) 22px; align-items: center; gap: 10px; min-height: 44px; color: var(--ink-secondary); font-family: var(--font-body); font-size: 11px; font-weight: 620; text-align: center; } .ds-range { width: 100%; height: 28px; margin: 0; padding: 0; appearance: none; background: transparent; } .ds-range::-webkit-slider-runnable-track { width: 100%; height: 3px; border-radius: 3px; background: var(--line-strong); } .ds-range::-webkit-slider-thumb { width: 14px; height: 14px; margin-top: -5.5px; appearance: none; border: 3px solid var(--surface-raised); border-radius: 50%; background: var(--ink); box-shadow: 0 2px 7px rgba(29, 36, 32, 0.24); } .ds-range::-moz-range-track { height: 3px; border-radius: 3px; background: var(--line-strong); } .ds-range::-moz-range-thumb { width: 10px; height: 10px; border: 3px solid var(--surface-raised); border-radius: 50%; background: var(--ink); box-shadow: 0 2px 7px rgba(29, 36, 32, 0.24); } .ds-range:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }"
+    },
+    {
+      "name": "Player Button",
+      "kind": "button",
+      "refersTo": "player-button",
+      "description": "持续播放器与专注模式共用的播放控制。",
+      "html": "<button class=\"ds-player-button\" type=\"button\" aria-label=\"播放\" title=\"播放\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><polygon points=\"6 3 20 12 6 21 6 3\"/></svg></button>",
+      "css": ".ds-player-button { display: grid; width: 44px; height: 44px; padding: 0; place-items: center; border: 0; border-radius: 7px; background: var(--ink); color: var(--surface-raised); transition: background-color 180ms ease-out, transform 180ms ease-out; } .ds-player-button svg { width: 18px; height: 18px; fill: currentColor; stroke: currentColor; stroke-width: 1.4; stroke-linejoin: round; } .ds-player-button:hover { background: var(--active); } .ds-player-button:active { transform: scale(0.97); } .ds-player-button:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }"
+    },
+    {
+      "name": "Background Task Notification",
+      "kind": "custom",
+      "refersTo": "task-notification",
+      "description": "后台预演进行时保持当前播放并显示阶段与进度。",
+      "html": "<aside class=\"ds-task-notification\" aria-live=\"polite\"><span class=\"ds-task-spinner\" aria-hidden=\"true\"></span><div class=\"ds-task-copy\"><strong>预演 · 选择声音</strong><small>流程预演 · 当前声景继续播放</small></div><span class=\"ds-task-percent\">55%</span></aside>",
+      "css": ".ds-task-notification { display: grid; grid-template-columns: 22px minmax(0, 1fr) auto; align-items: center; gap: 12px; width: min(370px, 100%); min-height: 74px; padding: 11px 12px; border-radius: 8px; background: var(--surface-raised); color: var(--ink); box-shadow: 0 14px 36px rgba(34, 47, 40, 0.12); font-family: var(--font-body); } .ds-task-spinner { width: 18px; height: 18px; border: 2px solid var(--line); border-top-color: var(--active); border-radius: 50%; animation: ds-task-spin 900ms linear infinite; } .ds-task-copy strong, .ds-task-copy small { display: block; } .ds-task-copy strong { font-size: 12px; font-weight: 660; } .ds-task-copy small { margin-top: 2px; color: var(--ink-tertiary); font-size: 11px; } .ds-task-percent { color: var(--ink-tertiary); font-size: 11px; font-variant-numeric: tabular-nums; } @keyframes ds-task-spin { to { transform: rotate(1turn); } } @media (prefers-reduced-motion: reduce) { .ds-task-spinner { animation-duration: 0.01ms; animation-iteration-count: 1; } }"
+    },
+    {
+      "name": "Character Option",
+      "kind": "chip",
+      "refersTo": "character-option-selected",
+      "description": "高级配置中选择播放质感并明确显示待接入状态。",
+      "html": "<div class=\"ds-character-options\" role=\"radiogroup\" aria-label=\"播放质感\"><button class=\"ds-character-option ds-is-selected\" type=\"button\" role=\"radio\" aria-checked=\"true\">自然</button><button class=\"ds-character-option\" type=\"button\" role=\"radio\" aria-checked=\"false\" disabled><span>Hi-Fi</span><small>待接入</small></button></div>",
+      "css": ".ds-character-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px; } .ds-character-option { display: flex; align-items: center; justify-content: center; gap: 5px; min-height: 40px; padding: 0 10px; border: 1px solid var(--line); border-radius: 7px; background: transparent; color: var(--ink-secondary); font-family: var(--font-body); font-size: 11px; font-weight: 620; letter-spacing: 0; } .ds-character-option small { color: var(--ink-tertiary); font-size: 9px; font-weight: 590; } .ds-character-option:hover:not(:disabled) { border-color: var(--line-strong); color: var(--ink); } .ds-character-option.ds-is-selected { border-color: var(--active); background: var(--active-soft); color: var(--active); } .ds-character-option:disabled { cursor: not-allowed; opacity: 0.62; } .ds-character-option:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "安静的声音工作室",
+    "overview": "“安静的声音工作室”把声景塑造成稳定、克制、可长期停留的日常工具：冷白与炭黑构成工作台，矿物灰绿承担选择和持续状态，雾蓝来自正式膜片位图，珊瑚只在需要明确行动时出现。界面以细线、紧凑密度和真实声音素材为主，不把普通使用包装成全屏概念海报。\n\n系统先维持当前聆听，再允许探索、后台生成和明确切换；高级声音层与播放质感只在用户需要时展开。品牌、页面标题和场景名使用自托管衬线体提供文化气质，正文和操作保持无衬线的清晰与效率。",
+    "keyCharacteristics": [
+      "冷白与炭黑双主题，以矿物灰绿表达状态，珊瑚只标记动作。",
+      "6 至 8 像素的小圆角、精密细线和低对比层级。",
+      "正式膜片位图承载场景情绪，界面结构保持工具化。",
+      "持续播放、后台生成、主动切换与按需高级编排。"
+    ],
+    "rules": [
+      { "name": "The Coral Action Rule", "body": "珊瑚只用于需要用户决定的动作；选择、播放与持续状态使用矿物灰绿。", "section": "colors" },
+      { "name": "The Two-Face Theme Rule", "body": "浅色与深色主题共享语义角色，不把夜间场景重做成另一套品牌。", "section": "colors" },
+      { "name": "The Serif Identity Rule", "body": "自托管 Noto Serif SC Variable 只用于品牌、页面标题和场景名；正文、标签与控件保持无衬线。", "section": "typography" },
+      { "name": "The Zero Tracking Rule", "body": "所有可见文字保持 0 字距，不用负字距制造精致感。", "section": "typography" },
+      { "name": "The Flat-First Rule", "body": "静态结构靠底色与 1px 分隔线建立层次；阴影只给抬升的输入面板、浮层、通知和媒体。", "section": "elevation" },
+      { "name": "The Small Radius Rule", "body": "内容容器保持 6 至 8 像素圆角，只有状态点、滑块拇指和旋转指示器使用圆形。", "section": "shapes" },
+      { "name": "The Progressive Control Rule", "body": "默认控制轨只暴露播放、音量和定时；展开播放器后才出现轻重/简繁，单层声音和播放质感继续按需披露。", "section": "components" },
+      { "name": "The Continuous Scene Rule", "body": "自然声景没有播放终点；除真正有时长的试听或导出媒体外，持续播放器不得出现进度条、已播放时间或总时长。", "section": "components" },
+      { "name": "The Explicit Switch Rule", "body": "后台任务完成只提供结果与切换动作，不自动替换当前正在播放的声景。", "section": "components" }
+    ],
+    "dos": [
+      "Do 让冷白或炭黑工作台保持主导，并用矿物灰绿表达选择、播放与持续状态。",
+      "Do 用正式膜片位图承载场景辨识度，并保持控件层克制。",
+      "Do 先呈现普通用户能理解的感受控制，再按需展开高级声音细节。",
+      "Do 为键盘焦点、禁用状态、后台进度和 reduced-motion 提供明确反馈。"
+    ],
+    "donts": [
+      "Don't 把日常产品壳做成 AI 模板、概念海报或全屏首屏叙事。",
+      "Don't 使用米白禅意、水墨竹子、廉价渐变或装饰性手绘 SVG。",
+      "Don't 用珊瑚标记被动状态，或用大圆角卡片堆叠替代清楚的信息层级。",
+      "Don't 默认暴露音频工程参数，也不要让后台生成打断当前播放或强制切换。"
+    ]
+  }
+}
