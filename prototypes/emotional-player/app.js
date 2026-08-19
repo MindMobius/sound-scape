@@ -2,22 +2,35 @@ import "@fontsource-variable/noto-serif-sc/wght.css";
 import {
   ArrowRight,
   ArrowUpRight,
+  AudioLines,
+  Blend,
   ChevronDown,
   ChevronUp,
+  CloudRain,
   Compass,
   createIcons,
+  Database,
+  Ellipsis,
+  Headphones,
   House,
   Library,
   Maximize2,
+  Moon,
   Pause,
   Play,
   Plus,
+  Radio,
+  Settings,
   Shuffle,
+  Speaker,
+  Sun,
   Timer,
   Trash2,
+  Tv,
   Upload,
   Volume2,
   VolumeX,
+  Waves,
   X,
 } from "lucide";
 import rainAudioUrl from "./media/rain-cabin.mp3?url";
@@ -26,9 +39,15 @@ import rainHero from "../../assets/scenes/rain-cabin/rain-cabin-hero-web-v1.jpg?
 import rainCover from "../../assets/scenes/rain-cabin/rain-cabin-cover-web-v1.jpg?url";
 import coastalHero from "../../assets/scenes/coastal-night/coastal-night-hero-web-v1.jpg?url";
 import coastalCover from "../../assets/scenes/coastal-night/coastal-night-cover-web-v1.jpg?url";
-import { createEqualPowerCrossfader } from "./audio/crossfader.js";
+import forestCover from "../../assets/scenes/forest-dawn/forest-dawn-cover-web-v1.jpg?url";
+import trainCover from "../../assets/scenes/night-train/night-train-cover-web-v1.jpg?url";
+import libraryCover from "../../assets/scenes/quiet-library/quiet-library-cover-web-v1.jpg?url";
+import courtyardCover from "../../assets/scenes/summer-courtyard/summer-courtyard-cover-web-v1.jpg?url";
+import { createEqualPowerCrossfader, SOUND_PROFILES } from "./audio/crossfader.js";
 import {
+  clearStoredAudioLayers,
   deleteStoredAudioLayer,
+  getStoredAudioStats,
   listStoredAudioLayers,
   loadPreferences,
   putStoredAudioLayer,
@@ -41,13 +60,15 @@ import { createMotionRuntime } from "./motion/runtime.js";
 import { createSceneMotion } from "./motion/scene-motion.js";
 import { MembraneField } from "./visual-field.js";
 
-const makeBaseLayer = (id, name, detail) => ({
+const makeBaseLayer = (id, name, detail, catalogId) => ({
   id: `${id}-base`,
   name,
   detail,
+  catalogId,
   level: 100,
   muted: false,
   source: "base",
+  profile: "natural",
 });
 
 const scenes = [
@@ -63,7 +84,7 @@ const scenes = [
     cover: rainCover,
     audio: rainAudioUrl,
     elements: ["屋檐雨", "远雷", "木屋回响"],
-    layers: [makeBaseLayer("rain-cabin", "雨声实录", "内置声音 · 实时调音")],
+    layers: [makeBaseLayer("rain-cabin", "雨声实录", "内置声音 · 实时调音", "rain-recording")],
     palette: ["#aebbc7", "#c4b7ae", "#78877d", "#d36b54", "#8a8e90", "#bcc5ce", "#d3ccc2"],
   },
   {
@@ -78,18 +99,67 @@ const scenes = [
     cover: coastalCover,
     audio: waterAudioUrl,
     elements: ["近岸潮水", "远浪", "礁石回响"],
-    layers: [makeBaseLayer("coastal-night", "海浪实录", "内置声音 · 实时调音")],
+    layers: [makeBaseLayer("coastal-night", "海浪实录", "内置声音 · 实时调音", "water-recording")],
     palette: ["#6b8290", "#7f7a70", "#4c6664", "#a95f4f", "#59656d", "#879197", "#706d65"],
   },
 ];
 
 const sceneById = new Map(scenes.map((scene) => [scene.id, scene]));
-const validViews = new Set(["home", "explore", "create", "library"]);
+const templates = [
+  {
+    id: "forest-dawn",
+    name: "林间初醒",
+    prompt: "清晨薄雾里的林间小路，远处有溪水、湿叶滴水和几声疏鸟。",
+    elements: ["林间风", "湿叶滴水", "远处溪流"],
+    cover: forestCover,
+  },
+  {
+    id: "night-train",
+    name: "夜行列车",
+    prompt: "夜行列车穿过安静而连续的远方，车轮节律与窗外风压缓慢交替。",
+    elements: ["车轮节律", "车厢低鸣", "窗外风压"],
+    cover: trainCover,
+  },
+  {
+    id: "quiet-library",
+    name: "闭馆后的图书馆",
+    prompt: "闭馆后的旧图书馆，只剩纸页余响、木构轻响和远处空调。",
+    elements: ["纸页余响", "木构轻响", "室内雨声"],
+    cover: libraryCover,
+  },
+  {
+    id: "summer-courtyard",
+    name: "夏夜庭院",
+    prompt: "夏夜庭院里，风穿过树叶，夜虫与远处生活声疏疏交织。",
+    elements: ["夜虫", "树影风声", "偶发水滴"],
+    cover: courtyardCover,
+  },
+];
+const sourceCatalog = {
+  environment: [
+    { id: "rain-recording", name: "雨夜实录", detail: "真实录音 · 连续环境", icon: "cloud-rain", audio: rainAudioUrl, profile: "natural" },
+    { id: "water-recording", name: "近岸潮水", detail: "真实录音 · 连续环境", icon: "waves", audio: waterAudioUrl, profile: "natural" },
+  ],
+  event: [
+    { id: "event-near", name: "偶尔靠近", detail: "添加一段会被放在近处的音频", icon: "audio-lines", upload: true, profile: "natural" },
+    { id: "event-far", name: "远处回应", detail: "添加一段带空间距离的音频", icon: "audio-lines", upload: true, profile: "spatial" },
+  ],
+  media: [
+    { id: "media-radio", name: "老式收音机", detail: "窄频、单声道与轻微底噪", icon: "radio", upload: true, profile: "radio" },
+    { id: "media-television", name: "雪花电视", detail: "颗粒底噪与突出的中频", icon: "tv", upload: true, profile: "television" },
+    { id: "media-speaker", name: "单声道喇叭", detail: "集中声像与轻微压缩", icon: "speaker", upload: true, profile: "speaker" },
+    { id: "media-tube", name: "胆机音箱", detail: "柔和低频与偶次染色", icon: "speaker", upload: true, profile: "tube" },
+    { id: "media-hifi", name: "Hi-Fi 音响", detail: "更开阔的声场与细节", icon: "speaker", upload: true, profile: "hifi" },
+    { id: "media-spatial", name: "耳机空间", detail: "双声道空间化与远近", icon: "headphones", upload: true, profile: "spatial" },
+  ],
+};
+const validViews = new Set(["home", "explore", "create", "library", "settings"]);
 const randomPrompts = [
   "雷雨夜里，点燃篝火的木屋。",
   "深夜海岸上，潮声持续靠近又缓缓退去。",
   "雨停前的玻璃温室，水珠沿着窗面缓慢滑落。",
   "夜里的礁石海湾，浪声从远处一层层靠近。",
+  ...templates.map((template) => template.prompt),
 ];
 const jobStages = [
   { until: 25, label: "理解场景" },
@@ -143,11 +213,17 @@ const dom = {
   volumeInputs: [document.querySelector("#volume"), ...document.querySelectorAll("[data-volume]")],
   intensityInputs: [...document.querySelectorAll("[data-intensity]")],
   richnessInputs: [...document.querySelectorAll("[data-richness]")],
+  movementInputs: [...document.querySelectorAll("[data-movement]")],
+  distanceInputs: [...document.querySelectorAll("[data-distance]")],
+  orchestrationSummary: document.querySelector("#orchestration-summary"),
   exploreGrid: document.querySelector("#explore-grid"),
   libraryGrid: document.querySelector("#library-grid"),
   libraryCount: document.querySelector("#library-count"),
+  templateList: document.querySelector("#template-list"),
   primaryNav: document.querySelector(".primary-nav"),
   mobileNav: document.querySelector(".mobile-nav"),
+  mobileMoreButton: document.querySelector("#mobile-more-button"),
+  mobileMoreMenu: document.querySelector("#mobile-more-menu"),
   featuredImage: document.querySelector("#featured-image"),
   featuredElements: document.querySelector("#featured-elements"),
   featuredTitle: document.querySelector("#featured-title"),
@@ -167,6 +243,8 @@ const dom = {
   switchScene: document.querySelector("#switch-scene"),
   toast: document.querySelector("#toast"),
   layerList: document.querySelector("#layer-list"),
+  sourceList: document.querySelector("#source-list"),
+  sourceTabs: [...document.querySelectorAll("[data-source-category]")],
   audioUpload: document.querySelector("#audio-upload"),
   addAudioButton: document.querySelector("#add-audio-button"),
   browseAudioButton: document.querySelector("#browse-audio-button"),
@@ -183,6 +261,12 @@ const dom = {
   focusState: document.querySelector("#focus-state"),
   canvas: document.querySelector("#membrane-field"),
   renderStatus: document.querySelector("#render-status"),
+  themeOptions: [...document.querySelectorAll("[data-theme-mode]")],
+  autoPlaySetting: document.querySelector("#auto-play-setting"),
+  rememberMixSetting: document.querySelector("#remember-mix-setting"),
+  storageSummary: document.querySelector("#storage-summary"),
+  storageDetail: document.querySelector("#storage-detail"),
+  clearStorageButton: document.querySelector("#clear-storage-button"),
   contentInertTargets: [
     document.querySelector(".side-rail"),
     document.querySelector(".mobile-header"),
@@ -202,6 +286,13 @@ scenes.forEach((scene) => {
   baseLayer.level = clampNumber(storedMix.level, 0, 100, baseLayer.level);
   baseLayer.muted = Boolean(storedMix.muted);
 });
+restoreBuiltInAssignments(storedPreferences.sceneLayers);
+
+const storedCharacter = storedPreferences.character === "warm"
+  ? "tube"
+  : storedPreferences.character === "distant"
+    ? "spatial"
+    : storedPreferences.character;
 
 const state = {
   activeView: getInitialView(),
@@ -220,6 +311,8 @@ const state = {
   volume: clampNumber(storedPreferences.volume, 0, 1, Number(dom.volumeInputs[0].value) / 100),
   intensity: clampNumber(storedPreferences.intensity, 0, 1, Number(dom.intensityInputs[0].value) / 100),
   richness: clampNumber(storedPreferences.richness, 0, 1, Number(dom.richnessInputs[0].value) / 100),
+  movement: clampNumber(storedPreferences.movement, 0, 1, Number(dom.movementInputs[0].value) / 100),
+  distance: clampNumber(storedPreferences.distance, 0, 1, Number(dom.distanceInputs[0].value) / 100),
   activeAudio: 0,
   hasPlayed: false,
   jobState: "idle",
@@ -232,9 +325,19 @@ const state = {
   focusTransitioning: false,
   fieldStarted: false,
   lastFocused: null,
-  character: ["natural", "warm", "distant"].includes(storedPreferences.character)
-    ? storedPreferences.character
+  character: SOUND_PROFILES[storedCharacter]
+    ? storedCharacter
     : "natural",
+  themeMode: ["scene", "light", "dark"].includes(storedPreferences.themeMode)
+    ? storedPreferences.themeMode
+    : "scene",
+  autoPlayOnSelect: storedPreferences.autoPlayOnSelect !== false,
+  rememberMix: storedPreferences.rememberMix !== false,
+  sourceCategory: "environment",
+  pendingUpload: null,
+  mobileMoreOpen: false,
+  clearStorageArmed: false,
+  clearStorageTimer: 0,
   exploreFilter: "all",
   libraryFilter: "all",
 };
@@ -262,9 +365,12 @@ audioCrossfader.setSoundscape({
   baseLevel: getBaseLayer().level / 100,
   baseMuted: getBaseLayer().muted,
   character: state.character,
+  distance: state.distance,
   intensity: state.intensity,
+  movement: state.movement,
   richness: state.richness,
 });
+scenes.forEach((scene) => scene.layers.filter((layer) => layer.source !== "base").forEach(registerLayerWithAudioEngine));
 
 const field = new MembraneField({
   canvas: dom.canvas,
@@ -331,6 +437,9 @@ async function boot() {
   renderCurrentScene();
   renderFeaturedScene();
   renderCollections();
+  renderTemplates();
+  renderSourceLibrary();
+  syncSettings();
   setActiveView(state.activeView, false);
   syncPlayerStructure();
   playerMotion.setInitialState(state.playerExpanded);
@@ -365,12 +474,15 @@ function installInteractions() {
   dom.volumeInputs.forEach((input) => input.addEventListener("input", () => updateVolume(input.value)));
   dom.intensityInputs.forEach((input) => input.addEventListener("input", () => updateFeeling("intensity", input.value)));
   dom.richnessInputs.forEach((input) => input.addEventListener("input", () => updateFeeling("richness", input.value)));
+  dom.movementInputs.forEach((input) => input.addEventListener("input", () => updateOrchestration("movement", input.value)));
+  dom.distanceInputs.forEach((input) => input.addEventListener("input", () => updateOrchestration("distance", input.value)));
 
   dom.playerIdentityButton.addEventListener("click", () => {
     if (state.playerExpanded) collapsePlayer();
     else expandPlayer();
   });
   dom.playerCollapseButton.addEventListener("click", () => collapsePlayer({ restoreFocus: true }));
+  dom.mobileMoreButton.addEventListener("click", () => toggleMobileMoreMenu());
   dom.sleepTimerButton.addEventListener("click", () => toggleSleepTimerMenu());
   dom.volumeButton.addEventListener("click", () => toggleVolumePopover());
   dom.sleepTimerOptions.forEach((button) => {
@@ -423,6 +535,16 @@ function installInteractions() {
   document.querySelectorAll("[data-starter]").forEach((button) => {
     button.addEventListener("click", () => setPrompt(button.dataset.starter));
   });
+  dom.templateList.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-template]");
+    if (!button) return;
+    const template = templates.find((item) => item.id === button.dataset.template);
+    if (!template) return;
+    setPrompt(template.prompt, false);
+    setActiveView("create");
+    dom.prompt.focus({ preventScroll: true });
+    dom.prompt.setSelectionRange(template.prompt.length, template.prompt.length);
+  });
   dom.dismissReady.addEventListener("click", dismissReadyScene);
   dom.switchScene.addEventListener("click", () => {
     if (state.pendingScene) switchToScene(state.pendingScene, { autoPlay: true, generated: true });
@@ -440,8 +562,29 @@ function installInteractions() {
 
   dom.layerList.addEventListener("input", handleLayerInput);
   dom.layerList.addEventListener("click", handleLayerToggle);
-  [dom.addAudioButton, dom.browseAudioButton].forEach((button) => button.addEventListener("click", () => dom.audioUpload.click()));
+  dom.layerList.addEventListener("change", handleLayerProfileChange);
+  dom.sourceTabs.forEach((button) => {
+    button.addEventListener("click", () => {
+      state.sourceCategory = button.dataset.sourceCategory;
+      updateTabSelection(button, "[data-source-category]");
+      renderSourceLibrary();
+    });
+  });
+  dom.sourceList.addEventListener("click", handleSourceLibraryClick);
+  dom.addAudioButton.addEventListener("click", () => requestAudioUpload());
+  dom.browseAudioButton.addEventListener("click", () => requestAudioUpload({ category: state.sourceCategory }));
   dom.audioUpload.addEventListener("change", () => handleAudioUpload());
+  dom.themeOptions.forEach((button) => button.addEventListener("click", () => setThemeMode(button.dataset.themeMode)));
+  dom.autoPlaySetting.addEventListener("change", () => {
+    state.autoPlayOnSelect = dom.autoPlaySetting.checked;
+    persistPreferences();
+  });
+  dom.rememberMixSetting.addEventListener("change", () => {
+    state.rememberMix = dom.rememberMixSetting.checked;
+    persistPreferences();
+    showToast(state.rememberMix ? "会保留这次听感" : "下次打开时使用默认听感");
+  });
+  dom.clearStorageButton.addEventListener("click", handleClearStoredAudio);
 
   document.addEventListener("click", (event) => {
     if (state.sleepMenuOpen
@@ -454,6 +597,11 @@ function installInteractions() {
       && !dom.volumeButton.contains(event.target)) {
       toggleVolumePopover(false, false);
     }
+    if (state.mobileMoreOpen
+      && !dom.mobileMoreMenu.contains(event.target)
+      && !dom.mobileMoreButton.contains(event.target)) {
+      toggleMobileMoreMenu(false, false);
+    }
   });
 
   document.addEventListener("keydown", (event) => {
@@ -461,12 +609,14 @@ function installInteractions() {
     if (state.focusOpen) closeFocusMode();
     else if (state.volumePopoverOpen) toggleVolumePopover(false);
     else if (state.sleepMenuOpen) toggleSleepTimerMenu(false);
+    else if (state.mobileMoreOpen) toggleMobileMoreMenu(false);
     else if (state.playerExpanded) collapsePlayer({ restoreFocus: true });
   });
 }
 
 function setActiveView(viewName, animate = true) {
   if (!validViews.has(viewName)) return;
+  if (state.mobileMoreOpen) toggleMobileMoreMenu(false, false);
   state.activeView = viewName;
   dom.shell.dataset.view = viewName;
 
@@ -477,7 +627,7 @@ function setActiveView(viewName, animate = true) {
   });
 
   dom.viewLinks.forEach((link) => {
-    const isPrimaryNavigation = Boolean(link.closest(".primary-nav, .mobile-nav"));
+    const isPrimaryNavigation = Boolean(link.closest(".primary-nav, .secondary-nav, .mobile-nav"));
     const active = isPrimaryNavigation && link.dataset.viewLink === viewName;
     link.classList.toggle("is-active", active);
     if (active) link.setAttribute("aria-current", "page");
@@ -491,6 +641,7 @@ function setActiveView(viewName, animate = true) {
   window.history.replaceState(null, "", url);
   const activeView = dom.views.find((view) => view.dataset.view === viewName);
   navigationMotion.enterView(activeView, animate);
+  if (viewName === "settings") refreshStorageStats();
   persistPreferences();
 }
 
@@ -584,6 +735,19 @@ function closeControlPopovers(restoreFocus = false) {
   if (state.volumePopoverOpen) toggleVolumePopover(false, restoreFocus);
 }
 
+function toggleMobileMoreMenu(force, restoreFocus = true) {
+  const open = typeof force === "boolean" ? force : !state.mobileMoreOpen;
+  if (open === state.mobileMoreOpen) return;
+  state.mobileMoreOpen = open;
+  setPopoverVisibility(dom.mobileMoreMenu, open, () => state.mobileMoreOpen);
+  dom.mobileMoreMenu.setAttribute("aria-hidden", String(!open));
+  dom.mobileMoreMenu.inert = !open;
+  dom.mobileMoreButton.setAttribute("aria-expanded", String(open));
+  if (open) dom.mobileMoreMenu.querySelector("button")?.focus({ preventScroll: true });
+  else if (restoreFocus) dom.mobileMoreButton.focus({ preventScroll: true });
+  syncStateMarkers();
+}
+
 function setPopoverVisibility(element, open, isStillOpen) {
   if (open) {
     element.hidden = false;
@@ -662,7 +826,7 @@ function handleSceneSelection(event) {
   const button = event.target.closest("[data-scene]");
   if (!button) return;
   const scene = sceneById.get(button.dataset.scene);
-  if (scene) switchToScene(scene, { autoPlay: true });
+  if (scene) switchToScene(scene, { autoPlay: state.autoPlayOnSelect });
 }
 
 async function togglePlayback() {
@@ -702,7 +866,11 @@ function pauseAllAudio() {
 function playUploadedLayers(scene) {
   scene.layers.forEach((layer) => {
     if (!layer.audio || layer.muted) return;
-    layer.audio.volume = state.volume * (layer.level / 100) * 0.55;
+    audioCrossfader.setLayer(layer.id, {
+      character: layer.profile ?? "natural",
+      level: layer.level / 100,
+      muted: layer.muted,
+    });
     layer.audio.play().catch(() => undefined);
   });
 }
@@ -746,7 +914,7 @@ function updateVolume(value) {
   dom.volumeButton.setAttribute("aria-label", `总音量，${volumeText}`);
   audioCrossfader.setVolume(state.volume);
   state.currentScene.layers.forEach((layer) => {
-    if (layer.audio) layer.audio.volume = layer.muted ? 0 : state.volume * (layer.level / 100) * 0.55;
+    if (layer.audio) audioCrossfader.setLayer(layer.id, { level: layer.level / 100, muted: layer.muted });
   });
   persistPreferences();
 }
@@ -768,16 +936,34 @@ function updateFeeling(kind, value) {
   persistPreferences();
 }
 
+function updateOrchestration(kind, value) {
+  const normalized = Math.max(0, Math.min(100, Number(value)));
+  state[kind] = normalized / 100;
+  const inputs = kind === "movement" ? dom.movementInputs : dom.distanceInputs;
+  inputs.forEach((input) => {
+    if (document.activeElement !== input) input.value = String(normalized);
+    input.setAttribute("aria-valuetext", kind === "movement"
+      ? describeMovement(state.movement)
+      : describeDistance(state.distance));
+  });
+  audioCrossfader.setSoundscape({ [kind]: state[kind] });
+  dom.orchestrationSummary.textContent = `${describeMovement(state.movement)} · ${describeDistance(state.distance)}，声音会持续自然变化。`;
+  syncStateMarkers();
+  persistPreferences();
+}
+
 function syncControls() {
   updateVolume(state.volume * 100);
   updateFeeling("intensity", state.intensity * 100);
   updateFeeling("richness", state.richness * 100);
+  updateOrchestration("movement", state.movement * 100);
+  updateOrchestration("distance", state.distance * 100);
   syncCharacterSelection();
   syncSleepTimerUI();
 }
 
 function setCharacter(character, sourceButton) {
-  if (!["natural", "warm", "distant"].includes(character)) return;
+  if (!SOUND_PROFILES[character]) return;
   state.character = character;
   if (sourceButton) updateTabSelection(sourceButton, "[data-character]", "aria-checked");
   else syncCharacterSelection();
@@ -803,7 +989,9 @@ function syncAudioProfile() {
     baseLevel: baseLayer.level / 100,
     baseMuted: baseLayer.muted,
     character: state.character,
+    distance: state.distance,
     intensity: state.intensity,
+    movement: state.movement,
     richness: state.richness,
   });
   syncStateMarkers();
@@ -829,21 +1017,58 @@ function describeRichness(value) {
   return "繁密";
 }
 
+function describeMovement(value) {
+  if (value < 0.2) return "近乎平稳";
+  if (value < 0.44) return "轻微起伏";
+  if (value < 0.7) return "自然流动";
+  if (value < 0.88) return "明显起伏";
+  return "持续涌动";
+}
+
+function describeDistance(value) {
+  if (value < 0.18) return "很贴近";
+  if (value < 0.42) return "稍近";
+  if (value < 0.68) return "居中";
+  if (value < 0.86) return "较远";
+  return "远处";
+}
+
 function persistPreferences() {
   const sceneMixes = Object.fromEntries(scenes.map((scene) => {
     const layer = getBaseLayer(scene);
     return [scene.id, { level: layer.level, muted: layer.muted }];
   }));
-  savePreferences({
+  const sceneLayers = scenes.flatMap((scene) => scene.layers
+    .filter((layer) => layer.source === "builtin")
+    .map((layer) => ({
+      catalogId: layer.catalogId,
+      id: layer.id,
+      level: layer.level,
+      muted: layer.muted,
+      profile: layer.profile,
+      sceneId: scene.id,
+    })));
+  const preferences = {
     activeView: state.activeView,
-    character: state.character,
-    intensity: state.intensity,
+    autoPlayOnSelect: state.autoPlayOnSelect,
     prompt: dom.prompt.value,
-    richness: state.richness,
+    rememberMix: state.rememberMix,
     sceneId: state.currentScene.id,
-    sceneMixes,
+    sceneLayers,
+    themeMode: state.themeMode,
     volume: state.volume,
-  });
+  };
+  if (state.rememberMix) {
+    Object.assign(preferences, {
+      character: state.character,
+      distance: state.distance,
+      intensity: state.intensity,
+      movement: state.movement,
+      richness: state.richness,
+      sceneMixes,
+    });
+  }
+  savePreferences(preferences);
 }
 
 async function switchToScene(nextScene, options = {}) {
@@ -943,10 +1168,9 @@ function renderHomeGreeting() {
 
 function renderCurrentScene() {
   const scene = state.currentScene;
-  document.documentElement.dataset.theme = scene.theme;
   document.documentElement.style.setProperty("--scene-tone", scene.palette[0]);
   document.documentElement.style.setProperty("--scene-earth", scene.palette[1]);
-  document.querySelector('meta[name="theme-color"]').content = scene.theme === "dark" ? "#141918" : "#f4f6f3";
+  applyTheme();
   dom.playerCover.src = scene.cover;
   dom.playerTitle.textContent = scene.name;
   dom.playerHeroCover.src = scene.cover;
@@ -957,7 +1181,8 @@ function renderCurrentScene() {
   dom.focusDescription.textContent = scene.description;
   dom.focusMode.dataset.focusTheme = scene.theme;
   setSurfaceImage(dom.focusStatic, scene.hero);
-  dom.playerExpandedElements.replaceChildren(...scene.elements.map((name) => {
+  const visibleElements = [...new Set([...scene.elements, ...scene.layers.slice(1).map((layer) => layer.name)])].slice(0, 6);
+  dom.playerExpandedElements.replaceChildren(...visibleElements.map((name) => {
     const span = document.createElement("span");
     span.textContent = name;
     return span;
@@ -967,6 +1192,7 @@ function renderCurrentScene() {
     : `展开播放器，当前是${scene.name}`);
   syncAudioProfile();
   renderLayerList();
+  renderSourceLibrary();
   persistPreferences();
 }
 
@@ -982,6 +1208,21 @@ function renderFeaturedScene() {
 function renderCollections() {
   renderExploreGrid();
   renderLibraryGrid();
+}
+
+function renderTemplates() {
+  dom.templateList.replaceChildren(...templates.map((template) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.dataset.template = template.id;
+    button.setAttribute("aria-label", `以${template.name}作为描述模板`);
+    button.innerHTML = `
+      <img src="${template.cover}" alt="" loading="lazy" decoding="async">
+      <span><strong>${template.name}</strong><small>${template.elements.join(" · ")}</small></span>
+      <i data-lucide="arrow-up-right" aria-hidden="true"></i>`;
+    return button;
+  }));
+  renderIcons();
 }
 
 function renderExploreGrid() {
@@ -1011,21 +1252,230 @@ function createSceneCard(scene) {
   return button;
 }
 
+function restoreBuiltInAssignments(assignments) {
+  if (!Array.isArray(assignments)) return;
+  assignments.forEach((assignment) => {
+    const scene = sceneById.get(assignment.sceneId);
+    const source = sourceCatalog.environment.find((item) => item.id === assignment.catalogId);
+    if (!scene || !source) return;
+    if (scene.layers.some((layer) => layer.catalogId === source.id)) return;
+    scene.layers.push({
+      audio: createLayerAudio(source.audio),
+      catalogId: source.id,
+      detail: source.detail,
+      id: assignment.id || `${scene.id}:builtin:${source.id}`,
+      level: clampNumber(assignment.level, 0, 100, 52),
+      muted: Boolean(assignment.muted),
+      name: source.name,
+      profile: SOUND_PROFILES[assignment.profile] ? assignment.profile : source.profile,
+      sceneId: scene.id,
+      source: "builtin",
+    });
+  });
+}
+
+function addBuiltInLayer(catalogId) {
+  const source = sourceCatalog.environment.find((item) => item.id === catalogId);
+  if (!source) return;
+  const existing = state.currentScene.layers.find((layer) => layer.catalogId === catalogId);
+  if (existing) {
+    showToast(`「${source.name}」已经在当前声景中`);
+    return;
+  }
+  const layer = {
+    audio: createLayerAudio(source.audio),
+    catalogId: source.id,
+    detail: source.detail,
+    id: `${state.currentScene.id}:builtin:${source.id}`,
+    level: 52,
+    muted: false,
+    name: source.name,
+    profile: source.profile,
+    sceneId: state.currentScene.id,
+    source: "builtin",
+  };
+  state.currentScene.layers.push(layer);
+  registerLayerWithAudioEngine(layer);
+  if (state.playing) layer.audio.play().catch(() => undefined);
+  renderCurrentScene();
+  renderCollections();
+  showToast(`已把「${source.name}」加入${state.currentScene.name}`);
+}
+
+function renderSourceLibrary() {
+  if (!dom.sourceList) return;
+  dom.sourceTabs.forEach((button) => {
+    const selected = button.dataset.sourceCategory === state.sourceCategory;
+    button.classList.toggle("is-selected", selected);
+    button.setAttribute("aria-selected", String(selected));
+  });
+
+  if (state.sourceCategory === "mine") {
+    const uploaded = state.currentScene.layers.filter((layer) => layer.source === "upload");
+    if (!uploaded.length) {
+      dom.sourceList.innerHTML = `<div class="source-empty"><strong>这里还没有声音</strong><small>选择一段本地音频，它会留在这个浏览器中。</small></div>`;
+      return;
+    }
+    dom.sourceList.innerHTML = uploaded.map((layer) => `
+      <button type="button" data-layer-locate="${escapeHtml(layer.id)}">
+        <i data-lucide="upload" aria-hidden="true"></i>
+        <span><strong>${escapeHtml(layer.name)}</strong><small>${escapeHtml(SOUND_PROFILES[layer.profile]?.label ?? "自然")} · 已加入当前声景</small></span>
+        <b>${layer.level}%</b>
+      </button>`).join("");
+    renderIcons();
+    return;
+  }
+
+  const sources = sourceCatalog[state.sourceCategory] ?? sourceCatalog.environment;
+  dom.sourceList.innerHTML = sources.map((source) => {
+    if (state.sourceCategory === "environment") {
+      const layer = state.currentScene.layers.find((item) => item.catalogId === source.id);
+      const isBase = layer?.source === "base";
+      return `
+        <button type="button" ${isBase ? "disabled" : ""} ${layer && !isBase ? `data-remove-catalog="${source.id}"` : `data-add-catalog="${source.id}"`}>
+          <i data-lucide="${source.icon}" aria-hidden="true"></i>
+          <span><strong>${escapeHtml(source.name)}</strong><small>${escapeHtml(source.detail)}</small></span>
+          <b>${isBase ? "底层" : layer ? "移除" : "加入"}</b>
+        </button>`;
+    }
+    return `
+      <button type="button" data-source-upload="${source.id}">
+        <i data-lucide="${source.icon}" aria-hidden="true"></i>
+        <span><strong>${escapeHtml(source.name)}</strong><small>${escapeHtml(source.detail)}</small></span>
+        <b>选择音频</b>
+      </button>`;
+  }).join("");
+  renderIcons();
+}
+
+function handleSourceLibraryClick(event) {
+  const addButton = event.target.closest("[data-add-catalog]");
+  if (addButton) {
+    addBuiltInLayer(addButton.dataset.addCatalog);
+    return;
+  }
+  const removeButton = event.target.closest("[data-remove-catalog]");
+  if (removeButton) {
+    const layer = state.currentScene.layers.find((item) => item.catalogId === removeButton.dataset.removeCatalog);
+    if (layer) removeAdditionalLayer(layer);
+    return;
+  }
+  const uploadButton = event.target.closest("[data-source-upload]");
+  if (uploadButton) {
+    const source = Object.values(sourceCatalog).flat().find((item) => item.id === uploadButton.dataset.sourceUpload);
+    if (source) requestAudioUpload({ category: state.sourceCategory, profile: source.profile, name: source.name });
+    return;
+  }
+  const locateButton = event.target.closest("[data-layer-locate]");
+  if (locateButton) {
+    const row = dom.layerList.querySelector(`[data-layer-id="${CSS.escape(locateButton.dataset.layerLocate)}"]`);
+    row?.scrollIntoView({ behavior: motionRuntime.isReduced() ? "auto" : "smooth", block: "center" });
+    row?.querySelector("input")?.focus({ preventScroll: true });
+  }
+}
+
+function setThemeMode(themeMode) {
+  if (!["scene", "light", "dark"].includes(themeMode)) return;
+  state.themeMode = themeMode;
+  applyTheme();
+  syncSettings();
+  persistPreferences();
+  const label = themeMode === "scene" ? "跟随声景" : themeMode === "light" ? "浅色" : "深色";
+  showToast(`外观已设为「${label}」`);
+}
+
+function applyTheme() {
+  const theme = state.themeMode === "scene" ? state.currentScene.theme : state.themeMode;
+  document.documentElement.dataset.theme = theme;
+  document.querySelector('meta[name="theme-color"]').content = theme === "dark" ? "#141918" : "#f4f6f3";
+}
+
+function syncSettings() {
+  dom.themeOptions.forEach((button) => {
+    const selected = button.dataset.themeMode === state.themeMode;
+    button.classList.toggle("is-selected", selected);
+    button.setAttribute("aria-checked", String(selected));
+  });
+  dom.autoPlaySetting.checked = state.autoPlayOnSelect;
+  dom.rememberMixSetting.checked = state.rememberMix;
+  refreshStorageStats();
+}
+
+async function refreshStorageStats() {
+  try {
+    const stats = await getStoredAudioStats();
+    dom.storageSummary.textContent = stats.count ? `${stats.count} 个声音 · ${formatBytes(stats.bytes)}` : "还没有本地声音";
+    dom.storageDetail.textContent = stats.count ? "只保存在当前浏览器，可随时清空" : "从播放器下方的素材库添加";
+  } catch {
+    dom.storageSummary.textContent = "无法读取本地存储";
+    dom.storageDetail.textContent = "浏览器可能已限制 IndexedDB";
+  }
+}
+
+async function handleClearStoredAudio() {
+  if (!state.clearStorageArmed) {
+    state.clearStorageArmed = true;
+    dom.clearStorageButton.dataset.armed = "true";
+    dom.clearStorageButton.textContent = "再次点击清空";
+    window.clearTimeout(state.clearStorageTimer);
+    state.clearStorageTimer = window.setTimeout(resetClearStorageButton, 4000);
+    return;
+  }
+
+  window.clearTimeout(state.clearStorageTimer);
+  state.clearStorageTimer = 0;
+  scenes.forEach((scene) => {
+    scene.layers.filter((layer) => layer.source === "upload").forEach((layer) => {
+      layer.audio?.pause();
+      audioCrossfader.detachLayer(layer.id);
+      if (layer.audio?.src.startsWith("blob:")) URL.revokeObjectURL(layer.audio.src);
+    });
+    scene.layers = scene.layers.filter((layer) => layer.source !== "upload");
+  });
+  try {
+    await clearStoredAudioLayers();
+    showToast("本地声音已清空，内置声景没有变化");
+  } catch {
+    showToast("本地声音没有清空，请稍后再试");
+  }
+  resetClearStorageButton();
+  renderCurrentScene();
+  renderCollections();
+  refreshStorageStats();
+}
+
+function resetClearStorageButton() {
+  state.clearStorageArmed = false;
+  dom.clearStorageButton.dataset.armed = "false";
+  dom.clearStorageButton.textContent = "清空本地声音";
+}
+
+function formatBytes(bytes) {
+  if (bytes < 1024) return `${bytes} B`;
+  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+}
+
 function renderLayerList() {
   dom.layerList.replaceChildren(...state.currentScene.layers.map((layer, index) => {
     const isBase = layer.source === "base";
     const available = isBase || Boolean(layer.audio);
+    const profile = SOUND_PROFILES[layer.profile ?? "natural"] ?? SOUND_PROFILES.natural;
     const row = document.createElement("article");
     row.className = "layer-row";
     row.dataset.layerId = layer.id;
     row.dataset.muted = String(layer.muted);
     row.dataset.available = String(available);
+    row.dataset.source = layer.source;
     row.innerHTML = `
       <div class="layer-identity">
         <span class="layer-swatch" aria-hidden="true"></span>
         <span class="layer-name"><strong>${escapeHtml(layer.name)}</strong><small>${escapeHtml(layer.detail)}</small></span>
       </div>
       <input type="range" min="0" max="100" value="${layer.level}" aria-label="${escapeHtml(layer.name)}存在感" aria-valuetext="${layer.level}%" data-layer-level ${available ? "" : "disabled"}>
+      ${isBase
+        ? `<span class="layer-profile-label">跟随整体听感</span>`
+        : `<label class="layer-profile"><span class="sr-only">${escapeHtml(layer.name)}播放质感</span><select data-layer-profile aria-label="${escapeHtml(layer.name)}播放质感">${Object.entries(SOUND_PROFILES).map(([id, item]) => `<option value="${id}" ${id === (layer.profile ?? "natural") ? "selected" : ""}>${escapeHtml(item.label)}</option>`).join("")}</select><small>${escapeHtml(profile.detail)}</small></label>`}
       <span class="layer-value">${available ? `${layer.level}%` : "不可用"}</span>
       <span class="layer-actions">
         <button class="layer-toggle" type="button" data-layer-toggle aria-pressed="${String(!layer.muted)}" aria-label="${layer.muted ? "开启" : "关闭"}${escapeHtml(layer.name)}" title="${layer.muted ? "开启" : "关闭"}${escapeHtml(layer.name)}" ${available ? "" : "disabled"}>
@@ -1053,9 +1503,23 @@ function handleLayerInput(event) {
     syncAudioProfile();
     persistPreferences();
   } else if (layer.audio) {
-    layer.audio.volume = layer.muted ? 0 : state.volume * (layer.level / 100) * 0.55;
-    persistUploadedLayer(layer);
+    audioCrossfader.setLayer(layer.id, { level: layer.level / 100, muted: layer.muted });
+    persistLayerState(layer);
   }
+}
+
+function handleLayerProfileChange(event) {
+  const select = event.target.closest("[data-layer-profile]");
+  if (!select) return;
+  const row = select.closest("[data-layer-id]");
+  const layer = state.currentScene.layers.find((item) => item.id === row.dataset.layerId);
+  if (!layer || !SOUND_PROFILES[select.value]) return;
+  layer.profile = select.value;
+  audioCrossfader.setLayer(layer.id, { character: layer.profile });
+  persistLayerState(layer);
+  renderLayerList();
+  renderSourceLibrary();
+  showToast(`「${layer.name}」现在通过${SOUND_PROFILES[layer.profile].label}播放`);
 }
 
 function handleLayerToggle(event) {
@@ -1063,7 +1527,7 @@ function handleLayerToggle(event) {
   if (removeButton) {
     const row = removeButton.closest("[data-layer-id]");
     const layer = state.currentScene.layers.find((item) => item.id === row.dataset.layerId);
-    if (layer) removeUploadedLayer(layer);
+    if (layer) removeAdditionalLayer(layer);
     return;
   }
 
@@ -1079,7 +1543,8 @@ function handleLayerToggle(event) {
   } else if (layer.audio) {
     if (layer.muted) layer.audio.pause();
     else if (state.playing) playUploadedLayers(state.currentScene);
-    persistUploadedLayer(layer);
+    audioCrossfader.setLayer(layer.id, { muted: layer.muted });
+    persistLayerState(layer);
   }
   renderLayerList();
 }
@@ -1092,24 +1557,37 @@ function addUploadedLayer({
   scene = state.currentScene,
   level = 56,
   muted = false,
+  profile = "natural",
+  category = "mine",
+  createdAt = Date.now(),
   persisted = true,
 }) {
+  const profileLabel = SOUND_PROFILES[profile]?.label ?? SOUND_PROFILES.natural.label;
   const layer = {
     id,
     name,
-    detail: persisted ? "本地音频 · 已保存在此浏览器" : "本地音频 · 仅当前会话",
+    detail: persisted ? `${profileLabel} · 保存在此浏览器` : `${profileLabel} · 仅当前会话`,
     level,
     muted,
     audio,
     blob,
+    category,
+    createdAt,
+    profile,
     sceneId: scene.id,
     source: "upload",
   };
   scene.layers.push(layer);
+  registerLayerWithAudioEngine(layer);
   if (scene.id === state.currentScene.id) renderCurrentScene();
   renderCollections();
   if (scene.id === state.currentScene.id && state.playing && !muted) playUploadedLayers(scene);
   return layer;
+}
+
+function requestAudioUpload({ category = "mine", profile = "natural", name = "" } = {}) {
+  state.pendingUpload = { category, profile, name };
+  dom.audioUpload.click();
 }
 
 async function handleAudioUpload() {
@@ -1118,18 +1596,33 @@ async function handleAudioUpload() {
   if (!file.type.startsWith("audio/")) {
     showToast("请选择音频文件");
     dom.audioUpload.value = "";
+    state.pendingUpload = null;
     return;
   }
   if (file.size > 32 * 1024 * 1024) {
     showToast("音频超过 32 MB，请选择更小的文件");
     dom.audioUpload.value = "";
+    state.pendingUpload = null;
     return;
   }
 
   const id = window.crypto?.randomUUID?.() ?? `audio-${Date.now()}`;
-  const name = file.name.replace(/\.[^.]+$/, "").slice(0, 28) || "本地声音";
+  const uploadRequest = state.pendingUpload ?? { category: "mine", profile: "natural", name: "" };
+  const originalName = file.name.replace(/\.[^.]+$/, "").slice(0, 28) || "本地声音";
+  const name = uploadRequest.name ? `${uploadRequest.name} · ${originalName}`.slice(0, 36) : originalName;
   const targetScene = state.currentScene;
-  const record = { blob: file, createdAt: Date.now(), id, level: 56, muted: false, name, sceneId: targetScene.id };
+  const createdAt = Date.now();
+  const record = {
+    blob: file,
+    category: uploadRequest.category,
+    createdAt,
+    id,
+    level: 56,
+    muted: false,
+    name,
+    profile: uploadRequest.profile,
+    sceneId: targetScene.id,
+  };
   let persisted = true;
   try {
     await putStoredAudioLayer(record);
@@ -1140,12 +1633,17 @@ async function handleAudioUpload() {
   addUploadedLayer({
     audio: createLayerAudio(URL.createObjectURL(file)),
     blob: file,
+    category: uploadRequest.category,
+    createdAt,
     id,
     name,
+    profile: uploadRequest.profile,
     persisted,
     scene: targetScene,
   });
   dom.audioUpload.value = "";
+  state.pendingUpload = null;
+  refreshStorageStats();
   showToast(persisted
     ? `已把「${name}」加入${state.currentScene.name}`
     : `已加入「${name}」，但浏览器未能保存`);
@@ -1163,17 +1661,23 @@ async function restoreStoredAudioLayers() {
     const scene = sceneById.get(record.sceneId);
     if (!scene || !(record.blob instanceof Blob)) return;
     const audio = createLayerAudio(URL.createObjectURL(record.blob));
-    scene.layers.push({
+    const profile = SOUND_PROFILES[record.profile] ? record.profile : "natural";
+    const layer = {
       audio,
       blob: record.blob,
-      detail: "本地音频 · 已保存在此浏览器",
+      category: record.category ?? "mine",
+      createdAt: record.createdAt ?? Date.now(),
+      detail: `${SOUND_PROFILES[profile].label} · 保存在此浏览器`,
       id: record.id,
       level: clampNumber(record.level, 0, 100, 56),
       muted: Boolean(record.muted),
       name: record.name || "本地声音",
+      profile,
       sceneId: record.sceneId,
       source: "upload",
-    });
+    };
+    scene.layers.push(layer);
+    registerLayerWithAudioEngine(layer);
   });
 }
 
@@ -1184,32 +1688,55 @@ function createLayerAudio(url) {
   return audio;
 }
 
+function registerLayerWithAudioEngine(layer) {
+  if (!layer.audio) return;
+  audioCrossfader.attachLayer(layer.id, layer.audio, {
+    character: layer.profile ?? "natural",
+    level: layer.level / 100,
+    muted: layer.muted,
+  });
+}
+
+function persistLayerState(layer) {
+  if (layer.source === "upload") persistUploadedLayer(layer);
+  else persistPreferences();
+}
+
 function persistUploadedLayer(layer) {
   if (layer.source !== "upload" || !layer.blob) return;
   putStoredAudioLayer({
     blob: layer.blob,
-    createdAt: Date.now(),
+    category: layer.category ?? "mine",
+    createdAt: layer.createdAt ?? Date.now(),
     id: layer.id,
     level: layer.level,
     muted: layer.muted,
     name: layer.name,
+    profile: layer.profile ?? "natural",
     sceneId: layer.sceneId ?? state.currentScene.id,
   }).catch(() => undefined);
 }
 
-async function removeUploadedLayer(layer) {
-  if (layer.source !== "upload") return;
+async function removeAdditionalLayer(layer) {
+  if (layer.source === "base") return;
   layer.audio?.pause();
+  audioCrossfader.detachLayer(layer.id);
   if (layer.audio?.src.startsWith("blob:")) URL.revokeObjectURL(layer.audio.src);
   state.currentScene.layers = state.currentScene.layers.filter((item) => item.id !== layer.id);
   renderCurrentScene();
   renderCollections();
-  try {
-    await deleteStoredAudioLayer(layer.id);
-    showToast(`已移除「${layer.name}」`);
-  } catch {
+  if (layer.source === "upload") {
+    try {
+      await deleteStoredAudioLayer(layer.id);
+      showToast(`已移除「${layer.name}」`);
+    } catch {
+      showToast(`已从当前声景移除「${layer.name}」`);
+    }
+  } else {
+    persistPreferences();
     showToast(`已从当前声景移除「${layer.name}」`);
   }
+  refreshStorageStats();
 }
 
 function stopUploadedLayers(scene) {
@@ -1426,21 +1953,34 @@ function renderIcons() {
     icons: {
       ArrowRight,
       ArrowUpRight,
+      AudioLines,
+      Blend,
       ChevronDown,
       ChevronUp,
+      CloudRain,
       Compass,
+      Database,
+      Ellipsis,
+      Headphones,
       House,
       Library,
       Maximize2,
+      Moon,
       Pause,
       Play,
       Plus,
+      Radio,
+      Settings,
       Shuffle,
+      Speaker,
+      Sun,
       Timer,
       Trash2,
+      Tv,
       Upload,
       Volume2,
       VolumeX,
+      Waves,
       X,
     },
   });
@@ -1465,7 +2005,12 @@ function syncStateMarkers() {
   dom.shell.dataset.sleepTimerMinutes = String(state.sleepTimerMinutes);
   dom.shell.dataset.intensity = state.intensity.toFixed(2);
   dom.shell.dataset.richness = state.richness.toFixed(2);
+  dom.shell.dataset.movement = state.movement.toFixed(2);
+  dom.shell.dataset.distance = state.distance.toFixed(2);
   dom.shell.dataset.character = state.character;
+  dom.shell.dataset.themeMode = state.themeMode;
+  dom.shell.dataset.sourceCategory = state.sourceCategory;
+  dom.shell.dataset.mobileMoreOpen = String(state.mobileMoreOpen);
   dom.shell.dataset.baseLevel = String(baseLayer.level);
   dom.shell.dataset.baseMuted = String(baseLayer.muted);
 }
@@ -1478,6 +2023,9 @@ function exposeDebugApi() {
       sleepMenuOpen: state.sleepMenuOpen,
       volumePopoverOpen: state.volumePopoverOpen,
       sleepTimerMinutes: state.sleepTimerMinutes,
+      themeMode: state.themeMode,
+      autoPlayOnSelect: state.autoPlayOnSelect,
+      rememberMix: state.rememberMix,
       currentScene: state.currentScene.id,
       pendingScene: state.pendingScene?.id ?? null,
       generatedReady: state.generatedReady?.id ?? null,

@@ -36,6 +36,19 @@ export async function deleteStoredAudioLayer(id) {
   await runRequest(database, "readwrite", (store) => store.delete(id));
 }
 
+export async function getStoredAudioStats() {
+  const records = await listStoredAudioLayers();
+  return records.reduce((summary, record) => ({
+    bytes: summary.bytes + (record.blob?.size ?? 0),
+    count: summary.count + 1,
+  }), { bytes: 0, count: 0 });
+}
+
+export async function clearStoredAudioLayers() {
+  const database = await openDatabase();
+  await runRequest(database, "readwrite", (store) => store.clear());
+}
+
 function openDatabase() {
   return new Promise((resolve, reject) => {
     if (!window.indexedDB) {
@@ -60,8 +73,11 @@ function runRequest(database, mode, makeRequest) {
   return new Promise((resolve, reject) => {
     const transaction = database.transaction(LAYER_STORE, mode);
     const request = makeRequest(transaction.objectStore(LAYER_STORE));
-    request.addEventListener("success", () => resolve(request.result), { once: true });
+    let result;
+    request.addEventListener("success", () => { result = request.result; }, { once: true });
     request.addEventListener("error", () => reject(request.error), { once: true });
+    transaction.addEventListener("complete", () => resolve(result), { once: true });
     transaction.addEventListener("abort", () => reject(transaction.error), { once: true });
+    transaction.addEventListener("error", () => reject(transaction.error), { once: true });
   });
 }
