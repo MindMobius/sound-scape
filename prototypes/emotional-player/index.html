@@ -6,7 +6,7 @@
     <meta name="theme-color" content="#f4f6f3" />
     <meta name="description" content="声景，把一句描述变成持续演化的声音环境。" />
     <title>声景</title>
-    <link rel="icon" type="image/png" href="../../assets/brand/identity/soundscape-mark-cutout.png" />
+    <link rel="icon" type="image/png" href="../../assets/brand/identity/soundscape-mark-ui.png" />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
@@ -40,11 +40,6 @@
           </button>
         </nav>
 
-        <nav class="secondary-nav" aria-label="更多">
-          <button class="nav-item" type="button" data-toast="设置会在产品化阶段接入">
-            <i data-lucide="settings" aria-hidden="true"></i><span>设置</span>
-          </button>
-        </nav>
       </aside>
 
       <header class="mobile-header">
@@ -81,8 +76,8 @@
             </div>
 
             <button class="home-guide-scene" type="button" data-view-link="explore" aria-label="前往探索深夜海岸等现成声景">
-              <img id="home-guide-cover" src="../../assets/scenes/coastal-night/coastal-night-cover-v1.png" alt="" />
-              <span><strong>从一处现成声景开始</strong><small>深夜海岸 · 林间初醒 · 夜行列车</small></span>
+              <img id="home-guide-cover" src="../../assets/scenes/coastal-night/coastal-night-cover-web-v1.jpg" alt="" decoding="async" />
+              <span><strong>从一处可听声景开始</strong><small>深夜海岸 · 雨夜木屋</small></span>
               <i data-lucide="arrow-up-right" aria-hidden="true"></i>
             </button>
           </section>
@@ -100,7 +95,7 @@
           </header>
 
           <article class="featured-scene" id="featured-scene">
-            <img id="featured-image" src="../../assets/scenes/coastal-night/coastal-night-hero-v1.png" alt="" />
+            <img id="featured-image" src="../../assets/scenes/coastal-night/coastal-night-hero-web-v1.jpg" alt="" decoding="async" fetchpriority="high" />
             <div class="featured-copy">
               <p id="featured-elements">近岸潮水 · 远浪 · 海风</p>
               <h2 id="featured-title">深夜海岸</h2>
@@ -118,7 +113,6 @@
                 <button class="is-selected" type="button" role="tab" aria-selected="true" data-filter="all">全部</button>
                 <button type="button" role="tab" aria-selected="false" data-filter="nature">自然</button>
                 <button type="button" role="tab" aria-selected="false" data-filter="interior">室内</button>
-                <button type="button" role="tab" aria-selected="false" data-filter="journey">旅途</button>
               </div>
             </div>
             <div class="scene-grid" id="explore-grid"></div>
@@ -128,8 +122,8 @@
         <section class="app-view create-view" data-view="create" aria-labelledby="create-view-title" hidden>
           <header class="view-header">
             <div>
-              <h1 id="create-view-title">创建声景 <span class="status-label">流程预演</span></h1>
-              <p>描述一处你现在想去的地方。</p>
+              <h1 id="create-view-title">创建声景 <span class="status-label">本地样例</span></h1>
+              <p>描述一处你现在想去的地方，我们会用本地声音样例组织一个可听版本。</p>
             </div>
             <button class="text-action" type="button" id="random-prompt-button" aria-label="随机生成灵感" title="换个灵感">
               <i data-lucide="shuffle" aria-hidden="true"></i><span>换个灵感</span>
@@ -140,12 +134,12 @@
             <form class="create-form" id="create-form">
               <label class="prompt-field">
                 <span>你想听见什么？</span>
-                <textarea id="scene-prompt" rows="7" maxlength="180" placeholder="例如，雨停后的松林，湿润的树叶偶尔落下水滴，远处有一声很轻的钟。"></textarea>
+                <textarea id="scene-prompt" rows="7" maxlength="180" aria-describedby="prompt-count prompt-hint" placeholder="例如，雨停前的玻璃温室，水珠沿着窗面缓慢滑落。"></textarea>
               </label>
               <div class="prompt-meta">
-                <span id="prompt-count">0 / 180</span>
-                <button class="primary-action" id="compose-button" type="submit">
-                  <span>预演组成</span><i data-lucide="arrow-up-right" aria-hidden="true"></i>
+                <span class="prompt-status"><span id="prompt-count">0 / 180</span><span id="prompt-hint">写下一处场景后即可开始</span></span>
+                <button class="primary-action" id="compose-button" type="submit" disabled>
+                  <span>生成可听样例</span><i data-lucide="arrow-up-right" aria-hidden="true"></i>
                 </button>
               </div>
             </form>
@@ -153,23 +147,20 @@
             <aside class="create-notes" aria-labelledby="starter-title">
               <h2 id="starter-title">从一个片刻开始</h2>
               <div class="starter-list">
-                <button type="button" data-starter="雨停后的松林，湿润的树叶偶尔落下水滴，远处有一声很轻的钟。">
-                  <span>雨后的松林</span><small>水滴 · 松针 · 远钟</small>
+                <button type="button" data-starter="雨停前的玻璃温室，水珠沿着窗面缓慢滑落。">
+                  <span>玻璃温室</span><small>细雨 · 玻璃 · 室内回响</small>
                 </button>
-                <button type="button" data-starter="凌晨的老式旅馆，窗外偶尔有汽车驶过，房间里的收音机放着很轻的爵士乐。">
-                  <span>凌晨旅馆</span><small>车流 · 收音机 · 房间声</small>
-                </button>
-                <button type="button" data-starter="冬日午后的温室，玻璃上有细雨，暖气管道偶尔发出轻响。">
-                  <span>冬日温室</span><small>细雨 · 暖气 · 玻璃房</small>
+                <button type="button" data-starter="夜里的礁石海湾，浪声从远处一层层靠近。">
+                  <span>礁石海湾</span><small>近浪 · 远潮 · 礁石回响</small>
                 </button>
               </div>
             </aside>
           </div>
 
           <section class="recent-jobs" aria-labelledby="recent-jobs-title">
-            <div class="section-title-row"><h2 id="recent-jobs-title">示例声景</h2><span>仅供本次流程预演</span></div>
-            <div class="recent-job-row"><span class="job-state-mark is-ready" aria-hidden="true"></span><div><strong>林间初醒</strong><small>内置示例 · 可试听</small></div><button type="button" data-scene="forest-dawn">聆听</button></div>
-            <div class="recent-job-row"><span class="job-state-mark" aria-hidden="true"></span><div><strong>深夜海岸</strong><small>内置示例 · 可试听</small></div><button type="button" data-scene="coastal-night">聆听</button></div>
+            <div class="section-title-row"><h2 id="recent-jobs-title">可听样例</h2><span>两段本地声音素材</span></div>
+            <div class="recent-job-row"><span class="job-state-mark is-ready" aria-hidden="true"></span><div><strong>雨夜木屋</strong><small>雨声实录 · 可实时调音</small></div><button type="button" data-scene="rain-cabin">聆听</button></div>
+            <div class="recent-job-row"><span class="job-state-mark" aria-hidden="true"></span><div><strong>深夜海岸</strong><small>海浪实录 · 可实时调音</small></div><button type="button" data-scene="coastal-night">聆听</button></div>
           </section>
         </section>
 
@@ -189,7 +180,7 @@
               <button type="button" role="tab" aria-selected="false" data-library-filter="saved">示例收藏</button>
               <button type="button" role="tab" aria-selected="false" data-library-filter="recent">近期示例</button>
             </div>
-            <span id="library-count">6 个声景</span>
+            <span id="library-count">2 个声景</span>
           </div>
           <div class="scene-grid library-grid" id="library-grid"></div>
         </section>
@@ -200,7 +191,7 @@
         <div class="player-surface">
           <div class="player-expanded-content" id="player-expanded-content">
             <div class="player-atmosphere" id="player-atmosphere" aria-hidden="true">
-              <img id="player-atmosphere-image" src="../../assets/scenes/rain-cabin/rain-cabin-hero-v1.png" alt="" />
+              <img id="player-atmosphere-image" src="../../assets/scenes/rain-cabin/rain-cabin-hero-web-v1.jpg" alt="" decoding="async" />
               <span class="player-atmosphere-field"></span>
             </div>
             <button class="icon-button player-collapse-button" id="player-collapse-button" type="button" aria-label="收起播放器" title="收起播放器">
@@ -210,7 +201,7 @@
             <div class="player-expanded-scroll" id="player-expanded-scroll">
               <div class="player-main">
               <figure class="player-hero-artwork">
-                <img id="player-hero-cover" src="../../assets/scenes/rain-cabin/rain-cabin-cover-v1.png" alt="" />
+                <img id="player-hero-cover" src="../../assets/scenes/rain-cabin/rain-cabin-cover-web-v1.jpg" alt="" decoding="async" />
                 <figcaption><span class="live-dot" aria-hidden="true"></span><span id="player-hero-state">准备播放</span></figcaption>
                 <button class="player-focus-entry" id="focus-button" type="button" aria-label="进入沉浸聆听">
                   <span class="player-focus-affordance" aria-hidden="true"><i data-lucide="maximize-2"></i></span>
@@ -218,14 +209,14 @@
               </figure>
 
               <div class="player-expanded-copy">
-                <p class="player-status-line"><span class="live-dot" aria-hidden="true"></span><span id="player-expanded-state">轻触播放</span></p>
+                <p class="player-status-line"><span class="live-dot" aria-hidden="true"></span><span id="player-expanded-state">尚未播放</span></p>
                 <h2 id="player-expanded-title">雨夜木屋</h2>
                 <p class="player-description" id="player-expanded-description">雷雨夜里，点燃篝火的木屋。</p>
                 <div class="player-elements" id="player-expanded-elements" aria-label="声音元素"></div>
 
                 <section class="player-feeling" aria-labelledby="player-feeling-title">
                   <div class="section-title-row">
-                    <div><h3 id="player-feeling-title">整体感受</h3><p>改变整个场景的倾向，不需要逐层调音。</p></div>
+                    <div><h3 id="player-feeling-title">整体感受</h3><p id="feeling-summary">均衡 · 丰富，声音正在实时变化。</p></div>
                   </div>
                   <label class="feeling-range"><span>轻</span><input id="intensity" type="range" min="0" max="100" value="52" data-intensity aria-label="轻重" /><span>重</span></label>
                   <label class="feeling-range"><span>简</span><input id="richness" type="range" min="0" max="100" value="68" data-richness aria-label="简繁" /><span>繁</span></label>
@@ -255,24 +246,16 @@
                         <section>
                           <h3 id="character-title">听感</h3>
                           <div class="character-options" id="character-options" role="radiogroup" aria-label="听感">
-                            <button class="is-selected" type="button" role="radio" aria-checked="true" data-character="自然">自然</button>
-                            <button type="button" role="radio" aria-checked="false" aria-label="Hi-Fi，待接入" disabled><span>Hi-Fi</span><small>待接入</small></button>
-                            <button type="button" role="radio" aria-checked="false" aria-label="胆机，待接入" disabled><span>胆机</span><small>待接入</small></button>
-                            <button type="button" role="radio" aria-checked="false" aria-label="老式收音机，待接入" disabled><span>老式收音机</span><small>待接入</small></button>
-                            <button type="button" role="radio" aria-checked="false" aria-label="5.1 环绕，待接入" disabled><span>5.1 环绕</span><small>待接入</small></button>
-                            <button type="button" role="radio" aria-checked="false" aria-label="7.1 环绕，待接入" disabled><span>7.1 环绕</span><small>待接入</small></button>
+                            <button class="is-selected" type="button" role="radio" aria-checked="true" data-character="natural" data-character-label="自然"><span>自然</span><small>清晰平衡</small></button>
+                            <button type="button" role="radio" aria-checked="false" data-character="warm" data-character-label="温暖"><span>温暖</span><small>柔和低频</small></button>
+                            <button type="button" role="radio" aria-checked="false" data-character="distant" data-character-label="远处"><span>远处</span><small>朦胧空间</small></button>
                           </div>
                         </section>
 
                         <section class="source-library" aria-labelledby="source-library-title">
-                          <div class="section-title-row"><h3 id="source-library-title">添一处声音</h3><button class="quiet-link" type="button" id="browse-audio-button">本地音频</button></div>
-                          <p class="capability-note">你加入的声音只留在这次聆听中；其他声音还在准备。</p>
-                          <div class="source-tabs" role="tablist" aria-label="声音分类">
-                            <button class="is-selected" type="button" role="tab" aria-selected="true">环境</button>
-                            <button type="button" role="tab" aria-selected="false">事件</button>
-                            <button type="button" role="tab" aria-selected="false">媒介</button>
-                          </div>
-                          <div class="source-list"></div>
+                          <div class="section-title-row"><h3 id="source-library-title">添一处声音</h3></div>
+                          <p class="capability-note">加入自己的音频，与当前声景一起播放。文件只保存在这个浏览器中，也可以随时移除。</p>
+                          <button class="source-upload-action" type="button" id="browse-audio-button"><i data-lucide="upload" aria-hidden="true"></i><span><strong>选择本地音频</strong><small>支持浏览器可播放的音频，最大 32 MB</small></span></button>
                         </section>
                       </aside>
                     </div>
@@ -284,8 +267,9 @@
 
           <footer class="player-control-rail" aria-label="播放控制">
             <button class="player-identity" id="player-identity-button" type="button" aria-label="展开雨夜木屋播放器">
-              <img id="player-cover" src="../../assets/scenes/rain-cabin/rain-cabin-cover-v1.png" alt="" />
-              <span><strong id="player-title">雨夜木屋</strong><small id="player-state">轻触播放</small></span>
+              <img id="player-cover" src="../../assets/scenes/rain-cabin/rain-cabin-cover-web-v1.jpg" alt="" decoding="async" />
+              <span><strong id="player-title">雨夜木屋</strong><small id="player-state">尚未播放</small></span>
+              <i class="player-expand-indicator" data-lucide="chevron-up" aria-hidden="true"></i>
             </button>
 
             <div class="player-rail-actions">
@@ -293,7 +277,7 @@
                 <button class="rail-control" id="sleep-timer-button" type="button" aria-expanded="false" aria-controls="sleep-timer-menu" aria-label="倒计时，未启动" title="设置睡眠倒计时">
                   <i data-lucide="timer" aria-hidden="true"></i><span class="rail-control-value" id="sleep-timer-label" data-mobile-label="未启动">未启动</span>
                 </button>
-                <div class="control-popover sleep-timer-menu" id="sleep-timer-menu" role="menu" aria-label="睡眠倒计时" aria-hidden="true" inert>
+                <div class="control-popover sleep-timer-menu" id="sleep-timer-menu" role="menu" aria-label="睡眠倒计时" aria-hidden="true" inert hidden>
                   <header class="control-popover-header"><strong>倒计时</strong><span>到时暂停</span></header>
                   <div class="timer-scale">
                     <button class="is-selected" type="button" role="menuitemradio" aria-checked="true" data-sleep-minutes="0"><span class="scale-dot" aria-hidden="true"></span><span>关闭</span></button>
@@ -308,7 +292,7 @@
                 <button class="rail-control" id="volume-button" type="button" aria-expanded="false" aria-controls="volume-popover" aria-label="总音量，64%" title="调整总音量">
                   <i data-lucide="volume-2" aria-hidden="true"></i><span class="rail-control-value" id="volume-label" data-mobile-label="64%">64%</span>
                 </button>
-                <div class="control-popover volume-popover" id="volume-popover" role="dialog" aria-labelledby="volume-popover-title" aria-hidden="true" inert>
+                <div class="control-popover volume-popover" id="volume-popover" role="dialog" aria-labelledby="volume-popover-title" aria-hidden="true" inert hidden>
                   <header class="control-popover-header"><strong id="volume-popover-title">音量</strong><output id="volume-popover-value" for="volume">64%</output></header>
                   <label class="volume-fader">
                     <span class="sr-only">总音量</span>
@@ -333,15 +317,15 @@
         </div>
       </section>
 
-      <aside class="task-toast" id="task-toast" aria-live="polite" aria-hidden="true" data-state="idle" inert>
+      <aside class="task-toast" id="task-toast" aria-live="polite" aria-hidden="true" data-state="idle" inert hidden>
         <div class="task-running">
           <span class="task-spinner" aria-hidden="true"></span>
-          <div><strong id="task-phase">预演 · 理解场景</strong><small>流程预演 · 当前声景继续播放</small></div>
+          <div><strong id="task-phase">理解场景</strong><small>本地编排 · 当前声景继续播放</small></div>
           <span id="task-percent">0%</span>
         </div>
         <div class="task-ready">
-          <img id="ready-cover" src="../../assets/scenes/forest-dawn/forest-dawn-cover-v1.png" alt="" />
-          <div><small>预演结果已就绪</small><strong id="ready-title">林间初醒</strong></div>
+          <img id="ready-cover" src="../../assets/scenes/coastal-night/coastal-night-cover-web-v1.jpg" alt="" />
+          <div><small>可听声景已就绪</small><strong id="ready-title">深夜海岸</strong></div>
           <button class="quiet-link" id="dismiss-ready" type="button">稍后</button>
           <button class="primary-action compact-primary" id="switch-scene" type="button">切换</button>
         </div>

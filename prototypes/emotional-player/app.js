@@ -2,43 +2,38 @@ import "@fontsource-variable/noto-serif-sc/wght.css";
 import {
   ArrowRight,
   ArrowUpRight,
-  AudioLines,
   ChevronDown,
-  CloudRain,
+  ChevronUp,
   Compass,
   createIcons,
-  Eye,
-  EyeOff,
-  Flame,
   House,
   Library,
   Maximize2,
   Pause,
   Play,
   Plus,
-  Radio,
-  Settings,
   Shuffle,
   Timer,
+  Trash2,
   Upload,
   Volume2,
+  VolumeX,
   X,
 } from "lucide";
 import rainAudioUrl from "./media/rain-cabin.mp3?url";
 import waterAudioUrl from "./media/open-water.wav?url";
-import rainHero from "../../assets/scenes/rain-cabin/rain-cabin-hero-v1.png?url";
-import rainCover from "../../assets/scenes/rain-cabin/rain-cabin-cover-v1.png?url";
-import forestHero from "../../assets/scenes/forest-dawn/forest-dawn-hero-v1.png?url";
-import forestCover from "../../assets/scenes/forest-dawn/forest-dawn-cover-v1.png?url";
-import coastalHero from "../../assets/scenes/coastal-night/coastal-night-hero-v1.png?url";
-import coastalCover from "../../assets/scenes/coastal-night/coastal-night-cover-v1.png?url";
-import trainHero from "../../assets/scenes/night-train/night-train-hero-v1.png?url";
-import trainCover from "../../assets/scenes/night-train/night-train-cover-v1.png?url";
-import libraryHero from "../../assets/scenes/quiet-library/quiet-library-hero-v1.png?url";
-import libraryCover from "../../assets/scenes/quiet-library/quiet-library-cover-v1.png?url";
-import courtyardHero from "../../assets/scenes/summer-courtyard/summer-courtyard-hero-v1.png?url";
-import courtyardCover from "../../assets/scenes/summer-courtyard/summer-courtyard-cover-v1.png?url";
+import rainHero from "../../assets/scenes/rain-cabin/rain-cabin-hero-web-v1.jpg?url";
+import rainCover from "../../assets/scenes/rain-cabin/rain-cabin-cover-web-v1.jpg?url";
+import coastalHero from "../../assets/scenes/coastal-night/coastal-night-hero-web-v1.jpg?url";
+import coastalCover from "../../assets/scenes/coastal-night/coastal-night-cover-web-v1.jpg?url";
 import { createEqualPowerCrossfader } from "./audio/crossfader.js";
+import {
+  deleteStoredAudioLayer,
+  listStoredAudioLayers,
+  loadPreferences,
+  putStoredAudioLayer,
+  savePreferences,
+} from "./audio/storage.js";
 import { createFocusMotion } from "./motion/focus-motion.js";
 import { createNavigationMotion } from "./motion/navigation-motion.js";
 import { createPlayerMotion } from "./motion/player-motion.js";
@@ -46,14 +41,14 @@ import { createMotionRuntime } from "./motion/runtime.js";
 import { createSceneMotion } from "./motion/scene-motion.js";
 import { MembraneField } from "./visual-field.js";
 
-const makeLayers = (...names) => names.map((name, index) => ({
-  id: `${name}-${index}`,
+const makeBaseLayer = (id, name, detail) => ({
+  id: `${id}-base`,
   name,
-  detail: `${["近处", "远处", "中景", "空间"][index % 4]} · 预设待接入`,
-  level: [72, 44, 61, 36][index % 4],
+  detail,
+  level: 100,
   muted: false,
-  audio: null,
-}));
+  source: "base",
+});
 
 const scenes = [
   {
@@ -67,22 +62,9 @@ const scenes = [
     hero: rainHero,
     cover: rainCover,
     audio: rainAudioUrl,
-    layers: makeLayers("屋檐雨", "远雷", "松木火", "夜风"),
+    elements: ["屋檐雨", "远雷", "木屋回响"],
+    layers: [makeBaseLayer("rain-cabin", "雨声实录", "内置声音 · 实时调音")],
     palette: ["#aebbc7", "#c4b7ae", "#78877d", "#d36b54", "#8a8e90", "#bcc5ce", "#d3ccc2"],
-  },
-  {
-    id: "forest-dawn",
-    name: "林间初醒",
-    description: "清晨薄雾里的林间小路，远处有溪水和几声鸟鸣。",
-    category: "nature",
-    saved: true,
-    recent: true,
-    theme: "light",
-    hero: forestHero,
-    cover: forestCover,
-    audio: waterAudioUrl,
-    layers: makeLayers("浅溪", "湿叶", "晨风", "疏鸟"),
-    palette: ["#b4c0ca", "#d0c7bd", "#788c7d", "#d9a58b", "#9aa79d", "#c8d0d4", "#b6c5b8"],
   },
   {
     id: "coastal-night",
@@ -95,50 +77,9 @@ const scenes = [
     hero: coastalHero,
     cover: coastalCover,
     audio: waterAudioUrl,
-    layers: makeLayers("近岸潮水", "远浪", "海风", "礁石回响"),
+    elements: ["近岸潮水", "远浪", "礁石回响"],
+    layers: [makeBaseLayer("coastal-night", "海浪实录", "内置声音 · 实时调音")],
     palette: ["#6b8290", "#7f7a70", "#4c6664", "#a95f4f", "#59656d", "#879197", "#706d65"],
-  },
-  {
-    id: "night-train",
-    name: "夜行列车",
-    description: "夜行列车穿过安静而连续的远方。",
-    category: "journey",
-    saved: false,
-    recent: true,
-    theme: "dark",
-    hero: trainHero,
-    cover: trainCover,
-    audio: waterAudioUrl,
-    layers: makeLayers("车轮节律", "车厢低鸣", "轨道接缝", "窗外风压"),
-    palette: ["#647888", "#716d66", "#4d6062", "#a75e4f", "#53616a", "#7d878d", "#696965"],
-  },
-  {
-    id: "quiet-library",
-    name: "安静图书馆",
-    description: "午后的旧图书馆，纸页与木地板都很轻。",
-    category: "interior",
-    saved: true,
-    recent: false,
-    theme: "light",
-    hero: libraryHero,
-    cover: libraryCover,
-    audio: rainAudioUrl,
-    layers: makeLayers("翻页", "远处脚步", "木地板", "窗缝微风"),
-    palette: ["#b7c0c7", "#cbbcaf", "#9aa298", "#d87860", "#8b8e90", "#d0c8bd", "#aaa99f"],
-  },
-  {
-    id: "summer-courtyard",
-    name: "夏日庭院",
-    description: "盛夏午后的小院，风把树影吹得很慢。",
-    category: "interior",
-    saved: true,
-    recent: false,
-    theme: "light",
-    hero: courtyardHero,
-    cover: courtyardCover,
-    audio: waterAudioUrl,
-    layers: makeLayers("树叶", "远蝉", "旧风扇", "偶尔风铃"),
-    palette: ["#b9c2c6", "#cbb9ad", "#879687", "#d77a5e", "#9ca29a", "#d0c7bc", "#b3bdaa"],
   },
 ];
 
@@ -146,34 +87,15 @@ const sceneById = new Map(scenes.map((scene) => [scene.id, scene]));
 const validViews = new Set(["home", "explore", "create", "library"]);
 const randomPrompts = [
   "雷雨夜里，点燃篝火的木屋。",
-  "清晨薄雾里的林间小路，远处有溪水和几声鸟鸣。",
   "深夜海岸上，潮声持续靠近又缓缓退去。",
-  "夜行列车穿过安静而连续的远方。",
-  "午后的旧图书馆，纸页与木地板都很轻。",
-  "盛夏午后的小院，风把树影吹得很慢。",
+  "雨停前的玻璃温室，水珠沿着窗面缓慢滑落。",
+  "夜里的礁石海湾，浪声从远处一层层靠近。",
 ];
-const sourceSets = {
-  环境: [
-    { name: "窗边细雨", icon: "cloud-rain" },
-    { name: "壁炉余火", icon: "flame" },
-    { name: "林间风", icon: "audio-lines" },
-  ],
-  事件: [
-    { name: "远雷", icon: "cloud-rain" },
-    { name: "木门轻响", icon: "audio-lines" },
-    { name: "偶尔脚步", icon: "audio-lines" },
-  ],
-  媒介: [
-    { name: "老式收音机", icon: "radio" },
-    { name: "雪花电视", icon: "radio" },
-    { name: "胆机唱机", icon: "radio" },
-  ],
-};
 const jobStages = [
-  { until: 25, label: "预演 · 理解场景" },
-  { until: 55, label: "预演 · 选择声音" },
-  { until: 82, label: "预演 · 组织远近" },
-  { until: 101, label: "预演 · 调整变化" },
+  { until: 25, label: "理解场景" },
+  { until: 55, label: "选择声音母版" },
+  { until: 82, label: "调整轻重与层次" },
+  { until: 101, label: "完成本地编排" },
 ];
 const dom = {
   shell: document.querySelector("#app-shell"),
@@ -202,6 +124,7 @@ const dom = {
   playerExpandedElements: document.querySelector("#player-expanded-elements"),
   playerExpandedCopy: document.querySelector(".player-expanded-copy"),
   playerFeeling: document.querySelector(".player-feeling"),
+  feelingSummary: document.querySelector("#feeling-summary"),
   playerScrollCue: document.querySelector(".player-scroll-cue"),
   soundDetailsButton: document.querySelector("#sound-details-button"),
   detailsPanel: document.querySelector("#sound-details-panel"),
@@ -233,6 +156,7 @@ const dom = {
   createForm: document.querySelector("#create-form"),
   prompt: document.querySelector("#scene-prompt"),
   promptCount: document.querySelector("#prompt-count"),
+  promptHint: document.querySelector("#prompt-hint"),
   composeButton: document.querySelector("#compose-button"),
   taskToast: document.querySelector("#task-toast"),
   taskPhase: document.querySelector("#task-phase"),
@@ -243,7 +167,6 @@ const dom = {
   switchScene: document.querySelector("#switch-scene"),
   toast: document.querySelector("#toast"),
   layerList: document.querySelector("#layer-list"),
-  sourceList: document.querySelector(".source-list"),
   audioUpload: document.querySelector("#audio-upload"),
   addAudioButton: document.querySelector("#add-audio-button"),
   browseAudioButton: document.querySelector("#browse-audio-button"),
@@ -271,6 +194,15 @@ const dom = {
 const motionRuntime = createMotionRuntime();
 
 const initialRequest = new URLSearchParams(window.location.search).get("view");
+const storedPreferences = loadPreferences();
+scenes.forEach((scene) => {
+  const storedMix = storedPreferences.sceneMixes?.[scene.id];
+  const baseLayer = scene.layers[0];
+  if (!storedMix || !baseLayer) return;
+  baseLayer.level = clampNumber(storedMix.level, 0, 100, baseLayer.level);
+  baseLayer.muted = Boolean(storedMix.muted);
+});
+
 const state = {
   activeView: getInitialView(),
   playerExpanded: ["player", "listening", "advanced"].includes(initialRequest),
@@ -280,14 +212,14 @@ const state = {
   sleepTimerId: 0,
   sleepTimerEndsAt: 0,
   sleepTimerTickerId: 0,
-  currentScene: sceneById.get("rain-cabin"),
+  currentScene: sceneById.get(storedPreferences.sceneId) ?? sceneById.get("rain-cabin"),
   featuredScene: sceneById.get("coastal-night"),
   pendingScene: null,
   generatedReady: null,
   playing: false,
-  volume: Number(dom.volumeInputs[0].value) / 100,
-  intensity: Number(dom.intensityInputs[0].value) / 100,
-  richness: Number(dom.richnessInputs[0].value) / 100,
+  volume: clampNumber(storedPreferences.volume, 0, 1, Number(dom.volumeInputs[0].value) / 100),
+  intensity: clampNumber(storedPreferences.intensity, 0, 1, Number(dom.intensityInputs[0].value) / 100),
+  richness: clampNumber(storedPreferences.richness, 0, 1, Number(dom.richnessInputs[0].value) / 100),
   activeAudio: 0,
   hasPlayed: false,
   jobState: "idle",
@@ -300,7 +232,9 @@ const state = {
   focusTransitioning: false,
   fieldStarted: false,
   lastFocused: null,
-  character: "自然",
+  character: ["natural", "warm", "distant"].includes(storedPreferences.character)
+    ? storedPreferences.character
+    : "natural",
   exploreFilter: "all",
   libraryFilter: "all",
 };
@@ -309,7 +243,7 @@ const audioTracks = [new Audio(), new Audio()];
 audioTracks.forEach((audio, index) => {
   audio.id = `audio-track-${index}`;
   audio.loop = true;
-  audio.preload = "auto";
+  audio.preload = index === 0 ? "auto" : "none";
   audio.crossOrigin = "anonymous";
   audio.hidden = true;
   audio.setAttribute("aria-hidden", "true");
@@ -324,6 +258,13 @@ const audioCrossfader = createEqualPowerCrossfader(audioTracks, {
   duration: 1.3,
 });
 audioCrossfader.setVolume(state.volume);
+audioCrossfader.setSoundscape({
+  baseLevel: getBaseLayer().level / 100,
+  baseMuted: getBaseLayer().muted,
+  character: state.character,
+  intensity: state.intensity,
+  richness: state.richness,
+});
 
 const field = new MembraneField({
   canvas: dom.canvas,
@@ -382,13 +323,14 @@ const focusMotion = createFocusMotion({
   onClosed: finishFocusClose,
 });
 
-function boot() {
-  preloadScenes();
+async function boot() {
+  await restoreStoredAudioLayers();
+  if (typeof storedPreferences.prompt === "string") dom.prompt.value = storedPreferences.prompt;
+  updatePromptCount();
   renderHomeGreeting();
   renderCurrentScene();
   renderFeaturedScene();
   renderCollections();
-  renderSourceList("环境");
   setActiveView(state.activeView, false);
   syncPlayerStructure();
   playerMotion.setInitialState(state.playerExpanded);
@@ -407,6 +349,7 @@ function boot() {
 
 function getInitialView() {
   if (validViews.has(initialRequest)) return initialRequest;
+  if (validViews.has(storedPreferences.activeView)) return storedPreferences.activeView;
   return "home";
 }
 
@@ -472,7 +415,10 @@ function installInteractions() {
     event.preventDefault();
     startGeneration(dom.prompt.value.trim());
   });
-  dom.prompt.addEventListener("input", updatePromptCount);
+  dom.prompt.addEventListener("input", () => {
+    updatePromptCount();
+    persistPreferences();
+  });
   document.querySelector("#random-prompt-button").addEventListener("click", setRandomPrompt);
   document.querySelectorAll("[data-starter]").forEach((button) => {
     button.addEventListener("click", () => setPrompt(button.dataset.starter));
@@ -489,25 +435,13 @@ function installInteractions() {
   document.querySelector("#character-options").addEventListener("click", (event) => {
     const button = event.target.closest("[data-character]");
     if (!button) return;
-    state.character = button.dataset.character;
-    updateTabSelection(button, "[data-character]", "aria-checked");
-    showToast(`已选择「${state.character}」播放质感`);
+    setCharacter(button.dataset.character, button);
   });
 
   dom.layerList.addEventListener("input", handleLayerInput);
   dom.layerList.addEventListener("click", handleLayerToggle);
-  dom.sourceList.addEventListener("click", (event) => {
-    const button = event.target.closest("[data-add-layer]");
-    if (button) addLayer(button.dataset.addLayer);
-  });
-  document.querySelectorAll(".source-tabs button").forEach((button) => {
-    button.addEventListener("click", () => {
-      updateTabSelection(button, ".source-tabs button");
-      renderSourceList(button.textContent.trim());
-    });
-  });
   [dom.addAudioButton, dom.browseAudioButton].forEach((button) => button.addEventListener("click", () => dom.audioUpload.click()));
-  dom.audioUpload.addEventListener("change", handleAudioUpload);
+  dom.audioUpload.addEventListener("change", () => handleAudioUpload());
 
   document.addEventListener("click", (event) => {
     if (state.sleepMenuOpen
@@ -557,6 +491,7 @@ function setActiveView(viewName, animate = true) {
   window.history.replaceState(null, "", url);
   const activeView = dom.views.find((view) => view.dataset.view === viewName);
   navigationMotion.enterView(activeView, animate);
+  persistPreferences();
 }
 
 function expandPlayer() {
@@ -621,7 +556,7 @@ function toggleSleepTimerMenu(force, restoreFocus = true) {
   if (open === state.sleepMenuOpen) return;
   if (open && state.volumePopoverOpen) toggleVolumePopover(false, false);
   state.sleepMenuOpen = open;
-  dom.sleepTimerMenu.classList.toggle("is-open", open);
+  setPopoverVisibility(dom.sleepTimerMenu, open, () => state.sleepMenuOpen);
   dom.sleepTimerMenu.setAttribute("aria-hidden", String(!open));
   dom.sleepTimerMenu.inert = !open;
   dom.sleepTimerButton.setAttribute("aria-expanded", String(open));
@@ -635,7 +570,7 @@ function toggleVolumePopover(force, restoreFocus = true) {
   if (open === state.volumePopoverOpen) return;
   if (open && state.sleepMenuOpen) toggleSleepTimerMenu(false, false);
   state.volumePopoverOpen = open;
-  dom.volumePopover.classList.toggle("is-open", open);
+  setPopoverVisibility(dom.volumePopover, open, () => state.volumePopoverOpen);
   dom.volumePopover.setAttribute("aria-hidden", String(!open));
   dom.volumePopover.inert = !open;
   dom.volumeButton.setAttribute("aria-expanded", String(open));
@@ -647,6 +582,21 @@ function toggleVolumePopover(force, restoreFocus = true) {
 function closeControlPopovers(restoreFocus = false) {
   if (state.sleepMenuOpen) toggleSleepTimerMenu(false, restoreFocus);
   if (state.volumePopoverOpen) toggleVolumePopover(false, restoreFocus);
+}
+
+function setPopoverVisibility(element, open, isStillOpen) {
+  if (open) {
+    element.hidden = false;
+    window.requestAnimationFrame(() => {
+      if (isStillOpen()) element.classList.add("is-open");
+    });
+    return;
+  }
+
+  element.classList.remove("is-open");
+  window.setTimeout(() => {
+    if (!isStillOpen()) element.hidden = true;
+  }, motionRuntime.isReduced() ? 0 : 180);
 }
 
 function setSleepTimer(minutes) {
@@ -758,7 +708,7 @@ function playUploadedLayers(scene) {
 }
 
 function syncPlaybackState() {
-  const label = state.playing ? "自然演化中" : state.hasPlayed ? "已经暂停" : "轻触播放";
+  const label = state.playing ? "正在播放" : state.hasPlayed ? "已暂停" : "尚未播放";
   const artworkLabel = state.playing ? "自然演化中" : state.hasPlayed ? "已经暂停" : "准备播放";
   dom.shell.dataset.playing = String(state.playing);
   dom.playerState.textContent = label;
@@ -798,6 +748,7 @@ function updateVolume(value) {
   state.currentScene.layers.forEach((layer) => {
     if (layer.audio) layer.audio.volume = layer.muted ? 0 : state.volume * (layer.level / 100) * 0.55;
   });
+  persistPreferences();
 }
 
 function updateFeeling(kind, value) {
@@ -806,15 +757,93 @@ function updateFeeling(kind, value) {
   const inputs = kind === "intensity" ? dom.intensityInputs : dom.richnessInputs;
   inputs.forEach((input) => {
     if (document.activeElement !== input) input.value = String(normalized);
+    input.setAttribute("aria-valuetext", kind === "intensity"
+      ? describeIntensity(state.intensity)
+      : describeRichness(state.richness));
   });
   field.setControls({ [kind]: state[kind] });
+  audioCrossfader.setSoundscape({ [kind]: state[kind] });
+  dom.feelingSummary.textContent = `${describeIntensity(state.intensity)} · ${describeRichness(state.richness)}，声音正在实时变化。`;
+  syncStateMarkers();
+  persistPreferences();
 }
 
 function syncControls() {
   updateVolume(state.volume * 100);
   updateFeeling("intensity", state.intensity * 100);
   updateFeeling("richness", state.richness * 100);
+  syncCharacterSelection();
   syncSleepTimerUI();
+}
+
+function setCharacter(character, sourceButton) {
+  if (!["natural", "warm", "distant"].includes(character)) return;
+  state.character = character;
+  if (sourceButton) updateTabSelection(sourceButton, "[data-character]", "aria-checked");
+  else syncCharacterSelection();
+  audioCrossfader.setSoundscape({ character });
+  syncStateMarkers();
+  persistPreferences();
+  const label = document.querySelector(`[data-character="${character}"]`)?.dataset.characterLabel ?? "自然";
+  showToast(`播放质感已变为「${label}」`);
+}
+
+function syncCharacterSelection() {
+  document.querySelectorAll("[data-character]").forEach((button) => {
+    const selected = button.dataset.character === state.character;
+    button.classList.toggle("is-selected", selected);
+    button.setAttribute("aria-checked", String(selected));
+  });
+  audioCrossfader.setSoundscape({ character: state.character });
+}
+
+function syncAudioProfile() {
+  const baseLayer = getBaseLayer();
+  audioCrossfader.setSoundscape({
+    baseLevel: baseLayer.level / 100,
+    baseMuted: baseLayer.muted,
+    character: state.character,
+    intensity: state.intensity,
+    richness: state.richness,
+  });
+  syncStateMarkers();
+}
+
+function getBaseLayer(scene = state.currentScene) {
+  return scene.layers.find((layer) => layer.source === "base") ?? scene.layers[0];
+}
+
+function describeIntensity(value) {
+  if (value < 0.2) return "很轻";
+  if (value < 0.42) return "偏轻";
+  if (value < 0.64) return "均衡";
+  if (value < 0.84) return "偏重";
+  return "浓重";
+}
+
+function describeRichness(value) {
+  if (value < 0.2) return "极简";
+  if (value < 0.42) return "稀疏";
+  if (value < 0.64) return "均衡";
+  if (value < 0.84) return "丰富";
+  return "繁密";
+}
+
+function persistPreferences() {
+  const sceneMixes = Object.fromEntries(scenes.map((scene) => {
+    const layer = getBaseLayer(scene);
+    return [scene.id, { level: layer.level, muted: layer.muted }];
+  }));
+  savePreferences({
+    activeView: state.activeView,
+    character: state.character,
+    intensity: state.intensity,
+    prompt: dom.prompt.value,
+    richness: state.richness,
+    sceneId: state.currentScene.id,
+    sceneMixes,
+    volume: state.volume,
+  });
 }
 
 async function switchToScene(nextScene, options = {}) {
@@ -878,6 +907,7 @@ async function crossfadeAudio(nextUrl) {
   const nextIndex = state.activeAudio === 0 ? 1 : 0;
   const nextAudio = audioTracks[nextIndex];
   nextAudio.pause();
+  nextAudio.preload = "auto";
   nextAudio.src = nextUrl;
   nextAudio.currentTime = 0;
 
@@ -927,15 +957,17 @@ function renderCurrentScene() {
   dom.focusDescription.textContent = scene.description;
   dom.focusMode.dataset.focusTheme = scene.theme;
   setSurfaceImage(dom.focusStatic, scene.hero);
-  dom.playerExpandedElements.replaceChildren(...scene.layers.slice(0, 5).map((layer) => {
+  dom.playerExpandedElements.replaceChildren(...scene.elements.map((name) => {
     const span = document.createElement("span");
-    span.textContent = layer.name;
+    span.textContent = name;
     return span;
   }));
   dom.playerIdentityButton.setAttribute("aria-label", state.playerExpanded
     ? `收起播放器，当前是${scene.name}`
     : `展开播放器，当前是${scene.name}`);
+  syncAudioProfile();
   renderLayerList();
+  persistPreferences();
 }
 
 function renderFeaturedScene() {
@@ -944,7 +976,7 @@ function renderFeaturedScene() {
   dom.featuredImage.src = scene.hero;
   dom.featuredTitle.textContent = scene.name;
   dom.featuredDescription.textContent = scene.description;
-  dom.featuredElements.textContent = scene.layers.slice(0, 3).map((layer) => layer.name).join(" · ");
+  dom.featuredElements.textContent = scene.elements.join(" · ");
 }
 
 function renderCollections() {
@@ -973,14 +1005,16 @@ function createSceneCard(scene) {
   button.className = "scene-card";
   button.dataset.scene = scene.id;
   button.classList.toggle("is-current", scene.id === state.currentScene.id);
-  button.setAttribute("aria-label", `${scene.name}，${scene.description}`);
-  button.innerHTML = `<span class="scene-card-media"><img src="${scene.cover}" alt="" loading="eager"></span><strong>${scene.name}</strong><small>${scene.layers.slice(0, 4).map((layer) => layer.name).join(" · ")}</small>`;
+  if (scene.id === state.currentScene.id) button.setAttribute("aria-current", "true");
+  button.setAttribute("aria-label", `${scene.name}${scene.id === state.currentScene.id ? "，当前声景" : ""}，${scene.description}`);
+  button.innerHTML = `<span class="scene-card-media"><img src="${scene.cover}" alt="" loading="lazy" decoding="async"></span><strong>${scene.name}</strong><small>${scene.elements.join(" · ")}</small>`;
   return button;
 }
 
 function renderLayerList() {
   dom.layerList.replaceChildren(...state.currentScene.layers.map((layer, index) => {
-    const available = Boolean(layer.audio);
+    const isBase = layer.source === "base";
+    const available = isBase || Boolean(layer.audio);
     const row = document.createElement("article");
     row.className = "layer-row";
     row.dataset.layerId = layer.id;
@@ -988,14 +1022,18 @@ function renderLayerList() {
     row.dataset.available = String(available);
     row.innerHTML = `
       <div class="layer-identity">
-        <span class="layer-swatch" style="background-image: url(${JSON.stringify(state.currentScene.cover)})" aria-hidden="true"></span>
-        <span class="layer-name"><strong>${layer.name}</strong><small>${layer.detail}</small></span>
+        <span class="layer-swatch" aria-hidden="true"></span>
+        <span class="layer-name"><strong>${escapeHtml(layer.name)}</strong><small>${escapeHtml(layer.detail)}</small></span>
       </div>
-      <input type="range" min="0" max="100" value="${layer.level}" aria-label="${available ? `${layer.name}存在感` : `${layer.name}音频引擎待接入`}" data-layer-level ${available ? "" : "disabled"}>
-      <span class="layer-value">${available ? `${layer.level}%` : "待接入"}</span>
-      <button class="layer-toggle" type="button" data-layer-toggle aria-pressed="${String(!layer.muted)}" aria-label="${available ? `${layer.muted ? "开启" : "关闭"}${layer.name}` : `${layer.name}音频引擎待接入`}" title="${available ? `${layer.muted ? "开启" : "关闭"}${layer.name}` : "音频引擎待接入"}" ${available ? "" : "disabled"}>
-        <i data-lucide="${layer.muted ? "eye-off" : "eye"}" aria-hidden="true"></i>
-      </button>`;
+      <input type="range" min="0" max="100" value="${layer.level}" aria-label="${escapeHtml(layer.name)}存在感" aria-valuetext="${layer.level}%" data-layer-level ${available ? "" : "disabled"}>
+      <span class="layer-value">${available ? `${layer.level}%` : "不可用"}</span>
+      <span class="layer-actions">
+        <button class="layer-toggle" type="button" data-layer-toggle aria-pressed="${String(!layer.muted)}" aria-label="${layer.muted ? "开启" : "关闭"}${escapeHtml(layer.name)}" title="${layer.muted ? "开启" : "关闭"}${escapeHtml(layer.name)}" ${available ? "" : "disabled"}>
+          <i data-lucide="${layer.muted ? "volume-x" : "volume-2"}" aria-hidden="true"></i>
+        </button>
+        ${isBase ? "" : `<button class="layer-remove" type="button" data-layer-remove aria-label="移除${escapeHtml(layer.name)}" title="移除${escapeHtml(layer.name)}"><i data-lucide="trash-2" aria-hidden="true"></i></button>`}
+      </span>`;
+    row.querySelector(".layer-swatch").style.backgroundImage = `url(${JSON.stringify(state.currentScene.cover)})`;
     row.querySelector(".layer-swatch").style.backgroundPosition = `${18 + index * 17}% ${22 + index * 13}%`;
     return row;
   }));
@@ -1009,59 +1047,169 @@ function handleLayerInput(event) {
   const layer = state.currentScene.layers.find((item) => item.id === row.dataset.layerId);
   if (!layer) return;
   layer.level = Number(input.value);
+  input.setAttribute("aria-valuetext", `${layer.level}%`);
   row.querySelector(".layer-value").textContent = `${layer.level}%`;
-  if (layer.audio) layer.audio.volume = layer.muted ? 0 : state.volume * (layer.level / 100) * 0.55;
+  if (layer.source === "base") {
+    syncAudioProfile();
+    persistPreferences();
+  } else if (layer.audio) {
+    layer.audio.volume = layer.muted ? 0 : state.volume * (layer.level / 100) * 0.55;
+    persistUploadedLayer(layer);
+  }
 }
 
 function handleLayerToggle(event) {
+  const removeButton = event.target.closest("[data-layer-remove]");
+  if (removeButton) {
+    const row = removeButton.closest("[data-layer-id]");
+    const layer = state.currentScene.layers.find((item) => item.id === row.dataset.layerId);
+    if (layer) removeUploadedLayer(layer);
+    return;
+  }
+
   const button = event.target.closest("[data-layer-toggle]");
   if (!button) return;
   const row = button.closest("[data-layer-id]");
   const layer = state.currentScene.layers.find((item) => item.id === row.dataset.layerId);
   if (!layer) return;
   layer.muted = !layer.muted;
-  if (layer.audio) {
+  if (layer.source === "base") {
+    syncAudioProfile();
+    persistPreferences();
+  } else if (layer.audio) {
     if (layer.muted) layer.audio.pause();
     else if (state.playing) playUploadedLayers(state.currentScene);
+    persistUploadedLayer(layer);
   }
   renderLayerList();
 }
 
-function addLayer(name, audio = null) {
-  if (state.currentScene.layers.some((layer) => layer.name === name)) {
-    showToast(`「${name}」已经在当前声景中`);
-    return;
-  }
+function addUploadedLayer({
+  id,
+  name,
+  audio,
+  blob,
+  scene = state.currentScene,
+  level = 56,
+  muted = false,
+  persisted = true,
+}) {
   const layer = {
-    id: `${name}-${Date.now()}`,
+    id,
     name,
-    detail: audio ? "本地音频 · 当前会话" : "素材预设 · 待接入",
-    level: 56,
-    muted: false,
+    detail: persisted ? "本地音频 · 已保存在此浏览器" : "本地音频 · 仅当前会话",
+    level,
+    muted,
     audio,
+    blob,
+    sceneId: scene.id,
+    source: "upload",
   };
-  state.currentScene.layers.push(layer);
-  renderCurrentScene();
+  scene.layers.push(layer);
+  if (scene.id === state.currentScene.id) renderCurrentScene();
   renderCollections();
-  if (audio && state.playing) playUploadedLayers(state.currentScene);
-  showToast(`已把「${name}」加入${state.currentScene.name}`);
+  if (scene.id === state.currentScene.id && state.playing && !muted) playUploadedLayers(scene);
+  return layer;
 }
 
-function renderSourceList(category) {
-  const sources = sourceSets[category] ?? sourceSets.环境;
-  dom.sourceList.innerHTML = sources.map((source) => `<button type="button" data-add-layer="${source.name}" aria-label="${source.name}，待接入" title="素材服务待接入" disabled><i data-lucide="${source.icon}" aria-hidden="true"></i><span>${source.name}</span><small>待接入</small></button>`).join("");
-  renderIcons();
-}
-
-function handleAudioUpload() {
+async function handleAudioUpload() {
   const file = dom.audioUpload.files?.[0];
   if (!file) return;
-  const audio = new Audio(URL.createObjectURL(file));
-  audio.loop = true;
-  audio.preload = "auto";
+  if (!file.type.startsWith("audio/")) {
+    showToast("请选择音频文件");
+    dom.audioUpload.value = "";
+    return;
+  }
+  if (file.size > 32 * 1024 * 1024) {
+    showToast("音频超过 32 MB，请选择更小的文件");
+    dom.audioUpload.value = "";
+    return;
+  }
+
+  const id = window.crypto?.randomUUID?.() ?? `audio-${Date.now()}`;
   const name = file.name.replace(/\.[^.]+$/, "").slice(0, 28) || "本地声音";
-  addLayer(name, audio);
+  const targetScene = state.currentScene;
+  const record = { blob: file, createdAt: Date.now(), id, level: 56, muted: false, name, sceneId: targetScene.id };
+  let persisted = true;
+  try {
+    await putStoredAudioLayer(record);
+  } catch {
+    persisted = false;
+  }
+
+  addUploadedLayer({
+    audio: createLayerAudio(URL.createObjectURL(file)),
+    blob: file,
+    id,
+    name,
+    persisted,
+    scene: targetScene,
+  });
   dom.audioUpload.value = "";
+  showToast(persisted
+    ? `已把「${name}」加入${state.currentScene.name}`
+    : `已加入「${name}」，但浏览器未能保存`);
+}
+
+async function restoreStoredAudioLayers() {
+  let records = [];
+  try {
+    records = await listStoredAudioLayers();
+  } catch {
+    return;
+  }
+
+  records.forEach((record) => {
+    const scene = sceneById.get(record.sceneId);
+    if (!scene || !(record.blob instanceof Blob)) return;
+    const audio = createLayerAudio(URL.createObjectURL(record.blob));
+    scene.layers.push({
+      audio,
+      blob: record.blob,
+      detail: "本地音频 · 已保存在此浏览器",
+      id: record.id,
+      level: clampNumber(record.level, 0, 100, 56),
+      muted: Boolean(record.muted),
+      name: record.name || "本地声音",
+      sceneId: record.sceneId,
+      source: "upload",
+    });
+  });
+}
+
+function createLayerAudio(url) {
+  const audio = new Audio(url);
+  audio.loop = true;
+  audio.preload = "metadata";
+  return audio;
+}
+
+function persistUploadedLayer(layer) {
+  if (layer.source !== "upload" || !layer.blob) return;
+  putStoredAudioLayer({
+    blob: layer.blob,
+    createdAt: Date.now(),
+    id: layer.id,
+    level: layer.level,
+    muted: layer.muted,
+    name: layer.name,
+    sceneId: layer.sceneId ?? state.currentScene.id,
+  }).catch(() => undefined);
+}
+
+async function removeUploadedLayer(layer) {
+  if (layer.source !== "upload") return;
+  layer.audio?.pause();
+  if (layer.audio?.src.startsWith("blob:")) URL.revokeObjectURL(layer.audio.src);
+  state.currentScene.layers = state.currentScene.layers.filter((item) => item.id !== layer.id);
+  renderCurrentScene();
+  renderCollections();
+  try {
+    await deleteStoredAudioLayer(layer.id);
+    showToast(`已移除「${layer.name}」`);
+  } catch {
+    showToast(`已从当前声景移除「${layer.name}」`);
+  }
 }
 
 function stopUploadedLayers(scene) {
@@ -1079,7 +1227,7 @@ function startGeneration(prompt) {
     return;
   }
   if (state.jobState === "running") {
-    showToast("声景预演仍在后台进行，当前播放没有中断");
+    showToast("声景仍在后台编排，当前播放没有中断");
     return;
   }
 
@@ -1090,11 +1238,12 @@ function startGeneration(prompt) {
   state.jobProgress = 0;
   state.playingAtJobStart = state.playing;
   dom.composeButton.disabled = true;
-  dom.taskToast.dataset.state = "running";
+  dom.taskToast.hidden = false;
+  window.requestAnimationFrame(() => { dom.taskToast.dataset.state = "running"; });
   dom.taskToast.setAttribute("aria-hidden", "false");
   dom.taskToast.inert = false;
   updateJobProgress();
-  showToast("已在后台开始预演，当前声景继续播放");
+  showToast("已在后台开始编排，当前声景继续播放");
   syncStateMarkers();
 
   const startedAt = performance.now();
@@ -1118,12 +1267,12 @@ function completeGeneration() {
   state.jobState = "ready";
   state.jobProgress = 100;
   state.generatedReady = state.pendingScene;
-  dom.composeButton.disabled = false;
+  updatePromptCount();
   dom.taskToast.dataset.state = "ready";
   dom.readyCover.src = state.generatedReady.cover;
   dom.readyTitle.textContent = state.generatedReady.name;
   renderCollections();
-  showToast("预演结果已经准备好，由你决定何时切换");
+  showToast("可听声景已经准备好，由你决定何时切换");
   syncStateMarkers();
 }
 
@@ -1132,6 +1281,9 @@ function dismissReadyScene(switched = false) {
   dom.taskToast.dataset.state = "idle";
   dom.taskToast.setAttribute("aria-hidden", "true");
   dom.taskToast.inert = true;
+  window.setTimeout(() => {
+    if (state.jobState === "idle") dom.taskToast.hidden = true;
+  }, motionRuntime.isReduced() ? 0 : 240);
   if (switched) {
     state.generatedReady = null;
     state.pendingScene = null;
@@ -1144,20 +1296,21 @@ function dismissReadyScene(switched = false) {
 function chooseScene(prompt) {
   const normalized = prompt.toLowerCase();
   if (/海|潮|浪|coast|ocean|sea/.test(normalized)) return sceneById.get("coastal-night");
-  if (/列车|火车|车厢|train/.test(normalized)) return sceneById.get("night-train");
-  if (/图书|书页|阅读|library/.test(normalized)) return sceneById.get("quiet-library");
-  if (/庭院|夏日|蝉|courtyard|summer/.test(normalized)) return sceneById.get("summer-courtyard");
-  if (/雨|雷|木屋|旅馆|温室|rain|thunder/.test(normalized)) return sceneById.get("rain-cabin");
-  return sceneById.get("forest-dawn");
+  return sceneById.get("rain-cabin");
 }
 
 function updatePromptCount() {
-  dom.promptCount.textContent = `${dom.prompt.value.length} / 180`;
+  const length = dom.prompt.value.length;
+  const ready = Boolean(dom.prompt.value.trim());
+  dom.promptCount.textContent = `${length} / 180`;
+  dom.composeButton.disabled = !ready || state.jobState === "running";
+  dom.promptHint.textContent = ready ? "将在后台编排，不会中断当前播放" : "写下一处场景后即可开始";
 }
 
 function setPrompt(prompt, shouldFocus = true) {
   dom.prompt.value = prompt;
   updatePromptCount();
+  persistPreferences();
   if (shouldFocus) {
     dom.prompt.focus();
     dom.prompt.setSelectionRange(prompt.length, prompt.length);
@@ -1256,13 +1409,6 @@ function showToast(message) {
   toastTimer = window.setTimeout(() => dom.toast.classList.remove("is-visible"), 3000);
 }
 
-function preloadScenes() {
-  scenes.forEach((scene) => {
-    preloadImage(scene.hero);
-    preloadImage(scene.cover);
-  });
-}
-
 function preloadImage(url) {
   const image = new Image();
   image.decoding = "async";
@@ -1280,31 +1426,28 @@ function renderIcons() {
     icons: {
       ArrowRight,
       ArrowUpRight,
-      AudioLines,
       ChevronDown,
-      CloudRain,
+      ChevronUp,
       Compass,
-      Eye,
-      EyeOff,
-      Flame,
       House,
       Library,
       Maximize2,
       Pause,
       Play,
       Plus,
-      Radio,
-      Settings,
       Shuffle,
       Timer,
+      Trash2,
       Upload,
       Volume2,
+      VolumeX,
       X,
     },
   });
 }
 
 function syncStateMarkers() {
+  const baseLayer = getBaseLayer();
   dom.shell.dataset.currentScene = state.currentScene.id;
   dom.shell.dataset.pendingScene = state.pendingScene?.id ?? "";
   dom.shell.dataset.generatedReady = state.generatedReady?.id ?? "";
@@ -1320,6 +1463,11 @@ function syncStateMarkers() {
   dom.shell.dataset.sleepMenuOpen = String(state.sleepMenuOpen);
   dom.shell.dataset.volumePopoverOpen = String(state.volumePopoverOpen);
   dom.shell.dataset.sleepTimerMinutes = String(state.sleepTimerMinutes);
+  dom.shell.dataset.intensity = state.intensity.toFixed(2);
+  dom.shell.dataset.richness = state.richness.toFixed(2);
+  dom.shell.dataset.character = state.character;
+  dom.shell.dataset.baseLevel = String(baseLayer.level);
+  dom.shell.dataset.baseMuted = String(baseLayer.muted);
 }
 
 function exposeDebugApi() {
@@ -1343,6 +1491,7 @@ function exposeDebugApi() {
       switching: state.switching,
       playerTransitioning: state.playerTransitioning,
       motion: motionRuntime.conditions(),
+      audio: audioCrossfader.snapshot(),
       field: field.snapshot(),
     }),
     setView: setActiveView,
@@ -1360,4 +1509,22 @@ function exposeDebugApi() {
   };
 }
 
-boot();
+function clampNumber(value, minimum, maximum, fallback) {
+  const number = Number(value);
+  if (!Number.isFinite(number)) return fallback;
+  return Math.max(minimum, Math.min(maximum, number));
+}
+
+function escapeHtml(value) {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+boot().catch((error) => {
+  console.error("Unable to initialize Soundscape", error);
+  showToast("声景没有完整载入，请刷新后重试");
+});

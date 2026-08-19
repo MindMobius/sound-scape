@@ -21,6 +21,23 @@
       "sha256": "50a5ff099caf7b969c0d0b5e607c8aaeef152f7e096114b5da12765eb0e5fad0"
     },
     {
+      "id": "brand.identity.soundscape-mark-ui.v1",
+      "path": "assets/brand/identity/soundscape-mark-ui.png",
+      "kind": "identity-mark",
+      "theme": "adaptive",
+      "usage": [
+        "navigation-mark",
+        "player-mark"
+      ],
+      "copySafe": "none",
+      "width": 96,
+      "height": 96,
+      "alpha": true,
+      "status": "accepted",
+      "prompt": "design/prompts/brand/identity/soundscape-mark-cutout-v1.txt",
+      "sha256": "d28aa0e8f35c6d91063070c31f0bbc60786f80322bb3b922be07da756148a8eb"
+    },
+    {
       "id": "brand.background.banner.dark.v1",
       "path": "assets/brand/backgrounds/banner-background-dark-v1.png",
       "kind": "background",
