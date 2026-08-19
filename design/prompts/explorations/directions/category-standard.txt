@@ -1,0 +1,10 @@
+Use case: ui-mockup
+Asset type: 16:9 landscape high-fidelity category-standard product interface comparison for a real web product
+Primary request: Create a polished, premium but intentionally familiar visual direction comp for the Chinese ambient-sound product "声景" (Sound-scape). This is the category-standard option: a beautiful natural scene, a centered listening action and a few gentle presets. Execute it impeccably, without making it ugly, while keeping it visibly less mechanism-specific than the other experimental directions.
+Composition/framing: A single full-bleed 16:9 listening screen, not a design-system board and not a phone mockup. Use one serene rain-darkened forest cabin photograph as the full background. Place the product name quietly at top left, the scene title and a restrained circular play/pause control near center, a thin unobtrusive volume control below, three scene presets along one lower edge, and a small background-generation status that does not interrupt playback. Keep navigation nearly absent.
+Subject/content: Exact visible text, sparingly and verbatim: "声景"; "一句话，用声音描述世界"; "雷雨夜里，点燃篝火的木屋"; "播放中"; "生成中"; "轻"; "重"; "简"; "繁". Do not invent claims, prices or testimonials.
+Style/medium: premium natural editorial photography integrated with a quiet contemporary wellness interface; deep forest green, mist gray and a soft warm cabin light; subtle translucent surfaces only where required for readability.
+Typography: elegant modern Chinese sans, highly legible and unshowy.
+Lighting/mood: calm rainy blue-hour ambience with visible real rain and a genuinely inspectable cabin, not dark blurred stock atmosphere.
+Constraints: practical UI, accessible contrast, tasteful restraint, no watermark.
+Avoid: cheesy spa imagery, lotus, stacked stones, bamboo, ink wash, purple gradient, neon, bokeh blobs, over-blurred background, huge marketing headline, glass card wall, fake phone mockup, dense controls, illegible microtext.

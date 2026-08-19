@@ -1,0 +1,28 @@
+Use case: stylized-concept
+Asset type: high-resolution production material atlas for the Soundscape brand system
+
+Input images:
+- Image 1 is the primary material and optical-fidelity reference only: preserve its milky translucent polymer, micro-perforated tactile surface, thin darker rim, bright edge catchlight, subtle uneven thickness, soft realistic contact shadows, and sophisticated overlap color.
+- Image 2 is the element-vocabulary and organization reference only: use the idea of isolated single membranes, paired overlaps, and multi-layer clusters, but do not copy its layout marks, labels, icons, or text.
+
+Primary request:
+Create a clean master atlas of reusable organic translucent membrane assets, photographed top-down on a uniform warm-white matte calibration surface. The sheet must contain twelve clearly separated asset groups arranged in a calm 4-column by 3-row rhythm with generous blank space between groups.
+
+Row 1: exactly four individual membranes, each fully visible, each with a distinct restrained organic silhouette and one small precise U-shaped cut notch.
+Row 2: exactly four two-membrane overlap studies, each fully visible, demonstrating convincing physical third-color formation in the overlap.
+Row 3: exactly four compact multi-layer clusters: two three-membrane clusters and two five-membrane clusters, all fully visible and internally legible.
+
+Style/medium:
+Ultra-refined macro product photography, tactile translucent polymer or technical acoustic membrane, not vector art, not CGI gloss, not glassmorphism. Quiet Japanese/Swiss material-study discipline, museum catalog precision, physically believable optics.
+
+Color palette:
+Restrained blue-gray, mineral sage-gray, ember coral, smoke gray, warm translucent white, charcoal only where colors physically overlap. Keep saturation subdued and consistent across the entire atlas.
+
+Materials/textures:
+Very fine micro-perforation, slight fibrous/frosted surface, subtle variation in opacity and thickness, hairline dark edge, narrow pale rim highlight, delicate soft offset contact shadow. Overlaps must create believable intermediate colors rather than simply stacking opaque shapes.
+
+Composition/framing:
+Landscape 3:2 sheet, orthographic top-down, every group isolated with safe crop margin, consistent scale, no group touching another, no membrane touching the frame. Uniform lighting and white balance across all twelve groups.
+
+Constraints:
+No text, no letters, no numbers, no logos, no icons, no captions, no measurement lines, no crosshairs, no borders, no dividers, no UI, no mockup frame, no watermark. No transparent glass, no liquid blobs, no acrylic shine, no iridescence, no neon, no gradients as decoration, no bokeh. Do not add objects or scenery. The result is a source-asset atlas, not a poster or presentation board.

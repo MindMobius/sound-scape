@@ -1,0 +1,32 @@
+Create a shader-ready grayscale optical membrane thickness atlas for the premium soundscape product brand "Soundscape / 声景". This is technical material input, not a poster and not a UI mockup.
+
+Canvas and layout:
+- Landscape 3:2 image, ideally 1536 x 1024.
+- Pure uniform black background (#000000), edge to edge.
+- Exactly eight separate organic membrane specimens arranged as a clean 4-column by 2-row atlas.
+- Generous black clearance around every specimen; no specimen touches or overlaps another; no dividers, frames, labels, text, numbers, guides, checkerboards, or crop marks.
+- Each specimen occupies one consistent cell but has a unique irregular contour and orientation.
+
+Material encoding:
+- Monochrome only: black, neutral gray, and white. No color tint at all.
+- Treat luminance as optical thickness/transmission data: pure black means absent material; soft gray interior means thin translucent film; brighter milky gray means thicker folded or compressed material.
+- Each silhouette must terminate cleanly into true black while preserving a nuanced feathered optical edge 2-8 pixels wide.
+- Interior should contain extremely subtle analog microstructure: sparse pores, fibers, tiny density variations, and gentle tension fields, with no photographic background baked in.
+- Include restrained edge thickening, occasional soft internal fold/ridge, and slight nonuniformity that can drive refraction and highlights in a WebGL shader.
+- No cast shadows, ambient shadows, contact shadows, glow, bloom, reflections, lighting environment, perspective floor, or surrounding haze. Black outside each silhouette must remain featureless and uniform.
+
+Shape language:
+- Eight distinctly different quiet organic forms: one broad asymmetric leaf-like sheet without looking botanical; one slender bent ribbon; one compact rounded shard; one stretched veil; one softly folded triangular sheet; one small porous oval fragment; one long tapered membrane; one irregular crescent-like film.
+- Avoid flowers, petals, literal leaves, waves, audio waveforms, musical notes, headphones, logos, calligraphy, ink painting, smoke, cloth drapery, plastic packaging, sci-fi HUD styling, neon, and glossy 3D objects.
+- Refined Japanese material-study sensibility, nendo-like restraint, translucent paper/organza/cellulose film character, museum-grade specimen photography translated into a grayscale data atlas.
+
+Critical output requirements:
+- Exactly eight isolated shapes.
+- True uniform black in all empty cell areas and all four corners.
+- No baked shadows or background texture.
+- No overlap between shapes.
+- High local detail inside the membranes, clean enough for luminance-key extraction and GPU sampling.
+
+References supplied to Image 2:
+- assets/brand/atlases/material-atlas-light-v1.png
+- assets/brand/atlases/material-macro-swatches-v1.png

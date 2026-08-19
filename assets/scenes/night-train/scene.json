@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "night-train",
+  "name": "夜行列车",
+  "description": "夜行列车穿过安静而连续的远方。",
+  "status": "starter",
+  "tags": ["travel", "night", "motion", "interior"],
+  "audioLayers": ["车轮节律", "车厢低鸣", "轨道接缝", "窗外风压"],
+  "visualBrief": "以拉长的蓝灰膜片和克制的重复间距表达持续前进，暖灰层保留车厢内部稳定感；避免列车摄影、胶片孔和速度光轨。",
+  "slots": {
+    "hero": { "status": "ready", "assetId": "scene.night-train.hero.v1" },
+    "banner": { "status": "shared-fallback", "assetId": "brand.background.banner.dark.v1" },
+    "cover": { "status": "ready", "assetId": "scene.night-train.cover.v1" },
+    "thumbnail": { "status": "planned", "assetId": null },
+    "detail": { "status": "planned", "assetId": null }
+  }
+}

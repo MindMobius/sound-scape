@@ -1,0 +1,12 @@
+Use case: product-mockup
+Asset type: premium die-cut sticker and decal sheet for 声景
+Input images: Image 1 is the binding style and material reference. Image 2 is the brand-mark family anchor generated from that world. Preserve Image 1's frosted translucency and Image 2's compact cut-edge and negative-space vocabulary; do not copy either source composition or its labels.
+Primary request: Create a coherent family of twelve collectible die-cut decals using the same material language. Include: four abstract sound-layer membranes; four compact scene emblems suggesting rain, ember, shelter, and distant thunder without literal clip-art; and four tiny functional state marks for playing, generating, ready, and waiting. Every decal should feel like one member of the same identity system, not twelve unrelated illustrations.
+Scene/backdrop: a flat warm-white backing sheet photographed directly overhead. The decals are evenly spaced and fully visible, with realistic kiss-cut outlines. No hands, packaging, stationery, or lifestyle props.
+Style/medium: sophisticated industrial graphic objects made from frosted translucent vinyl, thin silicone film, dry black linework, and precise die-cut edges.
+Composition/framing: square contact sheet, calm asymmetric grid with generous spacing; a few small registration crosses and numbered callouts are printed on the backing sheet, never inside decorative cards.
+Lighting/mood: soft diffused studio light, restrained, tactile, collectible, adult rather than playful.
+Color palette: warm white, charcoal, mist blue-gray, mineral sage-gray, muted ember coral; overlap colors only.
+Materials/textures: milky translucent film, fine micro-dots, one or two tiny pattern notches per larger decal, crisp edge highlight, subtle contact shadow.
+Constraints: no brand names or long text; no mockup clutter; each decal has a strong silhouette; maintain consistent edge thickness and material behavior across all twelve.
+Avoid: kawaii stickers, mascots, emoji, glossy vinyl shine, holographic foil, rainbow colors, glassmorphism, neon, gradient blobs, literal clouds or flames, headphones, waveform icons, music notes, generic app icons, thick white cartoon outlines, watermark.

@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "coastal-night",
+  "name": "深夜海岸",
+  "description": "深夜海岸上持续靠近又退去的潮声。",
+  "status": "starter",
+  "tags": ["water", "night", "open", "low-light"],
+  "audioLayers": ["近岸潮水", "远浪", "海风", "礁石回响"],
+  "visualBrief": "深炭纸面上用低反射蓝灰、烟色与极少珊瑚层建立水平张力；避免海景照片、星空、月亮和发光地平线。",
+  "slots": {
+    "hero": { "status": "ready", "assetId": "scene.coastal-night.hero.v1" },
+    "banner": { "status": "shared-fallback", "assetId": "brand.background.banner.dark.v1" },
+    "cover": { "status": "ready", "assetId": "scene.coastal-night.cover.v1" },
+    "thumbnail": { "status": "planned", "assetId": null },
+    "detail": { "status": "planned", "assetId": null }
+  }
+}

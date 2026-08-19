@@ -1,0 +1,29 @@
+Use case: stylized-concept
+Asset type: high-resolution dark-surface overlap-module atlas for the Soundscape brand system
+
+Input images:
+- Image 1 is the exact module structure, material texture, palette relationship, and spacing reference.
+- Image 2 is the dark-surface lighting reference only, especially the restrained rim visibility and charcoal tactile backdrop. Do not copy any text, interface, logo, landscape, or layout from Image 2.
+
+Primary request:
+Create exactly six large, clearly separated translucent-membrane composition modules on one uniform deep-charcoal matte fibrous surface, arranged in a calm 3-column by 2-row atlas with generous blank space.
+
+Preserve the module logic of Image 1:
+Top row contains exactly three two-membrane overlap studies.
+Bottom row contains exactly one three-membrane cluster, one four-membrane cluster, and one five-membrane cluster.
+Every module is fully visible, isolated, consistently scaled, and separated from every other module.
+
+Material behavior on dark:
+Milky translucent technical membrane rather than clear glass. Restrained smoke-white, blue-gray, mineral sage, ember coral, and neutral gray. Fine micro-perforation and subtle fibrous frost remain visible. Use a thin darker rim plus a narrow cool pale edge catchlight. Overlap colors deepen softly and remain readable; no blown-white center, no strong aura, no neon halo. Contact shadows are soft, close, and physically plausible on the charcoal surface.
+
+Silhouette:
+Related soft asymmetric pebble-like contours, each with one small precise rounded U-shaped cut notch. Designed and tactile, not liquid or amorphous.
+
+Style/medium:
+Ultra-refined orthographic macro product photography, museum material catalog precision, quiet and nocturnal, physically believable optics. Not vector art, not flat illustration, not glossy CGI.
+
+Composition/framing:
+Landscape 3:2, top-down, six equal visual zones, generous crop-safe margins, uniform lighting, no object touching frame.
+
+Constraints:
+Uniform charcoal backdrop only. No text, letters, numbers, labels, logos, icons, captions, lines, crosshairs, borders, dividers, UI, scenery, checkerboard, or watermark. No glassmorphism, acrylic shine, liquid glass, neon, bloom, iridescence, bokeh, or decorative gradients.

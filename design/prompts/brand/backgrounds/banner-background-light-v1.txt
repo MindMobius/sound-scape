@@ -1,0 +1,14 @@
+Use case: precise-object-edit
+Asset type: production wide banner background master
+
+Input image:
+- Image 1 is the edit target.
+
+Primary request:
+Remove only the two blocks of Chinese typography from the image: the large title "声景" and the smaller tagline beneath it. Reconstruct the exposed warm-white paper surface seamlessly, including the original subtle paper grain and lighting.
+
+Preserve exactly:
+The full wide 3:1 framing; every translucent membrane; all membrane geometry, crop, overlap, color, micro-perforation, frosted texture, edge highlight, shadow, and depth; the warm-white paper background; all subtle calibration crosses, fine dashed construction paths, arrows, and registration marks; all negative-space balance.
+
+Constraints:
+Change only the Chinese title and tagline area. Do not move, redraw, recolor, crop, sharpen, soften, add, or remove any other element. Do not add replacement text, logos, icons, UI, watermark, or new marks. The edited area must be indistinguishable from untouched paper.

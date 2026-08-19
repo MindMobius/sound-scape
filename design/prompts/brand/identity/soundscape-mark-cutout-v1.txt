@@ -1,0 +1,7 @@
+Use case: background-extraction
+Asset type: production web brand mark PNG
+Input image: the user-provided three-part black mark is the edit target.
+Primary request: remove only the off-white paper background and isolate the three existing dark organic shapes as a transparent-background cutout.
+Composition: preserve the original silhouettes, relative positions, rotations, proportions, spacing, and central negative space; center the complete mark on a square transparent canvas with modest even padding.
+Color and edges: keep the three shapes a single solid neutral charcoal-black and produce clean antialiased alpha edges without a white fringe.
+Constraints: extraction only; do not redraw, reinterpret, stylize, symmetrize, move any shape, change the center gap, or add outlines, shadows, gradients, texture, text, watermark, or visible background.

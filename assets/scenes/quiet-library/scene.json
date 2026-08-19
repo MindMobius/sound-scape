@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "quiet-library",
+  "name": "闭馆后的图书馆",
+  "description": "闭馆后的图书馆，只剩纸张、木材与建筑轻响。",
+  "status": "starter",
+  "tags": ["interior", "quiet", "study", "night"],
+  "audioLayers": ["翻页余响", "木构轻响", "远处空调", "室内雨声"],
+  "visualBrief": "暖白、烟灰和低饱和珊瑚的纵向膜片形成安静秩序，留白承担停顿；避免书架、书本、台灯和仿旧纸张符号。",
+  "slots": {
+    "hero": { "status": "ready", "assetId": "scene.quiet-library.hero.v1" },
+    "banner": { "status": "shared-fallback", "assetId": "brand.background.banner.light-left.v1" },
+    "cover": { "status": "ready", "assetId": "scene.quiet-library.cover.v1" },
+    "thumbnail": { "status": "planned", "assetId": null },
+    "detail": { "status": "planned", "assetId": null }
+  }
+}

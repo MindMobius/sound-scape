@@ -1,0 +1,20 @@
+Use case: stylized-concept
+Asset type: static 2:1 listening Hero master for the Soundscape scene "夏夜庭院"
+
+Input images:
+- Image 1 is the exact membrane material, optical translucency, micro-texture, warm paper surface, edge treatment, and quality reference. It is a reference, not an edit target.
+
+Primary request:
+Create a new distinct 2:1 abstract material composition for a warm summer courtyard at night. Express sparse insect rhythm, soft air movement, distant domestic sound, and open quiet through translucent acoustic membranes rather than literal outdoor imagery.
+
+Composition/framing:
+Keep the right 38 percent calm and copy-safe. Use mineral sage, warm translucent white, smoke gray, and one modest ember-coral layer in a sparse left-edge composition. A few extremely restrained drafting points may suggest distant intermittent sound. Keep the paper surface light and the overlaps airy.
+
+Style/medium:
+Physically believable top-down macro material photography, museum catalog precision, quiet Japanese/Swiss spatial discipline.
+
+Materials/textures:
+Match Image 1's fine micro-perforation, faint fibers, uneven milky thickness, thin dark rim, pale edge catchlight, realistic contact shadow, and sophisticated third-color overlaps exactly.
+
+Constraints:
+No text, letters, numbers, logos, captions, UI, borders, watermark, insects, plants, leaves, courtyard, lantern, moon, people, landscape, illustration, glassmorphism, neon, bloom, bokeh, iridescence, or decorative gradient. Do not copy Image 1's exact shapes or arrangement. Output one complete full-bleed 2:1 RGB Hero, not a board or mockup.

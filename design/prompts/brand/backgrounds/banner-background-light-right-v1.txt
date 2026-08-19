@@ -1,0 +1,18 @@
+Use case: compositing
+Asset type: production 3:1 right-copy-safe light banner background
+
+Input images:
+- Image 1 is the edit target and authoritative canvas: preserve its exact ultra-wide 3:1 dimensions, warm-white paper, material rendering quality, and restrained drafting details.
+- Image 2 is the directional composition reference only: use its left-entering membrane arrangement and right-side negative-space balance.
+
+Primary request:
+Within the exact 3:1 canvas of Image 1, replace the existing right-heavy membrane arrangement with a new left-entering composition guided by Image 2. Reserve the right 38 percent as clean warm-white copy-safe space. Large blue-gray, warm-white, mineral-sage, smoke-gray, and restrained ember-coral membranes enter from the left, upper-left, and lower-left edges, overlap through the left half, and stop before the right safe area.
+
+Preserve:
+The material fidelity of Image 1: fine micro-perforation, frosted fibers, subtle thickness variation, hairline dark rim, narrow pale catchlight, soft close shadow, warm-white paper texture, physically believable third colors, restrained registration crosses and dashed trajectory. Keep the entire canvas text-free.
+
+Composition:
+Create a distinct 3:1 arrangement, not a literal crop or stretch of Image 2. Maintain a calm center transition between occupied left and empty right. Nothing important may be cut awkwardly at the central handoff.
+
+Constraints:
+Keep the exact 3:1 framing. No text, letters, numbers, labels, logos, icons, UI, scenery, border, frame, checkerboard, watermark, or new objects. No glassmorphism, liquid glass, acrylic gloss, neon, bloom, iridescence, bokeh, or decorative gradients. Do not leave remnants of Image 1's old right-heavy composition.

@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>声景品牌标记尺寸校样</title>
+    <style>
+      :root {
+        color: #111513;
+        background: #e9e7e1;
+        font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        min-width: 320px;
+      }
+
+      main {
+        width: min(1120px, calc(100% - 48px));
+        margin: 0 auto;
+        padding: 56px 0 72px;
+      }
+
+      h1 {
+        margin: 0 0 10px;
+        font-size: 28px;
+        font-weight: 600;
+      }
+
+      p {
+        max-width: 68ch;
+        margin: 0 0 36px;
+        color: #4d5652;
+        line-height: 1.65;
+      }
+
+      section {
+        padding: 32px 0;
+        border-top: 1px solid #c9c8c2;
+      }
+
+      h2 {
+        margin: 0 0 24px;
+        font-size: 16px;
+        font-weight: 600;
+      }
+
+      .sizes {
+        display: flex;
+        align-items: flex-end;
+        flex-wrap: wrap;
+        gap: 32px;
+        min-height: 164px;
+      }
+
+      .sample {
+        display: grid;
+        justify-items: center;
+        gap: 12px;
+        color: #68716d;
+        font-size: 12px;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .sample img {
+        display: block;
+        width: var(--size);
+        height: var(--size);
+      }
+
+      .dark {
+        margin-inline: calc(50% - 50vw);
+        padding-inline: max(24px, calc((100vw - 1120px) / 2));
+        color: #f4f1ec;
+        background: #111513;
+        border-color: #343a37;
+      }
+
+      .dark .sample { color: #a9b1ad; }
+
+      .dark .mono { filter: invert(1); }
+
+      .platform {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 28px;
+      }
+
+      .mask {
+        width: 128px;
+        height: 128px;
+        overflow: hidden;
+        background: #111513;
+      }
+
+      .mask.circle { border-radius: 50%; }
+      .mask.squircle { border-radius: 28%; }
+      .mask img { width: 100%; height: 100%; display: block; }
+
+      .mask img {
+        padding: 18%;
+        object-fit: contain;
+        filter: invert(1);
+      }
+
+      @media (max-width: 600px) {
+        main {
+          width: calc(100% - 32px);
+          padding-block: 32px 48px;
+        }
+
+        .sizes {
+          align-items: center;
+          gap: 24px;
+        }
+
+        .dark {
+          margin-inline: 0;
+          padding-inline: 16px;
+        }
+
+        .mask {
+          width: 96px;
+          height: 96px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>声景品牌标记尺寸校样</h1>
+      <p>检查中央声口、三枚膜片分离和平台裁切安全区。该页面只用于资产验收，不是产品界面。</p>
+
+      <section>
+        <h2>浅色表面</h2>
+        <div class="sizes">
+          <div class="sample" style="--size: 16px"><img src="../../assets/brand/identity/soundscape-mark-cutout.png" alt="" /><span>16</span></div>
+          <div class="sample" style="--size: 24px"><img src="../../assets/brand/identity/soundscape-mark-cutout.png" alt="" /><span>24</span></div>
+          <div class="sample" style="--size: 32px"><img src="../../assets/brand/identity/soundscape-mark-cutout.png" alt="" /><span>32</span></div>
+          <div class="sample" style="--size: 64px"><img src="../../assets/brand/identity/soundscape-mark-cutout.png" alt="" /><span>64</span></div>
+          <div class="sample" style="--size: 128px"><img src="../../assets/brand/identity/soundscape-mark-cutout.png" alt="" /><span>128</span></div>
+        </div>
+      </section>
+
+      <section class="dark">
+        <h2>深色表面 / 单色</h2>
+        <div class="sizes">
+          <div class="sample" style="--size: 16px"><img class="mono" src="../../assets/brand/identity/soundscape-mark-cutout.png" alt="" /><span>16</span></div>
+          <div class="sample" style="--size: 24px"><img class="mono" src="../../assets/brand/identity/soundscape-mark-cutout.png" alt="" /><span>24</span></div>
+          <div class="sample" style="--size: 32px"><img class="mono" src="../../assets/brand/identity/soundscape-mark-cutout.png" alt="" /><span>32</span></div>
+          <div class="sample" style="--size: 64px"><img class="mono" src="../../assets/brand/identity/soundscape-mark-cutout.png" alt="" /><span>64</span></div>
+          <div class="sample" style="--size: 128px"><img class="mono" src="../../assets/brand/identity/soundscape-mark-cutout.png" alt="" /><span>128</span></div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Maskable 裁切预览</h2>
+        <div class="platform">
+          <div class="mask"><img src="../../assets/brand/identity/soundscape-mark-cutout.png" alt="" /></div>
+          <div class="mask squircle"><img src="../../assets/brand/identity/soundscape-mark-cutout.png" alt="" /></div>
+          <div class="mask circle"><img src="../../assets/brand/identity/soundscape-mark-cutout.png" alt="" /></div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

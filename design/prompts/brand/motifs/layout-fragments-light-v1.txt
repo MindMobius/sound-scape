@@ -1,0 +1,31 @@
+Use case: stylized-concept
+Asset type: layout-edge composition atlas for the Soundscape brand system
+
+Input images:
+- Image 1 is the exact translucent membrane material, overlap-color, and light-surface reference.
+- Image 2 is the wide editorial framing and negative-space reference only. Do not copy its precise membrane arrangement or technical marks.
+
+Primary request:
+Create exactly six clearly separated reusable membrane layout fragments arranged in a calm 3-column by 2-row atlas on one uniform warm-white matte surface. Each fragment is a small editorial composition designed to enter a future page from a different spatial direction while preserving useful empty space.
+
+Six required compositions:
+1. A restrained fan entering from the left edge of its visual zone, with open space to the right.
+2. A layered cluster entering from the right edge, with open space to the left.
+3. Two lightly overlapping membranes suspended from above, with open space below.
+4. A broad low membrane horizon rising from below, with open space above.
+5. A compact wrap around one implied corner, leaving the diagonal opposite area empty.
+6. A shallow diagonal sweep crossing one edge and receding into quiet negative space.
+
+Each fragment uses two to four membranes only. Vary scale, crop, overlap amount, and direction. Keep every composition clearly separate from the others with generous blank space; no fragment may visually merge with another.
+
+Material:
+Milky translucent technical membrane with fine micro-perforation, subtle frosted fiber, uneven thickness, thin dark rim, pale edge catchlight, close soft contact shadow. Restrained blue-gray, mineral sage, ember coral, smoke gray, and warm translucent white. Physically believable third colors.
+
+Style:
+High-end material editorial, orthographic or near-orthographic macro product photography, quiet Japanese/Swiss spatial discipline, intentional asymmetry. Not vector illustration, not abstract liquid art.
+
+Composition:
+Landscape 3:2 atlas, six equal visual zones without drawing zone boundaries. Each zone has a clear occupied edge and a clear negative-space side. Safe overall margins.
+
+Constraints:
+No text, letters, numbers, labels, logos, icons, captions, borders, dividers, crosshairs, measurement marks, UI, scenery, checkerboard, watermark, or mockup frames. Avoid centered clusters, flowers, mandalas, glassmorphism, liquid blobs, acrylic gloss, neon, iridescence, bokeh, and decorative gradients.

@@ -1,0 +1,23 @@
+Use case: stylized-concept
+Asset type: production square scene Cover for the Soundscape scene "夏夜庭院"
+
+Input images:
+- Image 1 is the scene identity reference: airy sage, smoke, warm-white, and small coral relations with fine distant calibration marks.
+- Image 2 is the exact square Cover framing reference: authored macro composition, edge-to-edge material, central overlap, and thumbnail strength.
+- Image 3 is the exact membrane material, micro-perforation, fibers, thin rim, overlap color, and contact-shadow reference.
+All images are style, material, and framing references, not edit targets. Create a new distinct composition, not a crop.
+
+Primary request:
+Create a tactile abstract Cover that evokes an open summer courtyard at night through dispersed near-and-far relationships, soft air, and intermittent life, without depicting a courtyard, plants, or insects. Use irregular translucent membrane fields in mineral sage, smoke gray, milky warm white, and one small muted ember-coral accent. Include only two or three extremely subtle pin-size calibration marks to suggest distant events.
+
+Composition/framing:
+Square 1:1, authored as an edge-to-edge macro cover. Let broad membranes enter from different edges and meet in an asymmetric overlap just off center, while a quieter open pocket remains in the upper-right quadrant. Keep the meaningful forms and tiny markers inside the central 70 percent crop-safe area. The composition should feel airy but not empty, and the silhouette must remain distinctive at 64px. Do not show a complete isolated object or a pile on a blank background.
+
+Style/medium:
+Physically believable top-down macro material photography, Japanese/Swiss editorial restraint, museum catalog precision, quiet and premium.
+
+Materials/textures:
+Fine micro-perforation, faint embedded fibers, uneven milky thickness, thin restrained rim, narrow edge catchlight, soft realistic contact shadow, and clearly changed third colors at overlaps. Warm off-white fibrous paper backdrop.
+
+Constraints:
+No text, letters, numbers, logo, UI, border, watermark, insect, leaf, branch, flower, grass, courtyard, lantern, moon, star field, firefly glow, dotted swarm, petal rosette, fan, spinner, recycling symbol, glassmorphism, glossy glass, liquid blobs, neon, gradient background, hard 3D plastic, or decorative grain overlay. The coral is a small acoustic accent, not a dominant shape. No more than three tiny marks.

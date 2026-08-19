@@ -1,0 +1,30 @@
+Use case: stylized-concept
+Asset type: compact emblem-motif atlas for the Soundscape brand system
+
+Input images:
+- Image 1 is the exact material, micro-texture, edge, palette, and light-surface reference.
+- Image 2 is the overlap-color and compact-cluster reference.
+
+Primary request:
+Create exactly nine isolated compact membrane emblems arranged in a quiet 3-column by 3-row atlas on a uniform warm-white matte surface. These are reusable material motifs for avatars, player centers, cover marks, loading-ready states, and small brand moments; they are not final logos.
+
+Design variation:
+Each emblem must have a distinct topology, negative-space logic, layer count, and center of gravity while remaining visibly part of one family.
+- Top row: three restrained two- or three-membrane knots with deliberate central gaps or split seams.
+- Middle row: three compact radial overlaps using three or four membranes, with readable third colors and asymmetric balance.
+- Bottom row: three denser four- or five-membrane emblems with one clear focal overlap, still legible at small scale.
+
+Overall silhouette:
+Each emblem fits inside an implied circle or rounded square without drawing that container. Soft asymmetric pebble-like membrane contours, small precise U-shaped cut notches, controlled negative space. Designed, compact, and calm.
+
+Material:
+Milky translucent technical acoustic membrane, fine micro-perforation, subtle fibrous frost, uneven thickness, thin dark edge, narrow pale rim highlight, close soft contact shadow. Restrained blue-gray, mineral sage, ember coral, smoke gray, and warm translucent white. Overlaps create believable third colors without black mud.
+
+Style:
+Museum material catalog precision, quiet Japanese/Swiss discipline, top-down macro product photography, physically believable optics. Not vector art, not flat icons, not glossy CGI.
+
+Composition:
+Landscape 3:2, nine equal visual zones, generous crop-safe space around every emblem, consistent scale and white balance, no motif touching another or the frame.
+
+Constraints:
+No text, letters, numbers, labels, logos, icons, captions, lines, crosshairs, borders, dividers, UI, scenery, checkerboard, or watermark. Avoid flowers, petals, clovers, recycling symbols, play triangles, audio waveforms, headphones, yin-yang, mandalas, perfect symmetry, liquid blobs, glassmorphism, neon, iridescence, and decorative gradients.

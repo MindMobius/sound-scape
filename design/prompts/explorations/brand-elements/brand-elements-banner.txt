@@ -1,0 +1,13 @@
+Use case: ads-marketing
+Asset type: panoramic product banner for 声景
+Input images: Image 1 is the binding style and material reference. Image 2 is the brand-mark family anchor generated from that world. Preserve Image 1's material physics and Image 2's compact cut-edge and negative-space vocabulary; do not reproduce either source sheet as a composition.
+Primary request: Design a finished panoramic brand banner in which a short sentence appears to have been organized into a layered acoustic landscape. Three to five large translucent biomorphic membranes cross the canvas at different scales; their overlaps create new colors and a clear sense of depth. One dominant membrane relationship carries the composition while all drafting marks remain secondary.
+Scene/backdrop: warm-white technical drawing surface extending edge to edge, with faint grid intersections and sparse registration marks. No card or poster mockup; the banner itself fills the canvas.
+Style/medium: premium material-led graphic design, real frosted translucent resin or silicone-film layers photographed from directly above, combined with Swiss/Japanese diagrammatic restraint.
+Composition/framing: very wide 3:1 panorama. The wordmark and tagline occupy one calm area with generous breathing room; the membrane composition sweeps through and partly crops beyond the opposite edges. Maintain a strong reading order at thumbnail size.
+Lighting/mood: soft diffuse daylight, almost shadowless except for precise contact shadows, quiet and contemplative but not wellness advertising.
+Color palette: warm white, mist blue-gray, mineral sage-gray, muted ember coral, charcoal; no additional hues.
+Materials/textures: milky translucency, visible thickness at edges, fine micro-perforation, subtle dry-ink registration marks, physically plausible overlap colors.
+Text (verbatim): "声景" and "一句话，用声音描述世界"
+Constraints: render both text strings exactly once; clean contemporary Chinese sans-serif; no other copy; no UI controls; no fake product screenshot; no photography of landscapes.
+Avoid: glassmorphism, blurry transparent cards, glossy glass, colorful gradients, neon, iridescence, generic floating blobs, generic 3D ribbons, stock nature imagery, meditation-app imagery, audio waveforms, equalizers, headphones, music notes, centered play button, fake awards, watermark.

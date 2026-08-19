@@ -1,0 +1,8 @@
+Use case: precise-object-edit
+Asset type: adjacent animation keyframe for a premium full-screen Soundscape interface
+Input image: Image 1 is the edit target and immutable visual authority
+Primary request: create the same scene approximately three seconds later. Move each translucent membrane by only 1 to 2 percent along its existing direction, with a barely perceptible independent floating drift. Shift the soft studio light very slightly so overlap shadows and transmitted color breathe. Keep the camera completely locked.
+Composition/framing: preserve the exact canvas, crop, scale, object count, overlap hierarchy, negative space, and left-heavy composition of Image 1
+Materials/textures: preserve the exact fine stippled membrane texture, concentric edge seams, translucent absorption, contact shadows, paper texture, restrained gray-blue, warm gray, sage, charcoal and coral palette
+Constraints: change only tiny membrane positions and tiny lighting phase; keep every membrane recognizable and geometrically stable; preserve the exact background and all small registration marks; no text; no watermark
+Avoid: camera movement, zoom, reframing, new objects, removed objects, morphing, liquid deformation, rubbery motion, biological forms, extra holes or notches, texture drift, blur, glow, harsh reflections, gradients, decorative SVG style

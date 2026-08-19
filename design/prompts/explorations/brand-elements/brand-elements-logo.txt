@@ -1,0 +1,13 @@
+Use case: logo-brand
+Asset type: high-fidelity brand mark exploration sheet for the product "声景"
+Input images: Image 1 is the binding style and material reference only. Preserve its material physics, restrained palette, microtexture, thin edge highlights, contact shadows, drafting precision, and calm visual discipline. Do not copy its exact four-piece composition, labels, or existing logo.
+Primary request: Create four original compact logo mark candidates for 声景. Each mark is built from two or three overlapping biomorphic membrane pieces and a deliberate central negative-space path, suggesting multiple sounds becoming one place. Every candidate must have a memorable outer silhouette and remain recognizable as a one-color 24 px icon. Show each candidate once as a physical translucent material specimen and once as a tiny solid black silhouette below it.
+Scene/backdrop: one flat warm-white drafting surface, no device mockups, no cards, no frames.
+Style/medium: rigorous identity design presented as real frosted translucent resin or thin silicone-film samples, vector-friendly geometry with physical material rendering.
+Composition/framing: square specimen sheet, four large marks in a disciplined 2x2 arrangement, generous negative space, a single neutral wordmark sample "声景" below the set, sparse registration crosses and hairline construction arcs only where useful.
+Lighting/mood: soft diffuse top light, quiet museum conservation-table feeling, restrained and exact.
+Color palette: mist blue-gray, mineral sage-gray, muted ember coral, charcoal black, warm white. Overlaps create physically plausible darker mixed colors.
+Materials/textures: milky translucency rather than clear glass; subtle internal light scattering; fine micro-perforation texture; slightly thick polished edge; tiny pattern notches; soft contact shadow proving each piece rests on the surface.
+Text (verbatim): "声景"
+Constraints: render the text exactly once; original designs only; no decorative slogan; no mockup devices; no rounded UI panels. The material rendition may be translucent, but the tiny black version must prove each silhouette works without transparency.
+Avoid: glassmorphism, background blur, glossy glass, liquid chrome, iridescence, neon, gradient blobs, generic AI 3D, puzzle-piece symbolism, brain shapes, headphones, music notes, waveform icons, play triangles, yin-yang, leaves, mountains, Zen stones, cute mascots, excessive shadows, watermark.

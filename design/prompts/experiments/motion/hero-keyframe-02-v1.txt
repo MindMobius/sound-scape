@@ -1,0 +1,8 @@
+Use case: precise-object-edit
+Asset type: second adjacent animation keyframe for a premium full-screen Soundscape interface
+Input image: Image 1 is the edit target and immutable visual authority
+Primary request: create the same scene at a different quiet motion phase. Keep the camera locked. Shift the large coral membrane about 12 pixels down and right, the cool blue upper membrane about 10 pixels up and left, and the smaller gray, sage and clear membranes by 6 to 12 pixels in distinct gentle directions. Change the soft studio light by only a few degrees so transmitted color and contact shadows subtly breathe.
+Composition/framing: preserve the exact canvas, crop, scale, object count, overlap hierarchy, negative space, and left-heavy composition of Image 1
+Materials/textures: preserve the exact fine stippled membrane texture, concentric edge seams, translucent absorption, contact shadows, paper texture, restrained gray-blue, warm gray, sage, charcoal and coral palette
+Constraints: change only the specified tiny positions and tiny lighting phase; keep every membrane recognizable and geometrically stable; preserve the exact background and all registration marks; no text; no watermark
+Avoid: camera movement, zoom, reframing, new objects, removed objects, morphing, liquid deformation, rubbery motion, biological forms, extra holes or notches, texture drift, blur, glow, harsh reflections, gradients, decorative SVG style

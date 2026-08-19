@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "summer-courtyard",
+  "name": "夏夜庭院",
+  "description": "夏夜庭院里，风、虫鸣与远处生活声交织。",
+  "status": "starter",
+  "tags": ["summer", "night", "home", "insects"],
+  "audioLayers": ["夜虫", "树影风声", "远处人声", "偶发水滴"],
+  "visualBrief": "暖白纸面上以鼠尾草、烟灰和一小片珊瑚形成疏朗叠层，细小标记表现远近关系；避免昆虫、植物、庭院和灯笼插画。",
+  "slots": {
+    "hero": { "status": "ready", "assetId": "scene.summer-courtyard.hero.v1" },
+    "banner": { "status": "shared-fallback", "assetId": "brand.background.banner.light-left.v1" },
+    "cover": { "status": "ready", "assetId": "scene.summer-courtyard.cover.v1" },
+    "thumbnail": { "status": "planned", "assetId": null },
+    "detail": { "status": "planned", "assetId": null }
+  }
+}

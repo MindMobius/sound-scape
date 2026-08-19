@@ -1,0 +1,28 @@
+Use case: stylized-concept
+Asset type: macro material-texture swatch atlas for the Soundscape brand system
+
+Input images:
+- Image 1 is the exact material family and palette reference.
+- Image 2 is the editorial crop and negative-space reference.
+
+Primary request:
+Create exactly eight large macro photographs of the translucent membrane material arranged in a precise 4-column by 2-row swatch atlas. Each swatch is a distinct close-up crop, not a complete object, and must reveal both a substantial membrane surface and at least one real edge or overlap transition.
+
+Eight material studies:
+1. Pale blue-gray, ultra-fine regular micro-perforation, thin cool edge.
+2. Mineral sage-gray, slightly denser pore field, subtle fibrous frost.
+3. Ember coral, warmer thicker center fading toward a bright thin rim.
+4. Warm translucent white, quiet low-contrast pores and layered edge.
+5. Smoke gray, irregular fine fibers visible between pores.
+6. Blue-gray over warm white, one broad overlap transition and third color.
+7. Coral over mineral sage, restrained overlap color and thickness variation.
+8. Three very pale layers crossing, focused on edge hierarchy and contact shadow.
+
+Style/medium:
+Extreme-detail top-down macro product photography of a tactile technical acoustic membrane, museum conservation photography, physically believable translucent optics, fine enough for high-end print and interface crops. Quiet, restrained, material-honest.
+
+Composition:
+Landscape 3:2 atlas with eight clean rectangular visual zones separated by narrow warm-white gutters. Consistent lighting, scale, focus, and white balance. Surface texture must remain crisp but not oversharpened. Every zone is useful as an independent crop.
+
+Constraints:
+No text, letters, numbers, labels, logos, icons, diagrams, crosshairs, measurement marks, UI, scenery, checkerboard, watermark, or unrelated objects. No full isolated membrane silhouettes. No fabric weave, leather, paper pulp, water droplets, bubbles, condensation, glitter, acrylic gloss, glassmorphism, liquid blobs, neon, iridescence, bokeh, or decorative gradients.

@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "defaultScene": "rain-cabin",
+  "scenes": [
+    { "id": "rain-cabin", "manifest": "assets/scenes/rain-cabin/scene.json", "status": "starter" },
+    { "id": "forest-dawn", "manifest": "assets/scenes/forest-dawn/scene.json", "status": "starter" },
+    { "id": "coastal-night", "manifest": "assets/scenes/coastal-night/scene.json", "status": "starter" },
+    { "id": "night-train", "manifest": "assets/scenes/night-train/scene.json", "status": "starter" },
+    { "id": "quiet-library", "manifest": "assets/scenes/quiet-library/scene.json", "status": "starter" },
+    { "id": "summer-courtyard", "manifest": "assets/scenes/summer-courtyard/scene.json", "status": "starter" }
+  ]
+}

@@ -1,0 +1,45 @@
+Use case: stylized-concept
+Asset type: shader-ready grayscale membrane thickness and silhouette atlas for the Soundscape / 声景 realtime optical renderer
+
+Input images:
+- Image 1 is the absolute visual authority for elegance, restraint, translucency, tonal softness, scale, and negative-space discipline.
+- Image 2 is the absolute authority for the membrane family: broad rounded discs, calm continuous arcs, subtle material grain, and the occasional shallow notch.
+- Preserve that exact design language. Do not reinterpret it as biological tissue, leaves, shards, fabric, or sculptural objects.
+
+Primary request:
+Translate only the quiet membrane silhouette language from the references into a clean technical grayscale atlas. This is input data for a GPU shader, not finished artwork, not a poster, and not a dramatic material render.
+
+Canvas and layout:
+- Landscape 3:2 canvas, ideally 1536 x 1024.
+- Completely uniform matte black background (#000000), including all four corners.
+- Exactly eight separate single membrane sheets in a disciplined 4-column by 2-row atlas.
+- One membrane per cell, centered, occupying roughly 65-75% of its cell.
+- Generous black clearance around every specimen. No overlap, no touching, no dividers, no labels, no text, no guides, no checkerboard.
+
+Shape family:
+- All eight shapes belong to the same calm design family seen in the references.
+- Broad near-circular or gently oval sheets made from long, continuous, controlled arcs.
+- Restrained asymmetry only: slight oval distortion, subtle flattening, or one very shallow crescent notch on no more than three specimens.
+- No sharp points. No thin ribbons. No triangles. No crescents. No leaf shapes. No irregular torn edges. No dramatic bends or folds.
+- The silhouette should feel product-designed and precise, not organic in a biological sense.
+
+Grayscale thickness encoding:
+- Outside the membrane: true pure black.
+- Main membrane body: smooth neutral mid-gray, approximately 25-45% luminance.
+- Extremely gentle, broad low-frequency thickness variation only; large quiet tonal fields, never high-frequency detail.
+- A restrained rim that is only slightly brighter than the body, with no white outline and no glow.
+- Interior texture must be almost imperceptible at normal viewing size: very sparse, tiny, shallow pinprick grain inspired by the references, never holes.
+- No RGB color tint. Neutral grayscale only.
+
+Lighting and surface restrictions:
+- No cast shadows, contact shadows, ambient shadows, reflections, bloom, glow, halo, rim lighting, photographic environment, floor, haze, or background texture.
+- No veins, fibers, scratches, wrinkles, pores, craters, bubbles, perforation, embossed rings, stitched lines, radial patterns, cellular texture, or visible noise.
+- No thick glass, no glossy plastic, no wet material, no jelly, no stone, no metal.
+- Edges should transition cleanly into black with a subtle antialiased falloff suitable for luminance-key extraction.
+
+Critical quality bar:
+The result must inherit the references' luxury restraint. It should look almost boring as a data atlas: eight elegant, smooth, related silhouettes with low-contrast thickness information. If a detail attracts attention on its own, remove it. The realtime shader, not this atlas, will provide color, light, shadow, and optical drama.
+
+References supplied to Image 2:
+- codex-clipboard-f7fbf303-e1d6-4261-8478-deab8409fd42.png (composition and restraint authority)
+- exec-a42a25be-8e29-4b7d-b8b4-c9c347002d66.png (contour and material authority)

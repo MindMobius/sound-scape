@@ -1,0 +1,29 @@
+Use case: stylized-concept
+Asset type: high-resolution reusable overlap-module atlas for the Soundscape brand system
+
+Input image:
+- Image 1 is the exact material and palette reference. Match its milky translucent technical polymer, very fine micro-perforation, subtle frosted fibers, thin dark rim, narrow pale edge highlight, realistic contact shadow, restrained blue-gray / mineral sage / ember coral / smoke / warm-white palette, and believable overlap colors.
+
+Primary request:
+Create exactly six large, clearly separated translucent-membrane composition modules on one uniform warm-white matte calibration surface, arranged as a calm 3-column by 2-row atlas with generous blank space.
+
+Top row:
+1. A blue-gray and mineral-sage pair with a broad lens-shaped overlap.
+2. An ember-coral and warm-white pair with a narrow offset overlap.
+3. A mineral-sage and smoke-gray pair with an asymmetrical diagonal overlap.
+
+Bottom row:
+1. A three-membrane cluster using blue-gray, ember coral, and mineral sage.
+2. A four-membrane cluster using warm white, blue-gray, smoke gray, and ember coral.
+3. A five-membrane cluster using the full restrained palette, compact but with every layer boundary still readable.
+
+Every module must be fully visible, internally coherent, and separated from every other module. Each membrane has a distinct soft asymmetric silhouette and one small rounded U-shaped cut notch. Overlap regions must produce sophisticated physical third colors and accumulated opacity without becoming black or muddy.
+
+Style/medium:
+Ultra-refined orthographic macro product photography, museum material catalog, quiet Japanese/Swiss discipline, tactile translucent acoustic membrane. Not vector art, not flat illustration, not glossy CGI.
+
+Composition/framing:
+Landscape 3:2, orthographic top-down, six equal visual zones, consistent scale and lighting, safe crop margin around each module, no object touching the frame.
+
+Constraints:
+Uniform warm-white background only. No text, letters, numbers, labels, logos, icons, captions, lines, crosshairs, borders, dividers, UI, checkerboard, watermark, scenery, or extra objects. No transparent-output simulation. No glassmorphism, liquid blobs, acrylic gloss, iridescence, neon, bokeh, or decorative gradients.

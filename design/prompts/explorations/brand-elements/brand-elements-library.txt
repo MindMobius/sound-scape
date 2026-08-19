@@ -1,0 +1,12 @@
+Use case: stylized-concept
+Asset type: auxiliary brand and interface element library for 声景
+Input images: Image 1 is the binding style and material reference. Image 2 is the brand-mark family anchor generated from that world. Preserve Image 1's translucent membrane physics and Image 2's compact cut-edge and negative-space vocabulary; do not copy either source composition or its labels.
+Primary request: Build a coherent library of sixteen reusable visual elements from the same system: four sound-layer swatches in distinct biomorphic silhouettes; four overlap constructions showing one, two, three, and four layers; four state indicators for playing, generating, ready, and pending; and four small directional or calibration marks. The elements must look useful for interface, packaging, motion titles, social graphics, and print rather than like decorative abstract art.
+Scene/backdrop: flat warm-white specimen surface, no UI cards and no device mockup.
+Style/medium: museum-grade material study board, frosted translucent resin and silicone-film cutouts combined with precise technical drafting.
+Composition/framing: landscape specimen sheet with a quiet modular grid, grouped by function but unboxed; enough whitespace to inspect each element; no large title.
+Lighting/mood: diffuse top light, calm, precise, tactile.
+Color palette: warm white, charcoal, mist blue-gray, mineral sage-gray, muted ember coral; physically plausible darker overlap colors.
+Materials/textures: consistent milky translucency, subtle internal scattering, fine micro-perforation, thin polished edges, small pattern notches, soft contact shadows.
+Constraints: no words beyond tiny numerals 1-4; every element should share one cut-edge language and line weight; state indicators must remain distinguishable in monochrome; no baked UI chrome.
+Avoid: glassmorphism, rounded cards, glossy glass, gradients, neon, iridescence, floating 3D blobs, decorative orbs, waveforms, equalizers, headphones, music notes, generic icon library style, watermark.

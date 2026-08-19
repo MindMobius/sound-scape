@@ -1,0 +1,23 @@
+Use case: stylized-concept
+Asset type: production square scene Cover for the Soundscape scene "闭馆后的图书馆"
+
+Input images:
+- Image 1 is the scene identity reference: warm-white, smoke-gray, and restrained coral vertical membranes arranged with quiet order.
+- Image 2 is the exact square Cover framing reference: authored macro composition, edge-to-edge material, central overlap, and thumbnail strength.
+- Image 3 is the exact membrane material, micro-perforation, fibers, thin rim, overlap color, and contact-shadow reference.
+All images are style, material, and framing references, not edit targets. Create a new distinct composition, not a crop.
+
+Primary request:
+Create a tactile abstract Cover that evokes a closed library after hours through silence, paper, wood-toned warmth, and measured vertical rhythm, without depicting any literal library object. Arrange four irregular translucent membrane fields in warm milky white, smoke gray, pale warm-gray, and one narrow low-saturation ember-coral accent.
+
+Composition/framing:
+Square 1:1, authored as an edge-to-edge macro cover. Large vertical and gently leaning membrane fields enter from the top and bottom edges. Build a strong but quiet overlap near the center, with clear intervals between forms and enough visual mass across the central 70 percent crop-safe area. The composition should feel ordered but asymmetric, like pauses in a reading rhythm. It must remain distinctive at 64px. Do not show a complete isolated object or a pile on a blank background.
+
+Style/medium:
+Physically believable top-down macro material photography, Japanese/Swiss editorial restraint, museum catalog precision, quiet and premium.
+
+Materials/textures:
+Fine micro-perforation, faint embedded fibers, uneven milky thickness, thin restrained rim, narrow edge catchlight, soft realistic contact shadow, and clearly changed third colors at overlaps. Warm off-white fibrous paper backdrop.
+
+Constraints:
+No text, letters, numbers, logo, UI, border, watermark, book, bookshelf, page, lamp, desk, architecture, window, literal paper sheets, flower, petal rosette, fan, spinner, recycling symbol, glassmorphism, glossy glass, liquid blobs, neon, gradient background, hard 3D plastic, sepia nostalgia, or decorative grain overlay. The coral must be a narrow accent, not a large dominant field.

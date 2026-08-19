@@ -1,0 +1,24 @@
+Use case: stylized-concept
+Asset type: dark wide banner background master for the Soundscape brand system
+
+Input images:
+- Image 1 is the wide 3:1 framing, negative-space discipline, membrane scale, and restrained drafting-mark reference.
+- Image 2 is the exact dark-surface material, palette, rim visibility, and overlap-color reference.
+
+Primary request:
+Create a new ultra-wide 3:1 dark banner background with no text. Reserve the left 38 percent as calm, readable deep-charcoal negative space for future real HTML typography. Large translucent membranes enter from the upper edge, right edge, and lower-right corner, overlapping across the right half and lightly approaching the center without filling the left safe area.
+
+Composition:
+Use four to six very large cropped membrane forms at different depths. A restrained ember-coral membrane anchors the lower-right diagonal; blue-gray, mineral sage, smoke, and warm translucent-white layers arc across the upper and right edges. Overlap boundaries and third colors remain legible. The center-left stays quiet enough for a product name and two lines of copy.
+
+Material and background:
+Deep-charcoal matte fibrous surface with extremely subtle physical grain, not a digital gradient. Milky translucent technical membrane with fine micro-perforation, faint fibers, subtle thickness change, thin dark rim, narrow cool pale edge catchlight, close soft contact shadow. No blown-white center, no aura, no neon glow.
+
+Drafting detail:
+Add only a few near-invisible charcoal-gray registration crosses, one thin dashed trajectory, and one small calibration circle in the negative space. They must remain subordinate and never resemble UI.
+
+Style:
+High-end nocturnal material editorial, museum catalog precision, physically believable top-down macro photography, quiet and architectural.
+
+Constraints:
+No text, letters, numbers, labels, logos, icons, captions, UI, borders, frames, scenery, checkerboard, watermark, people, objects, or landscape. No glassmorphism, liquid glass, acrylic gloss, neon, bloom, iridescence, bokeh, stars, smoke, or decorative gradients. Do not center the membrane cluster. Keep the left safe area materially clean.

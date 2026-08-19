@@ -1,0 +1,24 @@
+Use case: stylized-concept
+Asset type: right-copy-safe light wide banner background master for the Soundscape brand system
+
+Input images:
+- Image 1 is the exact 3:1 material fidelity, paper surface, large-scale membrane crop, and restrained drafting-detail reference.
+- Image 2 is the directional edge-composition and negative-space reference.
+
+Primary request:
+Create a new ultra-wide 3:1 warm-light banner background with no text. Reserve the right 38 percent as calm, clean warm-white negative space for future real HTML typography. Large translucent membrane forms enter from the left edge, upper-left edge, and lower-left corner, overlap across the left half, and taper before the right safe area.
+
+Composition:
+Use four to six very large cropped membrane forms at different depths. A blue-gray membrane creates the upper-left anchor; a restrained ember-coral layer sweeps from the lower-left; mineral sage, smoke, and warm translucent-white layers create smaller overlap lenses near the center-left. The right third remains materially quiet, with only one faint drafting cross and a short dashed trajectory.
+
+Material and background:
+Warm-white matte paper with subtle real fiber and pressure texture, not beige and not a digital gradient. Milky translucent technical membrane with very fine micro-perforation, faint fibers, subtle thickness change, thin dark rim, narrow pale edge catchlight, close soft contact shadow. Believable third colors and no muddy black overlap.
+
+Style:
+High-end material editorial, museum catalog precision, physically believable top-down macro photography, quiet Japanese/Swiss spatial discipline, asymmetrical and architectural.
+
+Constraints:
+No text, letters, numbers, labels, logos, icons, captions, UI, borders, frames, scenery, checkerboard, watermark, people, objects, or landscape. No glassmorphism, liquid glass, acrylic gloss, neon, bloom, iridescence, bokeh, or decorative gradients. Do not mirror Image 1 literally; create a distinct left-entering composition. Keep the right copy-safe area clean.
+
+Observed output deviation:
+The built-in generator returned a useful 2:1 composition rather than the requested 3:1 canvas. It is therefore stored as a Hero background, not a Banner master.

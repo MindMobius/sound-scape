@@ -1,0 +1,23 @@
+Use case: stylized-concept
+Asset type: production square scene Cover for the Soundscape scene "林间清晨"
+
+Input images:
+- Image 1 is the scene identity reference: mineral sage and cool translucent layers rising through pale morning space.
+- Image 2 is the exact square Cover framing reference: edge-to-edge macro material, central crossing, cropped forms, and thumbnail strength. Match this framing discipline, not its rain-cabin palette arrangement.
+- Image 3 is the exact membrane material, micro-perforation, fibers, thin rim, overlap color, and contact-shadow reference.
+All images are style, material, and framing references, not edit targets. Create a new distinct composition, not a crop.
+
+Primary request:
+Create a tactile abstract Cover that evokes mist lifting through a forest at dawn without depicting a forest. Use four broad irregular translucent membrane fields in mineral sage, pale cool blue-gray, milky translucent white, and one almost-white warm dawn layer.
+
+Composition/framing:
+Square 1:1, authored as an edge-to-edge macro cover. Every membrane is cropped by at least one image edge; do not show complete loose pieces. Let the layered fields rise diagonally from lower-left toward upper-center, with two strong overlaps crossing in the image center and meaningful visual mass across the central 70 percent crop-safe area. Keep a small breathing pocket near the upper-right, but do not leave the center or an entire half empty. The silhouette and color relationships must remain distinctive at 64px.
+
+Style/medium:
+Physically believable top-down macro material photography, Japanese/Swiss editorial restraint, museum catalog precision, quiet and premium.
+
+Materials/textures:
+Fine micro-perforation, faint embedded fibers, uneven milky thickness, thin cool rim, narrow edge catchlight, soft realistic contact shadow, and clearly changed third colors at overlaps. Warm off-white fibrous paper backdrop.
+
+Constraints:
+No text, letters, numbers, logo, UI, border, watermark, trees, leaves, branches, landscape, fog illustration, sun, flower, clover, petal rosette, fan, spinner, recycling symbol, isolated pile, complete loose object, glassmorphism, glossy glass, liquid blobs, neon, gradient background, hard 3D plastic, or decorative grain overlay. Do not arrange equal pieces radially. Use no saturated coral field; warmth appears only as a restrained pale rim or translucent warm-white layer.

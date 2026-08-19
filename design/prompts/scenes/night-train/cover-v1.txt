@@ -1,0 +1,21 @@
+Use case: stylized-concept
+Asset type: final 1:1 square scene cover for the Soundscape scene "夜行列车"
+
+Input images:
+- Image 1 is the approved Night Train Hero and exact scene identity reference: preserve its deep-charcoal paper, elongated blue-gray and warm-gray membranes, calm directional repetition, precise tiny ember-coral registration point, and low mechanical rhythm. It is a reference, not an edit target.
+- Image 2 is the exact dark membrane material, low-light overlap, rim-light and contact-shadow reference. It is a reference, not an edit target.
+
+Primary request:
+Create a new square cover composition that is unmistakably the concentrated sibling of Image 1. Express continuous night travel and a stable interior through elongated translucent acoustic membranes rather than transport imagery.
+
+Composition/framing:
+Full-bleed square 1:1 canvas. No copy-safe side and no poster layout. Use three or four long rounded membrane bands entering from the upper-left and lower-left, folding past one another through the center with measured parallel spacing and one warm-gray interior band. Include a single tiny muted ember-coral registration point, not a glowing light. Keep essential visual information inside the central 72 percent for square, circular and rounded-square crops. Preserve deep-charcoal breathing room. Do not create speed lines, a small centered emblem, fan, spinner, tunnel, or isolated object.
+
+Style/medium:
+Physically believable top-down nocturnal macro material photography, museum-catalog precision, quiet and architectural.
+
+Materials/textures:
+Match the references exactly: fine micro-perforation, faint fibers, uneven milky thickness, thin rim, narrow cool catchlight, realistic low contact shadow, non-neon dark translucency, sophisticated third colors, tactile charcoal paper.
+
+Constraints:
+No text, letters, numbers, logos, captions, UI, borders, frame, watermark, train, carriage, window, railway, film strip, speed line, light trail, tunnel, landscape, glassmorphism, neon, bloom, bokeh, iridescence, decorative gradient, radial symmetry, or repeated logo motif. Do not crop Image 1 or copy Image 2's modules. Output one complete high-resolution full-bleed square RGB cover image.

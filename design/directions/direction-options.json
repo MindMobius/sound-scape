@@ -1,0 +1,133 @@
+{
+  "title": "选择声景的视觉世界",
+  "question": "这不是选一张好看的图，而是在选择今后图标、Banner、宣传物料和界面共同遵守的视觉母语。",
+  "options": [
+    {
+      "id": "assigned",
+      "label": "暗室地平线",
+      "kicker": "THE ROLL",
+      "lineage": "长曝光海景、暗房银盐与持续的水平基准",
+      "thesis": "用一条几乎静止的光学地平线承载一个不断生成的声音世界。",
+      "palette": ["#0d1110", "#d9d8d0", "#6f8178", "#bd6548"],
+      "materials": ["银盐颗粒", "烟熏玻璃", "低反射铝"],
+      "viewport": "16:9 品牌母版中，声景名称与一句描述保持克制，一条雾化地平线贯穿画面并自然展开为播放状态、声音层关系和简繁轻重控制。",
+      "risk": "若可编辑结构不足，会退化成普通冥想应用。",
+      "raised": [
+        {"from": "多层动画", "raise": "声音距离通过真实遮挡和缓慢视差显形，地平线不只是背景。"},
+        {"from": "裁缝纸样", "raise": "每个声音层都有可读的来源、关系和可调边界。"},
+        {"from": "一比特桌面", "raise": "播放、生成、就绪和待切换状态必须一眼可辨。"},
+        {"from": "剪辑台", "raise": "当前声景持续存在，新声景只在时间线上等待用户确认。"},
+        {"from": "模块身份", "raise": "同一核心关系可以缩放到图标、Banner、宣传物料和界面。"},
+        {"from": "高密度杂志", "raise": "高级配置容纳真实密度，默认聆听界面保持安静。"}
+      ],
+      "comp": "design/directions/boards/decision/darkroom-horizon.png"
+    },
+    {
+      "id": "model-pick",
+      "label": "静默共振",
+      "kicker": "IMPECCABLE’S PICK",
+      "lineage": "声学节点、扬声器微孔与精密听觉仪器",
+      "thesis": "让不可见的共振节点成为声景自己的纹章，而不是俗套波形。",
+      "palette": ["#171715", "#e4e2db", "#607568", "#b7513b"],
+      "materials": ["阳极氧化铝", "微孔织物", "节点浮雕"],
+      "viewport": "16:9 品牌母版以一个大尺度共振纹章为核心，同一几何同时展示图标、播放反馈、声音层和空间强度。",
+      "risk": "对称过度会像音响硬件品牌，纹样过繁会沦为克拉尼装饰。",
+      "comp": "design/directions/boards/decision/quiet-resonance.png"
+    },
+    {
+      "id": "challenger-cel",
+      "label": "多层黎明",
+      "verdict": "competitive",
+      "lineage": "多平面动画中的手绘景深与镜头推进",
+      "thesis": "每个声音源是一层真实景深，用户像把镜头推进一个正在醒来的世界。",
+      "palette": ["#18251f", "#41594b", "#8ca0a1", "#d48d3a", "#17130f"],
+      "materials": ["哑光绘景", "半透明雾层", "景深遮挡"],
+      "viewport": "16:9 聆听画面以五个速度不同的环境层构成，描述、播放和轻重简繁控制位于独立前景层。",
+      "case": "对进入自然声景的感受很强，层次也清楚，但长期品牌识别更依赖插画内容。",
+      "risk": "最容易落入童话森林、陈旧衬线和普通冥想应用。",
+      "comp": "design/directions/boards/decision/multiplane-dawn.png",
+      "hero": "https://impeccable.style/worlds/cards/cinema-cinematography-editing-multiplane-cel-dawn-hero.webp",
+      "board": "https://impeccable.style/worlds/cards/cinema-cinematography-editing-multiplane-cel-dawn.webp"
+    },
+    {
+      "id": "challenger-pattern",
+      "label": "声场裁片",
+      "verdict": "competitive",
+      "lineage": "裁缝纸样、透明描图纸与套版标记",
+      "thesis": "一句话被裁成可重组的声音层，每条虚线、缺口和叠片都有编排意义。",
+      "palette": ["#f0f1ec", "#1e211f", "#91a499", "#a9b8c7", "#c34c38"],
+      "materials": ["半透明绘图纸", "干性油墨", "套版标记"],
+      "viewport": "16:9 工作面左侧保留一句描述，中央声音裁片彼此叠合，右侧只露出总音量与轻重简繁，高级关系藏在展开层中。",
+      "case": "产品机制异常清楚，但受众首先感到的是制作工具而不是安静聆听。",
+      "risk": "工具说明书感可能压过享受声音的第一体验。",
+      "comp": "design/directions/boards/decision/acoustic-pattern.png",
+      "hero": "https://impeccable.style/worlds/cards/fashion-folded-worlds-sewing-pattern-envelope-hero.webp",
+      "board": "https://impeccable.style/worlds/cards/fashion-folded-worlds-sewing-pattern-envelope.webp"
+    },
+    {
+      "id": "challenger-modular",
+      "label": "模块彩条",
+      "verdict": "declined",
+      "lineage": "摄影与硬质色块组成的模块身份系统",
+      "thesis": "声音场景被切成可重排的摄影与色块模块。",
+      "palette": ["#14a6b8", "#dd3f72", "#e6c833", "#3f9b5c", "#222222"],
+      "materials": ["平涂色块", "真实摄影", "叠色"],
+      "viewport": "摄影声景与参数模块在同一网格中重排。",
+      "case": "跨媒介能力强，但高饱和语法与安静聆听冲突。",
+      "kept": "每一种媒介仍要使用同一套可识别的组合规则。",
+      "risk": "会让声景变成文化活动或创意机构品牌。"
+    },
+    {
+      "id": "challenger-one-bit",
+      "label": "一比特声景桌面",
+      "verdict": "declined",
+      "lineage": "黑白像素、抖动灰阶与绝对清楚的桌面状态",
+      "thesis": "每个声景以一个可打开、可移动、状态明确的声音窗口存在。",
+      "palette": ["#ffffff", "#000000", "#8c8c8c"],
+      "materials": ["一比特像素", "有序抖动", "单像素边框"],
+      "viewport": "多个声音窗口在一张桌面上组织和切换。",
+      "case": "状态清楚，但复古计算机文化与目标受众、禅意和材料感都偏离。",
+      "kept": "任何状态都不能只靠轻微色差表达。",
+      "risk": "新鲜感会快速变成像素主题皮肤。"
+    },
+    {
+      "id": "challenger-bench",
+      "label": "声景剪辑台",
+      "verdict": "declined",
+      "lineage": "胶片穿孔、工作拷贝与不会中断的时间轨",
+      "thesis": "当前声音持续穿过一条时间轨，新声景在标记处等待接入。",
+      "palette": ["#080807", "#d56b2f", "#f2efe8"],
+      "materials": ["粗颗粒胶片", "蜡笔记号", "折叠胶带"],
+      "viewport": "连续声景横穿屏幕，生成任务悬挂在轨道下方。",
+      "case": "不中断切换表达准确，但会把产品误导为音视频编辑器。",
+      "kept": "当前播放必须持续，新内容以持久标记等待用户决定。",
+      "risk": "专业编辑语义会赶走只想立即聆听的用户。"
+    },
+    {
+      "id": "challenger-density",
+      "label": "高密度声景志",
+      "verdict": "declined",
+      "lineage": "满版街头杂志、手写引线与重叠信息",
+      "thesis": "每个声音元素都被大胆标注并挤进同一张声景剖面。",
+      "palette": ["#f4f1ea", "#d13c77", "#d7b22f", "#1e1d1b"],
+      "materials": ["满版印刷", "手写引线", "剪贴层"],
+      "viewport": "高密度声景剖面把全部音源与参数同时标出。",
+      "case": "信息容量足够，但受众识别和默认播放任务都不成立。",
+      "kept": "高级配置不应因为追求极简而隐藏真实信息。",
+      "risk": "与安静、优雅和默认简单直接冲突。"
+    }
+  ],
+  "reroll": {"registers": ["safer", "bolder"]},
+  "buildPath": {"value": "comp", "toggle": true},
+  "canon": true,
+  "canonCard": {
+    "label": "高端冥想播放器",
+    "thesis": "自然风景、居中播放键和柔和渐变，做得精致但不解释声景机制。",
+    "palette": ["#e9e5da", "#24332d", "#8da59a"],
+    "materials": ["雾化自然摄影", "柔软中性色", "半透明控件"],
+    "viewport": "一张全屏自然风景上叠加圆形播放键、场景标题和少量预设入口。",
+    "risk": "易用，但会与现有白噪声和冥想产品混同。",
+    "comp": "design/directions/boards/decision/category-standard.png"
+  },
+  "steer": true
+}

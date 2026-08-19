@@ -1,0 +1,22 @@
+Use case: stylized-concept
+Asset type: static 2:1 listening Hero master for the Soundscape scene "夜行列车"
+
+Input images:
+- Image 1 is the exact membrane material, optical behavior, edge treatment, and 2:1 Hero discipline reference.
+- Image 2 is the exact deep-charcoal surface, nocturnal palette, and low-light material visibility reference.
+Both are references, not edit targets.
+
+Primary request:
+Create a new distinct dark 2:1 abstract material composition for a night train moving through a quiet distance. Express continuous travel, low mechanical rhythm, and a stable interior through elongated translucent acoustic membranes rather than literal transport imagery.
+
+Composition/framing:
+Keep the right 38 percent calm and copy-safe. Use two or three elongated blue-gray and smoke membranes with restrained repeated spacing across the left half, supported by one warm-gray interior layer and a very small ember-coral registration point. The movement should be directional but calm, never a speed effect.
+
+Style/medium:
+Physically believable top-down nocturnal macro material photography, museum catalog precision, quiet and architectural.
+
+Materials/textures:
+Match the references' fine micro-perforation, faint fibers, uneven milky thickness, thin rim, narrow cool catchlight, realistic contact shadow, and non-neon dark translucency exactly.
+
+Constraints:
+No text, letters, numbers, logos, captions, UI, borders, watermark, train, carriage, window, railway, film strip, speed line, light trail, landscape, glassmorphism, neon, bloom, bokeh, iridescence, or decorative gradient. Do not copy either reference composition. Output one complete full-bleed 2:1 RGB Hero, not a board or mockup.

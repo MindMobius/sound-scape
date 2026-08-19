@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "forest-dawn",
+  "name": "林间清晨",
+  "description": "薄雾尚未散去的林间清晨。",
+  "status": "starter",
+  "tags": ["nature", "morning", "mist", "calm"],
+  "audioLayers": ["林间风", "晨鸟", "湿叶滴水", "远处溪流"],
+  "visualBrief": "矿物鼠尾草与冷白半透明层从下方缓慢抬升，少量暖色边缘代表天光；避免树叶轮廓、森林插画和绿色渐变。",
+  "slots": {
+    "hero": { "status": "ready", "assetId": "scene.forest-dawn.hero.v1" },
+    "banner": { "status": "shared-fallback", "assetId": "brand.background.banner.light-right.v1" },
+    "cover": { "status": "ready", "assetId": "scene.forest-dawn.cover.v1" },
+    "thumbnail": { "status": "planned", "assetId": null },
+    "detail": { "status": "planned", "assetId": null }
+  }
+}

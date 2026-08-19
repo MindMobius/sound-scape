@@ -1,0 +1,425 @@
+{
+  "schemaVersion": 1,
+  "policy": "static-first",
+  "assets": [
+    {
+      "id": "brand.identity.soundscape-mark-cutout.v1",
+      "path": "assets/brand/identity/soundscape-mark-cutout.png",
+      "kind": "identity-mark",
+      "theme": "adaptive",
+      "usage": [
+        "brand-mark",
+        "favicon",
+        "mask"
+      ],
+      "copySafe": "none",
+      "width": 1254,
+      "height": 1254,
+      "alpha": true,
+      "status": "accepted",
+      "prompt": "design/prompts/brand/identity/soundscape-mark-cutout-v1.txt",
+      "sha256": "50a5ff099caf7b969c0d0b5e607c8aaeef152f7e096114b5da12765eb0e5fad0"
+    },
+    {
+      "id": "brand.background.banner.dark.v1",
+      "path": "assets/brand/backgrounds/banner-background-dark-v1.png",
+      "kind": "background",
+      "theme": "dark",
+      "usage": [
+        "banner",
+        "cover",
+        "nocturnal-player"
+      ],
+      "copySafe": "left",
+      "width": 2172,
+      "height": 724,
+      "alpha": false,
+      "status": "accepted",
+      "prompt": "design/prompts/brand/backgrounds/banner-background-dark-v1.txt",
+      "sha256": "86c891efdb273579714f3af4c8ad30160672cf170b7f0196d69e6079033737b8"
+    },
+    {
+      "id": "brand.background.banner.light-left.v1",
+      "path": "assets/brand/backgrounds/banner-background-light-v1.png",
+      "kind": "background",
+      "theme": "light",
+      "usage": [
+        "banner",
+        "editorial-cover"
+      ],
+      "copySafe": "left",
+      "width": 2172,
+      "height": 724,
+      "alpha": false,
+      "status": "accepted",
+      "prompt": "design/prompts/brand/backgrounds/banner-background-light-v1.txt",
+      "sha256": "5a45ea1230e5094761002b363e2ddd660d2495d021630f3a4650dd0d0681fb34"
+    },
+    {
+      "id": "brand.background.banner.light-right.v1",
+      "path": "assets/brand/backgrounds/banner-background-light-right-v1.png",
+      "kind": "background",
+      "theme": "light",
+      "usage": [
+        "banner",
+        "editorial-cover"
+      ],
+      "copySafe": "right",
+      "width": 2172,
+      "height": 724,
+      "alpha": false,
+      "status": "accepted",
+      "prompt": "design/prompts/brand/backgrounds/banner-background-light-right-v1.txt",
+      "sha256": "0674dcf264eb0e9d23b81c5e4e59130cba652d24cffc6488d3c7b0941f040c89"
+    },
+    {
+      "id": "brand.background.hero.light-right.v1",
+      "path": "assets/brand/backgrounds/hero-background-light-right-v1.png",
+      "kind": "background",
+      "theme": "light",
+      "usage": [
+        "hero",
+        "listening-surface",
+        "editorial-cover"
+      ],
+      "copySafe": "right",
+      "width": 1774,
+      "height": 887,
+      "alpha": false,
+      "status": "accepted",
+      "prompt": "design/prompts/brand/backgrounds/hero-background-light-right-v1.txt",
+      "sha256": "4ca71bfe3f17abd279b1eaf66b76944fa0ca47fc0b8fdea3253de926a92853e6"
+    },
+    {
+      "id": "brand.motif.emblems.light.v1",
+      "path": "assets/brand/motifs/emblem-motifs-light-v1.png",
+      "kind": "motif-sheet",
+      "theme": "light",
+      "usage": [
+        "avatar",
+        "cover",
+        "player-center",
+        "state-moment"
+      ],
+      "copySafe": "none",
+      "width": 1536,
+      "height": 1024,
+      "alpha": false,
+      "status": "accepted-exploration",
+      "prompt": "design/prompts/brand/motifs/emblem-motifs-light-v1.txt",
+      "sha256": "7cdfcb6eb929a03e3d136a550ee2a0af302856fbdd97a746148ef70480982426"
+    },
+    {
+      "id": "brand.motif.layout-fragments.light.v1",
+      "path": "assets/brand/motifs/layout-fragments-light-v1.png",
+      "kind": "fragment-sheet",
+      "theme": "light",
+      "usage": [
+        "section",
+        "card-crop",
+        "transition",
+        "editorial-crop"
+      ],
+      "copySafe": "mixed",
+      "width": 1536,
+      "height": 1024,
+      "alpha": false,
+      "status": "accepted",
+      "prompt": "design/prompts/brand/motifs/layout-fragments-light-v1.txt",
+      "sha256": "b191999ef06a5d80ef50b95d32b8a5fea3638f04221374621f5a75baf72c79a4"
+    },
+    {
+      "id": "brand.atlas.material.light.v1",
+      "path": "assets/brand/atlases/material-atlas-light-v1.png",
+      "kind": "material-atlas",
+      "theme": "light",
+      "usage": [
+        "material-reference",
+        "calibration"
+      ],
+      "copySafe": "none",
+      "width": 1536,
+      "height": 1024,
+      "alpha": false,
+      "status": "accepted",
+      "prompt": "design/prompts/brand/atlases/material-atlas-light-v1.txt",
+      "sha256": "acec2e782a6c0396cd7f2560f564e95a642f13f539b44b587b35d94ed95cd041"
+    },
+    {
+      "id": "brand.atlas.material-macro.light.v1",
+      "path": "assets/brand/atlases/material-macro-swatches-v1.png",
+      "kind": "material-atlas",
+      "theme": "light",
+      "usage": [
+        "macro-crop",
+        "print-texture",
+        "material-reference"
+      ],
+      "copySafe": "none",
+      "width": 1536,
+      "height": 1024,
+      "alpha": false,
+      "status": "accepted",
+      "prompt": "design/prompts/brand/atlases/material-macro-swatches-v1.txt",
+      "sha256": "491bf981e09530487fb7bc4a280d30bee3b9297c42b1e5a3caa4db891d789a58"
+    },
+    {
+      "id": "brand.atlas.overlap.dark.v1",
+      "path": "assets/brand/atlases/overlap-modules-dark-v1.png",
+      "kind": "module-atlas",
+      "theme": "dark",
+      "usage": [
+        "cover-crop",
+        "player-crop",
+        "overlap-reference"
+      ],
+      "copySafe": "none",
+      "width": 1536,
+      "height": 1024,
+      "alpha": false,
+      "status": "accepted",
+      "prompt": "design/prompts/brand/atlases/overlap-modules-dark-v1.txt",
+      "sha256": "6e9e09b4a73bd49e48aa06a370002070a65c19827f4f836f6766a62762e4f8ec"
+    },
+    {
+      "id": "brand.atlas.overlap.light.v1",
+      "path": "assets/brand/atlases/overlap-modules-light-v1.png",
+      "kind": "module-atlas",
+      "theme": "light",
+      "usage": [
+        "section-crop",
+        "card-crop",
+        "overlap-reference"
+      ],
+      "copySafe": "none",
+      "width": 1536,
+      "height": 1024,
+      "alpha": false,
+      "status": "accepted",
+      "prompt": "design/prompts/brand/atlases/overlap-modules-light-v1.txt",
+      "sha256": "94ae4541581b0d6ae529cd71b066ed1b522dd985f82925bee6ceb72640d44e9f"
+    },
+    {
+      "id": "scene.rain-cabin.hero.v1",
+      "sceneId": "rain-cabin",
+      "path": "assets/scenes/rain-cabin/rain-cabin-hero-v1.png",
+      "kind": "scene-hero",
+      "theme": "light",
+      "usage": [
+        "hero",
+        "listening-surface"
+      ],
+      "copySafe": "right",
+      "width": 1774,
+      "height": 887,
+      "alpha": false,
+      "status": "accepted",
+      "prompt": "design/prompts/scenes/rain-cabin/hero-v1.txt",
+      "sha256": "69e348d57bd020e1205295b55e342a89986a8efdba8e826dcd6bdbf7982931e1"
+    },
+    {
+      "id": "scene.rain-cabin.cover.v1",
+      "sceneId": "rain-cabin",
+      "path": "assets/scenes/rain-cabin/rain-cabin-cover-v1.png",
+      "kind": "scene-cover",
+      "theme": "light",
+      "usage": [
+        "cover",
+        "library-tile",
+        "media-crop"
+      ],
+      "copySafe": "none",
+      "width": 1254,
+      "height": 1254,
+      "alpha": false,
+      "status": "accepted",
+      "prompt": "design/prompts/scenes/rain-cabin/cover-v1.txt",
+      "sha256": "8e3d9e015fda24a1b3bb4dee4ffedbb7756977ad33a4e58e3339ee667da55bf9"
+    },
+    {
+      "id": "scene.forest-dawn.hero.v1",
+      "sceneId": "forest-dawn",
+      "path": "assets/scenes/forest-dawn/forest-dawn-hero-v1.png",
+      "kind": "scene-hero",
+      "theme": "light",
+      "usage": [
+        "hero",
+        "listening-surface"
+      ],
+      "copySafe": "right",
+      "width": 1774,
+      "height": 887,
+      "alpha": false,
+      "status": "accepted",
+      "prompt": "design/prompts/scenes/forest-dawn/hero-v1.txt",
+      "sha256": "6c443d2306a888345a8ce8c550d1634209385345003b90c048d5e9c3d22eeadb"
+    },
+    {
+      "id": "scene.forest-dawn.cover.v1",
+      "sceneId": "forest-dawn",
+      "path": "assets/scenes/forest-dawn/forest-dawn-cover-v1.png",
+      "kind": "scene-cover",
+      "theme": "light",
+      "usage": [
+        "cover",
+        "library-tile",
+        "media-crop"
+      ],
+      "copySafe": "none",
+      "width": 1254,
+      "height": 1254,
+      "alpha": false,
+      "status": "accepted",
+      "prompt": "design/prompts/scenes/forest-dawn/cover-v1.txt",
+      "sha256": "46dcd80c8a7231bf243cf0c4be2a68bb39ac22b3860bc68e2629b78d2eac1316"
+    },
+    {
+      "id": "scene.coastal-night.hero.v1",
+      "sceneId": "coastal-night",
+      "path": "assets/scenes/coastal-night/coastal-night-hero-v1.png",
+      "kind": "scene-hero",
+      "theme": "dark",
+      "usage": [
+        "hero",
+        "listening-surface"
+      ],
+      "copySafe": "right",
+      "width": 1774,
+      "height": 887,
+      "alpha": false,
+      "status": "accepted",
+      "prompt": "design/prompts/scenes/coastal-night/hero-v1.txt",
+      "sha256": "d2d4d14962e2e18df9d3c8745781991f44c0a8f80f437c17b4231db870b80ee4"
+    },
+    {
+      "id": "scene.coastal-night.cover.v1",
+      "sceneId": "coastal-night",
+      "path": "assets/scenes/coastal-night/coastal-night-cover-v1.png",
+      "kind": "scene-cover",
+      "theme": "dark",
+      "usage": [
+        "cover",
+        "library-tile",
+        "media-crop"
+      ],
+      "copySafe": "none",
+      "width": 1254,
+      "height": 1254,
+      "alpha": false,
+      "status": "accepted",
+      "prompt": "design/prompts/scenes/coastal-night/cover-v1.txt",
+      "sha256": "41addb593a5c32785000fccbf11aecae684be00c9c5ed87788445051884a3fef"
+    },
+    {
+      "id": "scene.night-train.hero.v1",
+      "sceneId": "night-train",
+      "path": "assets/scenes/night-train/night-train-hero-v1.png",
+      "kind": "scene-hero",
+      "theme": "dark",
+      "usage": [
+        "hero",
+        "listening-surface"
+      ],
+      "copySafe": "right",
+      "width": 1774,
+      "height": 887,
+      "alpha": false,
+      "status": "accepted",
+      "prompt": "design/prompts/scenes/night-train/hero-v1.txt",
+      "sha256": "e8091c3ec50f35eaf0eeddba058d69a8c46ae8b4f67e56110506b3fed818bef6"
+    },
+    {
+      "id": "scene.night-train.cover.v1",
+      "sceneId": "night-train",
+      "path": "assets/scenes/night-train/night-train-cover-v1.png",
+      "kind": "scene-cover",
+      "theme": "dark",
+      "usage": [
+        "cover",
+        "library-tile",
+        "media-crop"
+      ],
+      "copySafe": "none",
+      "width": 1254,
+      "height": 1254,
+      "alpha": false,
+      "status": "accepted",
+      "prompt": "design/prompts/scenes/night-train/cover-v1.txt",
+      "sha256": "33f5fe54c3d5936b124b8c4cbcfcab6c593c54fc171cecfac343ed6778b299cb"
+    },
+    {
+      "id": "scene.quiet-library.hero.v1",
+      "sceneId": "quiet-library",
+      "path": "assets/scenes/quiet-library/quiet-library-hero-v1.png",
+      "kind": "scene-hero",
+      "theme": "light",
+      "usage": [
+        "hero",
+        "listening-surface"
+      ],
+      "copySafe": "right",
+      "width": 1774,
+      "height": 887,
+      "alpha": false,
+      "status": "accepted",
+      "prompt": "design/prompts/scenes/quiet-library/hero-v1.txt",
+      "sha256": "2cd79609b0dfca6d569e70ce3efa0060dc1d1a50b7805d47f8fa791e0d6409e2"
+    },
+    {
+      "id": "scene.quiet-library.cover.v1",
+      "sceneId": "quiet-library",
+      "path": "assets/scenes/quiet-library/quiet-library-cover-v1.png",
+      "kind": "scene-cover",
+      "theme": "light",
+      "usage": [
+        "cover",
+        "library-tile",
+        "media-crop"
+      ],
+      "copySafe": "none",
+      "width": 1254,
+      "height": 1254,
+      "alpha": false,
+      "status": "accepted",
+      "prompt": "design/prompts/scenes/quiet-library/cover-v1.txt",
+      "sha256": "c795b03c2d70a335979198f112a20647bc65d88f8b3b1f9fd56e2162d59a6d8d"
+    },
+    {
+      "id": "scene.summer-courtyard.hero.v1",
+      "sceneId": "summer-courtyard",
+      "path": "assets/scenes/summer-courtyard/summer-courtyard-hero-v1.png",
+      "kind": "scene-hero",
+      "theme": "light",
+      "usage": [
+        "hero",
+        "listening-surface"
+      ],
+      "copySafe": "right",
+      "width": 1774,
+      "height": 887,
+      "alpha": false,
+      "status": "accepted",
+      "prompt": "design/prompts/scenes/summer-courtyard/hero-v1.txt",
+      "sha256": "f8e1a047dd384e48e07fd27b982d7da73727a5edb8ae02c3305340aa0498d554"
+    },
+    {
+      "id": "scene.summer-courtyard.cover.v1",
+      "sceneId": "summer-courtyard",
+      "path": "assets/scenes/summer-courtyard/summer-courtyard-cover-v1.png",
+      "kind": "scene-cover",
+      "theme": "light",
+      "usage": [
+        "cover",
+        "library-tile",
+        "media-crop"
+      ],
+      "copySafe": "none",
+      "width": 1254,
+      "height": 1254,
+      "alpha": false,
+      "status": "accepted",
+      "prompt": "design/prompts/scenes/summer-courtyard/cover-v1.txt",
+      "sha256": "79d054cf398af4edd4f2459b3ade08b9bb719ec43fad1d6cc77a97e5a637b39b"
+    }
+  ]
+}
