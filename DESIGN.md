@@ -296,7 +296,7 @@ components:
 
 - **Style:** 创建输入置于 8px raised surface 中，文本区本身无边框；滑杆为 3px 轨道和 14px 圆形拇指。
 - **Focus:** 文本光标使用珊瑚，键盘焦点使用 2px 矿物绿轮廓；textarea 移除内部 outline，由容器语义承担。
-- **Disabled:** 未接入的声音与设备控件保持原布局，以 34% 至 62% 不透明度明确不可用。
+- **Unavailable:** 未接入能力不逐项陈列；只有用户必须理解某项受限状态时，才保留原位禁用并说明原因与恢复条件。
 
 ### Navigation
 
