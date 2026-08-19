@@ -24,9 +24,6 @@ import {
   Volume2,
   X,
 } from "lucide";
-import { gsap } from "gsap";
-import { Flip } from "gsap/Flip";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import rainAudioUrl from "./media/rain-cabin.mp3?url";
 import waterAudioUrl from "./media/open-water.wav?url";
 import rainHero from "../../assets/scenes/rain-cabin/rain-cabin-hero-v1.png?url";
@@ -41,9 +38,13 @@ import libraryHero from "../../assets/scenes/quiet-library/quiet-library-hero-v1
 import libraryCover from "../../assets/scenes/quiet-library/quiet-library-cover-v1.png?url";
 import courtyardHero from "../../assets/scenes/summer-courtyard/summer-courtyard-hero-v1.png?url";
 import courtyardCover from "../../assets/scenes/summer-courtyard/summer-courtyard-cover-v1.png?url";
+import { createEqualPowerCrossfader } from "./audio/crossfader.js";
+import { createFocusMotion } from "./motion/focus-motion.js";
+import { createNavigationMotion } from "./motion/navigation-motion.js";
+import { createPlayerMotion } from "./motion/player-motion.js";
+import { createMotionRuntime } from "./motion/runtime.js";
+import { createSceneMotion } from "./motion/scene-motion.js";
 import { MembraneField } from "./visual-field.js";
-
-gsap.registerPlugin(Flip, ScrollTrigger);
 
 const makeLayers = (...names) => names.map((name, index) => ({
   id: `${name}-${index}`,
@@ -174,8 +175,6 @@ const jobStages = [
   { until: 82, label: "预演 · 组织远近" },
   { until: 101, label: "预演 · 调整变化" },
 ];
-const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
 const dom = {
   shell: document.querySelector("#app-shell"),
   workspace: document.querySelector("#workspace"),
@@ -224,6 +223,8 @@ const dom = {
   exploreGrid: document.querySelector("#explore-grid"),
   libraryGrid: document.querySelector("#library-grid"),
   libraryCount: document.querySelector("#library-count"),
+  primaryNav: document.querySelector(".primary-nav"),
+  mobileNav: document.querySelector(".mobile-nav"),
   featuredImage: document.querySelector("#featured-image"),
   featuredElements: document.querySelector("#featured-elements"),
   featuredTitle: document.querySelector("#featured-title"),
@@ -267,6 +268,8 @@ const dom = {
   ].filter(Boolean),
 };
 
+const motionRuntime = createMotionRuntime();
+
 const initialRequest = new URLSearchParams(window.location.search).get("view");
 const state = {
   activeView: getInitialView(),
@@ -286,7 +289,6 @@ const state = {
   intensity: Number(dom.intensityInputs[0].value) / 100,
   richness: Number(dom.richnessInputs[0].value) / 100,
   activeAudio: 0,
-  crossfadeProgress: null,
   hasPlayed: false,
   jobState: "idle",
   jobProgress: 0,
@@ -295,6 +297,7 @@ const state = {
   switching: false,
   playerTransitioning: false,
   focusOpen: false,
+  focusTransitioning: false,
   fieldStarted: false,
   lastFocused: null,
   character: "自然",
@@ -316,16 +319,68 @@ audioTracks[0].src = state.currentScene.audio;
 audioTracks[0].volume = state.volume;
 audioTracks[1].volume = 0;
 
+const audioCrossfader = createEqualPowerCrossfader(audioTracks, {
+  volume: state.volume,
+  duration: 1.3,
+});
+audioCrossfader.setVolume(state.volume);
+
 const field = new MembraneField({
   canvas: dom.canvas,
   surface: dom.focusVisual,
   status: dom.renderStatus,
 });
 
-let playerTransition = null;
-let focusTransition = null;
-let playerScrollMotion = null;
-let artworkFlight = null;
+const navigationMotion = createNavigationMotion({
+  containers: [dom.primaryNav, dom.mobileNav],
+  isReducedMotion: motionRuntime.isReduced,
+});
+const sceneMotion = createSceneMotion({ isReducedMotion: motionRuntime.isReduced });
+
+let restoreFocusAfterCollapse = false;
+let queuedSceneSwitch = null;
+let fieldStartPromise = null;
+
+const playerMotion = createPlayerMotion({
+  elements: {
+    atmosphere: dom.playerAtmosphereImage,
+    collapseButton: dom.playerCollapseButton,
+    content: dom.playerExpandedContent,
+    copy: dom.playerExpandedCopy,
+    description: dom.playerExpandedDescription,
+    detailsPanel: dom.detailsPanel,
+    elementList: dom.playerExpandedElements,
+    feeling: dom.playerFeeling,
+    hero: dom.playerHeroArtwork,
+    heroCover: dom.playerHeroCover,
+    scrollContainer: dom.playerExpandedScroll,
+    scrollCue: dom.playerScrollCue,
+    title: dom.playerExpandedTitle,
+  },
+  isReducedMotion: motionRuntime.isReduced,
+  getArtworkSource: () => dom.playerCover,
+  onTransitionStart: (active) => {
+    if (state.playerTransitioning === active) return;
+    state.playerTransitioning = active;
+    syncPlayerStructure();
+  },
+  onOpened: finishPlayerOpen,
+  onClosed: finishPlayerClose,
+});
+
+const focusMotion = createFocusMotion({
+  elements: {
+    mode: dom.focusMode,
+    static: dom.focusStatic,
+    header: dom.focusHeader,
+    copy: dom.focusCopy,
+    player: dom.focusPlayer,
+  },
+  isReducedMotion: motionRuntime.isReduced,
+  getOriginClip: getArtworkClipPath,
+  onOpened: finishFocusOpen,
+  onClosed: finishFocusClose,
+});
 
 function boot() {
   preloadScenes();
@@ -336,14 +391,18 @@ function boot() {
   renderSourceList("环境");
   setActiveView(state.activeView, false);
   syncPlayerStructure();
+  playerMotion.setInitialState(state.playerExpanded);
   installInteractions();
-  installAmbientInteractions();
   syncControls();
   syncPlaybackState();
   syncStateMarkers();
   renderIcons();
   exposeDebugApi();
-  if (state.playerExpanded) window.requestAnimationFrame(initPlayerScrollMotion);
+  motionRuntime.subscribe(({ reduceMotion }) => {
+    field.setReducedMotion(reduceMotion);
+    if (state.playerTransitioning) playerMotion.settle(state.playerExpanded);
+    if (state.focusTransitioning) focusMotion.settle(state.focusOpen);
+  });
 }
 
 function getInitialView() {
@@ -376,6 +435,8 @@ function installInteractions() {
   });
   dom.soundDetailsButton.addEventListener("click", scrollToSoundDetails);
   dom.focusButton.addEventListener("click", openFocusMode);
+  dom.focusButton.addEventListener("pointerenter", prepareFocusField, { passive: true });
+  dom.focusButton.addEventListener("focus", prepareFocusField);
   dom.focusClose.addEventListener("click", closeFocusMode);
   dom.featuredPlay.addEventListener("click", () => switchToScene(state.featuredScene, { autoPlay: true }));
 
@@ -470,24 +531,6 @@ function installInteractions() {
   });
 }
 
-function installAmbientInteractions() {
-  if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches || prefersReducedMotion) return;
-  const pairs = [
-    { surface: dom.homeGuideScene, image: dom.homeGuideCover, scale: 1.045 },
-    { surface: dom.playerHeroArtwork, image: dom.playerHeroCover, scale: 1.022 },
-  ];
-
-  pairs.forEach(({ surface, image, scale }) => {
-    if (!surface || !image) return;
-    surface.addEventListener("pointerenter", () => {
-      gsap.to(image, { scale, duration: 0.62, ease: "expo.out", overwrite: "auto" });
-    });
-    surface.addEventListener("pointerleave", () => {
-      gsap.to(image, { scale: 1, duration: 0.52, ease: "expo.out", overwrite: "auto", clearProps: "transform" });
-    });
-  });
-}
-
 function setActiveView(viewName, animate = true) {
   if (!validViews.has(viewName)) return;
   state.activeView = viewName;
@@ -507,149 +550,60 @@ function setActiveView(viewName, animate = true) {
     else link.removeAttribute("aria-current");
   });
 
-  dom.workspace.scrollTo({ top: 0, behavior: "instant" });
+  navigationMotion.select(viewName, animate);
+  dom.workspace.scrollTo({ top: 0, behavior: "auto" });
   const url = new URL(window.location.href);
   url.searchParams.set("view", viewName);
   window.history.replaceState(null, "", url);
   const activeView = dom.views.find((view) => view.dataset.view === viewName);
-  if (animate && !prefersReducedMotion) {
-    gsap.fromTo(activeView, { opacity: 0.76, y: 7 }, {
-      opacity: 1,
-      y: 0,
-      duration: 0.26,
-      ease: "expo.out",
-      clearProps: "opacity,transform",
-    });
-  }
+  navigationMotion.enterView(activeView, animate);
 }
 
 function expandPlayer() {
-  if (state.playerExpanded || state.focusOpen || state.playerTransitioning) return;
+  if (state.focusOpen || state.focusTransitioning) return;
+  if (state.playerExpanded && !state.playerTransitioning) return;
   closeControlPopovers(false);
   state.playerExpanded = true;
   state.playerTransitioning = true;
-  syncPlayerStructure();
+  restoreFocusAfterCollapse = false;
   dom.playerExpandedScroll.scrollTop = 0;
-
-  if (prefersReducedMotion) {
-    state.playerTransitioning = false;
-    initPlayerScrollMotion();
-    syncStateMarkers();
-    return;
-  }
-
-  playerTransition?.kill();
-  stopArtworkFlight();
-  gsap.set(dom.playerExpandedContent, {
-    clipPath: "inset(100% 0 0 0 round 0px)",
-    opacity: 1,
-    visibility: "visible",
-  });
-  gsap.set(dom.playerCollapseButton, { opacity: 0, y: -8 });
-  animateArtworkFlight(dom.playerCover, dom.playerHeroCover, 0.72);
-
-  const copyTargets = [
-    dom.playerExpandedCopy.querySelector(".player-status-line"),
-    dom.playerExpandedTitle,
-    dom.playerExpandedDescription,
-    dom.playerExpandedElements,
-    dom.playerFeeling,
-  ];
-
-  playerTransition = gsap.timeline({
-    defaults: { overwrite: "auto" },
-    onComplete: () => {
-      state.playerTransitioning = false;
-      playerTransition = null;
-      initPlayerScrollMotion();
-      syncStateMarkers();
-    },
-  });
-  playerTransition
-    .to(dom.playerExpandedContent, {
-      clipPath: "inset(0% 0 0 0 round 0px)",
-      duration: 0.64,
-      ease: "expo.inOut",
-    }, 0)
-    .fromTo(dom.playerAtmosphereImage,
-      { opacity: 0, scale: 1.08 },
-      { opacity: 0.16, scale: 1.025, duration: 0.86, ease: "expo.out" }, 0.08)
-    .fromTo(dom.playerHeroArtwork,
-      { opacity: 0.22, y: 34, scale: 0.965, filter: "blur(5px)" },
-      { opacity: 1, y: 0, scale: 1, filter: "blur(0px)", duration: 0.72, ease: "expo.out" }, 0.12)
-    .fromTo(copyTargets,
-      { opacity: 0, y: 18 },
-      { opacity: 1, y: 0, duration: 0.5, stagger: 0.045, ease: "expo.out" }, 0.24)
-    .fromTo(dom.playerScrollCue,
-      { opacity: 0, y: -7 },
-      { opacity: 1, y: 0, duration: 0.38, ease: "power3.out" }, 0.44)
-    .to(dom.playerCollapseButton, { opacity: 1, y: 0, duration: 0.3, ease: "expo.out" }, 0.32);
+  syncPlayerStructure();
+  playerMotion.open();
 }
 
 function collapsePlayer({ restoreFocus = false } = {}) {
-  if (!state.playerExpanded || state.focusOpen || state.playerTransitioning) return;
+  if (state.focusOpen || state.focusTransitioning) return;
+  if (!state.playerExpanded && !state.playerTransitioning) return;
   closeControlPopovers(false);
+  state.playerExpanded = false;
   state.playerTransitioning = true;
-  syncStateMarkers();
-  destroyPlayerScrollMotion(false);
+  restoreFocusAfterCollapse ||= restoreFocus;
+  syncPlayerStructure();
+  playerMotion.close();
+}
 
-  const finish = () => {
-    state.playerExpanded = false;
-    state.playerTransitioning = false;
-    syncPlayerStructure();
-    dom.playerExpandedScroll.scrollTop = 0;
-    resetPlayerMotionStyles();
-    if (restoreFocus) dom.playerIdentityButton.focus({ preventScroll: true });
-  };
+function finishPlayerOpen() {
+  state.playerTransitioning = false;
+  syncPlayerStructure();
+}
 
-  if (prefersReducedMotion) {
-    finish();
-    return;
-  }
-
-  playerTransition?.kill();
-  stopArtworkFlight();
-  const heroVisible = dom.playerHeroArtwork.getBoundingClientRect().bottom > 0
-    && dom.playerHeroArtwork.getBoundingClientRect().top < window.innerHeight;
-  if (heroVisible) animateArtworkFlight(dom.playerHeroCover, dom.playerCover, 0.48);
-
-  playerTransition = gsap.timeline({
-    defaults: { overwrite: "auto" },
-    onComplete: () => {
-      playerTransition = null;
-      finish();
-    },
-  });
-  playerTransition
-    .to([
-      dom.playerExpandedCopy,
-      dom.playerScrollCue,
-      dom.playerCollapseButton,
-    ], { opacity: 0, y: 8, duration: 0.18, ease: "power2.out" }, 0)
-    .to(dom.playerHeroArtwork, {
-      opacity: heroVisible ? 0.2 : 0,
-      y: 18,
-      scale: 0.98,
-      filter: "blur(3px)",
-      duration: 0.28,
-      ease: "power2.in",
-    }, 0)
-    .to(dom.playerAtmosphereImage, { opacity: 0, scale: 1.06, duration: 0.28, ease: "power2.in" }, 0)
-    .to(dom.playerExpandedContent, {
-      clipPath: "inset(100% 0 0 0 round 0px)",
-      duration: 0.44,
-      ease: "power3.inOut",
-    }, 0.04);
+function finishPlayerClose() {
+  state.playerTransitioning = false;
+  dom.playerExpandedScroll.scrollTop = 0;
+  syncPlayerStructure();
+  if (restoreFocusAfterCollapse) dom.playerIdentityButton.focus({ preventScroll: true });
+  restoreFocusAfterCollapse = false;
 }
 
 function scrollToSoundDetails() {
   window.requestAnimationFrame(() => {
-    dom.detailsPanel.scrollIntoView({ behavior: prefersReducedMotion ? "auto" : "smooth", block: "start" });
+    dom.detailsPanel.scrollIntoView({ behavior: motionRuntime.isReduced() ? "auto" : "smooth", block: "start" });
   });
 }
 
 function syncPlayerStructure() {
-  const playerState = state.playerExpanded ? "expanded" : "collapsed";
+  const structurallyExpanded = state.playerExpanded || state.playerTransitioning;
+  const playerState = structurallyExpanded ? "expanded" : "collapsed";
   dom.shell.dataset.playerState = playerState;
   dom.globalPlayer.setAttribute("aria-label", state.playerExpanded ? `${state.currentScene.name}播放器` : "持续播放控制");
   dom.playerExpandedContent.setAttribute("aria-hidden", String(!state.playerExpanded));
@@ -660,102 +614,6 @@ function syncPlayerStructure() {
   dom.playerCollapseButton.setAttribute("aria-label", `收起${state.currentScene.name}播放器`);
   syncBackgroundInert();
   syncStateMarkers();
-}
-
-function animateArtworkFlight(source, target, duration) {
-  if (prefersReducedMotion || !source || !target) return;
-  const sourceRect = source.getBoundingClientRect();
-  const targetRect = target.getBoundingClientRect();
-  if (!sourceRect.width || !sourceRect.height || !targetRect.width || !targetRect.height) return;
-
-  const clone = document.createElement("img");
-  clone.className = "artwork-flight";
-  clone.src = state.currentScene.cover;
-  clone.alt = "";
-  Object.assign(clone.style, {
-    position: "fixed",
-    top: `${sourceRect.top}px`,
-    left: `${sourceRect.left}px`,
-    width: `${sourceRect.width}px`,
-    height: `${sourceRect.height}px`,
-    borderRadius: getComputedStyle(source).borderRadius,
-  });
-  document.body.append(clone);
-  gsap.set(target, { opacity: 0 });
-
-  const finish = () => {
-    clone.remove();
-    gsap.set(target, { clearProps: "opacity" });
-    artworkFlight = null;
-  };
-  const tween = Flip.fit(clone, target, {
-    scale: true,
-    simple: true,
-    duration,
-    ease: "expo.inOut",
-    borderRadius: getComputedStyle(target).borderRadius,
-    onComplete: finish,
-  });
-  artworkFlight = { clone, target, tween };
-}
-
-function stopArtworkFlight() {
-  if (!artworkFlight) return;
-  artworkFlight.tween?.kill();
-  artworkFlight.clone.remove();
-  gsap.set(artworkFlight.target, { clearProps: "opacity" });
-  artworkFlight = null;
-}
-
-function initPlayerScrollMotion() {
-  destroyPlayerScrollMotion();
-  if (prefersReducedMotion || !state.playerExpanded) return;
-
-  playerScrollMotion = gsap.timeline({
-    defaults: { ease: "none" },
-    scrollTrigger: {
-      trigger: dom.detailsPanel,
-      scroller: dom.playerExpandedScroll,
-      start: "top 92%",
-      end: "top 34%",
-      scrub: 0.45,
-      invalidateOnRefresh: true,
-    },
-  });
-  playerScrollMotion
-    .to(dom.playerHeroArtwork, { y: -30, scale: 0.95, opacity: 0.46 }, 0)
-    .to(dom.playerExpandedCopy, { y: -18, opacity: 0.5 }, 0)
-    .to(dom.playerAtmosphereImage, { scale: 1.07, opacity: 0.07 }, 0)
-    .to(dom.playerScrollCue, { opacity: 0, y: 9 }, 0);
-  ScrollTrigger.refresh();
-}
-
-function destroyPlayerScrollMotion(clearStyles = true) {
-  if (playerScrollMotion) {
-    playerScrollMotion.scrollTrigger?.kill();
-    playerScrollMotion.kill();
-    playerScrollMotion = null;
-  }
-  if (clearStyles) {
-    gsap.set([
-      dom.playerHeroArtwork,
-      dom.playerExpandedCopy,
-      dom.playerAtmosphereImage,
-      dom.playerScrollCue,
-    ], { clearProps: "transform,opacity" });
-  }
-}
-
-function resetPlayerMotionStyles() {
-  stopArtworkFlight();
-  gsap.set([
-    dom.playerExpandedContent,
-    dom.playerAtmosphereImage,
-    dom.playerHeroArtwork,
-    dom.playerExpandedCopy,
-    dom.playerScrollCue,
-    dom.playerCollapseButton,
-  ], { clearProps: "transform,opacity,filter,clip-path,visibility" });
 }
 
 function toggleSleepTimerMenu(force, restoreFocus = true) {
@@ -842,9 +700,12 @@ function syncSleepTimerUI() {
 }
 
 function syncBackgroundInert() {
-  const contentBlocked = state.playerExpanded || state.focusOpen;
+  const contentBlocked = state.playerExpanded
+    || state.playerTransitioning
+    || state.focusOpen
+    || state.focusTransitioning;
   dom.contentInertTargets.forEach((target) => { target.inert = contentBlocked; });
-  dom.globalPlayer.inert = state.focusOpen;
+  dom.globalPlayer.inert = state.focusOpen || state.focusTransitioning;
 }
 
 function handleSceneSelection(event) {
@@ -872,7 +733,7 @@ function pausePlayback() {
 
 async function startPlayback() {
   try {
-    await audioTracks[state.activeAudio].play();
+    await audioCrossfader.play();
     playUploadedLayers(state.currentScene);
     state.hasPlayed = true;
     state.playing = true;
@@ -884,7 +745,7 @@ async function startPlayback() {
 }
 
 function pauseAllAudio() {
-  audioTracks.forEach((audio) => audio.pause());
+  audioCrossfader.pauseAll();
   scenes.forEach((scene) => scene.layers.forEach((layer) => layer.audio?.pause()));
 }
 
@@ -933,7 +794,7 @@ function updateVolume(value) {
   dom.volumePopoverValue.textContent = volumeText;
   dom.volumePopover.style.setProperty("--volume-level", `${normalized}%`);
   dom.volumeButton.setAttribute("aria-label", `总音量，${volumeText}`);
-  applyAudioVolumes();
+  audioCrossfader.setVolume(state.volume);
   state.currentScene.layers.forEach((layer) => {
     if (layer.audio) layer.audio.volume = layer.muted ? 0 : state.volume * (layer.level / 100) * 0.55;
   });
@@ -956,8 +817,12 @@ function syncControls() {
   syncSleepTimerUI();
 }
 
-async function switchToScene(nextScene, { autoPlay = false, openPlayer = false, generated = false } = {}) {
-  if (state.switching) return;
+async function switchToScene(nextScene, options = {}) {
+  const { autoPlay = false, openPlayer = false, generated = false } = options;
+  if (state.switching) {
+    queuedSceneSwitch = { nextScene, options };
+    return;
+  }
   if (nextScene.id === state.currentScene.id) {
     if (generated) dismissReadyScene();
     if (autoPlay && !state.playing) await startPlayback();
@@ -973,66 +838,38 @@ async function switchToScene(nextScene, { autoPlay = false, openPlayer = false, 
   preloadImage(nextScene.cover);
   preloadImage(nextScene.hero);
 
-  if (!prefersReducedMotion) {
-    await tween([...artworkTargets, ...copyTargets], {
-      opacity: 0,
-      y: 5,
-      scale: 0.99,
-      filter: "blur(3px)",
-      duration: 0.2,
-      ease: "power2.out",
+  try {
+    stopUploadedLayers(outgoingScene);
+    const visualTransition = sceneMotion.swap({
+      artworkTargets,
+      copyTargets,
+      atmosphere: dom.playerAtmosphereImage,
+      update: () => {
+        state.currentScene = nextScene;
+        state.hasPlayed = state.playing;
+        renderCurrentScene();
+        renderCollections();
+      },
     });
-  }
-  stopUploadedLayers(outgoingScene);
-  const audioTransition = crossfadeAudio(nextScene.audio);
-  state.currentScene = nextScene;
-  state.hasPlayed = state.playing;
-  renderCurrentScene();
-  renderCollections();
-  const fieldTransition = state.fieldStarted ? field.setScene(nextScene) : Promise.resolve();
-  if (state.playing) playUploadedLayers(nextScene);
+    const audioTransition = crossfadeAudio(nextScene.audio);
+    const fieldTransition = state.fieldStarted && field.ready
+      ? field.setScene(nextScene)
+      : Promise.resolve();
 
-  if (generated && state.generatedReady?.id === nextScene.id) dismissReadyScene(true);
-  if (openPlayer) expandPlayer();
-  if (autoPlay && !state.playing) await startPlayback();
-
-  if (!prefersReducedMotion) {
-    gsap.timeline({ defaults: { overwrite: "auto" } })
-      .fromTo(artworkTargets,
-        { opacity: 0, clipPath: "inset(100% 0 0 0 round 6px)", scale: 1.025, filter: "blur(3px)" },
-        {
-          opacity: 1,
-          clipPath: "inset(0% 0 0 0 round 6px)",
-          scale: 1,
-          filter: "blur(0px)",
-          duration: 0.58,
-          ease: "expo.out",
-          clearProps: "opacity,transform,filter,clip-path",
-        }, 0)
-      .fromTo(copyTargets,
-        { opacity: 0, y: 10, filter: "blur(2px)" },
-        {
-          opacity: 1,
-          y: 0,
-          filter: "blur(0px)",
-          duration: 0.46,
-          stagger: 0.035,
-          ease: "expo.out",
-          clearProps: "opacity,transform,filter",
-        }, 0.1)
-      .fromTo(dom.playerAtmosphereImage,
-        { opacity: 0, scale: 1.08 },
-        {
-          opacity: state.playerExpanded ? 0.16 : 0,
-          scale: 1.025,
-          duration: 0.72,
-          ease: "expo.out",
-          clearProps: state.playerExpanded ? "" : "opacity,transform",
-        }, 0.06);
+    if (state.playing) playUploadedLayers(nextScene);
+    if (generated && state.generatedReady?.id === nextScene.id) dismissReadyScene(true);
+    if (openPlayer) expandPlayer();
+    if (autoPlay && !state.playing) await startPlayback();
+    await Promise.all([visualTransition, audioTransition, fieldTransition]);
+  } finally {
+    state.switching = false;
+    syncStateMarkers();
+    const queued = queuedSceneSwitch;
+    queuedSceneSwitch = null;
+    if (queued && queued.nextScene.id !== state.currentScene.id) {
+      queueMicrotask(() => switchToScene(queued.nextScene, queued.options));
+    }
   }
-  await Promise.all([audioTransition, fieldTransition]);
-  state.switching = false;
-  syncStateMarkers();
 }
 
 async function crossfadeAudio(nextUrl) {
@@ -1043,54 +880,18 @@ async function crossfadeAudio(nextUrl) {
   nextAudio.pause();
   nextAudio.src = nextUrl;
   nextAudio.currentTime = 0;
-  nextAudio.volume = 0;
 
   if (!state.playing) {
-    currentAudio.pause();
-    currentAudio.currentTime = 0;
-    state.activeAudio = nextIndex;
-    nextAudio.volume = state.volume;
+    state.activeAudio = audioCrossfader.switchImmediately(nextIndex);
     return;
   }
 
   try {
-    await nextAudio.play();
+    state.activeAudio = await audioCrossfader.crossfadeTo(nextIndex);
   } catch (error) {
     console.error("Unable to start the next soundscape audio", error);
-    return;
+    showToast("声音切换没有完成，请再试一次");
   }
-
-  await new Promise((resolve) => {
-    const startedAt = performance.now();
-    const duration = 1300;
-    const step = (now) => {
-      state.crossfadeProgress = Math.min(1, (now - startedAt) / duration);
-      applyAudioVolumes();
-      if (state.crossfadeProgress < 1) requestAnimationFrame(step);
-      else {
-        currentAudio.pause();
-        currentAudio.currentTime = 0;
-        state.activeAudio = nextIndex;
-        state.crossfadeProgress = null;
-        applyAudioVolumes();
-        resolve();
-      }
-    };
-    requestAnimationFrame(step);
-  });
-}
-
-function applyAudioVolumes() {
-  if (state.crossfadeProgress === null) {
-    audioTracks.forEach((audio, index) => {
-      audio.volume = index === state.activeAudio ? state.volume : 0;
-    });
-    return;
-  }
-  const oldIndex = state.activeAudio;
-  const nextIndex = oldIndex === 0 ? 1 : 0;
-  audioTracks[oldIndex].volume = state.volume * Math.cos(state.crossfadeProgress * Math.PI * 0.5);
-  audioTracks[nextIndex].volume = state.volume * Math.sin(state.crossfadeProgress * Math.PI * 0.5);
 }
 
 function renderHomeGreeting() {
@@ -1369,112 +1170,65 @@ function setRandomPrompt() {
   setPrompt(options[Math.floor(Math.random() * options.length)]);
 }
 
+async function prepareFocusField() {
+  if (field.ready) return { mode: "ready" };
+  if (fieldStartPromise) return fieldStartPromise;
+  state.fieldStarted = true;
+  field.setControls({ intensity: state.intensity, richness: state.richness });
+  field.setPlaying(state.playing);
+  fieldStartPromise = field.start(state.currentScene).finally(() => {
+    fieldStartPromise = null;
+  });
+  return fieldStartPromise;
+}
+
 async function openFocusMode() {
-  if (state.focusOpen || state.playerTransitioning) return;
+  if (state.playerTransitioning) return;
+  if (state.focusOpen && !state.focusTransitioning) return;
   state.focusOpen = true;
+  state.focusTransitioning = true;
   state.lastFocused = document.activeElement;
   dom.focusMode.classList.add("is-open");
   dom.focusMode.removeAttribute("inert");
   dom.focusMode.setAttribute("aria-hidden", "false");
   dom.focusClose.focus({ preventScroll: true });
+  field.setActive(true);
   syncBackgroundInert();
-
-  let fieldTransition = Promise.resolve();
-  if (!state.fieldStarted) {
-    state.fieldStarted = true;
-    field.setControls({ intensity: state.intensity, richness: state.richness });
-    field.setPlaying(state.playing);
-    fieldTransition = field.start(state.currentScene);
-  } else {
-    field.resize();
-  }
-
-  if (prefersReducedMotion) {
-    dom.focusMode.style.opacity = "1";
-  } else {
-    focusTransition?.kill();
-    const originClip = getArtworkClipPath();
-    gsap.set(dom.focusMode, {
-      opacity: 1,
-      visibility: "visible",
-      clipPath: originClip,
-    });
-    gsap.set([dom.focusHeader, dom.focusCopy, dom.focusPlayer], { opacity: 0 });
-    focusTransition = gsap.timeline({
-      defaults: { overwrite: "auto" },
-      onComplete: () => {
-        focusTransition = null;
-        gsap.set(dom.focusMode, { clearProps: "clip-path" });
-      },
-    });
-    focusTransition
-      .to(dom.focusMode, {
-        clipPath: "inset(0px 0px 0px 0px round 0px)",
-        duration: 0.76,
-        ease: "expo.inOut",
-      }, 0)
-      .fromTo(dom.focusStatic,
-        { scale: 1.08, filter: "blur(4px)" },
-        { scale: 1.01, filter: "blur(0px)", duration: 1.05, ease: "expo.out" }, 0)
-      .fromTo(dom.focusHeader,
-        { opacity: 0, y: -10 },
-        { opacity: 1, y: 0, duration: 0.44, ease: "expo.out" }, 0.38)
-      .fromTo(dom.focusCopy,
-        { opacity: 0, y: 22, filter: "blur(3px)" },
-        { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.62, ease: "expo.out" }, 0.34)
-      .fromTo(dom.focusPlayer,
-        { opacity: 0, y: 16 },
-        { opacity: 1, y: 0, duration: 0.48, ease: "expo.out" }, 0.48);
-  }
   syncStateMarkers();
+  const fieldTransition = prepareFocusField();
+  focusMotion.open();
   await fieldTransition;
+  if (state.focusOpen) {
+    field.resize();
+    field.setActive(true);
+  }
 }
 
 function closeFocusMode() {
-  if (!state.focusOpen) return;
-  const finish = () => {
-    state.focusOpen = false;
-    dom.focusMode.classList.remove("is-open");
-    dom.focusMode.setAttribute("aria-hidden", "true");
-    dom.focusMode.setAttribute("inert", "");
-    dom.focusMode.style.opacity = "";
-    gsap.set([
-      dom.focusMode,
-      dom.focusStatic,
-      dom.focusHeader,
-      dom.focusCopy,
-      dom.focusPlayer,
-    ], { clearProps: "transform,opacity,filter,clip-path,visibility" });
-    syncBackgroundInert();
-    state.lastFocused?.focus?.({ preventScroll: true });
-    syncStateMarkers();
-  };
+  if (!state.focusOpen && !state.focusTransitioning) return;
+  state.focusOpen = false;
+  state.focusTransitioning = true;
+  syncBackgroundInert();
+  syncStateMarkers();
+  focusMotion.close();
+}
 
-  if (prefersReducedMotion) finish();
-  else {
-    focusTransition?.kill();
-    const destinationClip = getArtworkClipPath();
-    focusTransition = gsap.timeline({
-      defaults: { overwrite: "auto" },
-      onComplete: () => {
-        focusTransition = null;
-        finish();
-      },
-    });
-    focusTransition
-      .to([dom.focusHeader, dom.focusCopy, dom.focusPlayer], {
-        opacity: 0,
-        y: 8,
-        duration: 0.2,
-        ease: "power2.out",
-      }, 0)
-      .to(dom.focusMode, {
-        clipPath: destinationClip,
-        duration: 0.52,
-        ease: "power3.inOut",
-      }, 0.08)
-      .to(dom.focusStatic, { scale: 1.055, duration: 0.52, ease: "power3.inOut" }, 0.08);
-  }
+function finishFocusOpen() {
+  state.focusTransitioning = false;
+  syncBackgroundInert();
+  syncStateMarkers();
+}
+
+function finishFocusClose() {
+  state.focusOpen = false;
+  state.focusTransitioning = false;
+  dom.focusMode.classList.remove("is-open");
+  dom.focusMode.setAttribute("aria-hidden", "true");
+  dom.focusMode.setAttribute("inert", "");
+  field.setActive(false);
+  syncBackgroundInert();
+  state.lastFocused?.focus?.({ preventScroll: true });
+  syncStateMarkers();
 }
 
 function getArtworkClipPath() {
@@ -1561,14 +1315,11 @@ function syncStateMarkers() {
   dom.shell.dataset.switching = String(state.switching);
   dom.shell.dataset.playerTransitioning = String(state.playerTransitioning);
   dom.shell.dataset.focusOpen = String(state.focusOpen);
-  dom.shell.dataset.playerState = state.playerExpanded ? "expanded" : "collapsed";
+  dom.shell.dataset.focusTransitioning = String(state.focusTransitioning);
+  dom.shell.dataset.playerState = state.playerExpanded || state.playerTransitioning ? "expanded" : "collapsed";
   dom.shell.dataset.sleepMenuOpen = String(state.sleepMenuOpen);
   dom.shell.dataset.volumePopoverOpen = String(state.volumePopoverOpen);
   dom.shell.dataset.sleepTimerMinutes = String(state.sleepTimerMinutes);
-}
-
-function tween(targets, vars) {
-  return new Promise((resolve) => gsap.to(targets, { ...vars, onComplete: resolve }));
 }
 
 function exposeDebugApi() {
@@ -1588,8 +1339,10 @@ function exposeDebugApi() {
       playingAtJobStart: state.playingAtJobStart,
       currentAudioPaused: audioTracks[state.activeAudio].paused,
       focusOpen: state.focusOpen,
+      focusTransitioning: state.focusTransitioning,
       switching: state.switching,
       playerTransitioning: state.playerTransitioning,
+      motion: motionRuntime.conditions(),
       field: field.snapshot(),
     }),
     setView: setActiveView,

@@ -2,8 +2,6 @@ import { Geometry, Mesh, Program, Renderer, RenderTarget, Texture } from "ogl";
 import atlasUrl from "../../assets/experiments/runtime/membrane-thickness-atlas-v2.png?url";
 import { membraneShader, presentShader, vertexShader } from "../optical-membrane-field/shaders.js";
 
-const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
 const backgroundShader = /* glsl */ `
   precision highp float;
 
@@ -75,6 +73,8 @@ export class MembraneField {
     this.surface = surface;
     this.status = status;
     this.playing = false;
+    this.active = false;
+    this.reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     this.intensity = 0.52;
     this.richness = 0.68;
     this.elapsed = 0;
@@ -93,7 +93,8 @@ export class MembraneField {
   }
 
   async start(scene) {
-    if (reducedMotion) {
+    if (this.ready) return { mode: `webgl2-${this.targetMode}` };
+    if (this.reducedMotion) {
       document.documentElement.dataset.renderer = "static-reduced-motion";
       this.status.textContent = "静态场域已就绪";
       return { mode: "static" };
@@ -127,7 +128,7 @@ export class MembraneField {
       this.resize();
       this.installInteractions();
       this.ready = true;
-      this.surface.classList.add("is-field-ready");
+      if (!this.reducedMotion) this.surface.classList.add("is-field-ready");
       this.status.textContent = "视觉场域已就绪";
       document.documentElement.dataset.renderer = `webgl2-${this.targetMode}`;
       this.canvas.dataset.atlas = "membrane-thickness-atlas-v2-experimental";
@@ -236,6 +237,19 @@ export class MembraneField {
     this.playing = Boolean(playing);
   }
 
+  setActive(active) {
+    this.active = Boolean(active);
+    this.previousFrameAt = performance.now();
+  }
+
+  setReducedMotion(reduced) {
+    this.reducedMotion = Boolean(reduced);
+    this.surface.classList.toggle("is-field-ready", this.ready && !this.reducedMotion);
+    if (this.reducedMotion) document.documentElement.dataset.renderer = "static-reduced-motion";
+    else if (this.ready) document.documentElement.dataset.renderer = `webgl2-${this.targetMode}`;
+    this.previousFrameAt = performance.now();
+  }
+
   setControls({ intensity, richness }) {
     if (Number.isFinite(intensity)) this.intensity = clamp(intensity, 0, 1);
     if (Number.isFinite(richness)) this.richness = clamp(richness, 0, 1);
@@ -310,7 +324,7 @@ export class MembraneField {
     this.animationFrame = requestAnimationFrame((nextNow) => this.tick(nextNow));
     const frameTime = Math.min(now - this.previousFrameAt, 80);
     this.previousFrameAt = now;
-    if (!this.visible) return;
+    if (!this.visible || !this.active || this.reducedMotion) return;
 
     if (this.playing) this.elapsed += frameTime / 1000;
     const pointerEase = 1 - Math.exp(-(frameTime / 1000) * 5.2);
@@ -417,7 +431,8 @@ export class MembraneField {
       playing: this.playing,
       activeLayers: 2.4 + this.richness * 4.4,
       averageFrameMs: Number(average.toFixed(2)),
-      reducedMotion,
+      active: this.active,
+      reducedMotion: this.reducedMotion,
     };
   }
 }
