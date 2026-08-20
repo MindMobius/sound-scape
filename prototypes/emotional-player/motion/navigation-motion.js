@@ -16,10 +16,14 @@ export function createNavigationMotion({ containers, isReducedMotion }) {
   function select(viewName, animate = true) {
     entries.forEach(({ container, indicator }) => {
       const destination = container.querySelector(`[data-view-link="${viewName}"]`);
-      if (!destination || indicator.parentElement === destination) return;
-      const previous = Flip.getState(indicator);
+      if (!destination) {
+        indicator.remove();
+        return;
+      }
+      if (indicator.parentElement === destination) return;
+      const previous = indicator.isConnected ? Flip.getState(indicator) : null;
       destination.append(indicator);
-      if (!animate || isReducedMotion()) return;
+      if (!animate || isReducedMotion() || !previous) return;
       Flip.from(previous, {
         targets: indicator,
         absolute: true,

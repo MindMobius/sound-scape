@@ -1,11 +1,8 @@
 import "@fontsource-variable/noto-serif-sc/wght.css";
 import {
-  ArrowRight,
-  ArrowUpRight,
   AudioLines,
   Blend,
   ChevronDown,
-  ChevronUp,
   CloudRain,
   Compass,
   createIcons,
@@ -14,7 +11,6 @@ import {
   Headphones,
   House,
   Library,
-  Maximize2,
   Moon,
   Pause,
   Play,
@@ -76,9 +72,6 @@ const scenes = [
     id: "rain-cabin",
     name: "雨夜木屋",
     description: "雷雨夜里，点燃篝火的木屋。",
-    category: "interior",
-    saved: true,
-    recent: true,
     theme: "light",
     hero: rainHero,
     cover: rainCover,
@@ -91,9 +84,6 @@ const scenes = [
     id: "coastal-night",
     name: "深夜海岸",
     description: "深夜海岸上，潮声持续靠近又缓缓退去。",
-    category: "nature",
-    saved: true,
-    recent: true,
     theme: "dark",
     hero: coastalHero,
     cover: coastalCover,
@@ -167,13 +157,12 @@ const jobStages = [
   { until: 82, label: "调整轻重与层次" },
   { until: 101, label: "完成本地编排" },
 ];
+const FOCUS_CHROME_IDLE_MS = 2400;
 const dom = {
   shell: document.querySelector("#app-shell"),
   workspace: document.querySelector("#workspace"),
   views: [...document.querySelectorAll(".app-view")],
   viewLinks: [...document.querySelectorAll("[data-view-link]")],
-  homeGreeting: document.querySelector("#home-view-title"),
-  homeGreetingNote: document.querySelector("#home-greeting-note"),
   homeGuideCover: document.querySelector("#home-guide-cover"),
   homeGuideScene: document.querySelector(".home-guide-scene"),
   globalPlayer: document.querySelector("#global-player"),
@@ -187,7 +176,6 @@ const dom = {
   playerState: document.querySelector("#player-state"),
   playerIdentityButton: document.querySelector("#player-identity-button"),
   playerHeroCover: document.querySelector("#player-hero-cover"),
-  playerHeroState: document.querySelector("#player-hero-state"),
   playerExpandedState: document.querySelector("#player-expanded-state"),
   playerExpandedTitle: document.querySelector("#player-expanded-title"),
   playerExpandedDescription: document.querySelector("#player-expanded-description"),
@@ -216,7 +204,6 @@ const dom = {
   orchestrationSummary: document.querySelector("#orchestration-summary"),
   exploreGrid: document.querySelector("#explore-grid"),
   libraryGrid: document.querySelector("#library-grid"),
-  libraryCount: document.querySelector("#library-count"),
   templateList: document.querySelector("#template-list"),
   primaryNav: document.querySelector(".primary-nav"),
   mobileNav: document.querySelector(".mobile-nav"),
@@ -244,7 +231,6 @@ const dom = {
   sourceList: document.querySelector("#source-list"),
   sourceTabs: [...document.querySelectorAll("[data-source-category]")],
   audioUpload: document.querySelector("#audio-upload"),
-  addAudioButton: document.querySelector("#add-audio-button"),
   browseAudioButton: document.querySelector("#browse-audio-button"),
   focusMode: document.querySelector("#focus-mode"),
   focusVisual: document.querySelector("#focus-visual"),
@@ -336,8 +322,6 @@ const state = {
   mobileMoreOpen: false,
   clearStorageArmed: false,
   clearStorageTimer: 0,
-  exploreFilter: "all",
-  libraryFilter: "all",
 };
 
 const audioTracks = [new Audio(), new Audio()];
@@ -385,6 +369,9 @@ const sceneMotion = createSceneMotion({ isReducedMotion: motionRuntime.isReduced
 let restoreFocusAfterCollapse = false;
 let queuedSceneSwitch = null;
 let fieldStartPromise = null;
+let focusChromeTimer = 0;
+let focusChromeVisible = true;
+let focusChromeEngaged = false;
 
 const playerMotion = createPlayerMotion({
   elements: {
@@ -430,7 +417,6 @@ async function boot() {
   await restoreStoredAudioLayers();
   if (typeof storedPreferences.prompt === "string") dom.prompt.value = storedPreferences.prompt;
   updatePromptCount();
-  renderHomeGreeting();
   renderCurrentScene();
   renderFeaturedScene();
   renderCollections();
@@ -490,6 +476,18 @@ function installInteractions() {
   dom.focusButton.addEventListener("focus", prepareFocusField);
   dom.focusClose.addEventListener("click", closeFocusMode);
   dom.featuredPlay.addEventListener("click", () => switchToScene(state.featuredScene, { autoPlay: true }));
+  dom.focusMode.addEventListener("pointermove", handleFocusActivity, { passive: true });
+  dom.focusMode.addEventListener("pointerdown", handleFocusActivity, { passive: true });
+  [dom.focusHeader, dom.focusPlayer].forEach((element) => {
+    element.addEventListener("pointerenter", () => {
+      focusChromeEngaged = true;
+      revealFocusChrome();
+    }, { passive: true });
+    element.addEventListener("pointerleave", () => {
+      focusChromeEngaged = false;
+      scheduleFocusChromeHide();
+    }, { passive: true });
+  });
 
   document.querySelectorAll("[data-shuffle]").forEach((button) => {
     button.addEventListener("click", () => {
@@ -499,24 +497,8 @@ function installInteractions() {
     });
   });
 
-  [dom.exploreGrid, dom.libraryGrid, document.querySelector(".recent-jobs")].filter(Boolean).forEach((container) => {
+  [dom.homeGuideScene, dom.exploreGrid, dom.libraryGrid].forEach((container) => {
     container.addEventListener("click", handleSceneSelection);
-  });
-
-  document.querySelectorAll("[data-filter]").forEach((button) => {
-    button.addEventListener("click", () => {
-      state.exploreFilter = button.dataset.filter;
-      updateTabSelection(button, "[data-filter]");
-      renderExploreGrid();
-    });
-  });
-
-  document.querySelectorAll("[data-library-filter]").forEach((button) => {
-    button.addEventListener("click", () => {
-      state.libraryFilter = button.dataset.libraryFilter;
-      updateTabSelection(button, "[data-library-filter]");
-      renderLibraryGrid();
-    });
   });
 
   dom.createForm.addEventListener("submit", (event) => {
@@ -567,7 +549,6 @@ function installInteractions() {
     });
   });
   dom.sourceList.addEventListener("click", handleSourceLibraryClick);
-  dom.addAudioButton.addEventListener("click", () => requestAudioUpload());
   dom.browseAudioButton.addEventListener("click", () => requestAudioUpload({ category: state.sourceCategory }));
   dom.audioUpload.addEventListener("change", () => handleAudioUpload());
   dom.themeOptions.forEach((button) => button.addEventListener("click", () => setThemeMode(button.dataset.themeMode)));
@@ -601,6 +582,7 @@ function installInteractions() {
   });
 
   document.addEventListener("keydown", (event) => {
+    if (state.focusOpen) revealFocusChrome();
     if (event.key !== "Escape") return;
     if (state.focusOpen) closeFocusMode();
     else if (state.volumePopoverOpen) toggleVolumePopover(false);
@@ -871,7 +853,6 @@ function syncPlaybackState() {
   dom.shell.dataset.playing = String(state.playing);
   dom.playerState.textContent = label;
   dom.playerExpandedState.textContent = label;
-  dom.playerHeroState.textContent = artworkLabel;
   dom.focusState.textContent = artworkLabel;
   dom.playerIdentityButton.setAttribute("aria-label", state.playerExpanded
     ? `收起播放器，${state.currentScene.name}，${label}`
@@ -887,6 +868,7 @@ function syncPlaybackState() {
       : `<i data-lucide="${state.playing ? "pause" : "play"}" aria-hidden="true"></i>`;
   });
   renderIcons();
+  syncFocusChromePlayback();
   syncStateMarkers();
 }
 
@@ -1139,23 +1121,6 @@ async function crossfadeAudio(nextUrl) {
   }
 }
 
-function renderHomeGreeting() {
-  const hour = new Date().getHours();
-  if (hour < 6) {
-    dom.homeGreeting.textContent = "夜深了";
-    dom.homeGreetingNote.textContent = "让声音陪你慢下来。";
-  } else if (hour < 11) {
-    dom.homeGreeting.textContent = "早上好";
-    dom.homeGreetingNote.textContent = "从一处安静的声音开始。";
-  } else if (hour < 18) {
-    dom.homeGreeting.textContent = "下午好";
-    dom.homeGreetingNote.textContent = "给手边的片刻留一点声音。";
-  } else {
-    dom.homeGreeting.textContent = "晚上好";
-    dom.homeGreetingNote.textContent = "给现在留一点声音。";
-  }
-}
-
 function renderCurrentScene() {
   const scene = state.currentScene;
   document.documentElement.style.setProperty("--scene-tone", scene.palette[0]);
@@ -1189,6 +1154,10 @@ function renderCurrentScene() {
 function renderFeaturedScene() {
   const scene = state.featuredScene;
   dom.homeGuideCover.src = scene.cover;
+  dom.homeGuideScene.dataset.scene = scene.id;
+  dom.homeGuideScene.setAttribute("aria-label", `播放${scene.name}`);
+  dom.homeGuideScene.querySelector("strong").textContent = scene.name;
+  dom.homeGuideScene.querySelector("small").textContent = scene.elements.join(" · ");
   dom.featuredImage.src = scene.hero;
   dom.featuredTitle.textContent = scene.name;
   dom.featuredDescription.textContent = scene.description;
@@ -1208,26 +1177,19 @@ function renderTemplates() {
     button.setAttribute("aria-label", `以${template.name}作为描述模板`);
     button.innerHTML = `
       <img src="${template.cover}" alt="" loading="lazy" decoding="async">
-      <span><strong>${template.name}</strong><small>${template.elements.join(" · ")}</small></span>
-      <i data-lucide="arrow-up-right" aria-hidden="true"></i>`;
+      <span><strong>${template.name}</strong><small>${template.elements.join(" · ")}</small></span>`;
     return button;
   }));
   renderIcons();
 }
 
 function renderExploreGrid() {
-  const filtered = state.exploreFilter === "all" ? scenes : scenes.filter((scene) => scene.category === state.exploreFilter);
-  dom.exploreGrid.replaceChildren(...filtered.map(createSceneCard));
+  const otherScenes = scenes.filter((scene) => scene.id !== state.featuredScene.id);
+  dom.exploreGrid.replaceChildren(...otherScenes.map(createSceneCard));
 }
 
 function renderLibraryGrid() {
-  const filtered = scenes.filter((scene) => {
-    if (state.libraryFilter === "saved") return scene.saved;
-    if (state.libraryFilter === "recent") return scene.recent;
-    return true;
-  });
-  dom.libraryGrid.replaceChildren(...filtered.map(createSceneCard));
-  dom.libraryCount.textContent = `${filtered.length} 个声景`;
+  dom.libraryGrid.replaceChildren(...scenes.map(createSceneCard));
 }
 
 function createSceneCard(scene) {
@@ -1235,7 +1197,6 @@ function createSceneCard(scene) {
   button.type = "button";
   button.className = "scene-card";
   button.dataset.scene = scene.id;
-  button.classList.toggle("is-current", scene.id === state.currentScene.id);
   if (scene.id === state.currentScene.id) button.setAttribute("aria-current", "true");
   button.setAttribute("aria-label", `${scene.name}${scene.id === state.currentScene.id ? "，当前声景" : ""}，${scene.description}`);
   button.innerHTML = `<span class="scene-card-media"><img src="${scene.cover}" alt="" loading="lazy" decoding="async"></span><strong>${scene.name}</strong><small>${scene.elements.join(" · ")}</small>`;
@@ -1396,9 +1357,11 @@ async function refreshStorageStats() {
     const stats = await getStoredAudioStats();
     dom.storageSummary.textContent = stats.count ? `${stats.count} 个声音 · ${formatBytes(stats.bytes)}` : "还没有本地声音";
     dom.storageDetail.textContent = stats.count ? "只保存在当前浏览器，可随时清空" : "从播放器下方的素材库添加";
+    dom.clearStorageButton.hidden = stats.count === 0;
   } catch {
     dom.storageSummary.textContent = "无法读取本地存储";
     dom.storageDetail.textContent = "浏览器可能已限制 IndexedDB";
+    dom.clearStorageButton.hidden = true;
   }
 }
 
@@ -1861,7 +1824,8 @@ async function openFocusMode() {
   dom.focusMode.classList.add("is-open");
   dom.focusMode.removeAttribute("inert");
   dom.focusMode.setAttribute("aria-hidden", "false");
-  dom.focusClose.focus({ preventScroll: true });
+  resetFocusChrome({ immediate: true });
+  dom.focusMode.focus({ preventScroll: true });
   field.setActive(true);
   syncBackgroundInert();
   syncStateMarkers();
@@ -1878,6 +1842,7 @@ function closeFocusMode() {
   if (!state.focusOpen && !state.focusTransitioning) return;
   state.focusOpen = false;
   state.focusTransitioning = true;
+  resetFocusChrome({ immediate: true });
   syncBackgroundInert();
   syncStateMarkers();
   focusMotion.close();
@@ -1885,6 +1850,7 @@ function closeFocusMode() {
 
 function finishFocusOpen() {
   state.focusTransitioning = false;
+  scheduleFocusChromeHide();
   syncBackgroundInert();
   syncStateMarkers();
 }
@@ -1896,9 +1862,65 @@ function finishFocusClose() {
   dom.focusMode.setAttribute("aria-hidden", "true");
   dom.focusMode.setAttribute("inert", "");
   field.setActive(false);
+  resetFocusChrome({ immediate: true });
   syncBackgroundInert();
   state.lastFocused?.focus?.({ preventScroll: true });
   syncStateMarkers();
+}
+
+function handleFocusActivity() {
+  if (!state.focusOpen) return;
+  revealFocusChrome();
+}
+
+function revealFocusChrome({ immediate = false } = {}) {
+  window.clearTimeout(focusChromeTimer);
+  focusChromeTimer = 0;
+  if (!state.focusOpen && !state.focusTransitioning) return;
+  if (!focusChromeVisible || immediate) {
+    focusChromeVisible = true;
+    focusMotion.setChromeVisible(true, { immediate });
+  }
+  scheduleFocusChromeHide();
+}
+
+function scheduleFocusChromeHide() {
+  window.clearTimeout(focusChromeTimer);
+  focusChromeTimer = 0;
+  if (!state.focusOpen || state.focusTransitioning || !state.playing || focusChromeEngaged) return;
+  focusChromeTimer = window.setTimeout(() => {
+    const focusedInChrome = dom.focusHeader.contains(document.activeElement)
+      || dom.focusPlayer.contains(document.activeElement);
+    if (!state.focusOpen || !state.playing) return;
+    if (focusChromeEngaged || focusedInChrome) {
+      scheduleFocusChromeHide();
+      return;
+    }
+    focusChromeVisible = false;
+    focusMotion.setChromeVisible(false);
+  }, FOCUS_CHROME_IDLE_MS);
+}
+
+function syncFocusChromePlayback() {
+  if (!state.focusOpen) return;
+  if (state.playing) {
+    revealFocusChrome();
+    return;
+  }
+  window.clearTimeout(focusChromeTimer);
+  focusChromeTimer = 0;
+  if (!focusChromeVisible) {
+    focusChromeVisible = true;
+    focusMotion.setChromeVisible(true);
+  }
+}
+
+function resetFocusChrome({ immediate = false } = {}) {
+  window.clearTimeout(focusChromeTimer);
+  focusChromeTimer = 0;
+  focusChromeVisible = true;
+  focusChromeEngaged = false;
+  focusMotion.setChromeVisible(true, { immediate });
 }
 
 function getArtworkClipPath() {
@@ -1941,12 +1963,9 @@ function renderIcons() {
   createIcons({
     attrs: { "aria-hidden": "true" },
     icons: {
-      ArrowRight,
-      ArrowUpRight,
       AudioLines,
       Blend,
       ChevronDown,
-      ChevronUp,
       CloudRain,
       Compass,
       Database,
@@ -1954,7 +1973,6 @@ function renderIcons() {
       Headphones,
       House,
       Library,
-      Maximize2,
       Moon,
       Pause,
       Play,

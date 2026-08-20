@@ -5,6 +5,7 @@ const FULL_CLIP = "inset(0px 0px 0px 0px round 0px)";
 
 export function createFocusMotion({ elements, isReducedMotion, getOriginClip, onOpened, onClosed }) {
   let timeline = null;
+  let chromeVisible = true;
 
   function build() {
     timeline?.revert();
@@ -106,6 +107,36 @@ export function createFocusMotion({ elements, isReducedMotion, getOriginClip, on
     clearTransientHints();
   }
 
+  function setChromeVisible(visible, { immediate = false } = {}) {
+    if (chromeVisible === visible && !immediate) return;
+    chromeVisible = visible;
+    const targets = [elements.header, elements.player];
+    gsap.killTweensOf(targets);
+    if (visible) gsap.set(targets, { pointerEvents: "auto" });
+    else gsap.set(targets, { pointerEvents: "none" });
+
+    if (immediate || isReducedMotion()) {
+      gsap.set(elements.header, { autoAlpha: visible ? 1 : 0, y: visible ? 0 : -8 });
+      gsap.set(elements.player, { autoAlpha: visible ? 1 : 0, y: visible ? 0 : 10 });
+      return;
+    }
+
+    gsap.to(elements.header, {
+      autoAlpha: visible ? 1 : 0,
+      y: visible ? 0 : -8,
+      duration: visible ? 0.28 : 0.36,
+      ease: visible ? MOTION.ease.enter : MOTION.ease.exit,
+      overwrite: "auto",
+    });
+    gsap.to(elements.player, {
+      autoAlpha: visible ? 1 : 0,
+      y: visible ? 0 : 10,
+      duration: visible ? 0.3 : 0.36,
+      ease: visible ? MOTION.ease.enter : MOTION.ease.exit,
+      overwrite: "auto",
+    });
+  }
+
   function setTransientHints() {
     gsap.set(elements.mode, { willChange: "clip-path, opacity" });
     gsap.set(elements.static, { willChange: "transform" });
@@ -116,17 +147,19 @@ export function createFocusMotion({ elements, isReducedMotion, getOriginClip, on
   }
 
   function resetStyles() {
+    chromeVisible = true;
     gsap.set(elements.mode, { clearProps: "opacity,visibility,clip-path,will-change" });
     gsap.set(elements.static, { clearProps: "transform,will-change" });
     gsap.set([elements.header, elements.copy, elements.player], {
-      clearProps: "opacity,visibility,transform",
+      clearProps: "opacity,visibility,transform,pointer-events",
     });
   }
 
   function destroy() {
+    gsap.killTweensOf([elements.header, elements.player]);
     timeline?.revert();
     timeline = null;
   }
 
-  return { close, destroy, open, settle };
+  return { close, destroy, open, setChromeVisible, settle };
 }

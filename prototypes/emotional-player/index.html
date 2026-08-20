@@ -13,7 +13,7 @@
     <!--
       THESIS: 日常聆听是一间稳定、安静的工作室；拒绝把每次使用都变成全屏概念海报。
       OWN-WORLD: 冷白底、炭黑、矿物灰绿与雾蓝，珊瑚只标记动作；精密细线、6 至 8 像素圆角和 Image 2 膜片裁片共同构成界面。
-      STORY: 首页只负责引导去创建或探索；全局控制轨独立于内容路由，完整播放器从控制轨上方展开，声景调节自然延续在下方，图窗按需进入沉浸聆听。
+      STORY: 首页负责引导创建、探索或直接播放一处精选声景；全局控制轨独立于内容路由，完整播放器从控制轨上方展开，声景调节自然延续在下方，图窗按需进入沉浸聆听。
       FIRST VIEWPORT: 桌面左侧固定导航，中部是克制的方向选择，底部播放器横跨整个窗口；移动端播放条位于底部导航之上。
       FORM: 克制的日常产品应用壳，用户明确要求替代此前概念式界面；seed ac023634。
       FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
@@ -53,9 +53,6 @@
           <span class="brand-name">声景</span>
         </a>
         <div class="mobile-header-actions">
-          <button class="icon-button" type="button" data-view-link="create" aria-label="创建声景" title="创建声景">
-            <i data-lucide="plus" aria-hidden="true"></i>
-          </button>
           <button class="icon-button" id="mobile-more-button" type="button" aria-label="更多" aria-expanded="false" aria-controls="mobile-more-menu" title="更多">
             <i data-lucide="ellipsis" aria-hidden="true"></i>
           </button>
@@ -67,33 +64,25 @@
 
       <main class="workspace" id="workspace">
         <section class="app-view home-view is-active" data-view="home" aria-labelledby="home-view-title">
-          <header class="view-header home-header">
-            <div>
-              <h1 id="home-view-title">晚上好</h1>
-              <p id="home-greeting-note">给现在留一点声音。</p>
-            </div>
-          </header>
-
-          <section class="home-guide" aria-labelledby="home-guide-title">
+          <div class="home-guide">
             <div class="home-guide-copy">
-              <h2 id="home-guide-title">此刻，想听见哪里？</h2>
+              <h1 id="home-view-title">此刻，想听见哪里？</h1>
               <p>描述一个片刻，或从已经准备好的声音世界开始。</p>
               <div class="home-guide-actions">
                 <button class="primary-action" type="button" data-view-link="create">
-                  <span>创建一处声景</span><i data-lucide="arrow-right" aria-hidden="true"></i>
+                  <span>创建一处声景</span>
                 </button>
                 <button class="text-action" type="button" data-view-link="explore">
-                  <span>探索现成声景</span><i data-lucide="arrow-right" aria-hidden="true"></i>
+                  <span>探索现成声景</span>
                 </button>
               </div>
             </div>
 
-            <button class="home-guide-scene" type="button" data-view-link="explore" aria-label="前往探索深夜海岸等现成声景">
+            <button class="home-guide-scene" type="button" data-scene="coastal-night" aria-label="播放深夜海岸">
               <img id="home-guide-cover" src="../../assets/scenes/coastal-night/coastal-night-cover-web-v1.jpg" alt="" decoding="async" />
-              <span><strong>从一处可听声景开始</strong><small>深夜海岸 · 雨夜木屋</small></span>
-              <i data-lucide="arrow-up-right" aria-hidden="true"></i>
+              <span><strong>深夜海岸</strong><small>近岸潮水 · 远浪 · 海风</small></span>
             </button>
-          </section>
+          </div>
         </section>
 
         <section class="app-view explore-view" data-view="explore" aria-labelledby="explore-view-title" hidden>
@@ -121,12 +110,7 @@
 
           <section class="scene-section" aria-labelledby="scene-section-title">
             <div class="section-title-row">
-              <h2 id="scene-section-title">为此刻准备</h2>
-              <div class="filter-tabs" role="tablist" aria-label="声景分类">
-                <button class="is-selected" type="button" role="tab" aria-selected="true" data-filter="all">全部</button>
-                <button type="button" role="tab" aria-selected="false" data-filter="nature">自然</button>
-                <button type="button" role="tab" aria-selected="false" data-filter="interior">室内</button>
-              </div>
+              <h2 id="scene-section-title">另一处声景</h2>
             </div>
             <div class="scene-grid" id="explore-grid"></div>
           </section>
@@ -135,24 +119,26 @@
         <section class="app-view create-view" data-view="create" aria-labelledby="create-view-title" hidden>
           <header class="view-header">
             <div>
-              <h1 id="create-view-title">创建声景 <span class="status-label">本地样例</span></h1>
-              <p>描述一处你现在想去的地方，我们会用本地声音样例组织一个可听版本。</p>
+              <h1 id="create-view-title">创建声景</h1>
+              <p>写下一处想去的地方。</p>
             </div>
-            <button class="text-action" type="button" id="random-prompt-button" aria-label="随机生成灵感" title="换个灵感">
-              <i data-lucide="shuffle" aria-hidden="true"></i><span>换个灵感</span>
-            </button>
           </header>
 
           <div class="create-layout">
             <form class="create-form" id="create-form">
-              <label class="prompt-field">
-                <span>你想听见什么？</span>
+              <div class="prompt-field">
+                <div class="prompt-heading">
+                  <label for="scene-prompt">你想听见什么？</label>
+                  <button class="text-action" type="button" id="random-prompt-button" aria-label="随机生成灵感" title="换个灵感">
+                    <i data-lucide="shuffle" aria-hidden="true"></i><span>换个灵感</span>
+                  </button>
+                </div>
                 <textarea id="scene-prompt" rows="7" maxlength="180" aria-describedby="prompt-count prompt-hint" placeholder="例如，雨停前的玻璃温室，水珠沿着窗面缓慢滑落。"></textarea>
-              </label>
+              </div>
               <div class="prompt-meta">
                 <span class="prompt-status"><span id="prompt-count">0 / 180</span><span id="prompt-hint">写下一处场景后即可开始</span></span>
                 <button class="primary-action" id="compose-button" type="submit" disabled>
-                  <span>生成可听样例</span><i data-lucide="arrow-up-right" aria-hidden="true"></i>
+                  <span>生成声景</span>
                 </button>
               </div>
             </form>
@@ -164,32 +150,18 @@
               <div class="template-list" id="template-list"></div>
             </aside>
           </div>
-
-          <section class="recent-jobs" aria-labelledby="recent-jobs-title">
-            <div class="section-title-row"><h2 id="recent-jobs-title">可听样例</h2><span>两段本地声音素材</span></div>
-            <div class="recent-job-row"><span class="job-state-mark is-ready" aria-hidden="true"></span><div><strong>雨夜木屋</strong><small>雨声实录 · 可实时调音</small></div><button type="button" data-scene="rain-cabin">聆听</button></div>
-            <div class="recent-job-row"><span class="job-state-mark" aria-hidden="true"></span><div><strong>深夜海岸</strong><small>海浪实录 · 可实时调音</small></div><button type="button" data-scene="coastal-night">聆听</button></div>
-          </section>
         </section>
 
         <section class="app-view library-view" data-view="library" aria-labelledby="library-view-title" hidden>
           <header class="view-header">
             <div>
               <h1 id="library-view-title">声景集</h1>
-              <p>内置示例与当前会话里的声音世界。</p>
+              <p>想再回来时，就从这里开始。</p>
             </div>
             <button class="primary-action compact-primary" type="button" data-view-link="create">
               <i data-lucide="plus" aria-hidden="true"></i><span>创建</span>
             </button>
           </header>
-          <div class="library-toolbar">
-            <div class="filter-tabs" role="tablist" aria-label="声景集分类">
-              <button class="is-selected" type="button" role="tab" aria-selected="true" data-library-filter="all">全部</button>
-              <button type="button" role="tab" aria-selected="false" data-library-filter="saved">示例收藏</button>
-              <button type="button" role="tab" aria-selected="false" data-library-filter="recent">近期示例</button>
-            </div>
-            <span id="library-count">2 个声景</span>
-          </div>
           <div class="scene-grid library-grid" id="library-grid"></div>
         </section>
 
@@ -197,7 +169,6 @@
           <header class="view-header">
             <div>
               <h1 id="settings-view-title">设置</h1>
-              <p>只管理跨声景生效的偏好与本地数据。</p>
             </div>
           </header>
 
@@ -229,16 +200,7 @@
               <div class="settings-section-heading"><h2 id="local-storage-title">本地声音</h2><p>添加的音频只保存在这个浏览器中。</p></div>
               <div class="storage-row">
                 <div class="storage-summary"><i data-lucide="database" aria-hidden="true"></i><span><strong id="storage-summary">正在读取</strong><small id="storage-detail">统计本地声音素材</small></span></div>
-                <button class="quiet-danger" id="clear-storage-button" type="button">清空本地声音</button>
-              </div>
-            </section>
-
-            <section class="settings-section" aria-labelledby="services-title">
-              <div class="settings-section-heading"><h2 id="services-title">声音服务</h2><p>当前原型的可用边界。</p></div>
-              <div class="service-list">
-                <div class="service-row"><span class="service-state is-ready" aria-hidden="true"></span><span><strong>浏览器音频引擎</strong><small>播放时启动，设备听感在本地实时处理</small></span><b>可用</b></div>
-                <div class="service-row"><span class="service-state is-ready" aria-hidden="true"></span><span><strong>本地示例声音</strong><small>雨夜与海岸两段真实音频</small></span><b>2 段</b></div>
-                <div class="service-row"><span class="service-state" aria-hidden="true"></span><span><strong>生成服务</strong><small>当前未连接后端，创建流程使用本地样例验证交互</small></span><b>未连接</b></div>
+                <button class="quiet-danger" id="clear-storage-button" type="button" hidden>清空本地声音</button>
               </div>
             </section>
           </div>
@@ -261,7 +223,6 @@
               <div class="player-main">
               <figure class="player-hero-artwork">
                 <img id="player-hero-cover" src="../../assets/scenes/rain-cabin/rain-cabin-cover-web-v1.jpg" alt="" decoding="async" />
-                <figcaption><span class="live-dot" aria-hidden="true"></span><span id="player-hero-state">准备播放</span></figcaption>
                 <button class="player-focus-entry" id="focus-button" type="button" aria-label="进入沉浸聆听"></button>
               </figure>
 
@@ -288,9 +249,6 @@
                       <section class="layer-workspace" aria-labelledby="layers-title">
                         <div class="section-title-row">
                           <div><h3 id="layers-title">此刻听见</h3><p>让某一种声音靠近或退远。</p></div>
-                          <button class="icon-button compact" type="button" id="add-audio-button" aria-label="添加本地声音" title="添加本地声音">
-                            <i data-lucide="upload" aria-hidden="true"></i>
-                          </button>
                         </div>
                         <div class="layer-list" id="layer-list"></div>
 
@@ -315,7 +273,6 @@
                             <button type="button" role="radio" aria-checked="false" data-character="speaker" data-character-label="单声道喇叭"><span>喇叭</span><small>集中压缩</small></button>
                             <button type="button" role="radio" aria-checked="false" data-character="spatial" data-character-label="耳机空间"><span>耳机空间</span><small>拓宽远近</small></button>
                           </div>
-                          <p class="capability-note">设备听感由浏览器实时处理；“耳机空间”是双声道空间化，不伪装成 5.1 或 7.1 输出。</p>
                         </section>
 
                         <section class="source-library" aria-labelledby="source-library-title">
@@ -411,7 +368,7 @@
 
       <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-      <section class="focus-mode" id="focus-mode" role="dialog" aria-modal="true" aria-hidden="true" inert aria-labelledby="focus-title">
+      <section class="focus-mode" id="focus-mode" role="dialog" aria-modal="true" aria-hidden="true" inert tabindex="-1" aria-labelledby="focus-title">
         <div class="focus-visual" id="focus-visual">
           <div class="focus-static" id="focus-static" aria-hidden="true"></div>
           <canvas id="membrane-field" aria-hidden="true"></canvas>
