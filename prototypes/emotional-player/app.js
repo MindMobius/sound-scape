@@ -446,10 +446,7 @@ function installInteractions() {
   dom.distanceInputs.forEach((input) => input.addEventListener("input", () => updateOrchestration("distance", input.value)));
 
   dom.playerIdentityButton.addEventListener("click", () => {
-    if (state.focusOpen || state.focusTransitioning) {
-      if (state.focusOpen && !state.focusTransitioning) closeFocusMode();
-      return;
-    }
+    if (state.focusOpen || state.focusTransitioning) return;
     if (state.playerExpanded) collapsePlayer();
     else expandPlayer();
   });
@@ -671,6 +668,13 @@ function syncExpandedAccessibility() {
   dom.playerExpandedContent.inert = hidden;
 }
 
+function syncPlayerRailAccessibility() {
+  const simplified = state.focusOpen || state.focusTransitioning;
+  if (simplified) dom.playerIdentityButton.setAttribute("aria-hidden", "true");
+  else dom.playerIdentityButton.removeAttribute("aria-hidden");
+  dom.playerIdentityButton.inert = simplified;
+}
+
 function syncPlayerIdentityLabel(playbackLabel = dom.playerState.textContent) {
   const sceneLabel = playbackLabel ? `${state.currentScene.name}，${playbackLabel}` : state.currentScene.name;
   if (state.focusOpen || state.focusTransitioning) {
@@ -800,6 +804,7 @@ function syncBackgroundInert() {
     || state.focusTransitioning;
   dom.contentInertTargets.forEach((target) => { target.inert = contentBlocked; });
   syncExpandedAccessibility();
+  syncPlayerRailAccessibility();
 }
 
 function handleSceneSelection(event) {
