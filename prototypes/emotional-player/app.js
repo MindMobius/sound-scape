@@ -166,6 +166,8 @@ const dom = {
   homeGuideCover: document.querySelector("#home-guide-cover"),
   homeGuideScene: document.querySelector(".home-guide-scene"),
   globalPlayer: document.querySelector("#global-player"),
+  playerSurface: document.querySelector(".player-surface"),
+  playerControlRail: document.querySelector(".player-control-rail"),
   playerExpandedContent: document.querySelector("#player-expanded-content"),
   playerExpandedScroll: document.querySelector("#player-expanded-scroll"),
   playerAtmosphereImage: document.querySelector("#player-atmosphere-image"),
@@ -192,10 +194,7 @@ const dom = {
   volumeLabel: document.querySelector("#volume-label"),
   volumePopover: document.querySelector("#volume-popover"),
   volumePopoverValue: document.querySelector("#volume-popover-value"),
-  playButtons: [
-    document.querySelector("#player-play-button"),
-    document.querySelector("#focus-play-button"),
-  ].filter(Boolean),
+  playButtons: [document.querySelector("#player-play-button")],
   volumeInputs: [document.querySelector("#volume"), ...document.querySelectorAll("[data-volume]")],
   intensityInputs: [...document.querySelectorAll("[data-intensity]")],
   richnessInputs: [...document.querySelectorAll("[data-richness]")],
@@ -237,7 +236,6 @@ const dom = {
   focusStatic: document.querySelector("#focus-static"),
   focusHeader: document.querySelector(".focus-header"),
   focusCopy: document.querySelector(".focus-copy"),
-  focusPlayer: document.querySelector(".focus-player"),
   focusButton: document.querySelector("#focus-button"),
   focusClose: document.querySelector("#focus-close"),
   focusTitle: document.querySelector("#focus-title"),
@@ -375,21 +373,9 @@ let focusChromeEngaged = false;
 
 const playerMotion = createPlayerMotion({
   elements: {
-    atmosphere: dom.playerAtmosphereImage,
-    collapseButton: dom.playerCollapseButton,
     content: dom.playerExpandedContent,
-    copy: dom.playerExpandedCopy,
-    description: dom.playerExpandedDescription,
-    detailsPanel: dom.detailsPanel,
-    elementList: dom.playerExpandedElements,
-    feeling: dom.playerFeeling,
-    hero: dom.playerHeroArtwork,
-    heroCover: dom.playerHeroCover,
-    scrollContainer: dom.playerExpandedScroll,
-    title: dom.playerExpandedTitle,
   },
   isReducedMotion: motionRuntime.isReduced,
-  getArtworkSource: () => dom.playerCover,
   onTransitionStart: (active) => {
     if (state.playerTransitioning === active) return;
     state.playerTransitioning = active;
@@ -405,10 +391,9 @@ const focusMotion = createFocusMotion({
     static: dom.focusStatic,
     header: dom.focusHeader,
     copy: dom.focusCopy,
-    player: dom.focusPlayer,
+    player: dom.playerControlRail,
   },
   isReducedMotion: motionRuntime.isReduced,
-  getOriginClip: getArtworkClipPath,
   onOpened: finishFocusOpen,
   onClosed: finishFocusClose,
 });
@@ -461,6 +446,10 @@ function installInteractions() {
   dom.distanceInputs.forEach((input) => input.addEventListener("input", () => updateOrchestration("distance", input.value)));
 
   dom.playerIdentityButton.addEventListener("click", () => {
+    if (state.focusOpen || state.focusTransitioning) {
+      if (state.focusOpen && !state.focusTransitioning) closeFocusMode();
+      return;
+    }
     if (state.playerExpanded) collapsePlayer();
     else expandPlayer();
   });
@@ -478,7 +467,7 @@ function installInteractions() {
   dom.featuredPlay.addEventListener("click", () => switchToScene(state.featuredScene, { autoPlay: true }));
   dom.focusMode.addEventListener("pointermove", handleFocusActivity, { passive: true });
   dom.focusMode.addEventListener("pointerdown", handleFocusActivity, { passive: true });
-  [dom.focusHeader, dom.focusPlayer].forEach((element) => {
+  [dom.focusHeader, dom.playerControlRail].forEach((element) => {
     element.addEventListener("pointerenter", () => {
       focusChromeEngaged = true;
       revealFocusChrome();
@@ -666,12 +655,21 @@ function syncPlayerStructure() {
   dom.globalPlayer.setAttribute("aria-label", state.playerExpanded ? `${state.currentScene.name}播放器` : "持续播放控制");
   dom.playerExpandedContent.setAttribute("aria-hidden", String(!state.playerExpanded));
   dom.playerExpandedContent.inert = !state.playerExpanded;
-  dom.playerIdentityButton.setAttribute("aria-label", state.playerExpanded
-    ? `收起播放器，当前是${state.currentScene.name}`
-    : `展开播放器，当前是${state.currentScene.name}`);
+  syncPlayerIdentityLabel();
   dom.playerCollapseButton.setAttribute("aria-label", `收起${state.currentScene.name}播放器`);
   syncBackgroundInert();
   syncStateMarkers();
+}
+
+function syncPlayerIdentityLabel(playbackLabel = dom.playerState.textContent) {
+  const sceneLabel = playbackLabel ? `${state.currentScene.name}，${playbackLabel}` : state.currentScene.name;
+  if (state.focusOpen || state.focusTransitioning) {
+    dom.playerIdentityButton.setAttribute("aria-label", `返回播放器，${sceneLabel}`);
+    return;
+  }
+  dom.playerIdentityButton.setAttribute("aria-label", state.playerExpanded
+    ? `收起播放器，${sceneLabel}`
+    : `展开播放器，${sceneLabel}`);
 }
 
 function toggleSleepTimerMenu(force, restoreFocus = true) {
@@ -854,9 +852,7 @@ function syncPlaybackState() {
   dom.playerState.textContent = label;
   dom.playerExpandedState.textContent = label;
   dom.focusState.textContent = artworkLabel;
-  dom.playerIdentityButton.setAttribute("aria-label", state.playerExpanded
-    ? `收起播放器，${state.currentScene.name}，${label}`
-    : `展开播放器，${state.currentScene.name}，${label}`);
+  syncPlayerIdentityLabel(label);
   field.setPlaying(state.playing);
 
   dom.playButtons.forEach((button) => {
@@ -1142,9 +1138,7 @@ function renderCurrentScene() {
     span.textContent = name;
     return span;
   }));
-  dom.playerIdentityButton.setAttribute("aria-label", state.playerExpanded
-    ? `收起播放器，当前是${scene.name}`
-    : `展开播放器，当前是${scene.name}`);
+  syncPlayerIdentityLabel();
   syncAudioProfile();
   renderLayerList();
   renderSourceLibrary();
@@ -1821,6 +1815,8 @@ async function openFocusMode() {
   state.focusOpen = true;
   state.focusTransitioning = true;
   state.lastFocused = document.activeElement;
+  closeControlPopovers(false);
+  mountPlayerRailInFocus();
   dom.focusMode.classList.add("is-open");
   dom.focusMode.removeAttribute("inert");
   dom.focusMode.setAttribute("aria-hidden", "false");
@@ -1842,6 +1838,7 @@ function closeFocusMode() {
   if (!state.focusOpen && !state.focusTransitioning) return;
   state.focusOpen = false;
   state.focusTransitioning = true;
+  closeControlPopovers(false);
   resetFocusChrome({ immediate: true });
   syncBackgroundInert();
   syncStateMarkers();
@@ -1861,11 +1858,26 @@ function finishFocusClose() {
   dom.focusMode.classList.remove("is-open");
   dom.focusMode.setAttribute("aria-hidden", "true");
   dom.focusMode.setAttribute("inert", "");
+  restorePlayerRail();
   field.setActive(false);
   resetFocusChrome({ immediate: true });
   syncBackgroundInert();
   state.lastFocused?.focus?.({ preventScroll: true });
+  syncPlayerIdentityLabel();
   syncStateMarkers();
+}
+
+function mountPlayerRailInFocus() {
+  if (dom.playerControlRail.parentElement === dom.focusMode) return;
+  dom.playerControlRail.classList.add("is-focus-rail");
+  dom.focusMode.append(dom.playerControlRail);
+  syncPlayerIdentityLabel();
+}
+
+function restorePlayerRail() {
+  if (dom.playerControlRail.parentElement === dom.playerSurface) return;
+  dom.playerControlRail.classList.remove("is-focus-rail");
+  dom.playerSurface.append(dom.playerControlRail);
 }
 
 function handleFocusActivity() {
@@ -1890,7 +1902,7 @@ function scheduleFocusChromeHide() {
   if (!state.focusOpen || state.focusTransitioning || !state.playing || focusChromeEngaged) return;
   focusChromeTimer = window.setTimeout(() => {
     const focusedInChrome = dom.focusHeader.contains(document.activeElement)
-      || dom.focusPlayer.contains(document.activeElement);
+      || dom.playerControlRail.contains(document.activeElement);
     if (!state.focusOpen || !state.playing) return;
     if (focusChromeEngaged || focusedInChrome) {
       scheduleFocusChromeHide();
@@ -1921,15 +1933,6 @@ function resetFocusChrome({ immediate = false } = {}) {
   focusChromeVisible = true;
   focusChromeEngaged = false;
   focusMotion.setChromeVisible(true, { immediate });
-}
-
-function getArtworkClipPath() {
-  const rect = dom.playerHeroArtwork.getBoundingClientRect();
-  const top = Math.max(0, rect.top);
-  const right = Math.max(0, window.innerWidth - rect.right);
-  const bottom = Math.max(0, window.innerHeight - rect.bottom);
-  const left = Math.max(0, rect.left);
-  return `inset(${top}px ${right}px ${bottom}px ${left}px round 8px)`;
 }
 
 function updateTabSelection(activeButton, selector, stateAttribute = "aria-selected") {
