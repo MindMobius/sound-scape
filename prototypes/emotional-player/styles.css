@@ -1575,7 +1575,6 @@ input[type="range"]::-moz-range-thumb {
   z-index: 3;
   width: min(42vw, 610px);
   text-align: right;
-  transform: translateY(-55%);
 }
 .focus-copy p { margin: 0; }
 .focus-copy > p:first-child {

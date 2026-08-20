@@ -234,7 +234,6 @@ const dom = {
   focusVisual: document.querySelector("#focus-visual"),
   focusStatic: document.querySelector("#focus-static"),
   focusHeader: document.querySelector(".focus-header"),
-  focusCopy: document.querySelector(".focus-copy"),
   focusButton: document.querySelector("#focus-button"),
   focusTitle: document.querySelector("#focus-title"),
   focusDescription: document.querySelector("#focus-description"),
@@ -387,9 +386,7 @@ const playerMotion = createPlayerMotion({
 const focusMotion = createFocusMotion({
   elements: {
     mode: dom.focusMode,
-    static: dom.focusStatic,
     header: dom.focusHeader,
-    copy: dom.focusCopy,
     player: dom.playerControlRail,
     control: dom.playerCollapseButton,
   },
