@@ -166,7 +166,6 @@ const dom = {
   homeGuideCover: document.querySelector("#home-guide-cover"),
   homeGuideScene: document.querySelector(".home-guide-scene"),
   globalPlayer: document.querySelector("#global-player"),
-  playerSurface: document.querySelector(".player-surface"),
   playerControlRail: document.querySelector(".player-control-rail"),
   playerExpandedContent: document.querySelector("#player-expanded-content"),
   playerExpandedScroll: document.querySelector("#player-expanded-scroll"),
@@ -370,6 +369,7 @@ let fieldStartPromise = null;
 let focusChromeTimer = 0;
 let focusChromeVisible = true;
 let focusChromeEngaged = false;
+let focusChromeKeyboardActive = false;
 
 const playerMotion = createPlayerMotion({
   elements: {
@@ -467,6 +467,9 @@ function installInteractions() {
   dom.featuredPlay.addEventListener("click", () => switchToScene(state.featuredScene, { autoPlay: true }));
   dom.focusMode.addEventListener("pointermove", handleFocusActivity, { passive: true });
   dom.focusMode.addEventListener("pointerdown", handleFocusActivity, { passive: true });
+  document.addEventListener("pointerdown", () => {
+    if (state.focusOpen) focusChromeKeyboardActive = false;
+  }, { capture: true, passive: true });
   [dom.focusHeader, dom.playerControlRail].forEach((element) => {
     element.addEventListener("pointerenter", () => {
       focusChromeEngaged = true;
@@ -571,7 +574,10 @@ function installInteractions() {
   });
 
   document.addEventListener("keydown", (event) => {
-    if (state.focusOpen) revealFocusChrome();
+    if (state.focusOpen) {
+      focusChromeKeyboardActive = true;
+      revealFocusChrome();
+    }
     if (event.key !== "Escape") return;
     if (state.focusOpen) closeFocusMode();
     else if (state.volumePopoverOpen) toggleVolumePopover(false);
@@ -653,12 +659,16 @@ function syncPlayerStructure() {
   const playerState = structurallyExpanded ? "expanded" : "collapsed";
   dom.shell.dataset.playerState = playerState;
   dom.globalPlayer.setAttribute("aria-label", state.playerExpanded ? `${state.currentScene.name}播放器` : "持续播放控制");
-  dom.playerExpandedContent.setAttribute("aria-hidden", String(!state.playerExpanded));
-  dom.playerExpandedContent.inert = !state.playerExpanded;
   syncPlayerIdentityLabel();
   dom.playerCollapseButton.setAttribute("aria-label", `收起${state.currentScene.name}播放器`);
   syncBackgroundInert();
   syncStateMarkers();
+}
+
+function syncExpandedAccessibility() {
+  const hidden = !state.playerExpanded || state.focusOpen || state.focusTransitioning;
+  dom.playerExpandedContent.setAttribute("aria-hidden", String(hidden));
+  dom.playerExpandedContent.inert = hidden;
 }
 
 function syncPlayerIdentityLabel(playbackLabel = dom.playerState.textContent) {
@@ -789,7 +799,7 @@ function syncBackgroundInert() {
     || state.focusOpen
     || state.focusTransitioning;
   dom.contentInertTargets.forEach((target) => { target.inert = contentBlocked; });
-  dom.globalPlayer.inert = state.focusOpen || state.focusTransitioning;
+  syncExpandedAccessibility();
 }
 
 function handleSceneSelection(event) {
@@ -1816,7 +1826,6 @@ async function openFocusMode() {
   state.focusTransitioning = true;
   state.lastFocused = document.activeElement;
   closeControlPopovers(false);
-  mountPlayerRailInFocus();
   dom.focusMode.classList.add("is-open");
   dom.focusMode.removeAttribute("inert");
   dom.focusMode.setAttribute("aria-hidden", "false");
@@ -1858,26 +1867,12 @@ function finishFocusClose() {
   dom.focusMode.classList.remove("is-open");
   dom.focusMode.setAttribute("aria-hidden", "true");
   dom.focusMode.setAttribute("inert", "");
-  restorePlayerRail();
   field.setActive(false);
   resetFocusChrome({ immediate: true });
   syncBackgroundInert();
   state.lastFocused?.focus?.({ preventScroll: true });
   syncPlayerIdentityLabel();
   syncStateMarkers();
-}
-
-function mountPlayerRailInFocus() {
-  if (dom.playerControlRail.parentElement === dom.focusMode) return;
-  dom.playerControlRail.classList.add("is-focus-rail");
-  dom.focusMode.append(dom.playerControlRail);
-  syncPlayerIdentityLabel();
-}
-
-function restorePlayerRail() {
-  if (dom.playerControlRail.parentElement === dom.playerSurface) return;
-  dom.playerControlRail.classList.remove("is-focus-rail");
-  dom.playerSurface.append(dom.playerControlRail);
 }
 
 function handleFocusActivity() {
@@ -1901,8 +1896,9 @@ function scheduleFocusChromeHide() {
   focusChromeTimer = 0;
   if (!state.focusOpen || state.focusTransitioning || !state.playing || focusChromeEngaged) return;
   focusChromeTimer = window.setTimeout(() => {
-    const focusedInChrome = dom.focusHeader.contains(document.activeElement)
-      || dom.playerControlRail.contains(document.activeElement);
+    const focusedElement = document.activeElement;
+    const focusedInChrome = focusChromeKeyboardActive
+      && (dom.focusHeader.contains(focusedElement) || dom.playerControlRail.contains(focusedElement));
     if (!state.focusOpen || !state.playing) return;
     if (focusChromeEngaged || focusedInChrome) {
       scheduleFocusChromeHide();
@@ -1932,6 +1928,7 @@ function resetFocusChrome({ immediate = false } = {}) {
   focusChromeTimer = 0;
   focusChromeVisible = true;
   focusChromeEngaged = false;
+  focusChromeKeyboardActive = false;
   focusMotion.setChromeVisible(true, { immediate });
 }
 

@@ -1558,39 +1558,7 @@ input[type="range"]::-moz-range-thumb {
   line-height: 1.1;
 }
 .focus-copy h2 + p { margin-top: 14px; font-size: 15px; }
-.player-control-rail.is-focus-rail {
-  --surface-raised: #f9faf7;
-  --surface-muted: #e8ede9;
-  --ink: #1c231f;
-  --ink-secondary: #59635d;
-  --ink-tertiary: #606b64;
-  --line: #d4dbd6;
-  --line-strong: #aeb8b1;
-  --active: #365f54;
-  --active-soft: #dce8e2;
-  --focus: #2c705f;
-  --shadow: 0 18px 46px rgba(23, 31, 26, 0.16);
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 4;
-  color: var(--ink);
-  transform: none;
-}
-.focus-mode[data-focus-theme="dark"] .player-control-rail.is-focus-rail {
-  --surface-raised: #191f1d;
-  --surface-muted: #2a322f;
-  --ink: #f1f3ef;
-  --ink-secondary: #b8c1bb;
-  --ink-tertiary: #97a29b;
-  --line: #37403c;
-  --line-strong: #59665f;
-  --active: #a9c8bc;
-  --active-soft: #243b34;
-  --focus: #8cc7b5;
-  --shadow: 0 20px 52px rgba(0, 0, 0, 0.34);
-}
+.app-shell[data-focus-open="true"] .player-control-rail { z-index: 201; }
 .scene-transition-layer {
   position: fixed;
   z-index: 180;
@@ -1803,7 +1771,6 @@ input[type="range"]::-moz-range-thumb {
   .focus-copy { top: 46%; right: 22px; left: 22px; width: auto; }
   .focus-copy h2 { font-size: 36px; }
   .focus-copy h2 + p { font-size: 13px; }
-  .player-control-rail.is-focus-rail { transform: none; }
 }
 
 @media (max-width: 420px) {

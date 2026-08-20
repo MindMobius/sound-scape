@@ -294,6 +294,24 @@
             </div>
           </div>
 
+          <section class="focus-mode" id="focus-mode" role="dialog" aria-hidden="true" inert tabindex="-1" aria-labelledby="focus-title">
+            <div class="focus-visual" id="focus-visual">
+              <div class="focus-static" id="focus-static" aria-hidden="true"></div>
+              <canvas id="membrane-field" aria-hidden="true"></canvas>
+              <div class="focus-tone" aria-hidden="true"></div>
+            </div>
+            <header class="focus-header">
+              <a class="brand" href="#" aria-label="声景" tabindex="-1"><span class="brand-mark" aria-hidden="true"></span><span class="brand-name">声景</span></a>
+              <button class="icon-button focus-close" id="focus-close" type="button" aria-label="返回播放器" title="返回播放器"><i data-lucide="x" aria-hidden="true"></i></button>
+            </header>
+            <div class="focus-copy">
+              <p><span class="live-dot" aria-hidden="true"></span><span id="focus-state">准备播放</span></p>
+              <h2 id="focus-title">雨夜木屋</h2>
+              <p id="focus-description">雷雨夜里，点燃篝火的木屋。</p>
+            </div>
+            <p class="render-status sr-only" id="render-status" aria-live="polite">准备视觉场域</p>
+          </section>
+
           <footer class="player-control-rail" aria-label="播放控制">
             <button class="player-identity" id="player-identity-button" type="button" aria-label="展开雨夜木屋播放器">
               <img id="player-cover" src="../../assets/scenes/rain-cabin/rain-cabin-cover-web-v1.jpg" alt="" decoding="async" />
@@ -367,24 +385,6 @@
       </nav>
 
       <div class="toast" id="toast" role="status" aria-live="polite"></div>
-
-      <section class="focus-mode" id="focus-mode" role="dialog" aria-modal="true" aria-hidden="true" inert tabindex="-1" aria-labelledby="focus-title">
-        <div class="focus-visual" id="focus-visual">
-          <div class="focus-static" id="focus-static" aria-hidden="true"></div>
-          <canvas id="membrane-field" aria-hidden="true"></canvas>
-          <div class="focus-tone" aria-hidden="true"></div>
-        </div>
-        <header class="focus-header">
-          <a class="brand" href="#" aria-label="声景" tabindex="-1"><span class="brand-mark" aria-hidden="true"></span><span class="brand-name">声景</span></a>
-          <button class="icon-button focus-close" id="focus-close" type="button" aria-label="返回播放器" title="返回播放器"><i data-lucide="x" aria-hidden="true"></i></button>
-        </header>
-        <div class="focus-copy">
-          <p><span class="live-dot" aria-hidden="true"></span><span id="focus-state">准备播放</span></p>
-          <h2 id="focus-title">雨夜木屋</h2>
-          <p id="focus-description">雷雨夜里，点燃篝火的木屋。</p>
-        </div>
-        <p class="render-status sr-only" id="render-status" aria-live="polite">准备视觉场域</p>
-      </section>
 
       <input id="audio-upload" type="file" accept="audio/*" hidden />
     </div>
