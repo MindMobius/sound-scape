@@ -962,23 +962,9 @@ input[role="switch"]:checked::after { transform: translateX(16px); }
 .play-button:active { transform: scale(0.97); }
 .play-button svg { width: 18px; height: 18px; fill: currentColor; stroke-width: 1.4; }
 .player-rail-actions {
-  position: relative;
-  isolation: isolate;
   display: flex;
   align-items: center;
   gap: 6px;
-}
-.player-rail-actions::before {
-  position: absolute;
-  inset: -4px;
-  z-index: -1;
-  border-radius: 8px;
-  background: color-mix(in srgb, var(--surface-raised) 90%, transparent);
-  box-shadow: var(--focus-rail-shadow, 0 12px 32px rgba(23, 31, 26, 0.14));
-  content: "";
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 220ms ease-out;
 }
 .rail-control-slot { position: relative; width: var(--rail-control-width); }
 .rail-control {
@@ -1583,7 +1569,6 @@ input[type="range"]::-moz-range-thumb {
   --active: #365f54;
   --active-soft: #dce8e2;
   --focus: #2c705f;
-  --focus-rail-shadow: 0 12px 32px rgba(23, 31, 26, 0.14);
 }
 .app-shell:is([data-focus-open="true"], [data-focus-transitioning="true"]) .focus-mode[data-focus-theme="dark"] + .player-control-rail {
   --surface-raised: #191f1d;
@@ -1596,9 +1581,8 @@ input[type="range"]::-moz-range-thumb {
   --active: #a9c8bc;
   --active-soft: #243b34;
   --focus: #8cc7b5;
-  --focus-rail-shadow: 0 14px 36px rgba(0, 0, 0, 0.3);
 }
-.app-shell:is([data-focus-open="true"], [data-focus-transitioning="true"]) .player-control-rail {
+:root[data-theme] .app-shell:is([data-focus-open="true"], [data-focus-transitioning="true"]) .player-control-rail {
   z-index: 201;
   border-top-color: transparent;
   background: transparent;
@@ -1608,7 +1592,6 @@ input[type="range"]::-moz-range-thumb {
   opacity: 0;
   pointer-events: none;
 }
-.app-shell:is([data-focus-open="true"], [data-focus-transitioning="true"]) .player-rail-actions::before { opacity: 1; }
 .scene-transition-layer {
   position: fixed;
   z-index: 180;
