@@ -195,8 +195,6 @@ const dom = {
   playerExpandedCopy: document.querySelector(".player-expanded-copy"),
   playerFeeling: document.querySelector(".player-feeling"),
   feelingSummary: document.querySelector("#feeling-summary"),
-  playerScrollCue: document.querySelector(".player-scroll-cue"),
-  soundDetailsButton: document.querySelector("#sound-details-button"),
   detailsPanel: document.querySelector("#sound-details-panel"),
   sleepTimerButton: document.querySelector("#sleep-timer-button"),
   sleepTimerLabel: document.querySelector("#sleep-timer-label"),
@@ -401,7 +399,6 @@ const playerMotion = createPlayerMotion({
     hero: dom.playerHeroArtwork,
     heroCover: dom.playerHeroCover,
     scrollContainer: dom.playerExpandedScroll,
-    scrollCue: dom.playerScrollCue,
     title: dom.playerExpandedTitle,
   },
   isReducedMotion: motionRuntime.isReduced,
@@ -488,7 +485,6 @@ function installInteractions() {
   dom.sleepTimerOptions.forEach((button) => {
     button.addEventListener("click", () => setSleepTimer(Number(button.dataset.sleepMinutes)));
   });
-  dom.soundDetailsButton.addEventListener("click", scrollToSoundDetails);
   dom.focusButton.addEventListener("click", openFocusMode);
   dom.focusButton.addEventListener("pointerenter", prepareFocusField, { passive: true });
   dom.focusButton.addEventListener("focus", prepareFocusField);
@@ -679,12 +675,6 @@ function finishPlayerClose() {
   syncPlayerStructure();
   if (restoreFocusAfterCollapse) dom.playerIdentityButton.focus({ preventScroll: true });
   restoreFocusAfterCollapse = false;
-}
-
-function scrollToSoundDetails() {
-  window.requestAnimationFrame(() => {
-    dom.detailsPanel.scrollIntoView({ behavior: motionRuntime.isReduced() ? "auto" : "smooth", block: "start" });
-  });
 }
 
 function syncPlayerStructure() {
@@ -2045,7 +2035,6 @@ function exposeDebugApi() {
     setView: setActiveView,
     expandPlayer,
     collapsePlayer,
-    scrollToSoundDetails,
     startGeneration: (prompt = "清晨薄雾里的林间小路，远处有溪水和几声鸟鸣") => {
       setPrompt(prompt);
       startGeneration(prompt);

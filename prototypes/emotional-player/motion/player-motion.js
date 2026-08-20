@@ -71,16 +71,6 @@ export function createPlayerMotion({
         easeReverse: MOTION.ease.exit,
         immediateRender: false,
       }, 0.16)
-    .fromTo(elements.scrollCue,
-      { opacity: 0, y: -5 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.28,
-        ease: MOTION.ease.direct,
-        easeReverse: MOTION.ease.exit,
-        immediateRender: false,
-      }, 0.32)
     .fromTo(elements.collapseButton,
       { opacity: 0, y: -6 },
       {
@@ -169,7 +159,6 @@ export function createPlayerMotion({
     gsap.set(elements.atmosphere, { opacity: 0.13, scale: 1.025 });
     gsap.set(elements.hero, { opacity: 1, y: 0, scale: 1 });
     gsap.set(copyTargets, { opacity: 1, y: 0 });
-    gsap.set(elements.scrollCue, { opacity: 1, y: 0 });
     gsap.set(elements.collapseButton, { opacity: 1, y: 0 });
   }
 
@@ -178,7 +167,6 @@ export function createPlayerMotion({
     gsap.set(elements.atmosphere, { opacity: 0, scale: 1.055 });
     gsap.set(elements.hero, { opacity: 0.34, y: 24, scale: 0.978 });
     gsap.set(copyTargets, { opacity: 0, y: 13 });
-    gsap.set(elements.scrollCue, { opacity: 0, y: -5 });
     gsap.set(elements.collapseButton, { opacity: 0, y: -6 });
   }
 
@@ -247,8 +235,7 @@ export function createPlayerMotion({
     });
     scrollTimeline
       .to(elements.hero, { y: -18, scale: 0.975, opacity: 0.62 }, 0)
-      .to(elements.copy, { y: -10, opacity: 0.66 }, 0)
-      .to(elements.scrollCue, { opacity: 0, y: 7 }, 0);
+      .to(elements.copy, { y: -10, opacity: 0.66 }, 0);
     requestAnimationFrame(() => ScrollTrigger.refresh());
   }
 
@@ -259,7 +246,7 @@ export function createPlayerMotion({
       scrollTimeline = null;
     }
     if (clearStyles) {
-      gsap.set([elements.hero, elements.copy, elements.scrollCue], { clearProps: "transform,opacity" });
+      gsap.set([elements.hero, elements.copy], { clearProps: "transform,opacity" });
     }
   }
 

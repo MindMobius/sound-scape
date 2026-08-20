@@ -873,7 +873,7 @@ input[role="switch"]:checked::after { transform: translateX(16px); }
   justify-content: center;
   gap: clamp(54px, 8vw, 112px);
   width: min(100%, 1120px);
-  min-height: 100%;
+  min-height: calc(100% - clamp(118px, 14vh, 148px));
   margin: 0 auto;
   padding: clamp(34px, 6vh, 68px) clamp(34px, 6vw, 76px);
   padding-bottom: max(76px, 6vh);
@@ -927,38 +927,26 @@ input[role="switch"]:checked::after { transform: translateX(16px); }
 .player-focus-entry::before {
   position: absolute;
   inset: 0;
-  background: rgba(18, 24, 21, 0.16);
+  border-radius: inherit;
+  background: rgba(18, 24, 21, 0.1);
   content: "";
-  opacity: 0;
-  transition: opacity 260ms ease-out;
+  opacity: 0.14;
+  animation: focus-frame-breathe 6.8s ease-in-out infinite;
+  transition: background-color 360ms ease-out, opacity 360ms ease-out;
 }
-.player-focus-affordance {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  display: grid;
-  width: 48px;
-  height: 48px;
-  place-items: center;
-  border-radius: 8px;
-  background: rgba(249, 250, 247, 0.92);
-  color: #28302b;
-  box-shadow: 0 12px 30px rgba(20, 28, 23, 0.18);
-  opacity: 0.28;
-  transform: translate(-50%, -48%) scale(0.96);
-  transition: opacity 220ms ease-out, transform 320ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-.player-focus-affordance svg { width: 19px; height: 19px; stroke-width: 1.65; }
 .player-focus-entry:hover::before,
-.player-focus-entry:focus-visible::before { opacity: 1; }
-.player-focus-entry:hover .player-focus-affordance,
-.player-focus-entry:focus-visible .player-focus-affordance {
-  opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
+.player-focus-entry:focus-visible::before {
+  background: rgba(18, 24, 21, 0.16);
+  opacity: 0.72;
+  animation: none;
 }
 .player-focus-entry:focus-visible {
   outline: 2px solid rgba(249, 250, 247, 0.96);
   outline-offset: -6px;
+}
+@keyframes focus-frame-breathe {
+  0%, 100% { opacity: 0.1; }
+  48% { opacity: 0.34; }
 }
 .player-expanded-copy { min-width: 0; }
 .player-status-line,
@@ -1022,28 +1010,6 @@ input[role="switch"]:checked::after { transform: translateX(16px); }
   text-align: center;
 }
 .feeling-range:first-of-type { margin-top: 13px; }
-.player-scroll-cue {
-  position: absolute;
-  bottom: 14px;
-  left: 50%;
-  display: grid;
-  width: 44px;
-  height: 52px;
-  padding: 4px 0;
-  place-content: center;
-  place-items: center;
-  gap: 4px;
-  border: 0;
-  border-radius: 7px;
-  background: transparent;
-  color: var(--ink-tertiary);
-  transform: translateX(-50%);
-  transition: color 180ms ease-out;
-}
-.player-scroll-cue span { width: 1px; height: 17px; background: currentColor; opacity: 0.62; }
-.player-scroll-cue svg { width: 16px; height: 16px; stroke-width: 1.6; transition: transform 180ms ease-out; }
-.player-scroll-cue:hover { color: var(--ink); }
-.player-scroll-cue:hover svg { transform: translateY(2px); }
 .player-control-rail {
   position: relative;
   z-index: 4;
@@ -1061,21 +1027,25 @@ input[role="switch"]:checked::after { transform: translateX(16px); }
 }
 .player-identity {
   display: grid;
-  grid-template-columns: 48px minmax(0, 1fr) 24px;
+  grid-template-columns: 48px minmax(0, 1fr);
   align-items: center;
   gap: 12px;
   width: 100%;
   min-width: 0;
   height: 56px;
   margin-left: -4px;
-  padding: 4px;
+  padding: 4px 12px 4px 4px;
   border: 0;
   border-radius: 7px;
   background: transparent;
   text-align: left;
-  transition: color 180ms ease-out;
+  transition: background-color 240ms ease-out, color 180ms ease-out;
 }
-.player-identity:hover { color: var(--active); }
+.player-identity:hover,
+.player-identity:focus-visible {
+  background: color-mix(in srgb, var(--surface-muted) 58%, transparent);
+  color: var(--active);
+}
 .player-identity:hover small { color: var(--ink-secondary); }
 .player-identity img {
   display: block;
@@ -1086,15 +1056,6 @@ input[role="switch"]:checked::after { transform: translateX(16px); }
   background: var(--surface-muted);
 }
 .player-identity > span { display: block; min-width: 0; }
-.player-expand-indicator {
-  width: 17px;
-  height: 17px;
-  color: var(--ink-tertiary);
-  stroke-width: 1.7;
-  transition: color 180ms ease-out, transform 240ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-.player-identity:hover .player-expand-indicator { color: var(--active); }
-.app-shell[data-player-state="expanded"] .player-expand-indicator { transform: rotate(180deg); }
 .player-identity strong,
 .player-identity small {
   display: block;
@@ -1893,7 +1854,7 @@ input[type="range"]::-moz-range-thumb {
     transform: translate3d(0, calc(-1 * var(--mobile-nav-height)), 0);
     transition: transform 320ms cubic-bezier(0.16, 1, 0.3, 1);
   }
-  .player-identity { grid-template-columns: 44px minmax(0, 1fr) 20px; gap: 10px; height: 54px; }
+  .player-identity { grid-template-columns: 44px minmax(0, 1fr); gap: 10px; height: 54px; }
   .player-identity img { width: 44px; height: 44px; }
   .player-rail-actions { gap: 2px; }
   .rail-control { flex-direction: column; gap: 2px; padding: 0; }
@@ -2020,7 +1981,6 @@ input[type="range"]::-moz-range-thumb {
   .player-feeling .section-title-row h3 { font-size: 12px; }
   .feeling-range { grid-template-columns: 17px minmax(0, 1fr) 17px; gap: 5px; min-height: 32px; }
   .feeling-range:first-of-type { margin-top: 4px; }
-  .player-scroll-cue { bottom: 2px; height: 48px; }
 }
 
 @media (max-height: 700px) and (min-width: 821px) {
@@ -2028,24 +1988,6 @@ input[type="range"]::-moz-range-thumb {
   .player-hero-artwork { width: min(100%, 260px); }
   .player-expanded-copy h2 { font-size: 30px; }
   .player-feeling { margin-top: 20px; padding-top: 16px; }
-}
-
-@media (hover: none) {
-  .player-focus-entry .player-focus-affordance,
-  .player-focus-entry:hover .player-focus-affordance,
-  .player-focus-entry:focus-visible .player-focus-affordance {
-    top: 12px;
-    right: 12px;
-    left: auto;
-    width: 38px;
-    height: 38px;
-    opacity: 0.8;
-    transform: none;
-  }
-  .player-focus-entry::before,
-  .player-focus-entry:hover::before,
-  .player-focus-entry:focus-visible::before { opacity: 0; }
-  .player-focus-entry:active .player-focus-affordance { transform: scale(0.94); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2057,4 +1999,5 @@ input[type="range"]::-moz-range-thumb {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+  .player-focus-entry::before { animation: none; opacity: 0.22; }
 }
