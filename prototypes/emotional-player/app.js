@@ -236,7 +236,6 @@ const dom = {
   focusHeader: document.querySelector(".focus-header"),
   focusCopy: document.querySelector(".focus-copy"),
   focusButton: document.querySelector("#focus-button"),
-  focusClose: document.querySelector("#focus-close"),
   focusTitle: document.querySelector("#focus-title"),
   focusDescription: document.querySelector("#focus-description"),
   focusState: document.querySelector("#focus-state"),
@@ -392,6 +391,7 @@ const focusMotion = createFocusMotion({
     header: dom.focusHeader,
     copy: dom.focusCopy,
     player: dom.playerControlRail,
+    control: dom.playerCollapseButton,
   },
   isReducedMotion: motionRuntime.isReduced,
   onOpened: finishFocusOpen,
@@ -450,7 +450,10 @@ function installInteractions() {
     if (state.playerExpanded) collapsePlayer();
     else expandPlayer();
   });
-  dom.playerCollapseButton.addEventListener("click", () => collapsePlayer({ restoreFocus: true }));
+  dom.playerCollapseButton.addEventListener("click", () => {
+    if (state.focusOpen) closeFocusMode();
+    else if (!state.focusTransitioning) collapsePlayer({ restoreFocus: true });
+  });
   dom.mobileMoreButton.addEventListener("click", () => toggleMobileMoreMenu());
   dom.sleepTimerButton.addEventListener("click", () => toggleSleepTimerMenu());
   dom.volumeButton.addEventListener("click", () => toggleVolumePopover());
@@ -460,14 +463,13 @@ function installInteractions() {
   dom.focusButton.addEventListener("click", openFocusMode);
   dom.focusButton.addEventListener("pointerenter", prepareFocusField, { passive: true });
   dom.focusButton.addEventListener("focus", prepareFocusField);
-  dom.focusClose.addEventListener("click", closeFocusMode);
   dom.featuredPlay.addEventListener("click", () => switchToScene(state.featuredScene, { autoPlay: true }));
   dom.focusMode.addEventListener("pointermove", handleFocusActivity, { passive: true });
   dom.focusMode.addEventListener("pointerdown", handleFocusActivity, { passive: true });
   document.addEventListener("pointerdown", () => {
     if (state.focusOpen) focusChromeKeyboardActive = false;
   }, { capture: true, passive: true });
-  [dom.focusHeader, dom.playerControlRail].forEach((element) => {
+  [dom.focusHeader, dom.playerCollapseButton, dom.playerControlRail].forEach((element) => {
     element.addEventListener("pointerenter", () => {
       focusChromeEngaged = true;
       revealFocusChrome();
@@ -657,9 +659,19 @@ function syncPlayerStructure() {
   dom.shell.dataset.playerState = playerState;
   dom.globalPlayer.setAttribute("aria-label", state.playerExpanded ? `${state.currentScene.name}播放器` : "持续播放控制");
   syncPlayerIdentityLabel();
-  dom.playerCollapseButton.setAttribute("aria-label", `收起${state.currentScene.name}播放器`);
+  syncPlayerExitControl();
   syncBackgroundInert();
   syncStateMarkers();
+}
+
+function syncPlayerExitControl() {
+  const returningFromFocus = state.focusOpen || state.focusTransitioning;
+  const hidden = !state.playerExpanded && !state.playerTransitioning;
+  const label = returningFromFocus ? "返回播放器" : `收起${state.currentScene.name}播放器`;
+  dom.playerCollapseButton.setAttribute("aria-label", label);
+  dom.playerCollapseButton.setAttribute("aria-hidden", String(hidden));
+  dom.playerCollapseButton.inert = hidden;
+  dom.playerCollapseButton.title = returningFromFocus ? "返回播放器" : "收起播放器";
 }
 
 function syncExpandedAccessibility() {
@@ -2026,6 +2038,7 @@ function syncStateMarkers() {
   dom.shell.dataset.mobileMoreOpen = String(state.mobileMoreOpen);
   dom.shell.dataset.baseLevel = String(baseLayer.level);
   dom.shell.dataset.baseMuted = String(baseLayer.muted);
+  syncPlayerExitControl();
 }
 
 function exposeDebugApi() {

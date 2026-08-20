@@ -756,12 +756,37 @@ input[role="switch"]:checked::after { transform: translateX(16px); }
   position: absolute;
   top: max(22px, env(safe-area-inset-top));
   right: max(24px, env(safe-area-inset-right));
-  z-index: 6;
+  z-index: 202;
   background: var(--surface-raised);
   box-shadow: 0 2px 8px rgba(37, 47, 41, 0.08);
   opacity: 0;
   pointer-events: none;
   transform: translateY(-6px);
+  transition:
+    background-color 180ms ease-out,
+    box-shadow 220ms ease-out,
+    color 180ms ease-out,
+    opacity 180ms ease-out,
+    transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.player-collapse-icon {
+  display: grid;
+  grid-area: 1 / 1;
+  place-items: center;
+  pointer-events: none;
+  transition: opacity 150ms ease-out, transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.player-collapse-icon--focus {
+  opacity: 0;
+  transform: rotate(-45deg) scale(0.84);
+}
+.app-shell:is([data-focus-open="true"], [data-focus-transitioning="true"]) .player-collapse-icon--player {
+  opacity: 0;
+  transform: rotate(45deg) scale(0.84);
+}
+.app-shell:is([data-focus-open="true"], [data-focus-transitioning="true"]) .player-collapse-icon--focus {
+  opacity: 1;
+  transform: rotate(0) scale(1);
 }
 .player-main {
   position: relative;
@@ -1522,16 +1547,27 @@ input[type="range"]::-moz-range-thumb {
   z-index: 3;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   min-height: 78px;
   padding: max(22px, env(safe-area-inset-top)) max(28px, env(safe-area-inset-right)) 16px max(28px, env(safe-area-inset-left));
 }
-.focus-mode .focus-close {
+.app-shell:is([data-focus-open="true"], [data-focus-transitioning="true"]) .focus-mode + .player-collapse-button {
   background: rgba(246, 248, 244, 0.88);
   color: #222824;
   box-shadow: 0 8px 24px rgba(23, 30, 26, 0.12);
 }
-.focus-mode[data-focus-theme="dark"] .focus-close { background: rgba(27, 32, 30, 0.88); color: #eef1ec; }
+.app-shell:is([data-focus-open="true"], [data-focus-transitioning="true"]) .focus-mode + .player-collapse-button:hover,
+.app-shell:is([data-focus-open="true"], [data-focus-transitioning="true"]) .focus-mode + .player-collapse-button:focus-visible {
+  background: rgba(246, 248, 244, 0.96);
+}
+.app-shell:is([data-focus-open="true"], [data-focus-transitioning="true"]) .focus-mode[data-focus-theme="dark"] + .player-collapse-button {
+  background: rgba(27, 32, 30, 0.88);
+  color: #eef1ec;
+}
+.app-shell:is([data-focus-open="true"], [data-focus-transitioning="true"]) .focus-mode[data-focus-theme="dark"] + .player-collapse-button:hover,
+.app-shell:is([data-focus-open="true"], [data-focus-transitioning="true"]) .focus-mode[data-focus-theme="dark"] + .player-collapse-button:focus-visible {
+  background: rgba(27, 32, 30, 0.96);
+}
 .focus-copy {
   position: absolute;
   top: 50%;
@@ -1558,7 +1594,7 @@ input[type="range"]::-moz-range-thumb {
   line-height: 1.1;
 }
 .focus-copy h2 + p { margin-top: 14px; font-size: 15px; }
-.app-shell:is([data-focus-open="true"], [data-focus-transitioning="true"]) .focus-mode + .player-control-rail {
+.app-shell:is([data-focus-open="true"], [data-focus-transitioning="true"]) .focus-mode ~ .player-control-rail {
   --surface-raised: #f9faf7;
   --surface-muted: #e8ede9;
   --ink: #1c231f;
@@ -1570,7 +1606,7 @@ input[type="range"]::-moz-range-thumb {
   --active-soft: #dce8e2;
   --focus: #2c705f;
 }
-.app-shell:is([data-focus-open="true"], [data-focus-transitioning="true"]) .focus-mode[data-focus-theme="dark"] + .player-control-rail {
+.app-shell:is([data-focus-open="true"], [data-focus-transitioning="true"]) .focus-mode[data-focus-theme="dark"] ~ .player-control-rail {
   --surface-raised: #191f1d;
   --surface-muted: #2a322f;
   --ink: #f1f3ef;

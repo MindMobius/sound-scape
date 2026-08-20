@@ -58,7 +58,7 @@ export function createFocusMotion({ elements, isReducedMotion, onOpened, onClose
   function open() {
     if (isReducedMotion()) {
       gsap.set(elements.mode, { autoAlpha: 1 });
-      gsap.set([elements.header, elements.copy, elements.player], { autoAlpha: 1, y: 0 });
+      gsap.set([elements.header, elements.copy, elements.player, elements.control], { autoAlpha: 1, y: 0 });
       onOpened();
       return;
     }
@@ -93,17 +93,18 @@ export function createFocusMotion({ elements, isReducedMotion, onOpened, onClose
   function setChromeVisible(visible, { immediate = false } = {}) {
     if (chromeVisible === visible && !immediate) return;
     chromeVisible = visible;
-    const targets = [elements.header, elements.player];
+    const topTargets = [elements.header, elements.control];
+    const targets = [...topTargets, elements.player];
     gsap.killTweensOf(targets);
     gsap.set(targets, { pointerEvents: visible ? "auto" : "none" });
 
     if (immediate || isReducedMotion()) {
-      gsap.set(elements.header, { autoAlpha: visible ? 1 : 0, y: visible ? 0 : -6 });
+      gsap.set(topTargets, { autoAlpha: visible ? 1 : 0, y: visible ? 0 : -6 });
       gsap.set(elements.player, { autoAlpha: visible ? 1 : 0, y: visible ? 0 : 6 });
       return;
     }
 
-    gsap.to(elements.header, {
+    gsap.to(topTargets, {
       autoAlpha: visible ? 1 : 0,
       y: visible ? 0 : -6,
       duration: visible ? 0.26 : 0.3,
@@ -132,13 +133,13 @@ export function createFocusMotion({ elements, isReducedMotion, onOpened, onClose
     chromeVisible = true;
     gsap.set(elements.mode, { clearProps: "opacity,visibility,will-change" });
     gsap.set(elements.static, { clearProps: "transform,will-change" });
-    gsap.set([elements.header, elements.copy, elements.player], {
+    gsap.set([elements.header, elements.copy, elements.player, elements.control], {
       clearProps: "opacity,visibility,transform,pointer-events",
     });
   }
 
   function destroy() {
-    gsap.killTweensOf([elements.header, elements.player]);
+    gsap.killTweensOf([elements.header, elements.player, elements.control]);
     timeline?.revert();
     timeline = null;
   }

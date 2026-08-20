@@ -215,10 +215,6 @@
               <img id="player-atmosphere-image" src="../../assets/scenes/rain-cabin/rain-cabin-hero-web-v1.jpg" alt="" decoding="async" />
               <span class="player-atmosphere-field"></span>
             </div>
-            <button class="icon-button player-collapse-button" id="player-collapse-button" type="button" aria-label="收起播放器" title="收起播放器">
-              <i data-lucide="chevron-down" aria-hidden="true"></i>
-            </button>
-
             <div class="player-expanded-scroll" id="player-expanded-scroll">
               <div class="player-main">
               <figure class="player-hero-artwork">
@@ -302,7 +298,6 @@
             </div>
             <header class="focus-header">
               <a class="brand" href="#" aria-label="声景" tabindex="-1"><span class="brand-mark" aria-hidden="true"></span><span class="brand-name">声景</span></a>
-              <button class="icon-button focus-close" id="focus-close" type="button" aria-label="返回播放器" title="返回播放器"><i data-lucide="x" aria-hidden="true"></i></button>
             </header>
             <div class="focus-copy">
               <p><span class="live-dot" aria-hidden="true"></span><span id="focus-state">准备播放</span></p>
@@ -311,6 +306,11 @@
             </div>
             <p class="render-status sr-only" id="render-status" aria-live="polite">准备视觉场域</p>
           </section>
+
+          <button class="icon-button player-collapse-button" id="player-collapse-button" type="button" aria-label="收起播放器" title="收起播放器">
+            <span class="player-collapse-icon player-collapse-icon--player" aria-hidden="true"><i data-lucide="chevron-down"></i></span>
+            <span class="player-collapse-icon player-collapse-icon--focus" aria-hidden="true"><i data-lucide="x"></i></span>
+          </button>
 
           <footer class="player-control-rail" aria-label="播放控制">
             <button class="player-identity" id="player-identity-button" type="button" aria-label="展开雨夜木屋播放器">
