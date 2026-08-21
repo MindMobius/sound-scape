@@ -1,0 +1,15 @@
+{
+  "dart.flutterHotReloadOnSave": "all",
+  "dart.lineLength": 80,
+  "editor.formatOnSave": true,
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 800,
+  "files.exclude": {
+    "apps/mobile/.dart_tool": true,
+    "apps/mobile/build": true
+  },
+  "search.exclude": {
+    "apps/mobile/.dart_tool": true,
+    "apps/mobile/build": true
+  }
+}

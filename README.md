@@ -2,16 +2,25 @@
 
 一句话，用声音描述世界。
 
-声景把自然语言描述组织成可持续演化的声音环境。当前仓库已经沉淀产品定义、视觉与场景素材体系，以及用于验证日常聆听、渐进式配置和沉浸场的前端原型；真实生成服务、素材持久化和生产音频运行时仍未接入。
+声景把自然语言描述组织成可持续演化的声音环境。当前仓库包含用于公开体验的 Web 原型，以及可在 Windows 和 Android 运行的 Flutter 客户端 MVP。客户端已经验证多层混音、持续播放、系统媒体控制、渐进式调节和沉浸聆听；真实生成服务、正式素材持久化和发布链路仍未接入。
 
-## 快速开始
+## Web 体验
 
 ```powershell
 npm ci --prefix prototypes/emotional-player
 npm run dev -- --port 4174
 ```
 
-打开 `http://127.0.0.1:4174/?view=home`。
+打开 `http://127.0.0.1:4174/`。
+
+## Flutter 客户端
+
+```powershell
+npm run mobile:setup
+npm run mobile:dev
+```
+
+脚本会自动找到本机 Flutter SDK、校验项目版本并仅为子进程配置国内镜像。使用 VS Code 的“声景：桌面日常开发”启动配置时，保存 Dart 文件即可热重载；Android、客户端能力边界和分层验收方式见 `apps/mobile/README.md`。
 
 ## 仓库结构
 
@@ -20,6 +29,7 @@ npm run dev -- --port 4174
 | `PRODUCT.md` | 产品定位、能力边界与不可虚构的事实 |
 | `DESIGN.md` | 视觉语言、组件规则、动效与响应式规范 |
 | `assets/` | 应用可直接消费的品牌、场景和平台静态资源 |
+| `apps/mobile/` | Flutter 本地优先客户端 MVP 与原生平台配置 |
 | `design/` | 提示词、方向稿、质量参考和视觉验收材料 |
 | `prototypes/` | 可运行但可丢弃的产品与渲染实验 |
 | `docs/` | 架构约定和经过保留的研究结论 |
@@ -34,6 +44,8 @@ npm run dev -- --port 4174
 npm run validate:assets
 npm run build
 npm run check
+
+npm run mobile:check
 ```
 
 品牌母版、场景清单、固定素材槽位和实验隔离规则见 `assets/README.md`；原型状态与启动方式见 `prototypes/README.md`。

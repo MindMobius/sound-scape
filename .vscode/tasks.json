@@ -1,0 +1,36 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "声景 Flutter：初始化环境",
+      "type": "shell",
+      "command": "npm run mobile:setup",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "声景 Flutter：快速检查",
+      "type": "shell",
+      "command": "npm run mobile:check",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "problemMatcher": ["$dart-build"]
+    },
+    {
+      "label": "声景 Flutter：查看设备",
+      "type": "shell",
+      "command": "npm run mobile:devices",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": []
+    }
+  ]
+}

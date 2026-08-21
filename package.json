@@ -6,6 +6,14 @@
     "dev": "npm --prefix prototypes/emotional-player run dev --",
     "build": "npm --prefix prototypes/emotional-player run build",
     "build:optical": "npm --prefix prototypes/optical-membrane-field run build",
+    "mobile:setup": "node tools/flutter.mjs setup",
+    "mobile:dev": "node tools/flutter.mjs run desktop",
+    "mobile:android": "node tools/flutter.mjs run android",
+    "mobile:devices": "node tools/flutter.mjs devices",
+    "mobile:check": "node tools/flutter.mjs check",
+    "mobile:test": "node tools/flutter.mjs test",
+    "mobile:build:windows": "node tools/flutter.mjs build windows",
+    "mobile:build:android": "node tools/flutter.mjs build android",
     "validate:assets": "node tools/validate-static-assets.mjs",
     "check": "npm run validate:assets && npm run build"
   }

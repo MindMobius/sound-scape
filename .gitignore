@@ -18,7 +18,11 @@ __pycache__/
 .DS_Store
 Thumbs.db
 .idea/
-.vscode/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/settings.json
+!.vscode/tasks.json
 
 # Impeccable working state and generated review captures
 .impeccable/questions/*.log

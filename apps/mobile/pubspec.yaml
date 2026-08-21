@@ -1,0 +1,30 @@
+name: soundscape_mobile
+description: "声景本地优先的持续自然声客户端 MVP。"
+publish_to: 'none'
+version: 0.1.0+1
+
+environment:
+  sdk: ^3.13.1
+
+dependencies:
+  audio_service: 0.18.19
+  audio_session: 0.2.4
+  flutter:
+    sdk: flutter
+  flutter_soloud: 4.1.7
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/audio/open-water.wav
+    - assets/audio/rain-cabin.mp3
+    - assets/images/coastal-night-cover.jpg
+    - assets/images/coastal-night-hero.jpg
+    - assets/images/rain-cabin-cover.jpg
+    - assets/images/rain-cabin-hero.jpg
+    - assets/images/soundscape-mark.png
