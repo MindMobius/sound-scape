@@ -13,14 +13,14 @@
     <!--
       THESIS: 公开 Web 是进入声音世界的门槛，不是缩小版客户端；拒绝用功能导航替代真实聆听。
       OWN-WORLD: 冷白底、炭黑、矿物灰绿与雾蓝，珊瑚只标记动作；精密细线、6 至 8 像素圆角和 Image 2 膜片裁片共同构成界面。
-      STORY: 访客先听见一处真实声景，再探索预置场景或了解客户端；全局控制轨、完整播放器与沉浸场始终属于同一聆听体验。
-      FIRST VIEWPORT: 顶部只有品牌、探索与下载；精选声景画面铺满首屏主体，产品名和直接播放动作落在画面上，下一段策展内容在首屏下缘可见。
+      STORY: 访客直接从探索页听见一处真实声景，再选择另一处场景或了解客户端；全局控制轨、完整播放器与沉浸场始终属于同一聆听体验。
+      FIRST VIEWPORT: 顶部只有品牌、探索与下载；探索页先呈现可直接播放的精选声景，再自然接续其他可听内容。
       FORM: 已建立视觉世界中的公开体验入口，延续 seed ac023634；内部创建、素材与设置仅在 lab 模式出现。
       FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
     -->
-    <div class="app-shell" id="app-shell" data-view="home" data-job-state="idle" data-lab-mode="false">
+    <div class="app-shell" id="app-shell" data-view="explore" data-job-state="idle" data-lab-mode="false">
       <header class="site-header side-rail" aria-label="主导航">
-        <a class="brand" href="#home" data-view-link="home" aria-label="声景，返回首页">
+        <a class="brand" href="#explore" data-view-link="explore" aria-label="声景，返回探索">
           <span class="brand-mark" aria-hidden="true"></span>
           <span class="brand-name">声景</span>
         </a>
@@ -45,7 +45,7 @@
       </header>
 
       <header class="mobile-header">
-        <a class="brand" href="#home" data-view-link="home" aria-label="声景，返回首页">
+        <a class="brand" href="#explore" data-view-link="explore" aria-label="声景，返回探索">
           <span class="brand-mark" aria-hidden="true"></span>
           <span class="brand-name">声景</span>
         </a>
@@ -66,46 +66,7 @@
       </header>
 
       <main class="workspace" id="workspace">
-        <section class="app-view home-view is-active" data-view="home" aria-labelledby="home-view-title">
-          <section class="home-stage">
-            <img id="home-guide-cover" src="../../assets/scenes/coastal-night/coastal-night-hero-web-v1.jpg" alt="深夜海岸上的潮水与礁石" decoding="async" fetchpriority="high" />
-            <span class="home-stage-tone" aria-hidden="true"></span>
-            <div class="home-stage-copy">
-              <h1 id="home-view-title">声景</h1>
-              <p>让一处声音世界，持续发生。</p>
-              <div class="home-stage-actions">
-                <button class="home-guide-scene" type="button" data-scene="coastal-night" aria-label="播放深夜海岸">
-                  <i data-lucide="play" aria-hidden="true"></i>
-                  <span><strong>听见深夜海岸</strong><small>近岸潮水 · 远浪 · 礁石回响</small></span>
-                </button>
-                <button class="home-explore-link" type="button" data-view-link="explore">
-                  <span>探索更多</span><i data-lucide="compass" aria-hidden="true"></i>
-                </button>
-              </div>
-            </div>
-          </section>
-
-          <section class="home-selection" aria-labelledby="home-selection-title">
-            <header class="public-section-heading">
-              <h2 id="home-selection-title">现在可以听见</h2>
-              <p>两处已经准备好的声音世界，会一直自然变化。</p>
-            </header>
-            <div class="home-scene-grid" id="home-scene-grid"></div>
-          </section>
-
-          <section class="home-client-band" aria-labelledby="home-client-title">
-            <div>
-              <h2 id="home-client-title">属于你的声景，将在客户端发生</h2>
-              <p>一句描述、本地声音和持续聆听，都留在你的设备上。</p>
-              <button class="primary-action" type="button" data-view-link="download">
-                <i data-lucide="download" aria-hidden="true"></i><span>了解客户端</span>
-              </button>
-            </div>
-            <img id="home-client-cover" src="../../assets/scenes/rain-cabin/rain-cabin-cover-web-v1.jpg" alt="雨夜木屋声景封面" loading="lazy" decoding="async" />
-          </section>
-        </section>
-
-        <section class="app-view explore-view" data-view="explore" aria-labelledby="explore-view-title" hidden>
+        <section class="app-view explore-view is-active" data-view="explore" aria-labelledby="explore-view-title">
           <header class="view-header">
             <div>
               <h1 id="explore-view-title">可听的声景</h1>

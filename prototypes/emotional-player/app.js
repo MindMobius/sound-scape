@@ -4,7 +4,6 @@ import {
   Blend,
   ChevronDown,
   CloudRain,
-  Compass,
   createIcons,
   Database,
   Download,
@@ -146,7 +145,7 @@ const sourceCatalog = {
     { id: "media-spatial", name: "耳机空间", detail: "双声道空间化与远近", icon: "headphones", upload: true, profile: "spatial" },
   ],
 };
-const publicViews = new Set(["home", "explore", "download"]);
+const publicViews = new Set(["explore", "download"]);
 const labViews = new Set(["create", "library", "settings"]);
 const randomPrompts = [
   "雷雨夜里，点燃篝火的木屋。",
@@ -167,9 +166,6 @@ const dom = {
   workspace: document.querySelector("#workspace"),
   views: [...document.querySelectorAll(".app-view")],
   viewLinks: [...document.querySelectorAll("[data-view-link]")],
-  homeGuideCover: document.querySelector("#home-guide-cover"),
-  homeGuideScene: document.querySelector(".home-guide-scene"),
-  homeClientCover: document.querySelector("#home-client-cover"),
   downloadVisualImage: document.querySelector("#download-visual-image"),
   globalPlayer: document.querySelector("#global-player"),
   playerControlRail: document.querySelector(".player-control-rail"),
@@ -206,7 +202,6 @@ const dom = {
   movementInputs: [...document.querySelectorAll("[data-movement]")],
   distanceInputs: [...document.querySelectorAll("[data-distance]")],
   orchestrationSummary: document.querySelector("#orchestration-summary"),
-  homeSceneGrid: document.querySelector("#home-scene-grid"),
   exploreGrid: document.querySelector("#explore-grid"),
   libraryGrid: document.querySelector("#library-grid"),
   templateList: document.querySelector("#template-list"),
@@ -434,10 +429,9 @@ async function boot() {
 }
 
 function getInitialView() {
-  if (validViews.has(initialRequest)) return initialRequest;
-  if (initialRequest) return "home";
-  if (validViews.has(storedPreferences.activeView)) return storedPreferences.activeView;
-  return "home";
+  const requestedView = initialRequest === "home" ? "explore" : initialRequest;
+  if (validViews.has(requestedView)) return requestedView;
+  return "explore";
 }
 
 function installInteractions() {
@@ -498,7 +492,7 @@ function installInteractions() {
     });
   });
 
-  [dom.homeGuideScene, dom.homeSceneGrid, dom.exploreGrid, dom.libraryGrid].filter(Boolean).forEach((container) => {
+  [dom.exploreGrid, dom.libraryGrid].filter(Boolean).forEach((container) => {
     container.addEventListener("click", handleSceneSelection);
   });
 
@@ -1184,14 +1178,7 @@ function renderCurrentScene() {
 
 function renderFeaturedScene() {
   const scene = state.featuredScene;
-  dom.homeClientCover.src = rainCover;
   dom.downloadVisualImage.src = rainHero;
-  dom.homeGuideCover.src = scene.hero;
-  dom.homeGuideCover.alt = `${scene.name}的声景画面`;
-  dom.homeGuideScene.dataset.scene = scene.id;
-  dom.homeGuideScene.setAttribute("aria-label", `播放${scene.name}`);
-  dom.homeGuideScene.querySelector("strong").textContent = `听见${scene.name}`;
-  dom.homeGuideScene.querySelector("small").textContent = scene.elements.join(" · ");
   dom.featuredImage.src = scene.hero;
   dom.featuredTitle.textContent = scene.name;
   dom.featuredDescription.textContent = scene.description;
@@ -1199,13 +1186,8 @@ function renderFeaturedScene() {
 }
 
 function renderCollections() {
-  renderHomeSceneGrid();
   renderExploreGrid();
   renderLibraryGrid();
-}
-
-function renderHomeSceneGrid() {
-  dom.homeSceneGrid.replaceChildren(...scenes.map((scene) => createSceneCard(scene, "home-scene-card")));
 }
 
 function renderTemplates() {
@@ -2002,7 +1984,6 @@ function renderIcons() {
       Blend,
       ChevronDown,
       CloudRain,
-      Compass,
       Database,
       Download,
       Ellipsis,
