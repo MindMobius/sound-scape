@@ -30,6 +30,7 @@ npm run mobile:dev
 | `DESIGN.md` | 视觉语言、组件规则、动效与响应式规范 |
 | `assets/` | 应用可直接消费的品牌、场景和平台静态资源 |
 | `apps/mobile/` | Flutter 本地优先客户端 MVP 与原生平台配置 |
+| `contracts/` | 客户端、生成服务和 Agent 共用的版本化声明式契约 |
 | `design/` | 提示词、方向稿、质量参考和视觉验收材料 |
 | `prototypes/` | 可运行但可丢弃的产品与渲染实验 |
 | `docs/` | 架构约定和经过保留的研究结论 |

@@ -21,12 +21,13 @@ SoundscapeController <----- SoundscapeAudioHandler
                               +-- event bus
                               |
                               v
-                  SoundscapeScene + SoundscapeMix
+        SceneRecipe + SoundLibrary + SoundscapeMix
 ```
 
 - `domain/` 定义场景、声音层、预设和目录，不依赖 Flutter 页面或 SoLoud 句柄。
+- `data/` 读取版本化素材清单、保存本地状态，并把用户音频复制到内容寻址目录。
 - `audio/soundscape_mix.dart` 是纯函数混音规则，可独立测试。
-- `audio/soundscape_runtime.dart` 管理音频源、总线、循环声部、随机事件和连续淡化。
+- `audio/soundscape_scheduler.dart` 负责确定性随机流、分段选择、随机静默和纹理变化；`audio/soundscape_runtime.dart` 只执行计划并管理句柄。
 - `audio/soundscape_audio_handler.dart` 管理系统音频会话、媒体通知、中断、耳机拔出和睡眠倒计时。
 - `ui/` 只依赖 `SoundscapeController` 和不可变快照，不持有或销毁原生音频引擎。
 
@@ -34,7 +35,7 @@ SoundscapeController <----- SoundscapeAudioHandler
 
 播放器、展开页和沉浸态始终来自 `SoundscapePlayerSurface` 同一根节点。UI 形态变化不能创建第二个播放条，也不能搬移音频状态。页面销毁或系统锁屏后，倒计时和播放状态仍由 `SoundscapeAudioHandler` 持有。
 
-场景级轻重、简繁、逐层存在感和开关保存在当前进程的 `SoundscapeRuntime` 中。MVP 退出后不持久化；正式客户端应把 `SceneRecipe`、素材内容地址、授权元数据和用户偏好放入持久存储。
+场景级轻重、简繁、逐层存在感、开关、收藏和用户预设由 `SoundscapeRuntime` 持有，并通过 `SoundscapeStateStore` 保存为版本化本地状态。音频文件不写入状态：打包素材由声音清单管理，用户素材复制到应用支持目录的 `imports/`。素材规模扩大到下载包和大量导入后，保持现有接口并把索引迁移到 Drift。
 
 ## 平台边界
 

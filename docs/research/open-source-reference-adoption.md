@@ -1,0 +1,81 @@
+# 开源声景项目采纳矩阵
+
+更新时间：2026-08-22
+
+## 结论
+
+声景不 fork 任何一个现成播放器，也不把多个项目的源码拼在一起。我们采用的是经过许可证隔离的能力组合：
+
+```text
+自然语言
+  -> Audio-Oscar 式结构化 SceneRecipe
+  -> Ambie / Noice 式版本化素材目录
+  -> Noice 式分段、随机静默与桥接语义
+  -> Generative.fm 式可复现持续调度
+  -> 声景现有 SoLoud Mixing Bus
+  -> Spotube 验证过的 Flutter 后台生命周期边界
+```
+
+代码许可证和音频素材许可证必须分别判断。上游项目允许使用代码，不代表其中每份音频也能被重新分发；GPL 或专有项目只做 clean-room 行为参考，不复制实现。
+
+## 采纳矩阵
+
+| 项目 | 许可证与边界 | 吸收内容 | 声景落点 | 明确不采用 |
+| --- | --- | --- | --- | --- |
+| [Noice](https://github.com/trynoice/android-app) | GPL-3.0；不复制代码 | 分段声音、随机静默、桥接片段、素材仓库、预设、后台服务 | `SoundSegment`、`SoundscapeScheduler`、逐层独立定时器、状态仓库接口 | Kotlin/Android 实现、GPL 源码和素材包 |
+| [Ambie](https://github.com/jenius-apps/ambie) | 代码 MIT；声音逐文件授权 | 素材 ID、元数据版本、文件版本、本地化、预览、来源、作者、许可证 | `SoundAsset`、`SoundSource`、`SoundLicense`、版本化 JSON 清单 | 未核验授权的音频和 Windows 专属 UI 架构 |
+| [Audio-Oscar](https://github.com/ziye26/Audio-Oscar) | Apache-2.0；模型和数据另有许可证；当前仍是部分发布 | Planner、Critic、Executor、Mixer 的职责拆分和结构化事件 | `SceneRecipe v1` 契约；未来 Agent 只产出声明式配方，客户端校验后执行 | 把固定时长成片逻辑直接套到无限声景、未经审核的模型输出直达播放器 |
+| [Generative.fm](https://github.com/generativefm) | MIT；原始播放器已归档 | seed、持续调度、样本与编排分离、无限演化而非长音频文件 | 自有确定性随机数、每层独立随机流、相同 seed 可复现 | Tone.js/Web Audio 实现和生成式音乐内容 |
+| [Moodist](https://github.com/remvze/moodist) | 代码 MIT；声音混合 Pixabay/CC0，仍需逐文件核验 | 分类、收藏、预设、淡入淡出、离线体验和分享心智 | 收藏与用户预设进入版本化本地状态；现有播放淡化保持 | 整包音频、Astro/React 运行时、工具集合式首页 |
+| [Blanket](https://github.com/rafaelmardojai/blanket) | GPL-3.0；有独立声音授权清单 | 克制交互、自定义声音、逐文件授权台账 | 内容寻址用户导入、每份素材独立来源与发布资格 | GPL 源码、GNOME/GTK 架构 |
+| [Spotube](https://github.com/KRTirtho/spotube) | BSD-4-Clause | Flutter 跨端媒体生命周期、本地文件、下载与系统媒体控制的工程经验 | `audio_service + audio_session`、客户端生命周期和跨端验收 | 歌曲队列、进度条、MPV 和流媒体业务模型 |
+| [Harmonoid](https://github.com/harmonoid/harmonoid) | PolyForm Strict；不适合产品代码复用 | 播放器层级、桌面与移动端信息密度参考 | 仅用于设计评审 | 任何代码、组件或商业复用 |
+| [Soundscape Agent](https://github.com/HaoZhang6720/Soundscape_agent) | 专有许可证；第三方模型和数据另行约束 | 检索优先、缺失时生成、显式时间层、局部替换、stems/mixer 概念 | 未来生成服务的检索与工具边界研究 | 源码、数据索引、模型封装和训练素材 |
+
+## 已落地的能力
+
+### 素材目录
+
+- `apps/mobile/assets/catalog/sound-library.v1.json` 是客户端当前素材清单。
+- `SoundAsset` 使用稳定 ID，不让场景直接引用文件路径。
+- 每份素材记录元数据版本、文件版本、SHA-256、分类、标签、本地化名称、可用状态、来源、作者、许可证、预览片段和正式片段。
+- 场景只能引用已注册的 `assetId + segmentIds`；启动时会做完整性校验。
+- 当前两份历史音频明确为 `development-only / unverified / redistributionAllowed=false`，因此自动无法进入发布目录。
+
+### 持续编排
+
+- 每个 `event` 层拥有独立随机流和定时器，不再由单一全局计时器随机挑层。
+- 多片段事件默认禁止连续重复，丰富度映射为随机静默长度。
+- 纹理层分别获得缓慢的增益和声像变化；变化范围来自配方，不由 UI 直接操纵。
+- 调度器使用稳定 seed，相同配方可复现编排次序。
+- `bridgeSegmentId` 已进入调度模型；只有拿到适合的真实桥接录音后才会配置，不能用交叉淡化伪装所有接缝。
+
+### 本地能力
+
+- 上次场景、总音量、轻重、简繁、逐层存在感、逐层开关、收藏和用户预设进入版本化本地状态。
+- 用户导入通过 Flutter 官方 `file_selector`，流式计算 SHA-256 后复制到 `Application Support/imports/<sha256>.<ext>`。
+- 相同内容自动去重；用户素材默认 `user-provided / blocked / redistributionAllowed=false`。
+- Web 使用内存降级实现，不虚构拥有原生持久目录；完整本地素材能力属于客户端。
+
+### Agent 契约
+
+- `contracts/scene-recipe.v1.schema.json` 是 Agent、API 和客户端共享的声明式边界。
+- 配方只允许稳定素材 ID、片段 ID、宏参数和有限调度参数。
+- 配方不允许脚本、任意路径、任意 URL、凭据、插件代码或模型返回的动态表达式。
+- 客户端仍负责素材存在性、授权状态、数值范围和 schema 版本校验。
+
+## 未完成但边界已确定
+
+1. 正式声音包：需要逐文件来源、作者、许可证、原始地址和哈希，当前原型音频不能发布。
+2. 下载仓库：素材数量扩大后使用 Drift 保存索引、版本、下载状态和迁移；音频仍使用内容寻址文件。
+3. 导入与预设 UI：数据和控制器边界已存在，需在素材库与高级配置中渐进披露，不能塞回默认播放器。
+4. Agent 服务：先实现 `描述 -> SceneRecipe -> 校验`，再接检索、缺失生成、critic 和局部修复。
+5. 长时验收：Android 与 iPhone 真机仍需完成锁屏、来电、蓝牙、系统回收和 30 分钟接缝测试。
+
+## 采纳规则
+
+- 只有许可证兼容、代码确有必要且本地模式不更简单时，才复制或改写上游代码，并记录具体文件和许可证。
+- GPL、PolyForm Strict 和专有项目只允许行为级研究，不允许把实现翻译成 Dart 后声称是自研。
+- 上游声音必须逐文件进入清单；项目级 MIT、GPL 或 README 描述不能替代素材授权。
+- 任何来源不明或不可再分发的素材只能标记为开发或用户私有，发布构建必须失败而不是警告后继续。
+- 每项“已吸收”必须能指向领域对象、运行时行为或自动测试，不能只停留在参考图和文档措辞。
