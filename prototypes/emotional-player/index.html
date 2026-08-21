@@ -26,9 +26,9 @@
         </a>
 
         <nav class="primary-nav" aria-label="网站导航">
-          <button class="nav-item site-download-link" type="button" data-view-link="download">
+          <a class="nav-item site-download-link" href="#client" data-client-link>
             <span>下载客户端</span>
-          </button>
+          </a>
           <button class="nav-item lab-only" type="button" data-view-link="create">
             <span>创建</span>
           </button>
@@ -48,7 +48,7 @@
         </a>
         <div class="mobile-header-actions">
           <nav class="mobile-public-nav" aria-label="网站导航">
-            <button class="mobile-public-link" type="button" data-view-link="download">下载客户端</button>
+            <a class="mobile-public-link" href="#client" data-client-link>下载客户端</a>
           </nav>
           <button class="icon-button lab-only" id="mobile-more-button" type="button" aria-label="内部功能" aria-expanded="false" aria-controls="mobile-more-menu" title="内部功能">
             <i data-lucide="ellipsis" aria-hidden="true"></i>
@@ -92,48 +92,42 @@
             <div class="scene-grid" id="explore-grid"></div>
           </section>
 
-          <section class="explore-client-band" aria-labelledby="explore-client-title">
-            <div><h2 id="explore-client-title">想创造自己的声音世界？</h2><p>完整客户端将承载一句话生成、本地素材与长期聆听。</p></div>
-            <button class="text-action" type="button" data-view-link="download"><span>前往下载页</span><i data-lucide="download" aria-hidden="true"></i></button>
-          </section>
-        </section>
+          <div class="client-section" id="client">
+            <section class="download-intro" aria-labelledby="client-title">
+              <div class="download-copy">
+                <h2 id="client-title">把声景带在身边</h2>
+                <p>客户端会把生成、素材和持续播放留在设备上。现在仍在打磨，网页体验会继续开放。</p>
+                <p class="download-state"><span aria-hidden="true"></span>客户端正在开发中</p>
+              </div>
+              <figure class="download-visual">
+                <img id="download-visual-image" src="../../assets/scenes/rain-cabin/rain-cabin-hero-web-v1.jpg" alt="雨夜木屋的声景视觉" loading="lazy" decoding="async" />
+              </figure>
+            </section>
 
-        <section class="app-view download-view" data-view="download" aria-labelledby="download-view-title" hidden>
-          <section class="download-intro">
-            <div class="download-copy">
-              <h1 id="download-view-title">把声景带在身边</h1>
-              <p>客户端会把生成、素材和持续播放留在设备上。现在仍在打磨，网页体验会继续开放。</p>
-              <p class="download-state"><span aria-hidden="true"></span>客户端正在开发中</p>
-              <button class="text-action" type="button" data-view-link="explore"><i data-lucide="headphones" aria-hidden="true"></i><span>先在网页聆听</span></button>
-            </div>
-            <figure class="download-visual">
-              <img id="download-visual-image" src="../../assets/scenes/rain-cabin/rain-cabin-hero-web-v1.jpg" alt="雨夜木屋的声景视觉" decoding="async" />
-            </figure>
-          </section>
-
-          <section class="download-platforms" aria-labelledby="download-platforms-title">
-            <header class="public-section-heading">
-              <h2 id="download-platforms-title">完整体验，正在走向每一台设备</h2>
-              <p>开放时间与安装包会在这里如实更新。</p>
-            </header>
-            <div class="platform-list">
-              <article class="platform-row">
-                <i data-lucide="smartphone" aria-hidden="true"></i>
-                <div><h3>iPhone 与 Android</h3><p>后台播放、锁屏控制和随身聆听。</p></div>
-                <span>开发中</span>
-              </article>
-              <article class="platform-row">
-                <i data-lucide="laptop" aria-hidden="true"></i>
-                <div><h3>Windows 与 macOS</h3><p>本地素材、离线场景和更完整的编排能力。</p></div>
-                <span>规划中</span>
-              </article>
-              <article class="platform-row platform-row--available">
-                <i data-lucide="waves" aria-hidden="true"></i>
-                <div><h3>网页体验</h3><p>无需安装，直接聆听现有声景。</p></div>
-                <button class="quiet-link" type="button" data-view-link="explore">现在进入</button>
-              </article>
-            </div>
-          </section>
+            <section class="download-platforms" aria-labelledby="download-platforms-title">
+              <header class="public-section-heading">
+                <h2 id="download-platforms-title">完整体验，正在走向每一台设备</h2>
+                <p>开放时间与安装包会在这里如实更新。</p>
+              </header>
+              <div class="platform-list">
+                <article class="platform-row">
+                  <i data-lucide="smartphone" aria-hidden="true"></i>
+                  <div><h3>iPhone 与 Android</h3><p>后台播放、锁屏控制和随身聆听。</p></div>
+                  <span>开发中</span>
+                </article>
+                <article class="platform-row">
+                  <i data-lucide="laptop" aria-hidden="true"></i>
+                  <div><h3>Windows 与 macOS</h3><p>本地素材、离线场景和更完整的编排能力。</p></div>
+                  <span>规划中</span>
+                </article>
+                <article class="platform-row platform-row--available">
+                  <i data-lucide="waves" aria-hidden="true"></i>
+                  <div><h3>网页体验</h3><p>无需安装，直接聆听现有声景。</p></div>
+                  <span>当前可用</span>
+                </article>
+              </div>
+            </section>
+          </div>
         </section>
 
         <section class="app-view create-view lab-only" data-view="create" aria-labelledby="create-view-title" hidden>

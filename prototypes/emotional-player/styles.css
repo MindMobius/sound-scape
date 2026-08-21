@@ -186,6 +186,7 @@ select:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
   font-size: 13px;
   font-weight: 590;
   text-align: center;
+  text-decoration: none;
   transition: background-color 180ms ease-out, color 180ms ease-out;
 }
 .nav-item:hover { background: transparent; color: var(--ink); }
@@ -221,6 +222,8 @@ select:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
 .mobile-header-actions { position: relative; display: flex; align-items: center; gap: 2px; }
 .mobile-public-link {
   position: relative;
+  display: inline-flex;
+  align-items: center;
   min-height: 40px;
   padding: 0 9px;
   border: 0;
@@ -228,6 +231,7 @@ select:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
   color: var(--ink-secondary);
   font-size: 12px;
   font-weight: 640;
+  text-decoration: none;
 }
 .mobile-public-link:hover,
 .mobile-public-link.is-active { color: var(--ink); }
@@ -434,20 +438,6 @@ select:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
 .light-action { margin-top: 22px; background: #f4f6f2; color: #1d2420; }
 .light-action:hover { background: #ffffff; }
 .scene-section { margin-top: 40px; }
-.explore-client-band {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 32px;
-  margin-top: 72px;
-  padding: 32px 0;
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-}
-.explore-client-band h2,
-.explore-client-band p { margin: 0; }
-.explore-client-band h2 { font-family: var(--font-display); font-size: 20px; font-weight: 620; }
-.explore-client-band p { margin-top: 7px; color: var(--ink-secondary); font-size: 12px; }
 .source-tabs {
   display: inline-flex;
   align-items: center;
@@ -511,26 +501,30 @@ select:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
 }
 .library-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 0; }
 
-/* Download is an honest release-status page, not a false store front. */
-.download-view { padding-top: 0; }
+/* Client availability follows listening as one restrained section, not another page. */
+.client-section {
+  margin-top: 96px;
+  padding-top: 76px;
+  border-top: 1px solid var(--line);
+  scroll-margin-top: 24px;
+}
 .download-intro {
   display: grid;
   grid-template-columns: minmax(300px, 0.78fr) minmax(420px, 1.22fr);
   align-items: center;
   gap: clamp(52px, 8vw, 116px);
-  min-height: max(520px, calc(100dvh - var(--site-header-height) - var(--player-height)));
+  padding-bottom: 76px;
 }
-.download-copy h1,
+.download-copy h2,
 .download-copy > p,
 .download-visual { margin: 0; }
-.download-copy h1 { max-width: 8em; font-family: var(--font-display); font-size: 48px; font-weight: 590; line-height: 1.16; }
+.download-copy h2 { max-width: 9em; font-family: var(--font-display); font-size: 42px; font-weight: 590; line-height: 1.18; }
 .download-copy > p:not(.download-state) { max-width: 38em; margin-top: 18px; color: var(--ink-secondary); font-size: 15px; line-height: 1.8; }
 .download-state { display: flex; align-items: center; gap: 9px; margin-top: 28px; color: var(--active); font-size: 12px; font-weight: 650; }
 .download-state > span { width: 7px; height: 7px; border-radius: 50%; background: var(--active); }
-.download-copy .text-action { margin-top: 18px; }
 .download-visual { overflow: hidden; border-radius: 8px; background: var(--surface-muted); }
 .download-visual img { display: block; width: 100%; aspect-ratio: 1.16 / 1; object-fit: cover; }
-.download-platforms { padding: 76px 0 56px; border-top: 1px solid var(--line); }
+.download-platforms { padding: 64px 0 28px; border-top: 1px solid var(--line); }
 .platform-list { margin-top: 30px; border-top: 1px solid var(--line); }
 .platform-row {
   display: grid;
@@ -1728,11 +1722,10 @@ input[type="range"]::-moz-range-thumb {
   .scene-section { margin-top: 32px; }
   .scene-grid,
   .library-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 12px; }
-  .explore-client-band { align-items: flex-start; flex-direction: column; gap: 14px; margin-top: 52px; }
 
-  .download-view { padding-top: 0; }
-  .download-intro { grid-template-columns: 1fr; gap: 34px; min-height: auto; padding: 44px 0 58px; }
-  .download-copy h1 { max-width: 9em; font-size: 38px; }
+  .client-section { margin-top: 68px; padding-top: 52px; scroll-margin-top: 16px; }
+  .download-intro { grid-template-columns: 1fr; gap: 34px; padding-bottom: 58px; }
+  .download-copy h2 { max-width: 9em; font-size: 34px; }
   .download-copy > p:not(.download-state) { font-size: 14px; }
   .download-visual { width: 100%; }
   .download-visual img { aspect-ratio: 1.28 / 1; }

@@ -6,7 +6,6 @@ import {
   CloudRain,
   createIcons,
   Database,
-  Download,
   Ellipsis,
   Headphones,
   House,
@@ -145,7 +144,7 @@ const sourceCatalog = {
     { id: "media-spatial", name: "耳机空间", detail: "双声道空间化与远近", icon: "headphones", upload: true, profile: "spatial" },
   ],
 };
-const publicViews = new Set(["explore", "download"]);
+const publicViews = new Set(["explore"]);
 const labViews = new Set(["create", "library", "settings"]);
 const randomPrompts = [
   "雷雨夜里，点燃篝火的木屋。",
@@ -166,6 +165,8 @@ const dom = {
   workspace: document.querySelector("#workspace"),
   views: [...document.querySelectorAll(".app-view")],
   viewLinks: [...document.querySelectorAll("[data-view-link]")],
+  clientLinks: [...document.querySelectorAll("[data-client-link]")],
+  clientSection: document.querySelector("#client"),
   downloadVisualImage: document.querySelector("#download-visual-image"),
   globalPlayer: document.querySelector("#global-player"),
   playerControlRail: document.querySelector(".player-control-rail"),
@@ -261,6 +262,7 @@ const motionRuntime = createMotionRuntime();
 
 const initialSearch = new URLSearchParams(window.location.search);
 const initialRequest = initialSearch.get("view");
+const initialClientTarget = initialRequest === "download" || window.location.hash === "#client";
 const labMode = initialSearch.get("lab") === "1";
 const validViews = new Set([...publicViews, ...(labMode ? labViews : [])]);
 dom.shell.dataset.labMode = String(labMode);
@@ -421,6 +423,7 @@ async function boot() {
   syncStateMarkers();
   renderIcons();
   exposeDebugApi();
+  if (initialClientTarget) window.requestAnimationFrame(() => openClientSection(false));
   motionRuntime.subscribe(({ reduceMotion }) => {
     field.setReducedMotion(reduceMotion);
     if (state.playerTransitioning) playerMotion.settle(state.playerExpanded);
@@ -435,6 +438,13 @@ function getInitialView() {
 }
 
 function installInteractions() {
+  dom.clientLinks.forEach((link) => {
+    link.addEventListener("click", (event) => {
+      event.preventDefault();
+      openClientSection();
+    });
+  });
+
   dom.viewLinks.forEach((link) => {
     link.addEventListener("click", (event) => {
       event.preventDefault();
@@ -590,6 +600,26 @@ function installInteractions() {
   });
 }
 
+function openClientSection(animate = true) {
+  const scroll = () => {
+    const url = new URL(window.location.href);
+    url.searchParams.set("view", "explore");
+    url.hash = "client";
+    window.history.replaceState(null, "", url);
+    dom.clientSection.scrollIntoView({
+      behavior: animate && !motionRuntime.isReduced() ? "smooth" : "auto",
+      block: "start",
+    });
+  };
+
+  if (state.activeView !== "explore") {
+    setActiveView("explore");
+    window.requestAnimationFrame(scroll);
+    return;
+  }
+  scroll();
+}
+
 function setActiveView(viewName, animate = true) {
   if (!validViews.has(viewName)) return;
   if (state.mobileMoreOpen) toggleMobileMoreMenu(false, false);
@@ -614,6 +644,7 @@ function setActiveView(viewName, animate = true) {
   dom.workspace.scrollTo({ top: 0, behavior: "auto" });
   const url = new URL(window.location.href);
   url.searchParams.set("view", viewName);
+  url.hash = "";
   window.history.replaceState(null, "", url);
   const activeView = dom.views.find((view) => view.dataset.view === viewName);
   navigationMotion.enterView(activeView, animate);
@@ -1985,7 +2016,6 @@ function renderIcons() {
       ChevronDown,
       CloudRain,
       Database,
-      Download,
       Ellipsis,
       Headphones,
       House,

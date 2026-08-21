@@ -95,12 +95,12 @@
       "css": ".ds-icon-button { display: grid; width: 40px; height: 40px; padding: 0; place-items: center; border: 0; border-radius: 7px; background: transparent; color: var(--ink-secondary); transition: background-color 180ms ease-out, color 180ms ease-out; } .ds-icon-button svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; } .ds-icon-button:hover { background: var(--surface-muted); color: var(--ink); } .ds-icon-button:active { background: var(--surface-pressed); } .ds-icon-button:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }"
     },
     {
-      "name": "Navigation Item",
+      "name": "Navigation Action",
       "kind": "nav",
-      "refersTo": "navigation-item-active",
-      "description": "公开 Web 以品牌返回探索，顶部导航只保留下载入口，并在下载页用文字和细线确认位置。",
-      "html": "<nav class=\"ds-site-nav\" aria-label=\"网站导航\"><button class=\"ds-nav-item ds-download-item\" type=\"button\">下载客户端</button></nav>",
-      "css": ".ds-site-nav { display: flex; align-items: center; gap: 2px; font-family: var(--font-body); } .ds-nav-item { position: relative; display: flex; align-items: center; justify-content: center; height: 40px; padding: 0 14px; border: 0; border-radius: 7px; background: transparent; color: var(--ink-secondary); font-size: 13px; font-weight: 590; letter-spacing: 0; transition: color 180ms ease-out, border-color 180ms ease-out; } .ds-nav-item:hover { color: var(--ink); } .ds-nav-item.ds-is-active { color: var(--active); } .ds-nav-item.ds-is-active::after { position: absolute; right: 14px; bottom: 3px; left: 14px; height: 1px; background: currentColor; content: ''; } .ds-download-item { margin-left: 8px; border: 1px solid var(--line); background: var(--surface-raised); color: var(--ink); } .ds-download-item:hover { border-color: var(--line-strong); } .ds-nav-item:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }"
+      "refersTo": "navigation-action",
+      "description": "公开 Web 以品牌返回探索顶部，唯一导航动作定位到同页下方的客户端状态。",
+      "html": "<nav class=\"ds-site-nav\" aria-label=\"网站导航\"><a class=\"ds-nav-item ds-download-item\" href=\"#client\">下载客户端</a></nav>",
+      "css": ".ds-site-nav { display: flex; align-items: center; font-family: var(--font-body); } .ds-nav-item { display: flex; align-items: center; justify-content: center; height: 40px; padding: 0 14px; border: 1px solid var(--line); border-radius: 7px; background: var(--surface-raised); color: var(--ink); font-size: 13px; font-weight: 590; letter-spacing: 0; text-decoration: none; transition: border-color 180ms ease-out; } .ds-nav-item:hover { border-color: var(--line-strong); } .ds-nav-item:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }"
     },
     {
       "name": "Filter Tabs",
