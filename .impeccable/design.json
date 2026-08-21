@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-08-19T12:18:11.9407531+08:00",
+  "generatedAt": "2026-08-21T16:23:21.4767891+08:00",
   "title": "Design System: 声景",
   "extensions": {
     "colorMeta": {
@@ -46,7 +46,7 @@
       "brand": { "displayName": "品牌字标", "purpose": "与正式位图品牌标记并置的产品名。" },
       "body": { "displayName": "正文", "purpose": "界面正文、说明和默认文本。" },
       "composer": { "displayName": "自然语言输入", "purpose": "创建声景时的大号描述文本。" },
-      "navigation": { "displayName": "导航", "purpose": "桌面侧栏与导航命令。" },
+      "navigation": { "displayName": "导航", "purpose": "公开 Web 顶部导航与内部功能命令。" },
       "action": { "displayName": "动作", "purpose": "主操作和明确命令。" },
       "label": { "displayName": "标签", "purpose": "元数据、时间、状态和紧凑控件。" }
     },
@@ -72,7 +72,7 @@
       { "name": "audio-crossfade", "value": "1300ms equal-power", "purpose": "播放中切换场景时保持听感连续。" }
     ],
     "breakpoints": [
-      { "name": "compact-desktop", "value": "1180px" },
+      { "name": "compact-desktop", "value": "1100px" },
       { "name": "mobile", "value": "820px" },
       { "name": "narrow-mobile", "value": "420px" }
     ]
@@ -98,9 +98,9 @@
       "name": "Navigation Item",
       "kind": "nav",
       "refersTo": "navigation-item-active",
-      "description": "桌面侧栏中带图标的当前视图入口。",
-      "html": "<button class=\"ds-nav-item ds-is-active\" type=\"button\" aria-current=\"page\"><svg viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M4 14a8 8 0 0 1 16 0\"/><path d=\"M18 19c0 1.1-.9 2-2 2h-1v-7h3a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2Z\"/><path d=\"M6 19c-1.1 0-2-.9-2-2v-1a2 2 0 0 1 2-2h3v7H8a2 2 0 0 1-2-2Z\"/></svg><span>聆听</span></button>",
-      "css": ".ds-nav-item { display: flex; align-items: center; gap: 12px; width: 100%; height: 44px; padding: 0 12px; border: 0; border-radius: 7px; background: transparent; color: var(--ink-secondary); font-family: var(--font-body); font-size: 13px; font-weight: 590; letter-spacing: 0; text-align: left; transition: background-color 180ms ease-out, color 180ms ease-out; } .ds-nav-item svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; } .ds-nav-item:hover { background: var(--surface-muted); color: var(--ink); } .ds-nav-item.ds-is-active { background: var(--active-soft); color: var(--active); } .ds-nav-item:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }"
+      "description": "公开 Web 顶部导航以文字和细线确认位置，下载入口只表达产品方向。",
+      "html": "<nav class=\"ds-site-nav\" aria-label=\"网站导航\"><button class=\"ds-nav-item ds-is-active\" type=\"button\" aria-current=\"page\">探索</button><button class=\"ds-nav-item ds-download-item\" type=\"button\">下载客户端</button></nav>",
+      "css": ".ds-site-nav { display: flex; align-items: center; gap: 2px; font-family: var(--font-body); } .ds-nav-item { position: relative; display: flex; align-items: center; justify-content: center; height: 40px; padding: 0 14px; border: 0; border-radius: 7px; background: transparent; color: var(--ink-secondary); font-size: 13px; font-weight: 590; letter-spacing: 0; transition: color 180ms ease-out, border-color 180ms ease-out; } .ds-nav-item:hover { color: var(--ink); } .ds-nav-item.ds-is-active { color: var(--active); } .ds-nav-item.ds-is-active::after { position: absolute; right: 14px; bottom: 3px; left: 14px; height: 1px; background: currentColor; content: ''; } .ds-download-item { margin-left: 8px; border: 1px solid var(--line); background: var(--surface-raised); color: var(--ink); } .ds-download-item:hover { border-color: var(--line-strong); } .ds-nav-item:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }"
     },
     {
       "name": "Filter Tabs",
@@ -153,7 +153,7 @@
   ],
   "narrative": {
     "northStar": "安静的声音工作室",
-    "overview": "“安静的声音工作室”把声景塑造成稳定、克制、可长期停留的日常工具：冷白与炭黑构成工作台，矿物灰绿承担选择和持续状态，雾蓝来自正式膜片位图，珊瑚只在需要明确行动时出现。界面以细线、紧凑密度和真实声音素材为主，不把普通使用包装成全屏概念海报。\n\n系统先维持当前聆听，再允许探索、后台生成和明确切换；高级声音层与播放质感只在用户需要时展开。品牌、页面标题和场景名使用自托管衬线体提供文化气质，正文和操作保持无衬线的清晰与效率。",
+    "overview": "“安静的声音工作室”把声景塑造成稳定、克制、可长期停留的日常工具：冷白与炭黑构成工作台，矿物灰绿承担选择和持续状态，雾蓝来自正式膜片位图，珊瑚只在需要明确行动时出现。公开首页允许一处真实声景铺满内容工作区建立第一印象；进入探索、播放与配置后，界面回到细线、紧凑密度和清楚留白组成的日常工具。\n\n系统先维持当前聆听，再允许探索、后台生成和明确切换；高级声音层与播放质感只在用户需要时展开。品牌、页面标题和场景名使用自托管衬线体提供文化气质，正文和操作保持无衬线的清晰与效率。",
     "keyCharacteristics": [
       "冷白与炭黑双主题，以矿物灰绿表达状态，珊瑚只标记动作。",
       "6 至 8 像素的小圆角、精密细线和低对比层级。",

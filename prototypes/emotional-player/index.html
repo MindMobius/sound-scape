@@ -11,41 +11,38 @@
   </head>
   <body>
     <!--
-      THESIS: 日常聆听是一间稳定、安静的工作室；拒绝把每次使用都变成全屏概念海报。
+      THESIS: 公开 Web 是进入声音世界的门槛，不是缩小版客户端；拒绝用功能导航替代真实聆听。
       OWN-WORLD: 冷白底、炭黑、矿物灰绿与雾蓝，珊瑚只标记动作；精密细线、6 至 8 像素圆角和 Image 2 膜片裁片共同构成界面。
-      STORY: 首页负责引导创建、探索或直接播放一处精选声景；全局控制轨独立于内容路由，完整播放器从控制轨上方展开，声景调节自然延续在下方，图窗按需进入沉浸聆听。
-      FIRST VIEWPORT: 桌面左侧固定导航，中部是克制的方向选择，底部播放器横跨整个窗口；移动端播放条位于底部导航之上。
-      FORM: 克制的日常产品应用壳，用户明确要求替代此前概念式界面；seed ac023634。
+      STORY: 访客先听见一处真实声景，再探索预置场景或了解客户端；全局控制轨、完整播放器与沉浸场始终属于同一聆听体验。
+      FIRST VIEWPORT: 顶部只有品牌、探索与下载；精选声景画面铺满首屏主体，产品名和直接播放动作落在画面上，下一段策展内容在首屏下缘可见。
+      FORM: 已建立视觉世界中的公开体验入口，延续 seed ac023634；内部创建、素材与设置仅在 lab 模式出现。
       FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
     -->
-    <div class="app-shell" id="app-shell" data-view="home" data-job-state="idle">
-      <aside class="side-rail" aria-label="主导航">
+    <div class="app-shell" id="app-shell" data-view="home" data-job-state="idle" data-lab-mode="false">
+      <header class="site-header side-rail" aria-label="主导航">
         <a class="brand" href="#home" data-view-link="home" aria-label="声景，返回首页">
           <span class="brand-mark" aria-hidden="true"></span>
           <span class="brand-name">声景</span>
         </a>
 
-        <nav class="primary-nav">
-          <button class="nav-item is-active" type="button" data-view-link="home" aria-current="page">
-            <i data-lucide="house" aria-hidden="true"></i><span>首页</span>
-          </button>
+        <nav class="primary-nav" aria-label="网站导航">
           <button class="nav-item" type="button" data-view-link="explore">
-            <i data-lucide="compass" aria-hidden="true"></i><span>探索</span>
+            <span>探索</span>
           </button>
-          <button class="nav-item" type="button" data-view-link="create">
-            <i data-lucide="plus" aria-hidden="true"></i><span>创建</span>
+          <button class="nav-item site-download-link" type="button" data-view-link="download">
+            <span>下载客户端</span>
           </button>
-          <button class="nav-item" type="button" data-view-link="library">
-            <i data-lucide="library" aria-hidden="true"></i><span>声景集</span>
+          <button class="nav-item lab-only" type="button" data-view-link="create">
+            <span>创建</span>
+          </button>
+          <button class="nav-item lab-only" type="button" data-view-link="library">
+            <span>声景集</span>
+          </button>
+          <button class="nav-item lab-only" type="button" data-view-link="settings">
+            <span>设置</span>
           </button>
         </nav>
-
-        <nav class="secondary-nav" aria-label="更多">
-          <button class="nav-item" type="button" data-view-link="settings">
-            <i data-lucide="settings" aria-hidden="true"></i><span>设置</span>
-          </button>
-        </nav>
-      </aside>
+      </header>
 
       <header class="mobile-header">
         <a class="brand" href="#home" data-view-link="home" aria-label="声景，返回首页">
@@ -53,43 +50,66 @@
           <span class="brand-name">声景</span>
         </a>
         <div class="mobile-header-actions">
-          <button class="icon-button" id="mobile-more-button" type="button" aria-label="更多" aria-expanded="false" aria-controls="mobile-more-menu" title="更多">
+          <nav class="mobile-public-nav" aria-label="网站导航">
+            <button class="mobile-public-link" type="button" data-view-link="explore">探索</button>
+            <button class="mobile-public-link" type="button" data-view-link="download">下载客户端</button>
+          </nav>
+          <button class="icon-button lab-only" id="mobile-more-button" type="button" aria-label="内部功能" aria-expanded="false" aria-controls="mobile-more-menu" title="内部功能">
             <i data-lucide="ellipsis" aria-hidden="true"></i>
           </button>
-          <div class="mobile-more-menu" id="mobile-more-menu" aria-hidden="true" inert hidden>
-            <button type="button" data-view-link="settings"><i data-lucide="settings" aria-hidden="true"></i><span>设置</span></button>
-          </div>
+          <nav class="mobile-more-menu mobile-nav lab-only" id="mobile-more-menu" aria-label="内部功能" aria-hidden="true" inert hidden>
+            <button class="lab-only" type="button" data-view-link="create"><i data-lucide="plus" aria-hidden="true"></i><span>创建</span></button>
+            <button class="lab-only" type="button" data-view-link="library"><i data-lucide="library" aria-hidden="true"></i><span>声景集</span></button>
+            <button class="lab-only" type="button" data-view-link="settings"><i data-lucide="settings" aria-hidden="true"></i><span>设置</span></button>
+          </nav>
         </div>
       </header>
 
       <main class="workspace" id="workspace">
         <section class="app-view home-view is-active" data-view="home" aria-labelledby="home-view-title">
-          <div class="home-guide">
-            <div class="home-guide-copy">
-              <h1 id="home-view-title">此刻，想听见哪里？</h1>
-              <p>描述一个片刻，或从已经准备好的声音世界开始。</p>
-              <div class="home-guide-actions">
-                <button class="primary-action" type="button" data-view-link="create">
-                  <span>创建一处声景</span>
+          <section class="home-stage">
+            <img id="home-guide-cover" src="../../assets/scenes/coastal-night/coastal-night-hero-web-v1.jpg" alt="深夜海岸上的潮水与礁石" decoding="async" fetchpriority="high" />
+            <span class="home-stage-tone" aria-hidden="true"></span>
+            <div class="home-stage-copy">
+              <h1 id="home-view-title">声景</h1>
+              <p>让一处声音世界，持续发生。</p>
+              <div class="home-stage-actions">
+                <button class="home-guide-scene" type="button" data-scene="coastal-night" aria-label="播放深夜海岸">
+                  <i data-lucide="play" aria-hidden="true"></i>
+                  <span><strong>听见深夜海岸</strong><small>近岸潮水 · 远浪 · 礁石回响</small></span>
                 </button>
-                <button class="text-action" type="button" data-view-link="explore">
-                  <span>探索现成声景</span>
+                <button class="home-explore-link" type="button" data-view-link="explore">
+                  <span>探索更多</span><i data-lucide="compass" aria-hidden="true"></i>
                 </button>
               </div>
             </div>
+          </section>
 
-            <button class="home-guide-scene" type="button" data-scene="coastal-night" aria-label="播放深夜海岸">
-              <img id="home-guide-cover" src="../../assets/scenes/coastal-night/coastal-night-cover-web-v1.jpg" alt="" decoding="async" />
-              <span><strong>深夜海岸</strong><small>近岸潮水 · 远浪 · 海风</small></span>
-            </button>
-          </div>
+          <section class="home-selection" aria-labelledby="home-selection-title">
+            <header class="public-section-heading">
+              <h2 id="home-selection-title">现在可以听见</h2>
+              <p>两处已经准备好的声音世界，会一直自然变化。</p>
+            </header>
+            <div class="home-scene-grid" id="home-scene-grid"></div>
+          </section>
+
+          <section class="home-client-band" aria-labelledby="home-client-title">
+            <div>
+              <h2 id="home-client-title">属于你的声景，将在客户端发生</h2>
+              <p>一句描述、本地声音和持续聆听，都留在你的设备上。</p>
+              <button class="primary-action" type="button" data-view-link="download">
+                <i data-lucide="download" aria-hidden="true"></i><span>了解客户端</span>
+              </button>
+            </div>
+            <img id="home-client-cover" src="../../assets/scenes/rain-cabin/rain-cabin-cover-web-v1.jpg" alt="雨夜木屋声景封面" loading="lazy" decoding="async" />
+          </section>
         </section>
 
         <section class="app-view explore-view" data-view="explore" aria-labelledby="explore-view-title" hidden>
           <header class="view-header">
             <div>
-              <h1 id="explore-view-title">探索</h1>
-              <p>从一个已经准备好的世界开始。</p>
+              <h1 id="explore-view-title">可听的声景</h1>
+              <p>从一处已经准备好的声音世界开始。</p>
             </div>
             <button class="text-action" type="button" data-shuffle aria-label="随机选择声景" title="随便听听">
               <i data-lucide="shuffle" aria-hidden="true"></i><span>随便听听</span>
@@ -99,9 +119,9 @@
           <article class="featured-scene" id="featured-scene">
             <img id="featured-image" src="../../assets/scenes/coastal-night/coastal-night-hero-web-v1.jpg" alt="" decoding="async" fetchpriority="high" />
             <div class="featured-copy">
-              <p id="featured-elements">近岸潮水 · 远浪 · 海风</p>
               <h2 id="featured-title">深夜海岸</h2>
-              <p id="featured-description">深夜海岸上，潮声持续靠近又缓缓退去。</p>
+              <p class="featured-elements" id="featured-elements">近岸潮水 · 远浪 · 海风</p>
+              <p class="featured-description" id="featured-description">深夜海岸上，潮声持续靠近又缓缓退去。</p>
               <button class="light-action" type="button" id="featured-play">
                 <i data-lucide="play" aria-hidden="true"></i><span>开始聆听</span>
               </button>
@@ -114,9 +134,52 @@
             </div>
             <div class="scene-grid" id="explore-grid"></div>
           </section>
+
+          <section class="explore-client-band" aria-labelledby="explore-client-title">
+            <div><h2 id="explore-client-title">想创造自己的声音世界？</h2><p>完整客户端将承载一句话生成、本地素材与长期聆听。</p></div>
+            <button class="text-action" type="button" data-view-link="download"><span>前往下载页</span><i data-lucide="download" aria-hidden="true"></i></button>
+          </section>
         </section>
 
-        <section class="app-view create-view" data-view="create" aria-labelledby="create-view-title" hidden>
+        <section class="app-view download-view" data-view="download" aria-labelledby="download-view-title" hidden>
+          <section class="download-intro">
+            <div class="download-copy">
+              <h1 id="download-view-title">把声景带在身边</h1>
+              <p>客户端会把生成、素材和持续播放留在设备上。现在仍在打磨，网页体验会继续开放。</p>
+              <p class="download-state"><span aria-hidden="true"></span>客户端正在开发中</p>
+              <button class="text-action" type="button" data-view-link="explore"><i data-lucide="headphones" aria-hidden="true"></i><span>先在网页聆听</span></button>
+            </div>
+            <figure class="download-visual">
+              <img id="download-visual-image" src="../../assets/scenes/rain-cabin/rain-cabin-hero-web-v1.jpg" alt="雨夜木屋的声景视觉" decoding="async" />
+            </figure>
+          </section>
+
+          <section class="download-platforms" aria-labelledby="download-platforms-title">
+            <header class="public-section-heading">
+              <h2 id="download-platforms-title">完整体验，正在走向每一台设备</h2>
+              <p>开放时间与安装包会在这里如实更新。</p>
+            </header>
+            <div class="platform-list">
+              <article class="platform-row">
+                <i data-lucide="smartphone" aria-hidden="true"></i>
+                <div><h3>iPhone 与 Android</h3><p>后台播放、锁屏控制和随身聆听。</p></div>
+                <span>开发中</span>
+              </article>
+              <article class="platform-row">
+                <i data-lucide="laptop" aria-hidden="true"></i>
+                <div><h3>Windows 与 macOS</h3><p>本地素材、离线场景和更完整的编排能力。</p></div>
+                <span>规划中</span>
+              </article>
+              <article class="platform-row platform-row--available">
+                <i data-lucide="waves" aria-hidden="true"></i>
+                <div><h3>网页体验</h3><p>无需安装，直接聆听现有声景。</p></div>
+                <button class="quiet-link" type="button" data-view-link="explore">现在进入</button>
+              </article>
+            </div>
+          </section>
+        </section>
+
+        <section class="app-view create-view lab-only" data-view="create" aria-labelledby="create-view-title" hidden>
           <header class="view-header">
             <div>
               <h1 id="create-view-title">创建声景</h1>
@@ -152,7 +215,7 @@
           </div>
         </section>
 
-        <section class="app-view library-view" data-view="library" aria-labelledby="library-view-title" hidden>
+        <section class="app-view library-view lab-only" data-view="library" aria-labelledby="library-view-title" hidden>
           <header class="view-header">
             <div>
               <h1 id="library-view-title">声景集</h1>
@@ -165,7 +228,7 @@
           <div class="scene-grid library-grid" id="library-grid"></div>
         </section>
 
-        <section class="app-view settings-view" data-view="settings" aria-labelledby="settings-view-title" hidden>
+        <section class="app-view settings-view lab-only" data-view="settings" aria-labelledby="settings-view-title" hidden>
           <header class="view-header">
             <div>
               <h1 id="settings-view-title">设置</h1>
@@ -376,13 +439,6 @@
           <button class="primary-action compact-primary" id="switch-scene" type="button">切换</button>
         </div>
       </aside>
-
-      <nav class="mobile-nav" aria-label="主导航">
-        <button class="is-active" type="button" data-view-link="home" aria-current="page"><i data-lucide="house" aria-hidden="true"></i><span>首页</span></button>
-        <button type="button" data-view-link="explore"><i data-lucide="compass" aria-hidden="true"></i><span>探索</span></button>
-        <button type="button" data-view-link="create"><i data-lucide="plus" aria-hidden="true"></i><span>创建</span></button>
-        <button type="button" data-view-link="library"><i data-lucide="library" aria-hidden="true"></i><span>声景集</span></button>
-      </nav>
 
       <div class="toast" id="toast" role="status" aria-live="polite"></div>
 

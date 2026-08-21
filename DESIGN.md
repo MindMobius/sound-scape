@@ -126,15 +126,15 @@ components:
     textColor: "{colors.ink-secondary}"
     typography: "{typography.navigation}"
     rounded: "{rounded.md}"
-    padding: "0 12px"
-    height: "44px"
+    padding: "0 14px"
+    height: "40px"
   navigation-item-active:
-    backgroundColor: "{colors.active-soft}"
+    backgroundColor: "transparent"
     textColor: "{colors.active}"
     typography: "{typography.navigation}"
     rounded: "{rounded.md}"
-    padding: "0 12px"
-    height: "44px"
+    padding: "0 14px"
+    height: "40px"
   filter-tab-selected:
     backgroundColor: "{colors.surface-raised}"
     textColor: "{colors.ink}"
@@ -180,7 +180,7 @@ components:
 
 **Creative North Star: "安静的声音工作室"**
 
-“安静的声音工作室”把声景塑造成稳定、克制、可长期停留的日常工具：冷白与炭黑构成工作台，矿物灰绿承担选择和持续状态，雾蓝来自正式膜片位图，珊瑚只在需要明确行动时出现。界面以细线、紧凑密度和真实声音素材为主，不把普通使用包装成全屏概念海报。
+“安静的声音工作室”把声景塑造成稳定、克制、可长期停留的日常工具：冷白与炭黑构成工作台，矿物灰绿承担选择和持续状态，雾蓝来自正式膜片位图，珊瑚只在需要明确行动时出现。公开首页允许一处真实声景铺满内容工作区建立第一印象；进入探索、播放与配置后，界面回到细线、紧凑密度和清楚留白组成的日常工具。
 
 系统先维持当前聆听，再允许探索、后台生成和明确切换；高级声音层与播放质感只在用户需要时展开。品牌、页面标题和场景名使用自托管衬线体提供文化气质，正文和操作保持无衬线的清晰与效率。
 
@@ -242,9 +242,9 @@ components:
 
 ## Layout
 
-当前 emotional-player 应用壳在桌面使用 208px 固定侧栏、最大 1360px 的滚动工作区和 76px 持续播放器；常规页面内边距为上下 34/64px、左右 48px。创建与展开播放器根据任务采用两列网格，间距通过 `clamp()` 在 30 至 84px 范围内响应。
+当前 emotional-player 的公开 Web 壳由 72px 顶部导航、其下独立滚动的内容工作区和 76px 全局持续播放器组成。首页的真实场景画面横跨工作区，首屏下缘露出下一段内容；探索、下载与内部验证页面使用最大 1360px 内容宽度和上下 34/64px、左右 48px 的常规内边距。展开播放器保持自己的两列网格，间距通过 `clamp()` 在 30 至 84px 范围内响应。
 
-在 821 至 1180px 之间，侧栏收至 184px，工作区左右内边距收至 34px。820px 及以下切换为 60px 顶部品牌、72px 紧凑播放器和 68px 底部导航；内容在三者之间独立滚动，并保留 safe-area。360px 及以下隐藏控制轨封面，为播放与三个必要操作保留触控空间。探索和专注状态才让场景画面扩大，日常界面仍保持工具密度。这些数值描述当前 surface，不替代其他页面自己的 surface brief。
+在 821 至 1100px 之间，常规工作区左右内边距收至 34px。820px 及以下使用 60px 顶部导航和 72px 紧凑播放器，内容在两者之间独立滚动并保留 safe-area；公开导航仍直接显示品牌、探索与下载客户端，只有 `lab=1` 才出现内部功能菜单。360px 及以下隐藏控制轨封面，为播放与三个必要操作保留触控空间。公开首页允许场景画面建立第一印象，探索与客户端状态页随后回到克制、可扫描的工作台密度。这些数值描述当前 surface，不替代其他页面自己的 surface brief。
 
 ## Elevation & Depth
 
@@ -300,7 +300,7 @@ components:
 
 ### Navigation
 
-桌面导航项为 44px 高、7px 圆角、13px/590 无衬线；默认使用 secondary 文字，悬停使用 muted surface，当前项使用 active-soft 底和 active 文字。当前 surface 在移动端转为顶部品牌与四项底部导航，图标 19px、标签 11px。
+公开导航只包含“声景 / 探索 / 下载客户端”。桌面使用顶部横向导航，默认以 secondary 文字呈现，当前项以一条 1px 下划线和 active 文字确认位置；下载入口另有低对比边框，但不伪装成已发布按钮。移动端在同一顶部导航中直接保留品牌、探索与下载客户端，不用省略号隐藏公开路径。创建、声景集与设置仅在 `?lab=1` 内部验证模式出现，移动端的省略号也只为这三项服务。
 
 ### Persistent Player
 
@@ -312,7 +312,7 @@ components:
 
 ### Settings
 
-设置是低频管理面，只收纳跟随声景/浅色/深色、选择后播放、保留上次听感与本地声音占用。桌面入口固定在侧栏底部；移动端从顶部更多菜单进入，不挤占四个主要底栏目的。只有存在用户音频时才显示清空动作，并采用原位二次确认，不使用模态框，也不影响内置示例。
+设置是低频内部管理面，只收纳跟随声景/浅色/深色、选择后播放、保留上次听感与本地声音占用。它不进入公开 Web 导航；仅在 `?lab=1` 中随创建与声景集一起出现，移动端从顶部内部功能菜单进入。只有存在用户音频时才显示清空动作，并采用原位二次确认，不使用模态框，也不影响内置示例。
 
 ### Background Task Notification
 

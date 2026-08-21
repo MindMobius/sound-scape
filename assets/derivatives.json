@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "policy": "web-raster-derivatives",
+  "derivatives": [
+    {
+      "id": "scene.coastal-night.cover.web.v1",
+      "path": "assets/scenes/coastal-night/coastal-night-cover-web-v1.jpg",
+      "sourceAssetId": "scene.coastal-night.cover.v1",
+      "format": "jpeg",
+      "width": 720,
+      "height": 720,
+      "fit": "cover",
+      "encoderQuality": "legacy-unknown",
+      "sha256": "be8969e4cd4d01a374c2334ebebaa0bcc0c5eb146975854e1a19af4256545c38"
+    },
+    {
+      "id": "scene.coastal-night.hero.web.v1",
+      "path": "assets/scenes/coastal-night/coastal-night-hero-web-v1.jpg",
+      "sourceAssetId": "scene.coastal-night.hero.v1",
+      "format": "jpeg",
+      "width": 1280,
+      "height": 640,
+      "fit": "cover",
+      "encoderQuality": "legacy-unknown",
+      "sha256": "765aa8c64147579c35efa36690c813a635ea3512688e5ce7a2d3afc0ac290541"
+    },
+    {
+      "id": "scene.forest-dawn.cover.web.v1",
+      "path": "assets/scenes/forest-dawn/forest-dawn-cover-web-v1.jpg",
+      "sourceAssetId": "scene.forest-dawn.cover.v1",
+      "format": "jpeg",
+      "width": 480,
+      "height": 480,
+      "fit": "cover",
+      "encoderQuality": "legacy-unknown",
+      "sha256": "cd255e18da073673f87d9e6bc81f27bd4d5ae30396aed3f9bf10324ae258f2ba"
+    },
+    {
+      "id": "scene.night-train.cover.web.v1",
+      "path": "assets/scenes/night-train/night-train-cover-web-v1.jpg",
+      "sourceAssetId": "scene.night-train.cover.v1",
+      "format": "jpeg",
+      "width": 480,
+      "height": 480,
+      "fit": "cover",
+      "encoderQuality": "legacy-unknown",
+      "sha256": "1b2af612a95fa7e4157386c5e1d3d2b4d2f57ad979e85609e5090bae24ccedf3"
+    },
+    {
+      "id": "scene.quiet-library.cover.web.v1",
+      "path": "assets/scenes/quiet-library/quiet-library-cover-web-v1.jpg",
+      "sourceAssetId": "scene.quiet-library.cover.v1",
+      "format": "jpeg",
+      "width": 480,
+      "height": 480,
+      "fit": "cover",
+      "encoderQuality": "legacy-unknown",
+      "sha256": "c1497625f043aa2aacfca381362e8218c05e98ac5541c74386e07f2a259d8032"
+    },
+    {
+      "id": "scene.rain-cabin.cover.web.v1",
+      "path": "assets/scenes/rain-cabin/rain-cabin-cover-web-v1.jpg",
+      "sourceAssetId": "scene.rain-cabin.cover.v1",
+      "format": "jpeg",
+      "width": 720,
+      "height": 720,
+      "fit": "cover",
+      "encoderQuality": "legacy-unknown",
+      "sha256": "ff9a3b16032e814939fbf72acbe11f81c96ed15c7a1719d911b17a954c2cda9e"
+    },
+    {
+      "id": "scene.rain-cabin.hero.web.v1",
+      "path": "assets/scenes/rain-cabin/rain-cabin-hero-web-v1.jpg",
+      "sourceAssetId": "scene.rain-cabin.hero.v1",
+      "format": "jpeg",
+      "width": 1280,
+      "height": 640,
+      "fit": "cover",
+      "encoderQuality": "legacy-unknown",
+      "sha256": "62805297766a965f527430a0ee27fe02958c0541821238401dfa510c37be5364"
+    },
+    {
+      "id": "scene.summer-courtyard.cover.web.v1",
+      "path": "assets/scenes/summer-courtyard/summer-courtyard-cover-web-v1.jpg",
+      "sourceAssetId": "scene.summer-courtyard.cover.v1",
+      "format": "jpeg",
+      "width": 480,
+      "height": 480,
+      "fit": "cover",
+      "encoderQuality": "legacy-unknown",
+      "sha256": "5febd6761f908d7d652a916697a3d213ddcec41ad1e68773e2ec57bea85fed41"
+    }
+  ]
+}

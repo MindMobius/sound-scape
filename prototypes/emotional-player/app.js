@@ -7,9 +7,11 @@ import {
   Compass,
   createIcons,
   Database,
+  Download,
   Ellipsis,
   Headphones,
   House,
+  Laptop,
   Library,
   Moon,
   Pause,
@@ -18,6 +20,7 @@ import {
   Radio,
   Settings,
   Shuffle,
+  Smartphone,
   Speaker,
   Sun,
   Timer,
@@ -143,7 +146,8 @@ const sourceCatalog = {
     { id: "media-spatial", name: "耳机空间", detail: "双声道空间化与远近", icon: "headphones", upload: true, profile: "spatial" },
   ],
 };
-const validViews = new Set(["home", "explore", "create", "library", "settings"]);
+const publicViews = new Set(["home", "explore", "download"]);
+const labViews = new Set(["create", "library", "settings"]);
 const randomPrompts = [
   "雷雨夜里，点燃篝火的木屋。",
   "深夜海岸上，潮声持续靠近又缓缓退去。",
@@ -165,6 +169,8 @@ const dom = {
   viewLinks: [...document.querySelectorAll("[data-view-link]")],
   homeGuideCover: document.querySelector("#home-guide-cover"),
   homeGuideScene: document.querySelector(".home-guide-scene"),
+  homeClientCover: document.querySelector("#home-client-cover"),
+  downloadVisualImage: document.querySelector("#download-visual-image"),
   globalPlayer: document.querySelector("#global-player"),
   playerControlRail: document.querySelector(".player-control-rail"),
   playerExpandedContent: document.querySelector("#player-expanded-content"),
@@ -200,10 +206,12 @@ const dom = {
   movementInputs: [...document.querySelectorAll("[data-movement]")],
   distanceInputs: [...document.querySelectorAll("[data-distance]")],
   orchestrationSummary: document.querySelector("#orchestration-summary"),
+  homeSceneGrid: document.querySelector("#home-scene-grid"),
   exploreGrid: document.querySelector("#explore-grid"),
   libraryGrid: document.querySelector("#library-grid"),
   templateList: document.querySelector("#template-list"),
   primaryNav: document.querySelector(".primary-nav"),
+  mobilePublicNav: document.querySelector(".mobile-public-nav"),
   mobileNav: document.querySelector(".mobile-nav"),
   mobileMoreButton: document.querySelector("#mobile-more-button"),
   mobileMoreMenu: document.querySelector("#mobile-more-menu"),
@@ -256,7 +264,11 @@ const dom = {
 
 const motionRuntime = createMotionRuntime();
 
-const initialRequest = new URLSearchParams(window.location.search).get("view");
+const initialSearch = new URLSearchParams(window.location.search);
+const initialRequest = initialSearch.get("view");
+const labMode = initialSearch.get("lab") === "1";
+const validViews = new Set([...publicViews, ...(labMode ? labViews : [])]);
+dom.shell.dataset.labMode = String(labMode);
 const storedPreferences = loadPreferences();
 scenes.forEach((scene) => {
   const storedMix = storedPreferences.sceneMixes?.[scene.id];
@@ -356,7 +368,7 @@ const field = new MembraneField({
 });
 
 const navigationMotion = createNavigationMotion({
-  containers: [dom.primaryNav, dom.mobileNav],
+  containers: [dom.primaryNav, dom.mobilePublicNav, dom.mobileNav],
   isReducedMotion: motionRuntime.isReduced,
 });
 const sceneMotion = createSceneMotion({ isReducedMotion: motionRuntime.isReduced });
@@ -423,6 +435,7 @@ async function boot() {
 
 function getInitialView() {
   if (validViews.has(initialRequest)) return initialRequest;
+  if (initialRequest) return "home";
   if (validViews.has(storedPreferences.activeView)) return storedPreferences.activeView;
   return "home";
 }
@@ -485,7 +498,7 @@ function installInteractions() {
     });
   });
 
-  [dom.homeGuideScene, dom.exploreGrid, dom.libraryGrid].forEach((container) => {
+  [dom.homeGuideScene, dom.homeSceneGrid, dom.exploreGrid, dom.libraryGrid].filter(Boolean).forEach((container) => {
     container.addEventListener("click", handleSceneSelection);
   });
 
@@ -596,7 +609,7 @@ function setActiveView(viewName, animate = true) {
   });
 
   dom.viewLinks.forEach((link) => {
-    const isPrimaryNavigation = Boolean(link.closest(".primary-nav, .secondary-nav, .mobile-nav"));
+    const isPrimaryNavigation = Boolean(link.closest(".primary-nav, .secondary-nav, .mobile-public-nav, .mobile-nav"));
     const active = isPrimaryNavigation && link.dataset.viewLink === viewName;
     link.classList.toggle("is-active", active);
     if (active) link.setAttribute("aria-current", "page");
@@ -1171,10 +1184,13 @@ function renderCurrentScene() {
 
 function renderFeaturedScene() {
   const scene = state.featuredScene;
-  dom.homeGuideCover.src = scene.cover;
+  dom.homeClientCover.src = rainCover;
+  dom.downloadVisualImage.src = rainHero;
+  dom.homeGuideCover.src = scene.hero;
+  dom.homeGuideCover.alt = `${scene.name}的声景画面`;
   dom.homeGuideScene.dataset.scene = scene.id;
   dom.homeGuideScene.setAttribute("aria-label", `播放${scene.name}`);
-  dom.homeGuideScene.querySelector("strong").textContent = scene.name;
+  dom.homeGuideScene.querySelector("strong").textContent = `听见${scene.name}`;
   dom.homeGuideScene.querySelector("small").textContent = scene.elements.join(" · ");
   dom.featuredImage.src = scene.hero;
   dom.featuredTitle.textContent = scene.name;
@@ -1183,8 +1199,13 @@ function renderFeaturedScene() {
 }
 
 function renderCollections() {
+  renderHomeSceneGrid();
   renderExploreGrid();
   renderLibraryGrid();
+}
+
+function renderHomeSceneGrid() {
+  dom.homeSceneGrid.replaceChildren(...scenes.map((scene) => createSceneCard(scene, "home-scene-card")));
 }
 
 function renderTemplates() {
@@ -1210,10 +1231,10 @@ function renderLibraryGrid() {
   dom.libraryGrid.replaceChildren(...scenes.map(createSceneCard));
 }
 
-function createSceneCard(scene) {
+function createSceneCard(scene, extraClass = "") {
   const button = document.createElement("button");
   button.type = "button";
-  button.className = "scene-card";
+  button.className = ["scene-card", extraClass].filter(Boolean).join(" ");
   button.dataset.scene = scene.id;
   if (scene.id === state.currentScene.id) button.setAttribute("aria-current", "true");
   button.setAttribute("aria-label", `${scene.name}${scene.id === state.currentScene.id ? "，当前声景" : ""}，${scene.description}`);
@@ -1983,9 +2004,11 @@ function renderIcons() {
       CloudRain,
       Compass,
       Database,
+      Download,
       Ellipsis,
       Headphones,
       House,
+      Laptop,
       Library,
       Moon,
       Pause,
@@ -1994,6 +2017,7 @@ function renderIcons() {
       Radio,
       Settings,
       Shuffle,
+      Smartphone,
       Speaker,
       Sun,
       Timer,
