@@ -33,14 +33,14 @@ import {
 } from "lucide";
 import rainAudioUrl from "./media/rain-cabin.mp3?url";
 import waterAudioUrl from "./media/open-water.wav?url";
-import rainHero from "../../assets/scenes/rain-cabin/rain-cabin-hero-web-v1.jpg?url";
-import rainCover from "../../assets/scenes/rain-cabin/rain-cabin-cover-web-v1.jpg?url";
-import coastalHero from "../../assets/scenes/coastal-night/coastal-night-hero-web-v1.jpg?url";
-import coastalCover from "../../assets/scenes/coastal-night/coastal-night-cover-web-v1.jpg?url";
-import forestCover from "../../assets/scenes/forest-dawn/forest-dawn-cover-web-v1.jpg?url";
-import trainCover from "../../assets/scenes/night-train/night-train-cover-web-v1.jpg?url";
-import libraryCover from "../../assets/scenes/quiet-library/quiet-library-cover-web-v1.jpg?url";
-import courtyardCover from "../../assets/scenes/summer-courtyard/summer-courtyard-cover-web-v1.jpg?url";
+import rainHero from "../../../assets/scenes/rain-cabin/rain-cabin-hero-web-v1.jpg?url";
+import rainCover from "../../../assets/scenes/rain-cabin/rain-cabin-cover-web-v1.jpg?url";
+import coastalHero from "../../../assets/scenes/coastal-night/coastal-night-hero-web-v1.jpg?url";
+import coastalCover from "../../../assets/scenes/coastal-night/coastal-night-cover-web-v1.jpg?url";
+import forestCover from "../../../assets/scenes/forest-dawn/forest-dawn-cover-web-v1.jpg?url";
+import trainCover from "../../../assets/scenes/night-train/night-train-cover-web-v1.jpg?url";
+import libraryCover from "../../../assets/scenes/quiet-library/quiet-library-cover-web-v1.jpg?url";
+import courtyardCover from "../../../assets/scenes/summer-courtyard/summer-courtyard-cover-web-v1.jpg?url";
 import { createEqualPowerCrossfader, SOUND_PROFILES } from "./audio/crossfader.js";
 import {
   clearStoredAudioLayers,
@@ -56,7 +56,7 @@ import { createNavigationMotion } from "./motion/navigation-motion.js";
 import { createPlayerMotion } from "./motion/player-motion.js";
 import { createMotionRuntime } from "./motion/runtime.js";
 import { createSceneMotion } from "./motion/scene-motion.js";
-import { MembraneField } from "./visual-field.js";
+import { MembraneField } from "./visual/membrane-field.js";
 
 const makeBaseLayer = (id, name, detail, catalogId) => ({
   id: `${id}-base`,

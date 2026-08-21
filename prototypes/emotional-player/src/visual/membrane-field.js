@@ -1,6 +1,6 @@
 import { Geometry, Mesh, Program, Renderer, RenderTarget, Texture } from "ogl";
-import atlasUrl from "../../assets/experiments/runtime/membrane-thickness-atlas-v2.png?url";
-import { membraneShader, presentShader, vertexShader } from "../optical-membrane-field/shaders.js";
+import atlasUrl from "../../../../assets/experiments/runtime/membrane-thickness-atlas-v2.png?url";
+import { membraneShader, presentShader, vertexShader } from "../../../optical-membrane-field/shaders.js";
 
 const backgroundShader = /* glsl */ `
   precision highp float;
