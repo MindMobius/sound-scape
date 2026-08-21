@@ -51,9 +51,12 @@ npm run mobile:check
 Widget Test 会批量覆盖小屏、横屏、平板、桌面、深色和 1.3 倍字号。完成一个平台能力阶段后再构建对应产物：
 
 ```powershell
+npm run mobile:integration:windows
 npm run mobile:build:windows
 npm run mobile:build:android
 ```
+
+连接 Android 设备后可用 `npm run mobile:integration:android` 运行同一条原生纵切。
 
 后台播放、锁屏媒体控制、音频焦点、耳机拔出、蓝牙切换和系统回收不能由 Widget Test 证明，发布前仍必须在 Android 与 iPhone 真机验收。完整调试分层见 `docs/development/flutter-workflow.md`。
 

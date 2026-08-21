@@ -191,6 +191,8 @@ Commands:
   run android [device-id]  Run the Android app on one connected target
   check                    Check formatting, analyze, and run headless tests
   test                     Run headless Flutter tests
+  integration windows      Run the native integration test on Windows
+  integration android      Run it on one connected Android target
   build windows            Build the Windows debug bundle
   build android            Build the Android debug APK`);
 }
@@ -251,6 +253,7 @@ function main() {
         '--set-exit-if-changed',
         'lib',
         'test',
+        'integration_test',
       ]);
       run(flutterExecutable, ['analyze']);
       run(flutterExecutable, ['test']);
@@ -258,6 +261,33 @@ function main() {
     case 'test':
       run(flutterExecutable, ['test']);
       return;
+    case 'integration':
+      if (target === 'windows') {
+        if (!isWindows) {
+          throw new Error('Windows integration tests must run on Windows.');
+        }
+        run(flutterExecutable, [
+          'test',
+          'integration_test',
+          '-d',
+          'windows',
+        ]);
+        return;
+      }
+      if (target === 'android') {
+        const selectedDevice = selectAndroidDevice(
+          flutterExecutable,
+          deviceId,
+        );
+        run(flutterExecutable, [
+          'test',
+          'integration_test',
+          '-d',
+          selectedDevice,
+        ]);
+        return;
+      }
+      throw new Error('Integration target must be windows or android.');
     case 'build':
       if (target === 'windows') {
         if (!isWindows) {

@@ -12,6 +12,8 @@
     "mobile:devices": "node tools/flutter.mjs devices",
     "mobile:check": "node tools/flutter.mjs check",
     "mobile:test": "node tools/flutter.mjs test",
+    "mobile:integration:windows": "node tools/flutter.mjs integration windows",
+    "mobile:integration:android": "node tools/flutter.mjs integration android",
     "mobile:build:windows": "node tools/flutter.mjs build windows",
     "mobile:build:android": "node tools/flutter.mjs build android",
     "validate:assets": "node tools/validate-static-assets.mjs",
