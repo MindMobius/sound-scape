@@ -10,12 +10,13 @@ import 'soundscape_runtime.dart';
 
 class SoundscapeAudioHandler extends BaseAudioHandler
     implements SoundscapeController {
-  SoundscapeAudioHandler() {
+  SoundscapeAudioHandler({SoundscapeRuntime? runtime})
+    : runtime = runtime ?? SoundscapeRuntime() {
     ready = _initialize();
     ready.ignore();
   }
 
-  final SoundscapeRuntime runtime = SoundscapeRuntime();
+  final SoundscapeRuntime runtime;
   late final Future<void> ready;
   late final AudioSession _session;
   StreamSubscription<SoundscapeSnapshot>? _runtimeSubscription;
@@ -104,6 +105,22 @@ class SoundscapeAudioHandler extends BaseAudioHandler
 
   @override
   void applyPreset(ListeningPreset preset) => runtime.applyPreset(preset);
+
+  @override
+  void setSceneFavorite(String sceneId, {required bool favorite}) =>
+      runtime.setSceneFavorite(sceneId, favorite: favorite);
+
+  @override
+  void saveCurrentAsPreset({required String id, required String name}) =>
+      runtime.saveCurrentAsPreset(id: id, name: name);
+
+  @override
+  void deleteSavedPreset(String presetId) =>
+      runtime.deleteSavedPreset(presetId);
+
+  @override
+  Future<void> applySavedPreset(String presetId) =>
+      runtime.applySavedPreset(presetId);
 
   @override
   void setSleepTimer(Duration? duration) {

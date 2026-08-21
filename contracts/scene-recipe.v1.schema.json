@@ -1,0 +1,102 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shengjing.cn/contracts/scene-recipe.v1.schema.json",
+  "title": "声景 SceneRecipe v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "sceneId", "seed", "macros", "layers"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "sceneId": { "type": "string", "minLength": 1 },
+    "seed": { "type": "integer", "minimum": 1 },
+    "macros": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["intensity", "richness"],
+      "properties": {
+        "intensity": { "type": "number", "minimum": 0, "maximum": 1 },
+        "richness": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "layers": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/layer" }
+    }
+  },
+  "$defs": {
+    "layer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "name",
+        "assetId",
+        "segmentIds",
+        "kind",
+        "baseGain",
+        "intensityGain",
+        "richnessGain",
+        "pan",
+        "enabledByDefault",
+        "eventPolicy",
+        "dynamics"
+      ],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "name": { "type": "string", "minLength": 1 },
+        "assetId": { "type": "string", "minLength": 1 },
+        "segmentIds": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "kind": { "enum": ["bed", "texture", "event"] },
+        "baseGain": { "type": "number", "minimum": 0, "maximum": 1 },
+        "intensityGain": { "type": "number", "minimum": 0, "maximum": 1 },
+        "richnessGain": { "type": "number", "minimum": 0, "maximum": 1 },
+        "pan": { "type": "number", "minimum": -1, "maximum": 1 },
+        "enabledByDefault": { "type": "boolean" },
+        "eventPolicy": { "$ref": "#/$defs/eventPolicy" },
+        "dynamics": { "$ref": "#/$defs/dynamics" }
+      }
+    },
+    "eventPolicy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "minimumSilenceMs",
+        "maximumSilenceMs",
+        "scheduleLeadMs",
+        "noImmediateRepeat"
+      ],
+      "properties": {
+        "minimumSilenceMs": { "type": "integer", "minimum": 0 },
+        "maximumSilenceMs": { "type": "integer", "minimum": 0 },
+        "scheduleLeadMs": { "type": "integer", "minimum": 0 },
+        "noImmediateRepeat": { "type": "boolean" }
+      }
+    },
+    "dynamics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "gainVariation",
+        "panVariation",
+        "minimumChangeIntervalMs",
+        "maximumChangeIntervalMs",
+        "minimumTransitionMs",
+        "maximumTransitionMs"
+      ],
+      "properties": {
+        "gainVariation": { "type": "number", "minimum": 0, "maximum": 0.95 },
+        "panVariation": { "type": "number", "minimum": 0, "maximum": 1 },
+        "minimumChangeIntervalMs": { "type": "integer", "minimum": 0 },
+        "maximumChangeIntervalMs": { "type": "integer", "minimum": 0 },
+        "minimumTransitionMs": { "type": "integer", "minimum": 0 },
+        "maximumTransitionMs": { "type": "integer", "minimum": 0 }
+      }
+    }
+  }
+}

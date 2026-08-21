@@ -9,9 +9,12 @@ environment:
 dependencies:
   audio_service: 0.18.19
   audio_session: 0.2.4
+  crypto: 3.0.7
+  file_selector: 1.1.0
   flutter:
     sdk: flutter
   flutter_soloud: 4.1.7
+  path_provider: 2.1.6
 
 dev_dependencies:
   flutter_test:
@@ -23,6 +26,7 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
+    - assets/catalog/sound-library.v1.json
     - assets/audio/open-water.wav
     - assets/audio/rain-cabin.mp3
     - assets/images/coastal-night-cover.jpg

@@ -96,6 +96,18 @@ class FakeSoundscapeController implements SoundscapeController {
   void applyPreset(ListeningPreset preset) {}
 
   @override
+  Future<void> applySavedPreset(String presetId) async {}
+
+  @override
+  void deleteSavedPreset(String presetId) {}
+
+  @override
+  void saveCurrentAsPreset({required String id, required String name}) {}
+
+  @override
+  void setSceneFavorite(String sceneId, {required bool favorite}) {}
+
+  @override
   void setIntensity(double value) {}
 
   @override

@@ -9,6 +9,8 @@ void main() {
       'coastal-night',
     });
     for (final scene in SoundscapeCatalog.scenes) {
+      expect(scene.schemaVersion, 1);
+      expect(scene.seed, greaterThan(0));
       expect(scene.layers, isNotEmpty);
       expect(
         scene.layers.any((layer) => layer.kind == SoundLayerKind.bed),
@@ -20,6 +22,14 @@ void main() {
       );
       expect(scene.coverAsset, endsWith('.jpg'));
       expect(scene.heroAsset, endsWith('.jpg'));
+      expect(
+        scene.layers.map((layer) => layer.assetId),
+        everyElement(isNotEmpty),
+      );
+      expect(
+        scene.layers.map((layer) => layer.segmentIds),
+        everyElement(isNotEmpty),
+      );
     }
   });
 

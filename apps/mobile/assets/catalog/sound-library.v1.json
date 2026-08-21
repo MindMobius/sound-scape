@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "catalogVersion": "2026.08.22-development.1",
+  "updatedAt": "2026-08-22T00:00:00+08:00",
+  "assets": [
+    {
+      "id": "rain-cabin-development",
+      "metadataVersion": 1,
+      "fileVersion": 1,
+      "category": "weather",
+      "name": {
+        "zh-CN": "雨夜木屋原型录音",
+        "en": "Rain cabin development recording"
+      },
+      "tags": ["雨", "室内", "持续底噪"],
+      "availability": "bundled",
+      "releaseStatus": "development-only",
+      "sha256": "4132d9b80d1469c601ab0ed3f4407212da7d1ade840232720d3fd2ef456ad3f5",
+      "previewSegmentId": "loop-main",
+      "source": {
+        "name": "仓库历史纵切素材",
+        "provenance": "unverified",
+        "authors": [],
+        "license": {
+          "name": "待确认",
+          "redistributionAllowed": false
+        }
+      },
+      "segments": [
+        {
+          "id": "loop-main",
+          "path": "assets/audio/rain-cabin.mp3",
+          "purpose": "loop",
+          "startMs": 0
+        },
+        {
+          "id": "texture-window",
+          "path": "assets/audio/rain-cabin.mp3",
+          "purpose": "texture",
+          "startMs": 11000
+        },
+        {
+          "id": "texture-mist",
+          "path": "assets/audio/rain-cabin.mp3",
+          "purpose": "texture",
+          "startMs": 5000
+        }
+      ]
+    },
+    {
+      "id": "open-water-development",
+      "metadataVersion": 1,
+      "fileVersion": 1,
+      "category": "water",
+      "name": {
+        "zh-CN": "开阔水面原型录音",
+        "en": "Open water development recording"
+      },
+      "tags": ["水面", "潮汐", "持续底噪"],
+      "availability": "bundled",
+      "releaseStatus": "development-only",
+      "sha256": "248c652a54b4d3c7aa3514c9aba43f750134032cddbb7137134ea32c13c21464",
+      "previewSegmentId": "loop-main",
+      "source": {
+        "name": "仓库历史纵切素材",
+        "provenance": "unverified",
+        "authors": [],
+        "license": {
+          "name": "待确认",
+          "redistributionAllowed": false
+        }
+      },
+      "segments": [
+        {
+          "id": "loop-main",
+          "path": "assets/audio/open-water.wav",
+          "purpose": "loop",
+          "startMs": 0
+        },
+        {
+          "id": "loop-eaves",
+          "path": "assets/audio/open-water.wav",
+          "purpose": "loop",
+          "startMs": 3000
+        },
+        {
+          "id": "texture-far",
+          "path": "assets/audio/open-water.wav",
+          "purpose": "texture",
+          "startMs": 7000
+        },
+        {
+          "id": "event-a",
+          "path": "assets/audio/open-water.wav",
+          "purpose": "event",
+          "startMs": 0,
+          "durationMs": 3400
+        },
+        {
+          "id": "event-b",
+          "path": "assets/audio/open-water.wav",
+          "purpose": "event",
+          "startMs": 9000,
+          "durationMs": 3400
+        },
+        {
+          "id": "event-c",
+          "path": "assets/audio/open-water.wav",
+          "purpose": "event",
+          "startMs": 18000,
+          "durationMs": 3400
+        }
+      ]
+    }
+  ]
+}
