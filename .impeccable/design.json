@@ -98,8 +98,8 @@
       "name": "Navigation Item",
       "kind": "nav",
       "refersTo": "navigation-item-active",
-      "description": "公开 Web 顶部导航以文字和细线确认位置，下载入口只表达产品方向。",
-      "html": "<nav class=\"ds-site-nav\" aria-label=\"网站导航\"><button class=\"ds-nav-item ds-is-active\" type=\"button\" aria-current=\"page\">探索</button><button class=\"ds-nav-item ds-download-item\" type=\"button\">下载客户端</button></nav>",
+      "description": "公开 Web 以品牌返回探索，顶部导航只保留下载入口，并在下载页用文字和细线确认位置。",
+      "html": "<nav class=\"ds-site-nav\" aria-label=\"网站导航\"><button class=\"ds-nav-item ds-download-item\" type=\"button\">下载客户端</button></nav>",
       "css": ".ds-site-nav { display: flex; align-items: center; gap: 2px; font-family: var(--font-body); } .ds-nav-item { position: relative; display: flex; align-items: center; justify-content: center; height: 40px; padding: 0 14px; border: 0; border-radius: 7px; background: transparent; color: var(--ink-secondary); font-size: 13px; font-weight: 590; letter-spacing: 0; transition: color 180ms ease-out, border-color 180ms ease-out; } .ds-nav-item:hover { color: var(--ink); } .ds-nav-item.ds-is-active { color: var(--active); } .ds-nav-item.ds-is-active::after { position: absolute; right: 14px; bottom: 3px; left: 14px; height: 1px; background: currentColor; content: ''; } .ds-download-item { margin-left: 8px; border: 1px solid var(--line); background: var(--surface-raised); color: var(--ink); } .ds-download-item:hover { border-color: var(--line-strong); } .ds-nav-item:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }"
     },
     {
