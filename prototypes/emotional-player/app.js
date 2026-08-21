@@ -11,6 +11,7 @@ import {
   House,
   Laptop,
   Library,
+  Maximize2,
   Moon,
   Pause,
   Play,
@@ -212,6 +213,7 @@ const dom = {
   mobileMoreButton: document.querySelector("#mobile-more-button"),
   mobileMoreMenu: document.querySelector("#mobile-more-menu"),
   featuredImage: document.querySelector("#featured-image"),
+  featuredScene: document.querySelector("#featured-scene"),
   featuredElements: document.querySelector("#featured-elements"),
   featuredTitle: document.querySelector("#featured-title"),
   featuredDescription: document.querySelector("#featured-description"),
@@ -234,6 +236,8 @@ const dom = {
   sourceTabs: [...document.querySelectorAll("[data-source-category]")],
   audioUpload: document.querySelector("#audio-upload"),
   browseAudioButton: document.querySelector("#browse-audio-button"),
+  characterSelect: document.querySelector("#character-select"),
+  characterDescription: document.querySelector("#character-description"),
   focusMode: document.querySelector("#focus-mode"),
   focusVisual: document.querySelector("#focus-visual"),
   focusStatic: document.querySelector("#focus-static"),
@@ -377,6 +381,8 @@ let focusChromeTimer = 0;
 let focusChromeVisible = true;
 let focusChromeEngaged = false;
 let focusChromeKeyboardActive = false;
+let focusEntryHintTimer = 0;
+let focusEntryHintShown = false;
 
 const playerMotion = createPlayerMotion({
   elements: {
@@ -422,6 +428,7 @@ async function boot() {
   syncPlaybackState();
   syncStateMarkers();
   renderIcons();
+  if (state.playerExpanded) window.requestAnimationFrame(revealFocusEntryHint);
   exposeDebugApi();
   if (initialClientTarget) window.requestAnimationFrame(() => openClientSection(false));
   motionRuntime.subscribe(({ reduceMotion }) => {
@@ -477,7 +484,7 @@ function installInteractions() {
   dom.focusButton.addEventListener("click", openFocusMode);
   dom.focusButton.addEventListener("pointerenter", prepareFocusField, { passive: true });
   dom.focusButton.addEventListener("focus", prepareFocusField);
-  dom.featuredPlay.addEventListener("click", () => switchToScene(state.featuredScene, { autoPlay: true }));
+  dom.featuredPlay.addEventListener("click", handleFeaturedSceneAction);
   dom.focusMode.addEventListener("pointermove", handleFocusActivity, { passive: true });
   dom.focusMode.addEventListener("pointerdown", handleFocusActivity, { passive: true });
   document.addEventListener("pointerdown", () => {
@@ -537,28 +544,33 @@ function installInteractions() {
     button.addEventListener("click", () => showToast(button.dataset.toast));
   });
 
-  document.querySelector("#character-options").addEventListener("click", (event) => {
-    const button = event.target.closest("[data-character]");
-    if (!button) return;
-    setCharacter(button.dataset.character, button);
-  });
+  dom.characterSelect.addEventListener("change", () => setCharacter(dom.characterSelect.value));
 
   dom.layerList.addEventListener("input", handleLayerInput);
   dom.layerList.addEventListener("click", handleLayerToggle);
   dom.layerList.addEventListener("change", handleLayerProfileChange);
   dom.sourceTabs.forEach((button) => {
-    button.addEventListener("click", () => {
-      state.sourceCategory = button.dataset.sourceCategory;
-      updateTabSelection(button, "[data-source-category]");
-      renderSourceLibrary();
-    });
+    button.addEventListener("click", () => activateSourceCategory(button));
+    button.addEventListener("keydown", (event) => handleRovingSelectionKeydown(
+      event,
+      dom.sourceTabs,
+      activateSourceCategory,
+    ));
   });
   dom.sourceList.addEventListener("click", handleSourceLibraryClick);
   dom.browseAudioButton.addEventListener("click", () => requestAudioUpload({ category: state.sourceCategory }));
   dom.audioUpload.addEventListener("change", () => handleAudioUpload());
-  dom.themeOptions.forEach((button) => button.addEventListener("click", () => setThemeMode(button.dataset.themeMode)));
+  dom.themeOptions.forEach((button) => {
+    button.addEventListener("click", () => setThemeMode(button.dataset.themeMode));
+    button.addEventListener("keydown", (event) => handleRovingSelectionKeydown(
+      event,
+      dom.themeOptions,
+      (nextButton) => setThemeMode(nextButton.dataset.themeMode),
+    ));
+  });
   dom.autoPlaySetting.addEventListener("change", () => {
     state.autoPlayOnSelect = dom.autoPlaySetting.checked;
+    syncSceneActions();
     persistPreferences();
   });
   dom.rememberMixSetting.addEventListener("change", () => {
@@ -678,14 +690,30 @@ function collapsePlayer({ restoreFocus = false } = {}) {
 function finishPlayerOpen() {
   state.playerTransitioning = false;
   syncPlayerStructure();
+  revealFocusEntryHint();
 }
 
 function finishPlayerClose() {
   state.playerTransitioning = false;
   dom.playerExpandedScroll.scrollTop = 0;
+  clearFocusEntryHint();
   syncPlayerStructure();
   if (restoreFocusAfterCollapse) dom.playerIdentityButton.focus({ preventScroll: true });
   restoreFocusAfterCollapse = false;
+}
+
+function revealFocusEntryHint() {
+  if (focusEntryHintShown || !state.playerExpanded || state.focusOpen) return;
+  focusEntryHintShown = true;
+  window.clearTimeout(focusEntryHintTimer);
+  dom.focusButton.classList.add("is-hint-visible");
+  focusEntryHintTimer = window.setTimeout(clearFocusEntryHint, 2800);
+}
+
+function clearFocusEntryHint() {
+  window.clearTimeout(focusEntryHintTimer);
+  focusEntryHintTimer = 0;
+  dom.focusButton.classList.remove("is-hint-visible");
 }
 
 function syncPlayerStructure() {
@@ -858,7 +886,23 @@ function handleSceneSelection(event) {
   const button = event.target.closest("[data-scene]");
   if (!button) return;
   const scene = sceneById.get(button.dataset.scene);
-  if (scene) switchToScene(scene, { autoPlay: state.autoPlayOnSelect });
+  if (!scene) return;
+  if (scene.id === state.currentScene.id) {
+    if (state.playing) expandPlayer();
+    else startPlayback();
+    return;
+  }
+  switchToScene(scene, { autoPlay: state.autoPlayOnSelect });
+}
+
+function handleFeaturedSceneAction() {
+  const scene = state.featuredScene;
+  if (scene.id === state.currentScene.id) {
+    if (state.playing) expandPlayer();
+    else startPlayback();
+    return;
+  }
+  switchToScene(scene, { autoPlay: true });
 }
 
 async function togglePlayback() {
@@ -886,7 +930,12 @@ async function startPlayback() {
     syncPlaybackState();
   } catch (error) {
     console.error("Unable to start audio playback", error);
-    showToast("播放没有开始，请再试一次");
+    const message = error?.name === "NotAllowedError"
+      ? "浏览器阻止了自动播放，请再次点击播放"
+      : error?.name === "NotSupportedError"
+        ? "这段声音暂时无法播放，请切换另一处声景"
+        : "播放没有开始，请检查系统音量或切换声景后重试";
+    showToast(message);
   }
 }
 
@@ -911,9 +960,12 @@ function syncPlaybackState() {
   const label = state.playing ? "正在播放" : state.hasPlayed ? "已暂停" : "尚未播放";
   const artworkLabel = state.playing ? "自然演化中" : state.hasPlayed ? "已经暂停" : "准备播放";
   dom.shell.dataset.playing = String(state.playing);
+  dom.shell.dataset.hasPlayed = String(state.hasPlayed);
   dom.playerState.textContent = label;
   dom.playerExpandedState.textContent = label;
   dom.focusState.textContent = artworkLabel;
+  syncPlaybackNarrative();
+  syncSceneActions();
   syncPlayerIdentityLabel(label);
   field.setPlaying(state.playing);
 
@@ -928,6 +980,23 @@ function syncPlaybackState() {
   renderIcons();
   syncFocusChromePlayback();
   syncStateMarkers();
+}
+
+function syncPlaybackNarrative() {
+  const feeling = `${describeIntensity(state.intensity)} · ${describeRichness(state.richness)}`;
+  const orchestration = `${describeMovement(state.movement)} · ${describeDistance(state.distance)}`;
+  if (state.playing) {
+    dom.feelingSummary.textContent = `${feeling}，声音正在实时变化。`;
+    dom.orchestrationSummary.textContent = `${orchestration}，声音正在持续变化。`;
+    return;
+  }
+  if (state.hasPlayed) {
+    dom.feelingSummary.textContent = `${feeling}，已暂停，当前听感已保留。`;
+    dom.orchestrationSummary.textContent = `${orchestration}，已暂停，当前走势已保留。`;
+    return;
+  }
+  dom.feelingSummary.textContent = `${feeling}，开始后会持续自然变化。`;
+  dom.orchestrationSummary.textContent = `${orchestration}，开始后会持续自然变化。`;
 }
 
 function updateVolume(value) {
@@ -961,7 +1030,7 @@ function updateFeeling(kind, value) {
   });
   field.setControls({ [kind]: state[kind] });
   audioCrossfader.setSoundscape({ [kind]: state[kind] });
-  dom.feelingSummary.textContent = `${describeIntensity(state.intensity)} · ${describeRichness(state.richness)}，声音正在实时变化。`;
+  syncPlaybackNarrative();
   syncStateMarkers();
   persistPreferences();
 }
@@ -977,7 +1046,7 @@ function updateOrchestration(kind, value) {
       : describeDistance(state.distance));
   });
   audioCrossfader.setSoundscape({ [kind]: state[kind] });
-  dom.orchestrationSummary.textContent = `${describeMovement(state.movement)} · ${describeDistance(state.distance)}，声音会持续自然变化。`;
+  syncPlaybackNarrative();
   syncStateMarkers();
   persistPreferences();
 }
@@ -992,24 +1061,20 @@ function syncControls() {
   syncSleepTimerUI();
 }
 
-function setCharacter(character, sourceButton) {
+function setCharacter(character) {
   if (!SOUND_PROFILES[character]) return;
   state.character = character;
-  if (sourceButton) updateTabSelection(sourceButton, "[data-character]", "aria-checked");
-  else syncCharacterSelection();
+  syncCharacterSelection();
   audioCrossfader.setSoundscape({ character });
   syncStateMarkers();
   persistPreferences();
-  const label = document.querySelector(`[data-character="${character}"]`)?.dataset.characterLabel ?? "自然";
-  showToast(`播放质感已变为「${label}」`);
+  showToast(`播放质感已变为「${SOUND_PROFILES[character].label}」`);
 }
 
 function syncCharacterSelection() {
-  document.querySelectorAll("[data-character]").forEach((button) => {
-    const selected = button.dataset.character === state.character;
-    button.classList.toggle("is-selected", selected);
-    button.setAttribute("aria-checked", String(selected));
-  });
+  const profile = SOUND_PROFILES[state.character] ?? SOUND_PROFILES.natural;
+  dom.characterSelect.value = state.character;
+  dom.characterDescription.textContent = profile.detail;
   audioCrossfader.setSoundscape({ character: state.character });
 }
 
@@ -1145,6 +1210,7 @@ async function switchToScene(nextScene, options = {}) {
     if (openPlayer) expandPlayer();
     if (autoPlay && !state.playing) await startPlayback();
     await Promise.all([visualTransition, audioTransition, fieldTransition]);
+    if (!autoPlay && !state.playing) showToast(`已选择「${nextScene.name}」，点击播放开始聆听`);
   } finally {
     state.switching = false;
     syncStateMarkers();
@@ -1175,7 +1241,10 @@ async function crossfadeAudio(nextUrl) {
     state.activeAudio = await audioCrossfader.crossfadeTo(nextIndex);
   } catch (error) {
     console.error("Unable to start the next soundscape audio", error);
-    showToast("声音切换没有完成，请再试一次");
+    state.activeAudio = audioCrossfader.switchImmediately(nextIndex);
+    state.playing = false;
+    syncPlaybackState();
+    showToast("声音切换没有完成，已暂停。请再次点击播放");
   }
 }
 
@@ -1214,11 +1283,14 @@ function renderFeaturedScene() {
   dom.featuredTitle.textContent = scene.name;
   dom.featuredDescription.textContent = scene.description;
   dom.featuredElements.textContent = scene.elements.join(" · ");
+  syncSceneActions();
 }
 
 function renderCollections() {
   renderExploreGrid();
   renderLibraryGrid();
+  syncSceneActions();
+  renderIcons();
 }
 
 function renderTemplates() {
@@ -1237,6 +1309,7 @@ function renderTemplates() {
 
 function renderExploreGrid() {
   const otherScenes = scenes.filter((scene) => scene.id !== state.featuredScene.id);
+  dom.exploreGrid.classList.toggle("scene-grid--single", otherScenes.length === 1);
   dom.exploreGrid.replaceChildren(...otherScenes.map(createSceneCard));
 }
 
@@ -1249,10 +1322,61 @@ function createSceneCard(scene, extraClass = "") {
   button.type = "button";
   button.className = ["scene-card", extraClass].filter(Boolean).join(" ");
   button.dataset.scene = scene.id;
-  if (scene.id === state.currentScene.id) button.setAttribute("aria-current", "true");
-  button.setAttribute("aria-label", `${scene.name}${scene.id === state.currentScene.id ? "，当前声景" : ""}，${scene.description}`);
-  button.innerHTML = `<span class="scene-card-media"><img src="${scene.cover}" alt="" loading="lazy" decoding="async"></span><strong>${scene.name}</strong><small>${scene.elements.join(" · ")}</small>`;
+  button.innerHTML = `
+    <span class="scene-card-media"><img src="${scene.cover}" alt="" loading="lazy" decoding="async"></span>
+    <span class="scene-card-copy">
+      <span class="scene-card-heading">
+        <strong>${escapeHtml(scene.name)}</strong>
+        <span class="scene-card-action" aria-hidden="true">
+          <i class="scene-card-action-icon scene-card-action-icon--play" data-lucide="play"></i>
+          <i class="scene-card-action-icon scene-card-action-icon--live" data-lucide="audio-lines"></i>
+          <span data-scene-action>开始聆听</span>
+        </span>
+      </span>
+      <small>${escapeHtml(scene.elements.join(" · "))}</small>
+      <span class="scene-card-description">${escapeHtml(scene.description)}</span>
+    </span>`;
+  syncSceneCardState(button, scene);
   return button;
+}
+
+function syncSceneActions() {
+  const featuredIsCurrent = state.featuredScene.id === state.currentScene.id;
+  const featuredIsPlaying = featuredIsCurrent && state.playing;
+  dom.featuredScene.classList.toggle("is-current", featuredIsCurrent);
+  dom.featuredPlay.classList.toggle("is-playing", featuredIsPlaying);
+  dom.featuredPlay.querySelector("span:last-child").textContent = featuredIsPlaying
+    ? "打开播放器"
+    : featuredIsCurrent && state.hasPlayed
+      ? "继续聆听"
+      : "开始聆听";
+  dom.featuredPlay.setAttribute("aria-label", featuredIsPlaying
+    ? `${state.featuredScene.name}正在聆听，打开播放器`
+    : `${featuredIsCurrent && state.hasPlayed ? "继续" : "开始"}聆听${state.featuredScene.name}`);
+  if (featuredIsCurrent) dom.featuredPlay.setAttribute("aria-current", "true");
+  else dom.featuredPlay.removeAttribute("aria-current");
+
+  document.querySelectorAll("[data-scene]").forEach((button) => {
+    const scene = sceneById.get(button.dataset.scene);
+    if (scene) syncSceneCardState(button, scene);
+  });
+}
+
+function syncSceneCardState(button, scene) {
+  const isCurrent = scene.id === state.currentScene.id;
+  const isPlaying = isCurrent && state.playing;
+  let action = state.autoPlayOnSelect ? "开始聆听" : "选择声景";
+  let ariaAction = state.autoPlayOnSelect ? `切换并播放${scene.name}` : `选择${scene.name}`;
+  if (isCurrent) {
+    action = isPlaying ? "正在聆听" : state.hasPlayed ? "继续聆听" : "开始聆听";
+    ariaAction = isPlaying ? `${scene.name}正在聆听，打开播放器` : `${state.hasPlayed ? "继续" : "开始"}聆听${scene.name}`;
+  }
+  button.classList.toggle("is-current", isCurrent);
+  button.classList.toggle("is-playing", isPlaying);
+  button.querySelector("[data-scene-action]").textContent = action;
+  button.setAttribute("aria-label", `${ariaAction}。${scene.description}`);
+  if (isCurrent) button.setAttribute("aria-current", "true");
+  else button.removeAttribute("aria-current");
 }
 
 function restoreBuiltInAssignments(assignments) {
@@ -1311,6 +1435,8 @@ function renderSourceLibrary() {
     const selected = button.dataset.sourceCategory === state.sourceCategory;
     button.classList.toggle("is-selected", selected);
     button.setAttribute("aria-selected", String(selected));
+    button.tabIndex = selected ? 0 : -1;
+    if (selected) dom.sourceList.setAttribute("aria-labelledby", button.id);
   });
 
   if (state.sourceCategory === "mine") {
@@ -1349,6 +1475,12 @@ function renderSourceLibrary() {
       </button>`;
   }).join("");
   renderIcons();
+}
+
+function activateSourceCategory(button) {
+  if (!button || !dom.sourceTabs.includes(button)) return;
+  state.sourceCategory = button.dataset.sourceCategory;
+  renderSourceLibrary();
 }
 
 function handleSourceLibraryClick(event) {
@@ -1398,6 +1530,7 @@ function syncSettings() {
     const selected = button.dataset.themeMode === state.themeMode;
     button.classList.toggle("is-selected", selected);
     button.setAttribute("aria-checked", String(selected));
+    button.tabIndex = selected ? 0 : -1;
   });
   dom.autoPlaySetting.checked = state.autoPlayOnSelect;
   dom.rememberMixSetting.checked = state.rememberMix;
@@ -1873,6 +2006,7 @@ async function openFocusMode() {
   state.focusOpen = true;
   state.focusTransitioning = true;
   state.lastFocused = document.activeElement;
+  clearFocusEntryHint();
   closeControlPopovers(false);
   dom.focusMode.classList.add("is-open");
   dom.focusMode.removeAttribute("inert");
@@ -1980,12 +2114,19 @@ function resetFocusChrome({ immediate = false } = {}) {
   focusMotion.setChromeVisible(true, { immediate });
 }
 
-function updateTabSelection(activeButton, selector, stateAttribute = "aria-selected") {
-  document.querySelectorAll(selector).forEach((button) => {
-    const selected = button === activeButton;
-    button.classList.toggle("is-selected", selected);
-    button.setAttribute(stateAttribute, String(selected));
-  });
+function handleRovingSelectionKeydown(event, options, activate) {
+  const horizontalKeys = ["ArrowLeft", "ArrowRight"];
+  if (![...horizontalKeys, "ArrowUp", "ArrowDown", "Home", "End"].includes(event.key)) return;
+  event.preventDefault();
+  const currentIndex = Math.max(0, options.indexOf(event.currentTarget));
+  let nextIndex = currentIndex;
+  if (["ArrowRight", "ArrowDown"].includes(event.key)) nextIndex = (currentIndex + 1) % options.length;
+  if (["ArrowLeft", "ArrowUp"].includes(event.key)) nextIndex = (currentIndex - 1 + options.length) % options.length;
+  if (event.key === "Home") nextIndex = 0;
+  if (event.key === "End") nextIndex = options.length - 1;
+  const nextButton = options[nextIndex];
+  activate(nextButton);
+  nextButton.focus({ preventScroll: true });
 }
 
 let toastTimer = 0;
@@ -2021,6 +2162,7 @@ function renderIcons() {
       House,
       Laptop,
       Library,
+      Maximize2,
       Moon,
       Pause,
       Play,

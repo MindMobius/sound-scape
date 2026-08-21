@@ -26,8 +26,8 @@
         </a>
 
         <nav class="primary-nav" aria-label="网站导航">
-          <a class="nav-item site-download-link" href="#client" data-client-link>
-            <span>下载客户端</span>
+          <a class="nav-item site-download-link" href="#client" data-client-link aria-label="查看客户端进展">
+            <span>客户端</span>
           </a>
           <button class="nav-item lab-only" type="button" data-view-link="create">
             <span>创建</span>
@@ -48,7 +48,7 @@
         </a>
         <div class="mobile-header-actions">
           <nav class="mobile-public-nav" aria-label="网站导航">
-            <a class="mobile-public-link" href="#client" data-client-link>下载客户端</a>
+            <a class="mobile-public-link" href="#client" data-client-link aria-label="查看客户端进展">客户端</a>
           </nav>
           <button class="icon-button lab-only" id="mobile-more-button" type="button" aria-label="内部功能" aria-expanded="false" aria-controls="mobile-more-menu" title="内部功能">
             <i data-lucide="ellipsis" aria-hidden="true"></i>
@@ -80,7 +80,9 @@
               <p class="featured-elements" id="featured-elements">近岸潮水 · 远浪 · 海风</p>
               <p class="featured-description" id="featured-description">深夜海岸上，潮声持续靠近又缓缓退去。</p>
               <button class="light-action" type="button" id="featured-play">
-                <i data-lucide="play" aria-hidden="true"></i><span>开始聆听</span>
+                <i class="featured-action-icon featured-action-icon--play" data-lucide="play" aria-hidden="true"></i>
+                <i class="featured-action-icon featured-action-icon--live" data-lucide="audio-lines" aria-hidden="true"></i>
+                <span>开始聆听</span>
               </button>
             </div>
           </article>
@@ -233,7 +235,9 @@
               <div class="player-main">
               <figure class="player-hero-artwork">
                 <img id="player-hero-cover" src="../../assets/scenes/rain-cabin/rain-cabin-cover-web-v1.jpg" alt="" decoding="async" />
-                <button class="player-focus-entry" id="focus-button" type="button" aria-label="进入沉浸聆听"></button>
+                <button class="player-focus-entry" id="focus-button" type="button" aria-label="进入沉浸聆听">
+                  <span class="focus-entry-cue" aria-hidden="true"><i data-lucide="maximize-2"></i><span>沉浸聆听</span></span>
+                </button>
               </figure>
 
               <div class="player-expanded-copy">
@@ -244,7 +248,7 @@
 
                 <section class="player-feeling" aria-labelledby="player-feeling-title">
                   <div class="section-title-row">
-                    <div><h3 id="player-feeling-title">整体感受</h3><p id="feeling-summary">均衡 · 丰富，声音正在实时变化。</p></div>
+                    <div><h3 id="player-feeling-title">整体感受</h3><p id="feeling-summary">均衡 · 丰富，开始后会持续自然变化。</p></div>
                   </div>
                   <label class="feeling-range"><span>轻</span><input id="intensity" type="range" min="0" max="100" value="52" data-intensity aria-label="轻重" /><span>重</span></label>
                   <label class="feeling-range"><span>简</span><input id="richness" type="range" min="0" max="100" value="68" data-richness aria-label="简繁" /><span>繁</span></label>
@@ -264,7 +268,7 @@
 
                         <section class="orchestration-controls" aria-labelledby="orchestration-title">
                           <div class="section-title-row">
-                            <div><h3 id="orchestration-title">声音走势</h3><p id="orchestration-summary">轻微起伏 · 稍近，声音会持续自然变化。</p></div>
+                            <div><h3 id="orchestration-title">声音走势</h3><p id="orchestration-summary">轻微起伏 · 稍近，开始后会持续自然变化。</p></div>
                           </div>
                           <label class="feeling-range"><span>平稳</span><input id="movement" type="range" min="0" max="100" value="36" data-movement aria-label="声音起伏" /><span>起伏</span></label>
                           <label class="feeling-range"><span>贴近</span><input id="distance" type="range" min="0" max="100" value="24" data-distance aria-label="声音远近" /><span>远处</span></label>
@@ -274,26 +278,29 @@
                       <aside class="sound-character" aria-labelledby="character-title">
                         <section>
                           <h3 id="character-title">听感</h3>
-                          <div class="character-options" id="character-options" role="radiogroup" aria-label="听感">
-                            <button class="is-selected" type="button" role="radio" aria-checked="true" data-character="natural" data-character-label="自然"><span>自然</span><small>清晰平衡</small></button>
-                            <button type="button" role="radio" aria-checked="false" data-character="hifi" data-character-label="Hi-Fi"><span>Hi-Fi</span><small>开阔清晰</small></button>
-                            <button type="button" role="radio" aria-checked="false" data-character="tube" data-character-label="胆机"><span>胆机</span><small>柔和染色</small></button>
-                            <button type="button" role="radio" aria-checked="false" data-character="radio" data-character-label="老式收音机"><span>收音机</span><small>窄频底噪</small></button>
-                            <button type="button" role="radio" aria-checked="false" data-character="television" data-character-label="雪花电视"><span>雪花电视</span><small>颗粒中频</small></button>
-                            <button type="button" role="radio" aria-checked="false" data-character="speaker" data-character-label="单声道喇叭"><span>喇叭</span><small>集中压缩</small></button>
-                            <button type="button" role="radio" aria-checked="false" data-character="spatial" data-character-label="耳机空间"><span>耳机空间</span><small>拓宽远近</small></button>
-                          </div>
+                          <label class="character-control" for="character-select">
+                            <select id="character-select" aria-labelledby="character-title" aria-describedby="character-description">
+                              <option value="natural">自然</option>
+                              <option value="hifi">Hi-Fi</option>
+                              <option value="tube">胆机</option>
+                              <option value="radio">老式收音机</option>
+                              <option value="television">雪花电视</option>
+                              <option value="speaker">单声道喇叭</option>
+                              <option value="spatial">耳机空间</option>
+                            </select>
+                            <small id="character-description">保留原始层次</small>
+                          </label>
                         </section>
 
                         <section class="source-library" aria-labelledby="source-library-title">
                           <div class="section-title-row"><div><h3 id="source-library-title">添一处声音</h3><p>从素材或自己的声音开始。</p></div></div>
-                          <div class="source-tabs" role="tablist" aria-label="声音分类">
-                            <button class="is-selected" type="button" role="tab" aria-selected="true" data-source-category="environment">环境</button>
-                            <button type="button" role="tab" aria-selected="false" data-source-category="event">事件</button>
-                            <button type="button" role="tab" aria-selected="false" data-source-category="media">媒介</button>
-                            <button type="button" role="tab" aria-selected="false" data-source-category="mine">我的声音</button>
+                          <div class="source-tabs" role="tablist" aria-label="声音分类" aria-orientation="horizontal">
+                            <button class="is-selected" id="source-tab-environment" type="button" role="tab" aria-selected="true" aria-controls="source-list" tabindex="0" data-source-category="environment">环境</button>
+                            <button id="source-tab-event" type="button" role="tab" aria-selected="false" aria-controls="source-list" tabindex="-1" data-source-category="event">事件</button>
+                            <button id="source-tab-media" type="button" role="tab" aria-selected="false" aria-controls="source-list" tabindex="-1" data-source-category="media">媒介</button>
+                            <button id="source-tab-mine" type="button" role="tab" aria-selected="false" aria-controls="source-list" tabindex="-1" data-source-category="mine">我的声音</button>
                           </div>
-                          <div class="source-list" id="source-list"></div>
+                          <div class="source-list" id="source-list" role="tabpanel" aria-labelledby="source-tab-environment" tabindex="0"></div>
                           <button class="source-upload-action" type="button" id="browse-audio-button"><i data-lucide="upload" aria-hidden="true"></i><span><strong>选择本地音频</strong><small>最大 32 MB，只保存在这个浏览器中</small></span></button>
                         </section>
                       </aside>
