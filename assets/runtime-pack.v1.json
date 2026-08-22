@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "flutter": {
-    "outputRoot": "apps/mobile/assets/generated",
+    "outputRoot": "apps/client/assets/generated",
     "catalogSource": "assets/audio/sound-library.v1.json",
     "catalogTarget": "catalog/sound-library.v1.json",
     "files": [

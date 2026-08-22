@@ -217,6 +217,23 @@
       "sha256": "94ae4541581b0d6ae529cd71b066ed1b522dd985f82925bee6ceb72640d44e9f"
     },
     {
+      "id": "ui.runtime.membrane-thickness-atlas.v2",
+      "path": "assets/ui/runtime/membrane-thickness-atlas-v2.png",
+      "kind": "runtime-atlas",
+      "theme": "adaptive",
+      "usage": [
+        "webgl-thickness-sampling",
+        "immersive-field"
+      ],
+      "copySafe": "none",
+      "width": 1536,
+      "height": 1024,
+      "alpha": false,
+      "status": "accepted",
+      "prompt": "design/prompts/ui/runtime/membrane-thickness-atlas-v2.txt",
+      "sha256": "8fa178418e606acd42261b85e31fb03644f47409bb4532475ee7e593c5d30496"
+    },
+    {
       "id": "scene.rain-cabin.hero.v1",
       "sceneId": "rain-cabin",
       "path": "assets/scenes/rain-cabin/rain-cabin-hero-v1.png",

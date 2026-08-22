@@ -107,10 +107,13 @@ if (catalog) {
     if (assetPaths.has(asset.path)) fail(`duplicate asset path: ${asset.path}`);
     assetPaths.add(asset.path);
 
-    const isStaticPath =
-      asset.path.startsWith("assets/brand/") || asset.path.startsWith("assets/scenes/");
+    const isStaticPath = ["assets/brand/", "assets/scenes/", "assets/ui/"].some((root) =>
+      asset.path.startsWith(root),
+    );
     if (!isStaticPath || asset.path.includes("/experiments/")) {
-      fail(`${asset.id}: static catalog path must stay under assets/brand or assets/scenes`);
+      fail(
+        `${asset.id}: static catalog path must stay under assets/brand, assets/scenes, or assets/ui`,
+      );
     }
 
     if (asset.path.startsWith("assets/scenes/")) {
@@ -118,7 +121,7 @@ if (catalog) {
         fail(`${asset.id}: sceneId must match its scene directory`);
       }
     } else if (Object.hasOwn(asset, "sceneId")) {
-      fail(`${asset.id}: brand assets must not declare sceneId`);
+      fail(`${asset.id}: shared assets must not declare sceneId`);
     }
 
     if (!(await exists(asset.path)) || !(await exists(asset.prompt))) continue;
@@ -178,6 +181,7 @@ if (catalog && derivatives) {
   const productionRasters = [
     ...(await listFiles("assets/brand")),
     ...(await listFiles("assets/scenes")),
+    ...(await listFiles("assets/ui")),
   ].filter((file) => /\.(?:png|jpe?g)$/i.test(file));
 
   for (const file of productionRasters) {

@@ -7,9 +7,11 @@
 ## 启动
 
 ```powershell
-npm install
-npm run dev -- --port 10600
+npm ci
+npm run dev --workspace @soundscape/prototype-optical-membrane-field -- --port 10600
 ```
+
+命令从仓库根目录运行；依赖由根 npm workspace 和唯一锁文件管理。构建验收也可直接使用 `npm run build:optical`。
 
 打开 `http://127.0.0.1:10600/?variant=A`。
 

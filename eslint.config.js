@@ -6,7 +6,7 @@ const nodeFiles = ["apps/web/vite.config.js", "tools/**/*.mjs"];
 
 export default [
   {
-    ignores: ["**/build/**", "**/dist/**", "**/node_modules/**", "apps/mobile/assets/generated/**"],
+    ignores: ["**/build/**", "**/dist/**", "**/node_modules/**", "apps/client/assets/generated/**"],
   },
   {
     ...js.configs.recommended,

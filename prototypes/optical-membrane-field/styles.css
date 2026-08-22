@@ -1,6 +1,7 @@
 :root {
   color-scheme: light;
-  font-family: "Avenir Next", "Segoe UI", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family:
+    "Avenir Next", "Segoe UI", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
   font-synthesis: none;
   --surface: #f2f0ec;
   --ink: #242321;
@@ -113,7 +114,8 @@ button {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: max(24px, env(safe-area-inset-top)) max(28px, env(safe-area-inset-right)) 20px max(28px, env(safe-area-inset-left));
+  padding: max(24px, env(safe-area-inset-top)) max(28px, env(safe-area-inset-right)) 20px
+    max(28px, env(safe-area-inset-left));
   pointer-events: none;
 }
 
@@ -431,7 +433,8 @@ button:active {
 
   .topbar {
     align-items: flex-start;
-    padding: max(18px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) 14px max(16px, env(safe-area-inset-left));
+    padding: max(18px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) 14px
+      max(16px, env(safe-area-inset-left));
   }
 
   .brand {

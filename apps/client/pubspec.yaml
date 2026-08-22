@@ -1,0 +1,36 @@
+name: soundscape_client
+description: "声景本地优先的持续自然声客户端 MVP。"
+publish_to: 'none'
+version: 0.1.0+1
+
+environment:
+  sdk: ^3.13.1
+
+dependencies:
+  audio_service: 0.18.19
+  audio_session: 0.2.4
+  crypto: 3.0.7
+  file_selector: 1.1.0
+  flutter:
+    sdk: flutter
+  flutter_soloud: 4.1.7
+  path_provider: 2.1.6
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  integration_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/generated/catalog/sound-library.v1.json
+    - assets/generated/audio/open-water.wav
+    - assets/generated/audio/rain-cabin.mp3
+    - assets/generated/images/coastal-night-cover.jpg
+    - assets/generated/images/coastal-night-hero.jpg
+    - assets/generated/images/rain-cabin-cover.jpg
+    - assets/generated/images/rain-cabin-hero.jpg
+    - assets/generated/images/soundscape-mark.png

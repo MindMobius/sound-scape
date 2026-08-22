@@ -26,7 +26,7 @@ const fixturePath = path.join(
 const generatedBindingPath = path.join(
   repositoryRoot,
   "apps",
-  "mobile",
+  "client",
   "lib",
   "domain",
   "generated",

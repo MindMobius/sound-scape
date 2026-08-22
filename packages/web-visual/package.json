@@ -1,0 +1,9 @@
+{
+  "name": "@soundscape/web-visual",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    "./membrane-shaders": "./membrane-shaders.js"
+  }
+}

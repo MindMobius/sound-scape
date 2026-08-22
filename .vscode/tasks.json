@@ -4,7 +4,7 @@
     {
       "label": "声景 Flutter：初始化环境",
       "type": "shell",
-      "command": "npm run mobile:setup",
+      "command": "npm run client:setup",
       "options": {
         "cwd": "${workspaceFolder}"
       },
@@ -13,7 +13,7 @@
     {
       "label": "声景 Flutter：快速检查",
       "type": "shell",
-      "command": "npm run mobile:check",
+      "command": "npm run client:check",
       "options": {
         "cwd": "${workspaceFolder}"
       },
@@ -26,7 +26,7 @@
     {
       "label": "声景 Flutter：查看设备",
       "type": "shell",
-      "command": "npm run mobile:devices",
+      "command": "npm run client:devices",
       "options": {
         "cwd": "${workspaceFolder}"
       },

@@ -1,10 +1,11 @@
 import { Geometry, Mesh, Program, Renderer, RenderTarget, Texture } from "ogl";
-import atlasUrl from "../../../../assets/experiments/runtime/membrane-thickness-atlas-v2.png?url";
 import {
   membraneShader,
   presentShader,
   vertexShader,
-} from "../../../../packages/web-visual/membrane-shaders.js";
+} from "@soundscape/web-visual/membrane-shaders";
+
+import atlasUrl from "../../../../assets/ui/runtime/membrane-thickness-atlas-v2.png?url";
 
 const backgroundShader = /* glsl */ `
   precision highp float;
@@ -138,7 +139,7 @@ export class MembraneField {
       if (!this.reducedMotion) this.surface.classList.add("is-field-ready");
       this.status.textContent = "视觉场域已就绪";
       document.documentElement.dataset.renderer = `webgl2-${this.targetMode}`;
-      this.canvas.dataset.atlas = "membrane-thickness-atlas-v2-experimental";
+      this.canvas.dataset.atlas = "ui.runtime.membrane-thickness-atlas.v2";
       this.animationFrame = requestAnimationFrame((now) => this.tick(now));
       return { mode: "webgl2" };
     } catch (error) {

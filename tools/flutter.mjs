@@ -9,7 +9,7 @@ import { syncRuntimeAssets } from "./sync-runtime-assets.mjs";
 
 const scriptDirectory = path.dirname(fileURLToPath(import.meta.url));
 const repositoryRoot = path.resolve(scriptDirectory, "..");
-const applicationRoot = path.join(repositoryRoot, "apps", "mobile");
+const applicationRoot = path.join(repositoryRoot, "apps", "client");
 const expectedVersionFile = path.join(applicationRoot, ".flutter-version");
 const isWindows = process.platform === "win32";
 
@@ -139,7 +139,7 @@ function selectAndroidDevice(flutterExecutable, requestedDeviceId) {
     if (!requested) {
       throw new Error(
         `Android device '${requestedDeviceId}' is not connected. ` +
-          "Run npm run mobile:devices to inspect available targets.",
+          "Run npm run client:devices to inspect available targets.",
       );
     }
     return requested.id;

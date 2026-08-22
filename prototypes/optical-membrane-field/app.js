@@ -1,8 +1,14 @@
 import { Geometry, Mesh, Program, Renderer, RenderTarget, Texture } from "ogl";
 import { createIcons, Pause, Play, Volume2 } from "lucide";
-import atlasUrl from "../../assets/experiments/runtime/membrane-thickness-atlas-v2.png?url";
+import {
+  backgroundShader,
+  membraneShader,
+  presentShader,
+  vertexShader,
+} from "@soundscape/web-visual/membrane-shaders";
+
+import atlasUrl from "../../assets/ui/runtime/membrane-thickness-atlas-v2.png?url";
 import fallbackUrl from "../../assets/brand/backgrounds/hero-background-light-right-v1.png?url";
-import { backgroundShader, membraneShader, presentShader, vertexShader } from "../../packages/web-visual/membrane-shaders.js";
 
 const VARIANT_NAMES = ["A", "B", "C"];
 const REDUCED_MOTION = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -125,7 +131,8 @@ async function boot() {
 }
 
 function createPipeline(geometry) {
-  const floatTargets = renderer.isWebgl2 && Boolean(renderer.getExtension("EXT_color_buffer_float"));
+  const floatTargets =
+    renderer.isWebgl2 && Boolean(renderer.getExtension("EXT_color_buffer_float"));
   targetMode = floatTargets ? "rgba16f" : "rgba8";
   readTarget = createTarget(targetMode);
   writeTarget = createTarget(targetMode);
@@ -213,7 +220,13 @@ function renderFrame(now) {
   backgroundMesh.program.uniforms.uEnergy.value = state.intensity;
   backgroundMesh.program.uniforms.uPointer.value = state.pointer;
   backgroundMesh.program.uniforms.uResolution.value = targetResolution;
-  renderer.render({ scene: backgroundMesh, target: readTarget, clear: true, sort: false, frustumCull: false });
+  renderer.render({
+    scene: backgroundMesh,
+    target: readTarget,
+    clear: true,
+    sort: false,
+    frustumCull: false,
+  });
 
   const layers = LAYOUTS[state.variant];
   const activeLayers = 3 + state.richness * 2.75;
@@ -226,7 +239,9 @@ function renderFrame(now) {
 
     const revealDelay = REDUCED_MOTION ? 0 : index * 78;
     const revealDuration = REDUCED_MOTION ? 1 : 1160;
-    const reveal = easeOutCubic(clamp((now - state.transitionStartedAt - revealDelay) / revealDuration, 0, 1));
+    const reveal = easeOutCubic(
+      clamp((now - state.transitionStartedAt - revealDelay) / revealDuration, 0, 1),
+    );
     const drift = item.drift * motion * (0.55 + state.richness * 0.3);
     const parallaxX = (state.pointer[0] - 0.5) * item.depth * 0.024;
     const parallaxY = (state.pointer[1] - 0.5) * item.depth * 0.018;
@@ -259,7 +274,13 @@ function renderFrame(now) {
     uniforms.uTint.value = tint;
     uniforms.uAbsorption.value = absorption;
 
-    renderer.render({ scene: membraneMesh, target: writeTarget, clear: false, sort: false, frustumCull: false });
+    renderer.render({
+      scene: membraneMesh,
+      target: writeTarget,
+      clear: false,
+      sort: false,
+      frustumCull: false,
+    });
     [readTarget, writeTarget] = [writeTarget, readTarget];
   });
 
@@ -293,7 +314,10 @@ function resize() {
   if (width < 720) renderScale = Math.max(renderScale, 0.92);
 
   renderer.setSize(width, height);
-  readTarget.setSize(Math.max(1, Math.floor(width * renderer.dpr * renderScale)), Math.max(1, Math.floor(height * renderer.dpr * renderScale)));
+  readTarget.setSize(
+    Math.max(1, Math.floor(width * renderer.dpr * renderScale)),
+    Math.max(1, Math.floor(height * renderer.dpr * renderScale)),
+  );
   writeTarget.setSize(readTarget.width, readTarget.height);
   canvas.dataset.renderScale = renderScale.toFixed(2);
 }
@@ -339,7 +363,8 @@ function applyVariant(nextVariant, updateHistory = true) {
   state.variant = normalized;
   state.transitionStartedAt = performance.now();
   document.documentElement.dataset.variant = normalized;
-  document.querySelector('meta[name="theme-color"]').content = normalized === "B" ? "#0b0e0f" : normalized === "C" ? "#ecece8" : "#f2f0ec";
+  document.querySelector('meta[name="theme-color"]').content =
+    normalized === "B" ? "#0b0e0f" : normalized === "C" ? "#ecece8" : "#f2f0ec";
 
   variantButtons.forEach((button) => {
     const selected = button.dataset.variant === normalized;
@@ -378,7 +403,12 @@ function handleVariantKeys(event) {
   if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
   event.preventDefault();
   const current = variantIndex(state.variant);
-  const nextIndex = event.key === "Home" ? 0 : event.key === "End" ? 2 : (current + (event.key === "ArrowRight" ? 1 : -1) + 3) % 3;
+  const nextIndex =
+    event.key === "Home"
+      ? 0
+      : event.key === "End"
+        ? 2
+        : (current + (event.key === "ArrowRight" ? 1 : -1) + 3) % 3;
   const nextVariant = VARIANT_NAMES[nextIndex];
   applyVariant(nextVariant);
   variantButtons[nextIndex].focus();
@@ -459,7 +489,9 @@ function exposeDebugApi() {
       state.pointerTarget[1] = clamp(Number(y), 0, 1);
     },
     snapshot: () => {
-      const averageFrameMs = frameSamples.length ? frameSamples.reduce((sum, value) => sum + value, 0) / frameSamples.length : 0;
+      const averageFrameMs = frameSamples.length
+        ? frameSamples.reduce((sum, value) => sum + value, 0) / frameSamples.length
+        : 0;
       return {
         ready: surface.classList.contains("is-ready"),
         renderer: renderer.isWebgl2 ? "WebGL2" : "WebGL1",

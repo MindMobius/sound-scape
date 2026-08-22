@@ -183,7 +183,7 @@ iOS 需要 `AVAudioSessionCategory.playback` 和 `UIBackgroundModes = audio`。�
 - 2026-08-21 官方 Windows stable 清单为 Flutter `3.47.1` / Dart `3.13.1`，满足 `flutter_soloud` 要求的 Flutter `>= 3.41.0`。
 - 国内网络安装时使用 Flutter 官方文档列出的 CFUG 镜像：`PUB_HOSTED_URL=https://pub.flutter-io.cn` 与 `FLUTTER_STORAGE_BASE_URL=https://storage.flutter-io.cn`，并保留官方 SHA-256 校验。
 
-下一步应先安装 Flutter 3.47.1 stable 与 Android SDK，再创建 `apps/mobile/` 纵切原型；在音频门槛通过前，不迁移完整 Web 界面。
+该方案现已落地为 `apps/client/` 纵切客户端；Flutter SDK、Android SDK、原生音频集成以及 Windows、Android 构建均由仓库脚本和 CI 持续验收，Web 界面不作为客户端运行时来源。
 
 ## 主要来源
 

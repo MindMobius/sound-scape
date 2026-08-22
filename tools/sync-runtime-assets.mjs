@@ -24,13 +24,13 @@ const playableSchemaPath = path.join(repositoryRoot, "contracts", "playable-scen
 const generatedSceneCatalogPath = path.join(
   repositoryRoot,
   "apps",
-  "mobile",
+  "client",
   "lib",
   "domain",
   "generated",
   "soundscape_catalog.g.dart",
 );
-const allowedOutputRoot = path.join(repositoryRoot, "apps", "mobile", "assets", "generated");
+const allowedOutputRoot = path.join(repositoryRoot, "apps", "client", "assets", "generated");
 
 function fail(message) {
   throw new Error(message);
@@ -298,7 +298,7 @@ function buildRuntimePack() {
 
   const outputRoot = resolveRepositoryPath(manifest.flutter.outputRoot, "flutter.outputRoot");
   if (outputRoot !== allowedOutputRoot) {
-    fail("Flutter runtime assets must stay under apps/mobile/assets/generated.");
+    fail("Flutter runtime assets must stay under apps/client/assets/generated.");
   }
 
   const mappings = manifest.flutter.files.map((entry, index) => {

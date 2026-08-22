@@ -24,23 +24,21 @@ jobs:
         with:
           node-version-file: .nvmrc
           cache: npm
-          cache-dependency-path: |
-            package-lock.json
-            apps/web/package-lock.json
-      - name: 安装仓库工具依赖
+          cache-dependency-path: package-lock.json
+      - name: 安装仓库依赖
         run: npm ci
-      - name: 安装 Web 依赖
-        run: npm ci --prefix apps/web
       - name: 执行 Web、资源与契约检查
         run: |
           npm run assets:sync
+          npm run validate:repository
           npm run validate:assets
           npm run validate:contracts
           npm run check:web
+          npm run build:optical
       - name: 检查跨端生成文件漂移
-        run: git diff --exit-code -- apps/mobile/lib/domain/generated
+        run: git diff --exit-code -- apps/client/lib/domain/generated
 
-  flutter-check:
+  client-check:
     name: Flutter 分析、测试与 Android 构建
     runs-on: ubuntu-latest
     env:
@@ -61,12 +59,12 @@ jobs:
           flutter-version: 3.47.1
           channel: stable
           cache: true
-      - name: 安装仓库工具依赖
+      - name: 安装仓库依赖
         run: npm ci
       - name: 执行 Flutter 检查
-        run: npm run mobile:check
+        run: npm run client:check
       - name: 构建 Android 调试包
-        run: npm run mobile:build:android
+        run: npm run client:build:android
 
   windows-native:
     name: Windows 原生播放与构建
@@ -89,12 +87,12 @@ jobs:
           flutter-version: 3.47.1
           channel: stable
           cache: true
-      - name: 安装仓库工具依赖
+      - name: 安装仓库依赖
         run: npm ci
       - name: 验证 Windows 原生播放
-        run: npm run mobile:integration:windows
+        run: npm run client:integration:windows
       - name: 构建 Windows 调试包
-        run: npm run mobile:build:windows
+        run: npm run client:build:windows
 
   ios-build:
     name: iOS 无签名构建
@@ -117,7 +115,7 @@ jobs:
           flutter-version: 3.47.1
           channel: stable
           cache: true
-      - name: 安装仓库工具依赖
+      - name: 安装仓库依赖
         run: npm ci
       - name: 构建 iOS 调试包
-        run: npm run mobile:build:ios
+        run: npm run client:build:ios
