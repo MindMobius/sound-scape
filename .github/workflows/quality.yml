@@ -1,0 +1,123 @@
+name: 跨端质量门禁
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: quality-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  web-contracts:
+    name: Web、资源与契约
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v6
+      - name: 配置 Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            apps/web/package-lock.json
+      - name: 安装仓库工具依赖
+        run: npm ci
+      - name: 安装 Web 依赖
+        run: npm ci --prefix apps/web
+      - name: 执行 Web、资源与契约检查
+        run: |
+          npm run assets:sync
+          npm run validate:assets
+          npm run validate:contracts
+          npm run check:web
+      - name: 检查跨端生成文件漂移
+        run: git diff --exit-code -- apps/mobile/lib/domain/generated
+
+  flutter-check:
+    name: Flutter 分析、测试与 Android 构建
+    runs-on: ubuntu-latest
+    env:
+      PUB_HOSTED_URL: https://pub.dev
+      FLUTTER_STORAGE_BASE_URL: https://storage.googleapis.com
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v6
+      - name: 配置 Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - name: 配置 Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 3.47.1
+          channel: stable
+          cache: true
+      - name: 安装仓库工具依赖
+        run: npm ci
+      - name: 执行 Flutter 检查
+        run: npm run mobile:check
+      - name: 构建 Android 调试包
+        run: npm run mobile:build:android
+
+  windows-native:
+    name: Windows 原生播放与构建
+    runs-on: windows-latest
+    env:
+      PUB_HOSTED_URL: https://pub.dev
+      FLUTTER_STORAGE_BASE_URL: https://storage.googleapis.com
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v6
+      - name: 配置 Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - name: 配置 Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 3.47.1
+          channel: stable
+          cache: true
+      - name: 安装仓库工具依赖
+        run: npm ci
+      - name: 验证 Windows 原生播放
+        run: npm run mobile:integration:windows
+      - name: 构建 Windows 调试包
+        run: npm run mobile:build:windows
+
+  ios-build:
+    name: iOS 无签名构建
+    runs-on: macos-latest
+    env:
+      PUB_HOSTED_URL: https://pub.dev
+      FLUTTER_STORAGE_BASE_URL: https://storage.googleapis.com
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v6
+      - name: 配置 Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - name: 配置 Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 3.47.1
+          channel: stable
+          cache: true
+      - name: 安装仓库工具依赖
+        run: npm ci
+      - name: 构建 iOS 调试包
+        run: npm run mobile:build:ios
