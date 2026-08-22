@@ -114,11 +114,11 @@ SceneRepository         Job / Manifest Service
 
 ## 本地素材与数据
 
-推荐布局：
+当前少量内置素材和用户状态使用原子 JSON；接入可下载声音包和大量索引后的目标布局为：
 
 ```text
 Application Support/
-  soundscape.db
+  soundscape-state.v1.json
   assets/
     <sha256>.<ext>
   artwork/
@@ -127,7 +127,8 @@ Application Support/
     <sha256>.<ext>
 ```
 
-- Drift 保存 `SceneRecipe`、素材 hash、来源、授权信息、下载状态、用户设置和最后播放状态。
+- 当前 schema v2 JSON 保存用户设置、动态声层、听感、收藏、导入记录和用户片刻，并兼容读取 v1。
+- 下载仓库带来大量素材、版本和增量状态后，再由 `SoundscapeStateStore` 迁移到 Drift；数据库不是当前小目录的前置依赖。
 - 受管理音频保存为内容寻址文件，下载完成后先校验 hash，再原子加入素材索引。
 - 用户从文件选择器添加声音后，立即复制进 `imports/`；不能长期依赖外部 picker 返回的临时路径或 `content://` 引用。
 - 可重新下载的中间文件才放 cache；离线声景依赖的正式素材放 Application Support。
