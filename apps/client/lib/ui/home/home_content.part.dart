@@ -6,12 +6,14 @@ class _HomeContent extends StatelessWidget {
     required this.bottomPadding,
     required this.transitioning,
     required this.onSceneTap,
+    required this.onFavoriteTap,
   });
 
   final SoundscapeSnapshot snapshot;
   final double bottomPadding;
   final bool transitioning;
   final ValueChanged<SoundscapeScene> onSceneTap;
+  final ValueChanged<SoundscapeScene> onFavoriteTap;
 
   @override
   Widget build(BuildContext context) {
@@ -107,10 +109,14 @@ class _HomeContent extends StatelessWidget {
                                   playing:
                                       snapshot.scene.id == scene.id &&
                                       snapshot.isPlaying,
+                                  favorite: snapshot.favoriteSceneIds.contains(
+                                    scene.id,
+                                  ),
                                   transitioning:
                                       transitioning &&
                                       snapshot.scene.id == scene.id,
                                   onTap: () => onSceneTap(scene),
+                                  onFavoriteTap: () => onFavoriteTap(scene),
                                 ),
                               ),
                           ],

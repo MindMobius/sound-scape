@@ -44,6 +44,15 @@ void main() {
       expect(find.byKey(const ValueKey('collapse-player')), findsOneWidget);
       expect(tester.takeException(), isNull);
 
+      final playerScroll = find.byType(CustomScrollView).last;
+      await tester.drag(playerScroll, const Offset(0, -760));
+      await tester.pump(const Duration(milliseconds: 180));
+      await tester.drag(playerScroll, const Offset(0, -920));
+      await tester.pump(const Duration(milliseconds: 180));
+
+      expect(find.text('添加声音'), findsOneWidget);
+      expect(tester.takeException(), isNull);
+
       await tester.tap(find.byKey(const ValueKey('collapse-player')));
       await pumpSoundscapeMotion(tester);
 

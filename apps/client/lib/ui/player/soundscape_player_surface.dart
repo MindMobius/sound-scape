@@ -1,11 +1,14 @@
+import 'dart:async';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
 import '../../audio/soundscape_controller.dart';
 import '../../audio/soundscape_runtime.dart';
+import '../../domain/sound_asset.dart';
 import '../../domain/soundscape_catalog.dart';
 import '../../domain/soundscape_scene.dart';
+import '../../domain/soundscape_user_state.dart';
 import '../theme/soundscape_theme.dart';
 import 'player_control_rail.dart';
 
@@ -13,6 +16,7 @@ part 'player_chrome.part.dart';
 part 'player_listening.part.dart';
 part 'player_controls.part.dart';
 part 'player_immersive.part.dart';
+part 'player_library.part.dart';
 
 class SoundscapePlayerSurface extends StatefulWidget {
   const SoundscapePlayerSurface({

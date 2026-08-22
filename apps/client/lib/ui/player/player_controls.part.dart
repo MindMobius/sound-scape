@@ -9,13 +9,41 @@ class _ListeningControls extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final favorite = snapshot.favoriteSceneIds.contains(snapshot.scene.id);
     return ConstrainedBox(
       constraints: const BoxConstraints(maxWidth: 430),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(snapshot.scene.name, style: theme.textTheme.headlineLarge),
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  snapshot.scene.name,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: theme.textTheme.headlineLarge,
+                ),
+              ),
+              const SizedBox(width: 12),
+              IconButton(
+                key: ValueKey('favorite-scene-${snapshot.scene.id}'),
+                tooltip: favorite ? '取消收藏' : '收藏这一处',
+                onPressed: () => controller.setSceneFavorite(
+                  snapshot.scene.id,
+                  favorite: !favorite,
+                ),
+                icon: Icon(
+                  favorite
+                      ? Icons.favorite_rounded
+                      : Icons.favorite_border_rounded,
+                  size: 22,
+                  color: favorite ? theme.colorScheme.secondary : null,
+                ),
+              ),
+            ],
+          ),
           const SizedBox(height: 10),
           Text(
             snapshot.scene.description,
@@ -147,121 +175,6 @@ class _FeelingSlider extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-}
-
-class _LayerCollection extends StatelessWidget {
-  const _LayerCollection({required this.snapshot, required this.controller});
-
-  final SoundscapeSnapshot snapshot;
-  final SoundscapeController controller;
-
-  @override
-  Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final dark = theme.brightness == Brightness.dark;
-    return ColoredBox(
-      color: dark ? SoundscapeColors.darkGround : SoundscapeColors.ground,
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(24, 58, 24, 120),
-        child: Center(
-          child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 820),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('让这一处声音，更像你此刻想听的样子。', style: theme.textTheme.titleLarge),
-                const SizedBox(height: 12),
-                Text(
-                  '保留环境的自然变化，只调整你想靠近或远离的声音。',
-                  style: theme.textTheme.bodyMedium?.copyWith(
-                    color: theme.textTheme.bodySmall?.color,
-                  ),
-                ),
-                const SizedBox(height: 36),
-                for (
-                  var index = 0;
-                  index < snapshot.layers.length;
-                  index++
-                ) ...[
-                  if (index > 0) Divider(height: 1, color: theme.dividerColor),
-                  _LayerRow(
-                    layer: snapshot.layers[index],
-                    controller: controller,
-                  ),
-                ],
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class _LayerRow extends StatelessWidget {
-  const _LayerRow({required this.layer, required this.controller});
-
-  final SoundLayerSnapshot layer;
-  final SoundscapeController controller;
-
-  @override
-  Widget build(BuildContext context) {
-    final descriptor = switch (layer.definition.kind) {
-      SoundLayerKind.bed => '一直在',
-      SoundLayerKind.texture => '缓缓变化',
-      SoundLayerKind.event => '偶尔响起',
-    };
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 20),
-      child: Row(
-        children: [
-          Expanded(
-            flex: 4,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  layer.definition.name,
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
-                const SizedBox(height: 3),
-                Text(descriptor, style: Theme.of(context).textTheme.bodySmall),
-              ],
-            ),
-          ),
-          Expanded(
-            flex: 5,
-            child: Semantics(
-              label: '${layer.definition.name}的存在感',
-              value: '${(layer.presence * 100).round()}%',
-              child: Slider(
-                value: layer.presence,
-                onChanged: layer.enabled
-                    ? (value) => controller.setLayerPresence(
-                        layer.definition.id,
-                        value,
-                      )
-                    : null,
-                semanticFormatterCallback: (value) =>
-                    '${(value * 100).round()}%',
-              ),
-            ),
-          ),
-          const SizedBox(width: 12),
-          Semantics(
-            label: '${layer.definition.name}开关',
-            child: Switch(
-              value: layer.enabled,
-              onChanged: (enabled) => controller.setLayerEnabled(
-                layer.definition.id,
-                enabled: enabled,
-              ),
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

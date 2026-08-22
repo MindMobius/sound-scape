@@ -5,15 +5,19 @@ class _SceneTile extends StatefulWidget {
     required this.scene,
     required this.selected,
     required this.playing,
+    required this.favorite,
     required this.transitioning,
     required this.onTap,
+    required this.onFavoriteTap,
   });
 
   final SoundscapeScene scene;
   final bool selected;
   final bool playing;
+  final bool favorite;
   final bool transitioning;
   final VoidCallback onTap;
+  final VoidCallback onFavoriteTap;
 
   @override
   State<_SceneTile> createState() => _SceneTileState();
@@ -101,10 +105,25 @@ class _SceneTileState extends State<_SceneTile> {
                     ),
                     const SizedBox(width: 16),
                     Padding(
-                      padding: const EdgeInsets.only(top: 3),
+                      padding: const EdgeInsets.only(top: 1),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
+                          IconButton(
+                            key: ValueKey('home-favorite-${widget.scene.id}'),
+                            tooltip: widget.favorite ? '取消收藏' : '收藏这一处',
+                            onPressed: widget.onFavoriteTap,
+                            icon: Icon(
+                              widget.favorite
+                                  ? Icons.favorite_rounded
+                                  : Icons.favorite_border_rounded,
+                              size: 20,
+                              color: widget.favorite
+                                  ? theme.colorScheme.secondary
+                                  : theme.textTheme.bodySmall?.color,
+                            ),
+                          ),
+                          const SizedBox(width: 2),
                           if (widget.transitioning)
                             SizedBox.square(
                               dimension: 13,

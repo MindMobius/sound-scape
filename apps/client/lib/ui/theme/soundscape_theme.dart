@@ -156,6 +156,91 @@ abstract final class SoundscapeTheme {
           ),
         ),
       ),
+      filledButtonTheme: FilledButtonThemeData(
+        style: FilledButton.styleFrom(
+          minimumSize: const Size(0, 48),
+          padding: const EdgeInsets.symmetric(horizontal: 18),
+          backgroundColor: accent,
+          foregroundColor: Colors.white,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7)),
+          textStyle: body.copyWith(fontSize: 13, fontWeight: FontWeight.w600),
+        ),
+      ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: OutlinedButton.styleFrom(
+          minimumSize: const Size(0, 48),
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          foregroundColor: ink,
+          side: BorderSide(color: line),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7)),
+          textStyle: body.copyWith(fontSize: 13, fontWeight: FontWeight.w600),
+        ),
+      ),
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+          minimumSize: const Size(48, 48),
+          foregroundColor: active,
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7)),
+          textStyle: body.copyWith(fontSize: 13, fontWeight: FontWeight.w600),
+        ),
+      ),
+      inputDecorationTheme: InputDecorationTheme(
+        filled: true,
+        fillColor: raised,
+        hintStyle: body.copyWith(color: secondary),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 14,
+          vertical: 14,
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(7),
+          borderSide: BorderSide(color: line),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(7),
+          borderSide: BorderSide(color: active, width: 1.5),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(7),
+          borderSide: BorderSide(
+            color: dark ? const Color(0xFFFFB4AB) : const Color(0xFFBA1A1A),
+          ),
+        ),
+      ),
+      tabBarTheme: TabBarThemeData(
+        labelColor: active,
+        unselectedLabelColor: secondary,
+        dividerColor: line,
+        indicatorColor: active,
+        indicatorSize: TabBarIndicatorSize.label,
+        labelStyle: body.copyWith(fontSize: 13, fontWeight: FontWeight.w600),
+        unselectedLabelStyle: body.copyWith(
+          fontSize: 13,
+          fontWeight: FontWeight.w500,
+        ),
+      ),
+      dialogTheme: DialogThemeData(
+        backgroundColor: raised,
+        surfaceTintColor: Colors.transparent,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        titleTextStyle: serif.copyWith(
+          fontSize: 22,
+          fontWeight: FontWeight.w600,
+          height: 1.25,
+        ),
+        contentTextStyle: body.copyWith(fontSize: 14, height: 1.65),
+      ),
+      snackBarTheme: SnackBarThemeData(
+        behavior: SnackBarBehavior.floating,
+        backgroundColor: dark ? SoundscapeColors.darkInk : SoundscapeColors.ink,
+        contentTextStyle: body.copyWith(
+          color: dark ? SoundscapeColors.darkGround : Colors.white,
+          fontSize: 13,
+        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7)),
+        insetPadding: const EdgeInsets.fromLTRB(16, 0, 16, 90),
+      ),
       splashFactory: InkSparkle.splashFactory,
     );
   }

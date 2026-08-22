@@ -189,6 +189,12 @@ class _SoundscapeHomeScreenState extends State<SoundscapeHomeScreen>
                               transitioning: _transitioning,
                               onSceneTap: (scene) =>
                                   unawaited(_chooseScene(scene, snapshot)),
+                              onFavoriteTap: (scene) =>
+                                  widget.audioController.setSceneFavorite(
+                                    scene.id,
+                                    favorite: !snapshot.favoriteSceneIds
+                                        .contains(scene.id),
+                                  ),
                             ),
                             Positioned(
                               left: 0,
