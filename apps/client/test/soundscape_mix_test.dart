@@ -17,11 +17,11 @@ void main() {
     );
 
     expect(heavy.gainFor('roof-rain'), greaterThan(light.gainFor('roof-rain')));
+    expect(heavy.gainFor('fireplace'), greaterThan(light.gainFor('fireplace')));
     expect(
-      heavy.gainFor('eaves-water'),
-      greaterThan(light.gainFor('eaves-water')),
+      heavy.gainFor('distant-thunder'),
+      greaterThan(light.gainFor('distant-thunder')),
     );
-    expect(heavy.gainFor('damp-echo'), greaterThan(light.gainFor('damp-echo')));
   });
 
   test('richness controls textures without muting the bed', () {
@@ -61,7 +61,7 @@ void main() {
       intensity: 0.5,
       richness: 0.6,
       presence: const {'roof-rain': 0.25},
-      disabledLayers: const {'damp-echo'},
+      disabledLayers: const {'distant-thunder'},
     );
     final full = SoundscapeMix.fromScene(
       scene: scene,
@@ -73,6 +73,6 @@ void main() {
       mix.gainFor('roof-rain'),
       closeTo(full.gainFor('roof-rain') * 0.25, 0.001),
     );
-    expect(mix.gainFor('damp-echo'), 0);
+    expect(mix.gainFor('distant-thunder'), 0);
   });
 }

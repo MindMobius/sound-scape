@@ -27,8 +27,19 @@ flutter:
   uses-material-design: true
   assets:
     - assets/generated/catalog/sound-library.v1.json
-    - assets/generated/audio/open-water.wav
-    - assets/generated/audio/rain-cabin.mp3
+    - assets/generated/audio/ambie-beach.wav
+    - assets/generated/audio/ambie-birds.wav
+    - assets/generated/audio/ambie-city-street.wav
+    - assets/generated/audio/ambie-coffee-shop.mp3
+    - assets/generated/audio/ambie-creek.wav
+    - assets/generated/audio/ambie-fireplace.wav
+    - assets/generated/audio/ambie-rain.wav
+    - assets/generated/audio/ambie-rainforest.mp3
+    - assets/generated/audio/ambie-thunder.mp3
+    - assets/generated/audio/ambie-underwater.wav
+    - assets/generated/audio/ambie-waterfall.wav
+    - assets/generated/audio/ambie-white-noise.wav
+    - assets/generated/audio/ambie-wind.wav
     - assets/generated/images/coastal-night-cover.jpg
     - assets/generated/images/coastal-night-hero.jpg
     - assets/generated/images/rain-cabin-cover.jpg

@@ -1,115 +1,350 @@
 {
   "schemaVersion": 1,
-  "catalogVersion": "2026.08.22-development.1",
-  "updatedAt": "2026-08-22T00:00:00+08:00",
+  "catalogVersion": "2026.08.23-release.1",
+  "updatedAt": "2026-08-23T00:00:00+08:00",
   "assets": [
     {
-      "id": "rain-cabin-development",
-      "metadataVersion": 1,
-      "fileVersion": 1,
-      "category": "weather",
-      "name": {
-        "zh-CN": "雨夜实录",
-        "en": "Rain at night"
-      },
-      "tags": ["雨", "室内", "持续底噪"],
-      "availability": "bundled",
-      "releaseStatus": "development-only",
-      "sha256": "4132d9b80d1469c601ab0ed3f4407212da7d1ade840232720d3fd2ef456ad3f5",
-      "previewSegmentId": "loop-main",
-      "source": {
-        "name": "仓库历史纵切素材",
-        "provenance": "unverified",
-        "authors": [],
-        "license": {
-          "name": "待确认",
-          "redistributionAllowed": false
-        }
-      },
-      "segments": [
-        {
-          "id": "loop-main",
-          "path": "assets/audio/rain-cabin.mp3",
-          "purpose": "loop",
-          "startMs": 0
-        },
-        {
-          "id": "texture-window",
-          "path": "assets/audio/rain-cabin.mp3",
-          "purpose": "texture",
-          "startMs": 11000
-        },
-        {
-          "id": "texture-mist",
-          "path": "assets/audio/rain-cabin.mp3",
-          "purpose": "texture",
-          "startMs": 5000
-        }
-      ]
-    },
-    {
-      "id": "open-water-development",
+      "id": "ambie.beach.v1",
       "metadataVersion": 1,
       "fileVersion": 1,
       "category": "water",
-      "name": {
-        "zh-CN": "近岸潮水",
-        "en": "Nearshore tide"
-      },
-      "tags": ["水面", "潮汐", "持续底噪"],
+      "name": { "zh-CN": "海岸潮声", "en": "Beach" },
+      "tags": ["海岸", "潮水", "持续环境"],
       "availability": "bundled",
-      "releaseStatus": "development-only",
-      "sha256": "248c652a54b4d3c7aa3514c9aba43f750134032cddbb7137134ea32c13c21464",
+      "releaseStatus": "approved",
+      "sha256": "7ca6e70f2ab234a767e55b4a197abd10dedfe2a3c63806f5243c6cd3c58d2084",
       "previewSegmentId": "loop-main",
       "source": {
-        "name": "仓库历史纵切素材",
-        "provenance": "unverified",
-        "authors": [],
+        "name": "Ambie 内置声音（Freesound CC0）",
+        "url": "https://github.com/jenius-apps/ambie/blob/6888f324dadf70725b75aa8830844d97d827958a/src/AmbientSounds.Uwp/Assets/Sounds/beach.wav",
+        "provenance": "verified",
+        "authors": [{ "name": "jordir", "url": "https://freesound.org/s/360578/" }],
         "license": {
-          "name": "待确认",
-          "redistributionAllowed": false
+          "name": "Creative Commons Zero v1.0 Universal",
+          "spdxId": "CC0-1.0",
+          "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "redistributionAllowed": true
         }
       },
       "segments": [
-        {
-          "id": "loop-main",
-          "path": "assets/audio/open-water.wav",
-          "purpose": "loop",
-          "startMs": 0
-        },
-        {
-          "id": "loop-eaves",
-          "path": "assets/audio/open-water.wav",
-          "purpose": "loop",
-          "startMs": 3000
-        },
-        {
-          "id": "texture-far",
-          "path": "assets/audio/open-water.wav",
-          "purpose": "texture",
-          "startMs": 7000
-        },
-        {
-          "id": "event-a",
-          "path": "assets/audio/open-water.wav",
-          "purpose": "event",
-          "startMs": 0,
-          "durationMs": 3400
-        },
-        {
-          "id": "event-b",
-          "path": "assets/audio/open-water.wav",
-          "purpose": "event",
-          "startMs": 9000,
-          "durationMs": 3400
-        },
-        {
-          "id": "event-c",
-          "path": "assets/audio/open-water.wav",
-          "purpose": "event",
-          "startMs": 18000,
-          "durationMs": 3400
+        { "id": "loop-main", "path": "assets/audio/ambie-beach.wav", "purpose": "loop", "startMs": 0 },
+        { "id": "texture-far", "path": "assets/audio/ambie-beach.wav", "purpose": "texture", "startMs": 11000 }
+      ]
+    },
+    {
+      "id": "ambie.birds.v1",
+      "metadataVersion": 1,
+      "fileVersion": 1,
+      "category": "wildlife",
+      "name": { "zh-CN": "林间鸟声", "en": "Birds" },
+      "tags": ["鸟鸣", "清晨", "持续环境"],
+      "availability": "bundled",
+      "releaseStatus": "approved",
+      "sha256": "1b0a19cab4c14ca7263e3ddcc91cf10a7b3de157b94175af4215ff48025b0fda",
+      "previewSegmentId": "loop-main",
+      "source": {
+        "name": "Ambie 内置声音（Freesound CC0）",
+        "url": "https://github.com/jenius-apps/ambie/blob/6888f324dadf70725b75aa8830844d97d827958a/src/AmbientSounds.Uwp/Assets/Sounds/birds.wav",
+        "provenance": "verified",
+        "authors": [{ "name": "hargissssound", "url": "https://freesound.org/s/345851/" }],
+        "license": {
+          "name": "Creative Commons Zero v1.0 Universal",
+          "spdxId": "CC0-1.0",
+          "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "redistributionAllowed": true
         }
+      },
+      "segments": [{ "id": "loop-main", "path": "assets/audio/ambie-birds.wav", "purpose": "loop", "startMs": 0 }]
+    },
+    {
+      "id": "ambie.city-street.v1",
+      "metadataVersion": 1,
+      "fileVersion": 1,
+      "category": "place",
+      "name": { "zh-CN": "城市街角", "en": "City street" },
+      "tags": ["城市", "街道", "人群"],
+      "availability": "bundled",
+      "releaseStatus": "approved",
+      "sha256": "05346bcef4768a8a5590a2bf64b21301f9832212f19bd351e3c6b805ae23b353",
+      "previewSegmentId": "loop-main",
+      "source": {
+        "name": "Ambie 内置声音（Freesound CC0）",
+        "url": "https://github.com/jenius-apps/ambie/blob/6888f324dadf70725b75aa8830844d97d827958a/src/AmbientSounds.Uwp/Assets/Sounds/citystreet.wav",
+        "provenance": "verified",
+        "authors": [{ "name": "o_ciz", "url": "https://freesound.org/s/475513/" }],
+        "license": {
+          "name": "Creative Commons Zero v1.0 Universal",
+          "spdxId": "CC0-1.0",
+          "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "redistributionAllowed": true
+        }
+      },
+      "segments": [{ "id": "loop-main", "path": "assets/audio/ambie-city-street.wav", "purpose": "loop", "startMs": 0 }]
+    },
+    {
+      "id": "ambie.coffee-shop.v1",
+      "metadataVersion": 1,
+      "fileVersion": 1,
+      "category": "place",
+      "name": { "zh-CN": "咖啡馆", "en": "Coffee shop" },
+      "tags": ["室内", "人声背景", "日常空间"],
+      "availability": "bundled",
+      "releaseStatus": "approved",
+      "sha256": "efd0d9abe9bd210d922e9c1b0246508d44a45b5adbad6cc110397b10b9424e03",
+      "previewSegmentId": "loop-main",
+      "source": {
+        "name": "Ambie 内置声音（Freesound CC0）",
+        "url": "https://github.com/jenius-apps/ambie/blob/6888f324dadf70725b75aa8830844d97d827958a/src/AmbientSounds.Uwp/Assets/Sounds/coffeeshop.mp3",
+        "provenance": "verified",
+        "authors": [{ "name": "C_Rogers", "url": "https://freesound.org/s/453074/" }],
+        "license": {
+          "name": "Creative Commons Zero v1.0 Universal",
+          "spdxId": "CC0-1.0",
+          "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "redistributionAllowed": true
+        }
+      },
+      "segments": [{ "id": "loop-main", "path": "assets/audio/ambie-coffee-shop.mp3", "purpose": "loop", "startMs": 0 }]
+    },
+    {
+      "id": "ambie.creek.v1",
+      "metadataVersion": 1,
+      "fileVersion": 1,
+      "category": "water",
+      "name": { "zh-CN": "林间溪流", "en": "Creek" },
+      "tags": ["溪流", "近水", "持续环境"],
+      "availability": "bundled",
+      "releaseStatus": "approved",
+      "sha256": "3926d7cf09975740dc39baec395a4117ea06a8f4a322978a44798b3245863777",
+      "previewSegmentId": "loop-main",
+      "source": {
+        "name": "Ambie 内置声音（Freesound CC0）",
+        "url": "https://github.com/jenius-apps/ambie/blob/6888f324dadf70725b75aa8830844d97d827958a/src/AmbientSounds.Uwp/Assets/Sounds/creek.wav",
+        "provenance": "verified",
+        "authors": [{ "name": "hargissssound", "url": "https://freesound.org/s/324591/" }],
+        "license": {
+          "name": "Creative Commons Zero v1.0 Universal",
+          "spdxId": "CC0-1.0",
+          "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "redistributionAllowed": true
+        }
+      },
+      "segments": [{ "id": "loop-main", "path": "assets/audio/ambie-creek.wav", "purpose": "loop", "startMs": 0 }]
+    },
+    {
+      "id": "ambie.fireplace.v1",
+      "metadataVersion": 1,
+      "fileVersion": 1,
+      "category": "fire",
+      "name": { "zh-CN": "壁炉火焰", "en": "Fireplace" },
+      "tags": ["炉火", "木柴", "室内"],
+      "availability": "bundled",
+      "releaseStatus": "approved",
+      "sha256": "e3c10a5a1c328edbf261a87f66ce150234cabfb88a169ec3f0de70fabc561b20",
+      "previewSegmentId": "loop-main",
+      "source": {
+        "name": "Ambie 内置声音（Freesound CC0）",
+        "url": "https://github.com/jenius-apps/ambie/blob/6888f324dadf70725b75aa8830844d97d827958a/src/AmbientSounds.Uwp/Assets/Sounds/fireplace.wav",
+        "provenance": "verified",
+        "authors": [{ "name": "16FThumaF", "url": "https://freesound.org/s/499032/" }],
+        "license": {
+          "name": "Creative Commons Zero v1.0 Universal",
+          "spdxId": "CC0-1.0",
+          "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "redistributionAllowed": true
+        }
+      },
+      "segments": [{ "id": "loop-main", "path": "assets/audio/ambie-fireplace.wav", "purpose": "loop", "startMs": 0 }]
+    },
+    {
+      "id": "ambie.rain.v1",
+      "metadataVersion": 1,
+      "fileVersion": 1,
+      "category": "weather",
+      "name": { "zh-CN": "旷野大雨", "en": "Rain" },
+      "tags": ["雨", "旷野", "持续环境"],
+      "availability": "bundled",
+      "releaseStatus": "approved",
+      "sha256": "5a68ea94b6e1d83e77db80fbc55d7c2f7abef192879dfb6a9b859c1c3f753fa0",
+      "previewSegmentId": "loop-main",
+      "source": {
+        "name": "Ambie 内置声音（Freesound CC0）",
+        "url": "https://github.com/jenius-apps/ambie/blob/6888f324dadf70725b75aa8830844d97d827958a/src/AmbientSounds.Uwp/Assets/Sounds/rain.wav",
+        "provenance": "verified",
+        "authors": [{ "name": "jmbphilmes", "url": "https://freesound.org/s/200270/" }],
+        "license": {
+          "name": "Creative Commons Zero v1.0 Universal",
+          "spdxId": "CC0-1.0",
+          "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "redistributionAllowed": true
+        }
+      },
+      "segments": [
+        { "id": "loop-main", "path": "assets/audio/ambie-rain.wav", "purpose": "loop", "startMs": 0 },
+        { "id": "texture-window", "path": "assets/audio/ambie-rain.wav", "purpose": "texture", "startMs": 9000 },
+        { "id": "texture-mist", "path": "assets/audio/ambie-rain.wav", "purpose": "texture", "startMs": 18000 }
+      ]
+    },
+    {
+      "id": "ambie.rainforest.v1",
+      "metadataVersion": 1,
+      "fileVersion": 1,
+      "category": "place",
+      "name": { "zh-CN": "热带雨林", "en": "Rainforest" },
+      "tags": ["雨林", "虫鸟", "持续环境"],
+      "availability": "bundled",
+      "releaseStatus": "approved",
+      "sha256": "83f98bf8ed6009cae72ee3494ccf785284a65b339c6fb591ebf03792ec86ffcb",
+      "previewSegmentId": "loop-main",
+      "source": {
+        "name": "Ambie 内置声音（Freesound CC0）",
+        "url": "https://github.com/jenius-apps/ambie/blob/6888f324dadf70725b75aa8830844d97d827958a/src/AmbientSounds.Uwp/Assets/Sounds/Rainforest.mp3",
+        "provenance": "verified",
+        "authors": [{ "name": "INNORECORDS", "url": "https://freesound.org/s/457447/" }],
+        "license": {
+          "name": "Creative Commons Zero v1.0 Universal",
+          "spdxId": "CC0-1.0",
+          "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "redistributionAllowed": true
+        }
+      },
+      "segments": [{ "id": "loop-main", "path": "assets/audio/ambie-rainforest.mp3", "purpose": "loop", "startMs": 0 }]
+    },
+    {
+      "id": "ambie.thunder.v1",
+      "metadataVersion": 1,
+      "fileVersion": 1,
+      "category": "weather",
+      "name": { "zh-CN": "远雷", "en": "Thunder" },
+      "tags": ["雷声", "偶发", "远处"],
+      "availability": "bundled",
+      "releaseStatus": "approved",
+      "sha256": "376bf069316be852eff2b8473d08375ae87cb1138fb38d0ccf07b35398d57a66",
+      "previewSegmentId": "event-a",
+      "source": {
+        "name": "Ambie 内置声音（Freesound CC0）",
+        "url": "https://github.com/jenius-apps/ambie/blob/6888f324dadf70725b75aa8830844d97d827958a/src/AmbientSounds.Uwp/Assets/Sounds/thunder.mp3",
+        "provenance": "verified",
+        "authors": [{ "name": "hifijohn", "url": "https://freesound.org/s/242735/" }],
+        "license": {
+          "name": "Creative Commons Zero v1.0 Universal",
+          "spdxId": "CC0-1.0",
+          "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "redistributionAllowed": true
+        }
+      },
+      "segments": [
+        { "id": "event-a", "path": "assets/audio/ambie-thunder.mp3", "purpose": "event", "startMs": 0, "durationMs": 4500 },
+        { "id": "event-b", "path": "assets/audio/ambie-thunder.mp3", "purpose": "event", "startMs": 9000, "durationMs": 4500 },
+        { "id": "event-c", "path": "assets/audio/ambie-thunder.mp3", "purpose": "event", "startMs": 18000, "durationMs": 4500 }
+      ]
+    },
+    {
+      "id": "ambie.underwater.v1",
+      "metadataVersion": 1,
+      "fileVersion": 1,
+      "category": "water",
+      "name": { "zh-CN": "水下回响", "en": "Underwater" },
+      "tags": ["水下", "低频", "空间"],
+      "availability": "bundled",
+      "releaseStatus": "approved",
+      "sha256": "25a76a92409646c7052de484e7366d11f0e3d28f50fbe40ad301dbbcf03bc38c",
+      "previewSegmentId": "loop-main",
+      "source": {
+        "name": "Ambie 内置声音（Freesound CC0）",
+        "url": "https://github.com/jenius-apps/ambie/blob/6888f324dadf70725b75aa8830844d97d827958a/src/AmbientSounds.Uwp/Assets/Sounds/underwater.wav",
+        "provenance": "verified",
+        "authors": [{ "name": "Kinoton", "url": "https://freesound.org/s/393819/" }],
+        "license": {
+          "name": "Creative Commons Zero v1.0 Universal",
+          "spdxId": "CC0-1.0",
+          "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "redistributionAllowed": true
+        }
+      },
+      "segments": [
+        { "id": "loop-main", "path": "assets/audio/ambie-underwater.wav", "purpose": "loop", "startMs": 0 },
+        { "id": "event-a", "path": "assets/audio/ambie-underwater.wav", "purpose": "event", "startMs": 2000, "durationMs": 4500 },
+        { "id": "event-b", "path": "assets/audio/ambie-underwater.wav", "purpose": "event", "startMs": 9000, "durationMs": 4500 },
+        { "id": "event-c", "path": "assets/audio/ambie-underwater.wav", "purpose": "event", "startMs": 16000, "durationMs": 4500 }
+      ]
+    },
+    {
+      "id": "ambie.waterfall.v1",
+      "metadataVersion": 1,
+      "fileVersion": 1,
+      "category": "water",
+      "name": { "zh-CN": "山间瀑布", "en": "Waterfall" },
+      "tags": ["瀑布", "流水", "持续环境"],
+      "availability": "bundled",
+      "releaseStatus": "approved",
+      "sha256": "4463b43118e4e92c0befd4eafe04734b1c7b572824f02d3d401dc8caf652e0ee",
+      "previewSegmentId": "loop-main",
+      "source": {
+        "name": "Ambie 内置声音（Freesound CC0）",
+        "url": "https://github.com/jenius-apps/ambie/blob/6888f324dadf70725b75aa8830844d97d827958a/src/AmbientSounds.Uwp/Assets/Sounds/waterfall.wav",
+        "provenance": "verified",
+        "authors": [{ "name": "askeseverin", "url": "https://freesound.org/s/376202/" }],
+        "license": {
+          "name": "Creative Commons Zero v1.0 Universal",
+          "spdxId": "CC0-1.0",
+          "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "redistributionAllowed": true
+        }
+      },
+      "segments": [{ "id": "loop-main", "path": "assets/audio/ambie-waterfall.wav", "purpose": "loop", "startMs": 0 }]
+    },
+    {
+      "id": "ambie.white-noise.v1",
+      "metadataVersion": 1,
+      "fileVersion": 1,
+      "category": "device",
+      "name": { "zh-CN": "棕色噪声", "en": "Brown noise" },
+      "tags": ["噪声", "稳定", "专注"],
+      "availability": "bundled",
+      "releaseStatus": "approved",
+      "sha256": "efa6c13a2b6d6c4bd635e6c5113f90e35c174234f6e94c78b580dd50a352e23f",
+      "previewSegmentId": "loop-main",
+      "source": {
+        "name": "Ambie 内置声音（Freesound CC0）",
+        "url": "https://github.com/jenius-apps/ambie/blob/6888f324dadf70725b75aa8830844d97d827958a/src/AmbientSounds.Uwp/Assets/Sounds/whitenoise.wav",
+        "provenance": "verified",
+        "authors": [{ "name": "theundecided", "url": "https://freesound.org/s/165056/" }],
+        "license": {
+          "name": "Creative Commons Zero v1.0 Universal",
+          "spdxId": "CC0-1.0",
+          "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "redistributionAllowed": true
+        }
+      },
+      "segments": [{ "id": "loop-main", "path": "assets/audio/ambie-white-noise.wav", "purpose": "loop", "startMs": 0 }]
+    },
+    {
+      "id": "ambie.wind.v1",
+      "metadataVersion": 1,
+      "fileVersion": 1,
+      "category": "weather",
+      "name": { "zh-CN": "穿林风声", "en": "Wind" },
+      "tags": ["风", "树木", "持续环境"],
+      "availability": "bundled",
+      "releaseStatus": "approved",
+      "sha256": "eb05f8ffd7cac63bb926cdf8909d295786e21fbaca919d8ba448cda3a4059ff0",
+      "previewSegmentId": "loop-main",
+      "source": {
+        "name": "Ambie 内置声音（Freesound CC0）",
+        "url": "https://github.com/jenius-apps/ambie/blob/6888f324dadf70725b75aa8830844d97d827958a/src/AmbientSounds.Uwp/Assets/Sounds/wind.wav",
+        "provenance": "verified",
+        "authors": [{ "name": "jorge0000", "url": "https://freesound.org/s/361053/" }],
+        "license": {
+          "name": "Creative Commons Zero v1.0 Universal",
+          "spdxId": "CC0-1.0",
+          "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "redistributionAllowed": true
+        }
+      },
+      "segments": [
+        { "id": "loop-main", "path": "assets/audio/ambie-wind.wav", "purpose": "loop", "startMs": 0 },
+        { "id": "texture-far", "path": "assets/audio/ambie-wind.wav", "purpose": "texture", "startMs": 5000 }
       ]
     }
   ]

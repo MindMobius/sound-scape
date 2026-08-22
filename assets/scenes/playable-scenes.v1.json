@@ -3,7 +3,7 @@
   "scenes": [
     {
       "sceneId": "rain-cabin",
-      "previewAudioAssetId": "rain-cabin-development",
+      "previewAudioAssetId": "ambie.rain.v1",
       "palette": ["#aebbc7", "#c4b7ae", "#78877d", "#d36b54", "#8a8e90", "#bcc5ce", "#d3ccc2"],
       "recipe": {
         "schemaVersion": 1,
@@ -17,7 +17,7 @@
           {
             "id": "roof-rain",
             "name": "屋檐雨",
-            "assetId": "rain-cabin-development",
+            "assetId": "ambie.rain.v1",
             "segmentIds": ["loop-main"],
             "kind": "bed",
             "baseGain": 0.3,
@@ -43,7 +43,7 @@
           {
             "id": "window-rain",
             "name": "窗外雨幕",
-            "assetId": "rain-cabin-development",
+            "assetId": "ambie.rain.v1",
             "segmentIds": ["texture-window"],
             "kind": "texture",
             "baseGain": 0,
@@ -67,14 +67,14 @@
             }
           },
           {
-            "id": "eaves-water",
-            "name": "檐下水声",
-            "assetId": "open-water-development",
-            "segmentIds": ["loop-eaves"],
-            "kind": "bed",
-            "baseGain": 0.04,
-            "intensityGain": 0.14,
-            "richnessGain": 0.01,
+            "id": "fireplace",
+            "name": "炉火细响",
+            "assetId": "ambie.fireplace.v1",
+            "segmentIds": ["loop-main"],
+            "kind": "texture",
+            "baseGain": 0.08,
+            "intensityGain": 0.08,
+            "richnessGain": 0.1,
             "pan": 0.16,
             "enabledByDefault": true,
             "eventPolicy": {
@@ -93,9 +93,9 @@
             }
           },
           {
-            "id": "damp-echo",
-            "name": "潮湿回响",
-            "assetId": "open-water-development",
+            "id": "distant-thunder",
+            "name": "远雷",
+            "assetId": "ambie.thunder.v1",
             "segmentIds": ["event-a", "event-b", "event-c"],
             "kind": "event",
             "baseGain": 0.01,
@@ -123,7 +123,7 @@
     },
     {
       "sceneId": "coastal-night",
-      "previewAudioAssetId": "open-water-development",
+      "previewAudioAssetId": "ambie.beach.v1",
       "palette": ["#6b8290", "#7f7a70", "#4c6664", "#a95f4f", "#59656d", "#879197", "#706d65"],
       "recipe": {
         "schemaVersion": 1,
@@ -137,7 +137,7 @@
           {
             "id": "near-water",
             "name": "近岸潮水",
-            "assetId": "open-water-development",
+            "assetId": "ambie.beach.v1",
             "segmentIds": ["loop-main"],
             "kind": "bed",
             "baseGain": 0.28,
@@ -163,7 +163,7 @@
           {
             "id": "far-water",
             "name": "远浪",
-            "assetId": "open-water-development",
+            "assetId": "ambie.beach.v1",
             "segmentIds": ["texture-far"],
             "kind": "texture",
             "baseGain": 0.03,
@@ -189,8 +189,8 @@
           {
             "id": "sea-mist",
             "name": "海面细雨",
-            "assetId": "rain-cabin-development",
-            "segmentIds": ["texture-mist"],
+            "assetId": "ambie.wind.v1",
+            "segmentIds": ["texture-far"],
             "kind": "texture",
             "baseGain": 0.02,
             "intensityGain": 0.08,
@@ -214,8 +214,8 @@
           },
           {
             "id": "reef-echo",
-            "name": "礁石回响",
-            "assetId": "open-water-development",
+            "name": "礁下回响",
+            "assetId": "ambie.underwater.v1",
             "segmentIds": ["event-a", "event-b", "event-c"],
             "kind": "event",
             "baseGain": 0.01,

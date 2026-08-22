@@ -6,12 +6,56 @@
     "catalogTarget": "catalog/sound-library.v1.json",
     "files": [
       {
-        "source": "assets/audio/rain-cabin.mp3",
-        "target": "audio/rain-cabin.mp3"
+        "source": "assets/audio/ambie-beach.wav",
+        "target": "audio/ambie-beach.wav"
       },
       {
-        "source": "assets/audio/open-water.wav",
-        "target": "audio/open-water.wav"
+        "source": "assets/audio/ambie-birds.wav",
+        "target": "audio/ambie-birds.wav"
+      },
+      {
+        "source": "assets/audio/ambie-city-street.wav",
+        "target": "audio/ambie-city-street.wav"
+      },
+      {
+        "source": "assets/audio/ambie-coffee-shop.mp3",
+        "target": "audio/ambie-coffee-shop.mp3"
+      },
+      {
+        "source": "assets/audio/ambie-creek.wav",
+        "target": "audio/ambie-creek.wav"
+      },
+      {
+        "source": "assets/audio/ambie-fireplace.wav",
+        "target": "audio/ambie-fireplace.wav"
+      },
+      {
+        "source": "assets/audio/ambie-rain.wav",
+        "target": "audio/ambie-rain.wav"
+      },
+      {
+        "source": "assets/audio/ambie-rainforest.mp3",
+        "target": "audio/ambie-rainforest.mp3"
+      },
+      {
+        "source": "assets/audio/ambie-thunder.mp3",
+        "target": "audio/ambie-thunder.mp3"
+      },
+      {
+        "source": "assets/audio/ambie-underwater.wav",
+        "target": "audio/ambie-underwater.wav"
+      },
+      {
+        "source": "assets/audio/ambie-waterfall.wav",
+        "target": "audio/ambie-waterfall.wav"
+      },
+      {
+        "source": "assets/audio/ambie-white-noise.wav",
+        "target": "audio/ambie-white-noise.wav"
+      },
+      {
+        "source": "assets/audio/ambie-wind.wav",
+        "target": "audio/ambie-wind.wav"
       },
       {
         "source": "assets/scenes/coastal-night/coastal-night-cover-web-v1.jpg",

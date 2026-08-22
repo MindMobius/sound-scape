@@ -15,46 +15,43 @@ void main() {
   test('bundled manifest is versioned and all scene references resolve', () {
     expect(library.schemaVersion, 1);
     expect(library.catalogVersion, isNotEmpty);
-    expect(library.assets, hasLength(2));
+    expect(library.assets, hasLength(13));
     final issues = library.integrityIssues(scenes: SoundscapeCatalog.scenes);
     expect(issues.map((issue) => '${issue.code}: ${issue.message}'), isEmpty);
   });
 
-  test('development recordings cannot silently enter a release catalog', () {
+  test('every bundled recording is release eligible with verified rights', () {
     final referencedAssetIds = {
       for (final scene in SoundscapeCatalog.scenes)
         for (final layer in scene.layers) layer.assetId,
     };
     final issues = library.releaseIssues(referencedAssetIds);
 
-    expect(issues, hasLength(referencedAssetIds.length));
-    expect(
-      issues.map((issue) => issue.code),
-      everyElement('not-release-eligible'),
-    );
+    expect(issues, isEmpty);
     expect(
       referencedAssetIds
           .map(library.assetById)
           .map((asset) => asset.source.provenance),
-      everyElement(SoundAssetProvenance.unverified),
+      everyElement(SoundAssetProvenance.verified),
+    );
+    expect(
+      library.assets.map((asset) => asset.isReleaseEligible),
+      everyElement(isTrue),
     );
   });
 
   test(
     'asset metadata keeps localized names, hashes, and playable segments',
     () {
-      final water = library.assetById('open-water-development');
+      final water = library.assetById('ambie.underwater.v1');
 
-      expect(water.name.resolve(), '近岸潮水');
+      expect(water.name.resolve(), '水下回响');
       expect(water.sha256, hasLength(64));
       expect(
         water.segmentById('event-a').duration,
-        const Duration(milliseconds: 3400),
+        const Duration(milliseconds: 4500),
       );
-      expect(
-        water.segmentById('texture-far').start,
-        const Duration(seconds: 7),
-      );
+      expect(water.segmentById('event-c').start, const Duration(seconds: 16));
     },
   );
 }
