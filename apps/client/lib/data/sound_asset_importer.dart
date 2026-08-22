@@ -14,4 +14,8 @@ class ImportedSoundAsset {
 
 abstract interface class SoundAssetImporter {
   Future<ImportedSoundAsset?> pickAndImport();
+
+  Future<bool> exists(SoundAsset asset);
+
+  Future<void> delete(SoundAsset asset);
 }

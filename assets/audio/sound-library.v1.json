@@ -27,8 +27,18 @@
         }
       },
       "segments": [
-        { "id": "loop-main", "path": "assets/audio/ambie-beach.wav", "purpose": "loop", "startMs": 0 },
-        { "id": "texture-far", "path": "assets/audio/ambie-beach.wav", "purpose": "texture", "startMs": 11000 }
+        {
+          "id": "loop-main",
+          "path": "assets/audio/ambie-beach.wav",
+          "purpose": "loop",
+          "startMs": 0
+        },
+        {
+          "id": "texture-far",
+          "path": "assets/audio/ambie-beach.wav",
+          "purpose": "texture",
+          "startMs": 11000
+        }
       ]
     },
     {
@@ -54,7 +64,14 @@
           "redistributionAllowed": true
         }
       },
-      "segments": [{ "id": "loop-main", "path": "assets/audio/ambie-birds.wav", "purpose": "loop", "startMs": 0 }]
+      "segments": [
+        {
+          "id": "loop-main",
+          "path": "assets/audio/ambie-birds.wav",
+          "purpose": "loop",
+          "startMs": 0
+        }
+      ]
     },
     {
       "id": "ambie.city-street.v1",
@@ -79,7 +96,14 @@
           "redistributionAllowed": true
         }
       },
-      "segments": [{ "id": "loop-main", "path": "assets/audio/ambie-city-street.wav", "purpose": "loop", "startMs": 0 }]
+      "segments": [
+        {
+          "id": "loop-main",
+          "path": "assets/audio/ambie-city-street.wav",
+          "purpose": "loop",
+          "startMs": 0
+        }
+      ]
     },
     {
       "id": "ambie.coffee-shop.v1",
@@ -104,7 +128,14 @@
           "redistributionAllowed": true
         }
       },
-      "segments": [{ "id": "loop-main", "path": "assets/audio/ambie-coffee-shop.mp3", "purpose": "loop", "startMs": 0 }]
+      "segments": [
+        {
+          "id": "loop-main",
+          "path": "assets/audio/ambie-coffee-shop.mp3",
+          "purpose": "loop",
+          "startMs": 0
+        }
+      ]
     },
     {
       "id": "ambie.creek.v1",
@@ -129,7 +160,14 @@
           "redistributionAllowed": true
         }
       },
-      "segments": [{ "id": "loop-main", "path": "assets/audio/ambie-creek.wav", "purpose": "loop", "startMs": 0 }]
+      "segments": [
+        {
+          "id": "loop-main",
+          "path": "assets/audio/ambie-creek.wav",
+          "purpose": "loop",
+          "startMs": 0
+        }
+      ]
     },
     {
       "id": "ambie.fireplace.v1",
@@ -154,7 +192,14 @@
           "redistributionAllowed": true
         }
       },
-      "segments": [{ "id": "loop-main", "path": "assets/audio/ambie-fireplace.wav", "purpose": "loop", "startMs": 0 }]
+      "segments": [
+        {
+          "id": "loop-main",
+          "path": "assets/audio/ambie-fireplace.wav",
+          "purpose": "loop",
+          "startMs": 0
+        }
+      ]
     },
     {
       "id": "ambie.rain.v1",
@@ -180,9 +225,24 @@
         }
       },
       "segments": [
-        { "id": "loop-main", "path": "assets/audio/ambie-rain.wav", "purpose": "loop", "startMs": 0 },
-        { "id": "texture-window", "path": "assets/audio/ambie-rain.wav", "purpose": "texture", "startMs": 9000 },
-        { "id": "texture-mist", "path": "assets/audio/ambie-rain.wav", "purpose": "texture", "startMs": 18000 }
+        {
+          "id": "loop-main",
+          "path": "assets/audio/ambie-rain.wav",
+          "purpose": "loop",
+          "startMs": 0
+        },
+        {
+          "id": "texture-window",
+          "path": "assets/audio/ambie-rain.wav",
+          "purpose": "texture",
+          "startMs": 9000
+        },
+        {
+          "id": "texture-mist",
+          "path": "assets/audio/ambie-rain.wav",
+          "purpose": "texture",
+          "startMs": 18000
+        }
       ]
     },
     {
@@ -208,7 +268,14 @@
           "redistributionAllowed": true
         }
       },
-      "segments": [{ "id": "loop-main", "path": "assets/audio/ambie-rainforest.mp3", "purpose": "loop", "startMs": 0 }]
+      "segments": [
+        {
+          "id": "loop-main",
+          "path": "assets/audio/ambie-rainforest.mp3",
+          "purpose": "loop",
+          "startMs": 0
+        }
+      ]
     },
     {
       "id": "ambie.thunder.v1",
@@ -234,9 +301,27 @@
         }
       },
       "segments": [
-        { "id": "event-a", "path": "assets/audio/ambie-thunder.mp3", "purpose": "event", "startMs": 0, "durationMs": 4500 },
-        { "id": "event-b", "path": "assets/audio/ambie-thunder.mp3", "purpose": "event", "startMs": 9000, "durationMs": 4500 },
-        { "id": "event-c", "path": "assets/audio/ambie-thunder.mp3", "purpose": "event", "startMs": 18000, "durationMs": 4500 }
+        {
+          "id": "event-a",
+          "path": "assets/audio/ambie-thunder.mp3",
+          "purpose": "event",
+          "startMs": 0,
+          "durationMs": 4500
+        },
+        {
+          "id": "event-b",
+          "path": "assets/audio/ambie-thunder.mp3",
+          "purpose": "event",
+          "startMs": 9000,
+          "durationMs": 4500
+        },
+        {
+          "id": "event-c",
+          "path": "assets/audio/ambie-thunder.mp3",
+          "purpose": "event",
+          "startMs": 18000,
+          "durationMs": 4500
+        }
       ]
     },
     {
@@ -263,10 +348,33 @@
         }
       },
       "segments": [
-        { "id": "loop-main", "path": "assets/audio/ambie-underwater.wav", "purpose": "loop", "startMs": 0 },
-        { "id": "event-a", "path": "assets/audio/ambie-underwater.wav", "purpose": "event", "startMs": 2000, "durationMs": 4500 },
-        { "id": "event-b", "path": "assets/audio/ambie-underwater.wav", "purpose": "event", "startMs": 9000, "durationMs": 4500 },
-        { "id": "event-c", "path": "assets/audio/ambie-underwater.wav", "purpose": "event", "startMs": 16000, "durationMs": 4500 }
+        {
+          "id": "loop-main",
+          "path": "assets/audio/ambie-underwater.wav",
+          "purpose": "loop",
+          "startMs": 0
+        },
+        {
+          "id": "event-a",
+          "path": "assets/audio/ambie-underwater.wav",
+          "purpose": "event",
+          "startMs": 2000,
+          "durationMs": 4500
+        },
+        {
+          "id": "event-b",
+          "path": "assets/audio/ambie-underwater.wav",
+          "purpose": "event",
+          "startMs": 9000,
+          "durationMs": 4500
+        },
+        {
+          "id": "event-c",
+          "path": "assets/audio/ambie-underwater.wav",
+          "purpose": "event",
+          "startMs": 16000,
+          "durationMs": 4500
+        }
       ]
     },
     {
@@ -292,7 +400,14 @@
           "redistributionAllowed": true
         }
       },
-      "segments": [{ "id": "loop-main", "path": "assets/audio/ambie-waterfall.wav", "purpose": "loop", "startMs": 0 }]
+      "segments": [
+        {
+          "id": "loop-main",
+          "path": "assets/audio/ambie-waterfall.wav",
+          "purpose": "loop",
+          "startMs": 0
+        }
+      ]
     },
     {
       "id": "ambie.white-noise.v1",
@@ -317,7 +432,14 @@
           "redistributionAllowed": true
         }
       },
-      "segments": [{ "id": "loop-main", "path": "assets/audio/ambie-white-noise.wav", "purpose": "loop", "startMs": 0 }]
+      "segments": [
+        {
+          "id": "loop-main",
+          "path": "assets/audio/ambie-white-noise.wav",
+          "purpose": "loop",
+          "startMs": 0
+        }
+      ]
     },
     {
       "id": "ambie.wind.v1",
@@ -343,8 +465,18 @@
         }
       },
       "segments": [
-        { "id": "loop-main", "path": "assets/audio/ambie-wind.wav", "purpose": "loop", "startMs": 0 },
-        { "id": "texture-far", "path": "assets/audio/ambie-wind.wav", "purpose": "texture", "startMs": 5000 }
+        {
+          "id": "loop-main",
+          "path": "assets/audio/ambie-wind.wav",
+          "purpose": "loop",
+          "startMs": 0
+        },
+        {
+          "id": "texture-far",
+          "path": "assets/audio/ambie-wind.wav",
+          "purpose": "texture",
+          "startMs": 5000
+        }
       ]
     }
   ]

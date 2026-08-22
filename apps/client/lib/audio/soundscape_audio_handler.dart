@@ -4,6 +4,7 @@ import 'package:audio_service/audio_service.dart';
 import 'package:audio_session/audio_session.dart';
 
 import '../domain/soundscape_catalog.dart';
+import '../domain/sound_asset.dart';
 import '../domain/soundscape_scene.dart';
 import 'soundscape_controller.dart';
 import 'soundscape_runtime.dart';
@@ -104,6 +105,28 @@ class SoundscapeAudioHandler extends BaseAudioHandler
       runtime.setLayerEnabled(layerId, enabled: enabled);
 
   @override
+  void setLayerCharacter(String layerId, SoundCharacter character) =>
+      runtime.setLayerCharacter(layerId, character);
+
+  @override
+  Future<void> addSoundAsset(String assetId) => runtime.addSoundAsset(assetId);
+
+  @override
+  Future<void> removeSoundLayer(String layerId) =>
+      runtime.removeSoundLayer(layerId);
+
+  @override
+  Future<SoundAsset?> importSound() => runtime.importSound();
+
+  @override
+  void renameImportedSound(String assetId, String name) =>
+      runtime.renameImportedSound(assetId, name);
+
+  @override
+  Future<void> deleteImportedSound(String assetId) =>
+      runtime.deleteImportedSound(assetId);
+
+  @override
   void applyPreset(ListeningPreset preset) => runtime.applyPreset(preset);
 
   @override
@@ -113,6 +136,10 @@ class SoundscapeAudioHandler extends BaseAudioHandler
   @override
   void saveCurrentAsPreset({required String id, required String name}) =>
       runtime.saveCurrentAsPreset(id: id, name: name);
+
+  @override
+  void renameSavedPreset(String presetId, String name) =>
+      runtime.renameSavedPreset(presetId, name);
 
   @override
   void deleteSavedPreset(String presetId) =>

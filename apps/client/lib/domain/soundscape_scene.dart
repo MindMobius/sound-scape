@@ -2,6 +2,8 @@ import 'package:flutter/foundation.dart';
 
 enum SoundLayerKind { bed, texture, event }
 
+enum SoundCharacter { natural, hifi, tube, radio, television, speaker, spatial }
+
 @immutable
 class ListeningPreset {
   const ListeningPreset({
@@ -116,10 +118,14 @@ class SoundLayerSnapshot {
     required this.enabled,
     required this.presence,
     required this.effectiveGain,
+    this.character = SoundCharacter.natural,
+    this.userAdded = false,
   });
 
   final SoundLayerDefinition definition;
   final bool enabled;
   final double presence;
   final double effectiveGain;
+  final SoundCharacter character;
+  final bool userAdded;
 }

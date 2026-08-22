@@ -104,6 +104,61 @@ class LocalSoundAssetImporter implements SoundAssetImporter {
       ),
     );
   }
+
+  @override
+  Future<bool> exists(SoundAsset asset) async {
+    final path = _importedPath(asset);
+    if (path == null || !await _isManagedPath(path, asset.sha256)) return false;
+    return File(path).exists();
+  }
+
+  @override
+  Future<void> delete(SoundAsset asset) async {
+    final path = _importedPath(asset);
+    if (path == null || !await _isManagedPath(path, asset.sha256)) return;
+    final file = File(path);
+    if (await file.exists()) await file.delete();
+  }
+
+  String? _importedPath(SoundAsset asset) {
+    if (asset.availability != SoundAssetAvailability.imported ||
+        asset.segments.isEmpty) {
+      return null;
+    }
+    return asset.segments.first.path;
+  }
+
+  Future<bool> _isManagedPath(String path, String hash) async {
+    final rootPath =
+        await (directoryPathProvider?.call() ??
+            getApplicationSupportDirectory().then(
+              (directory) => directory.path,
+            ));
+    final importsDirectory = Directory(
+      '$rootPath${Platform.pathSeparator}imports',
+    );
+    final file = File(path);
+    final importsPath = await _resolvedPath(importsDirectory);
+    final filePath = await _resolvedPath(file);
+    final prefix = '$importsPath${Platform.pathSeparator}';
+    final normalizedFile = Platform.isWindows
+        ? filePath.toLowerCase()
+        : filePath;
+    final normalizedPrefix = Platform.isWindows ? prefix.toLowerCase() : prefix;
+    final fileName = file.uri.pathSegments.last.toLowerCase();
+    final extension = _extensionOf(fileName);
+    return normalizedFile.startsWith(normalizedPrefix) &&
+        supportedExtensions.contains(extension) &&
+        fileName == '${hash.toLowerCase()}.$extension';
+  }
+}
+
+Future<String> _resolvedPath(FileSystemEntity entity) async {
+  try {
+    return await entity.resolveSymbolicLinks();
+  } on FileSystemException {
+    return entity.absolute.path;
+  }
 }
 
 String _extensionOf(String fileName) {

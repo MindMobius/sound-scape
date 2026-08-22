@@ -38,6 +38,40 @@ void main() {
         second.asset.segmentById('main').path,
       );
       expect(await File(first.asset.segmentById('main').path).exists(), isTrue);
+      expect(await importer.exists(first.asset), isTrue);
+
+      await importer.delete(first.asset);
+
+      expect(await importer.exists(first.asset), isFalse);
+    },
+  );
+
+  test(
+    'delete never touches a file outside the managed imports directory',
+    () async {
+      final directory = await Directory.systemTemp.createTemp(
+        'soundscape-delete-boundary-test-',
+      );
+      addTearDown(() async {
+        if (await directory.exists()) await directory.delete(recursive: true);
+      });
+      final source = File(
+        '${directory.path}${Platform.pathSeparator}keep-this.wav',
+      );
+      await source.writeAsBytes(List<int>.filled(32, 7));
+      final importer = LocalSoundAssetImporter(
+        directoryPathProvider: () async => directory.path,
+      );
+      final imported = await importer.importFile(XFile(source.path));
+      final forgedJson = imported.asset.toJson();
+      forgedJson['segments'] = [
+        {...imported.asset.segments.single.toJson(), 'path': source.path},
+      ];
+      final forgedAsset = SoundAsset.fromJson(forgedJson);
+
+      await importer.delete(forgedAsset);
+
+      expect(await source.exists(), isTrue);
     },
   );
 

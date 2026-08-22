@@ -41,6 +41,8 @@ class SoundLocalizedText {
         values.values.firstOrNull ??
         '';
   }
+
+  Map<String, Object?> toJson() => values;
 }
 
 @immutable
@@ -56,6 +58,8 @@ class SoundAuthor {
 
   final String name;
   final String? url;
+
+  Map<String, Object?> toJson() => {'name': name, if (url != null) 'url': url};
 }
 
 @immutable
@@ -80,6 +84,13 @@ class SoundLicense {
   final String? spdxId;
   final String? url;
   final bool redistributionAllowed;
+
+  Map<String, Object?> toJson() => {
+    'name': name,
+    if (spdxId != null) 'spdxId': spdxId,
+    if (url != null) 'url': url,
+    'redistributionAllowed': redistributionAllowed,
+  };
 }
 
 @immutable
@@ -110,6 +121,14 @@ class SoundSource {
   final SoundAssetProvenance provenance;
   final SoundLicense license;
   final List<SoundAuthor> authors;
+
+  Map<String, Object?> toJson() => {
+    'name': name,
+    if (url != null) 'url': url,
+    'provenance': _provenanceName(provenance),
+    'authors': [for (final author in authors) author.toJson()],
+    'license': license.toJson(),
+  };
 }
 
 @immutable
@@ -141,6 +160,15 @@ class SoundSegment {
   final Duration start;
   final Duration? duration;
   final String? bridgeSegmentId;
+
+  Map<String, Object?> toJson() => {
+    'id': id,
+    'path': path,
+    'purpose': _segmentPurposeName(purpose),
+    'startMs': start.inMilliseconds,
+    if (duration != null) 'durationMs': duration!.inMilliseconds,
+    if (bridgeSegmentId != null) 'bridgeSegmentId': bridgeSegmentId,
+  };
 }
 
 @immutable
@@ -197,6 +225,42 @@ class SoundAsset {
   final Map<String, SoundSegment> segmentsById;
   final String previewSegmentId;
   final List<String> tags;
+
+  SoundAsset copyWith({
+    SoundAssetCategory? category,
+    SoundLocalizedText? name,
+    List<String>? tags,
+  }) {
+    return SoundAsset(
+      id: id,
+      metadataVersion: metadataVersion + 1,
+      fileVersion: fileVersion,
+      category: category ?? this.category,
+      name: name ?? this.name,
+      availability: availability,
+      releaseStatus: releaseStatus,
+      sha256: sha256,
+      source: source,
+      segments: segments,
+      previewSegmentId: previewSegmentId,
+      tags: tags ?? this.tags,
+    );
+  }
+
+  Map<String, Object?> toJson() => {
+    'id': id,
+    'metadataVersion': metadataVersion,
+    'fileVersion': fileVersion,
+    'category': _categoryName(category),
+    'name': name.toJson(),
+    'tags': tags,
+    'availability': _availabilityName(availability),
+    'releaseStatus': _releaseStatusName(releaseStatus),
+    'sha256': sha256,
+    'previewSegmentId': previewSegmentId,
+    'source': source.toJson(),
+    'segments': [for (final segment in segments) segment.toJson()],
+  };
 
   bool get isReleaseEligible {
     return releaseStatus == SoundAssetReleaseStatus.approved &&
@@ -461,4 +525,42 @@ SoundSegmentPurpose _parseSegmentPurpose(String value) => switch (value) {
   'bridge' => SoundSegmentPurpose.bridge,
   'preview' => SoundSegmentPurpose.preview,
   _ => throw FormatException('Unknown sound segment purpose: $value.'),
+};
+
+String _categoryName(SoundAssetCategory value) => switch (value) {
+  SoundAssetCategory.weather => 'weather',
+  SoundAssetCategory.water => 'water',
+  SoundAssetCategory.fire => 'fire',
+  SoundAssetCategory.wildlife => 'wildlife',
+  SoundAssetCategory.place => 'place',
+  SoundAssetCategory.device => 'device',
+  SoundAssetCategory.media => 'media',
+  SoundAssetCategory.custom => 'custom',
+};
+
+String _availabilityName(SoundAssetAvailability value) => switch (value) {
+  SoundAssetAvailability.bundled => 'bundled',
+  SoundAssetAvailability.downloadable => 'downloadable',
+  SoundAssetAvailability.imported => 'imported',
+  SoundAssetAvailability.missing => 'missing',
+};
+
+String _releaseStatusName(SoundAssetReleaseStatus value) => switch (value) {
+  SoundAssetReleaseStatus.developmentOnly => 'development-only',
+  SoundAssetReleaseStatus.approved => 'approved',
+  SoundAssetReleaseStatus.blocked => 'blocked',
+};
+
+String _provenanceName(SoundAssetProvenance value) => switch (value) {
+  SoundAssetProvenance.verified => 'verified',
+  SoundAssetProvenance.unverified => 'unverified',
+  SoundAssetProvenance.userProvided => 'user-provided',
+};
+
+String _segmentPurposeName(SoundSegmentPurpose value) => switch (value) {
+  SoundSegmentPurpose.loop => 'loop',
+  SoundSegmentPurpose.texture => 'texture',
+  SoundSegmentPurpose.event => 'event',
+  SoundSegmentPurpose.bridge => 'bridge',
+  SoundSegmentPurpose.preview => 'preview',
 };
