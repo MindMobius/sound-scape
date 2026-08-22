@@ -1,0 +1,532 @@
+@media (max-width: 1100px) and (min-width: 821px) {
+  .app-view {
+    padding-right: 34px;
+    padding-left: 34px;
+  }
+  .player-main {
+    grid-template-columns: minmax(240px, 340px) minmax(280px, 380px);
+    gap: 48px;
+  }
+}
+
+@media (max-width: 820px) {
+  :root {
+    --player-height: 72px;
+    --rail-control-width: 64px;
+    --rail-control-height: 48px;
+  }
+  .app-shell {
+    display: block;
+    min-height: 0;
+  }
+  .side-rail {
+    display: none;
+  }
+  .mobile-header {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--mobile-header-height);
+    padding: 10px 14px 10px 16px;
+    border-bottom: 1px solid var(--line);
+    background: var(--surface);
+    transition: opacity 180ms ease-out;
+  }
+  .mobile-header .brand-mark {
+    width: 25px;
+    height: 25px;
+  }
+  .mobile-header .icon-button {
+    width: 44px;
+    height: 44px;
+  }
+  .mobile-public-nav {
+    display: flex;
+    align-items: center;
+  }
+  .workspace {
+    position: fixed;
+    top: var(--mobile-header-height);
+    right: 0;
+    bottom: var(--player-height);
+    left: 0;
+    height: auto;
+  }
+  .app-view {
+    min-height: 100%;
+    padding: 24px 16px 48px;
+  }
+  .view-header {
+    gap: 14px;
+    margin-bottom: 26px;
+  }
+  .view-header h1 {
+    font-size: 23px;
+  }
+  .view-header p {
+    font-size: 12px;
+  }
+
+  .public-section-heading h2 {
+    font-size: 24px;
+  }
+
+  .featured-scene {
+    height: 300px;
+    min-height: 300px;
+  }
+  .featured-copy {
+    right: 22px;
+    bottom: 24px;
+    left: 22px;
+  }
+  .featured-copy h2 {
+    font-size: 28px;
+  }
+  .scene-section {
+    margin-top: 32px;
+  }
+  .scene-grid,
+  .library-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px 12px;
+  }
+  .scene-grid--single {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .scene-grid--single .scene-card {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
+  }
+  .scene-grid--single .scene-card-copy {
+    padding-right: 0;
+  }
+  .scene-grid--single .scene-card strong {
+    font-size: 19px;
+  }
+
+  .client-section {
+    margin-top: 68px;
+    padding-top: 52px;
+    scroll-margin-top: 16px;
+  }
+  .download-intro {
+    grid-template-columns: 1fr;
+    gap: 34px;
+    padding-bottom: 58px;
+  }
+  .download-copy h2 {
+    max-width: 9em;
+    font-size: 34px;
+  }
+  .download-copy > p:not(.download-state) {
+    font-size: 14px;
+  }
+  .download-visual {
+    width: 100%;
+  }
+  .download-visual img {
+    aspect-ratio: 1.28 / 1;
+  }
+  .download-platforms {
+    padding-top: 54px;
+  }
+  .platform-row {
+    grid-template-columns: 30px minmax(0, 1fr) auto;
+    gap: 13px;
+  }
+
+  .create-layout {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+  .prompt-field {
+    padding: 22px 20px 8px;
+  }
+  .prompt-field textarea {
+    min-height: 180px;
+    font-size: 18px;
+  }
+  .prompt-meta {
+    padding-left: 20px;
+  }
+
+  .settings-section {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 24px 0;
+  }
+  .theme-options {
+    grid-template-columns: 1fr;
+  }
+  .theme-options button {
+    min-height: 58px;
+  }
+  .storage-row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .mobile-more-menu.mobile-nav {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    bottom: auto;
+    left: auto;
+    z-index: 80;
+    display: block;
+    width: 184px;
+    height: auto;
+    padding: 6px;
+    border: 0;
+    background: var(--surface-raised);
+  }
+  .mobile-more-menu.mobile-nav button {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+    min-width: 0;
+    min-height: 42px;
+    padding: 0 10px;
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    color: var(--ink-secondary);
+    font-size: 12px;
+    font-weight: 620;
+  }
+  .mobile-nav button.is-active {
+    color: var(--active);
+  }
+  .mobile-nav .nav-active-indicator {
+    inset: 3px;
+  }
+  .mobile-nav svg {
+    width: 18px;
+    height: 18px;
+    stroke-width: 1.7;
+  }
+
+  .global-player {
+    bottom: 0;
+  }
+  .player-control-rail {
+    gap: 8px;
+    padding: 8px 12px;
+  }
+  .player-identity {
+    grid-template-columns: 44px minmax(0, 1fr);
+    gap: 10px;
+    height: 54px;
+  }
+  .player-identity img {
+    width: 44px;
+    height: 44px;
+  }
+  .player-rail-actions {
+    gap: 2px;
+  }
+  .rail-control {
+    flex-direction: column;
+    gap: 2px;
+    padding: 0;
+  }
+  .rail-control-value {
+    display: block;
+    max-width: 100%;
+    font-size: 11px;
+    line-height: 1.05;
+  }
+  .rail-control-value::after {
+    content: none;
+  }
+  .control-popover {
+    padding: 7px;
+  }
+  .control-popover-header {
+    padding-right: 2px;
+    padding-left: 2px;
+  }
+  .timer-scale::before {
+    left: 7px;
+  }
+  .sleep-timer-menu button {
+    grid-template-columns: 9px minmax(0, 1fr);
+    gap: 4px;
+    padding: 0 2px;
+    font-size: 11px;
+    white-space: nowrap;
+  }
+  .scale-dot {
+    width: 6px;
+    height: 6px;
+  }
+  .volume-fader-ticks b {
+    display: none;
+  }
+
+  .app-shell[data-player-state="expanded"] .mobile-header {
+    opacity: 0;
+    pointer-events: none;
+  }
+  .player-collapse-button {
+    top: max(12px, env(safe-area-inset-top));
+    right: max(12px, env(safe-area-inset-right));
+  }
+  .player-main {
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+    gap: 24px;
+    width: min(100%, 560px);
+    padding: max(24px, env(safe-area-inset-top)) 20px 78px;
+  }
+  .player-hero-artwork {
+    width: min(58vw, 250px);
+  }
+  .player-expanded-copy {
+    width: 100%;
+  }
+  .player-expanded-copy h2 {
+    margin-top: 8px;
+    font-size: 29px;
+  }
+  .player-description {
+    font-size: 13px;
+  }
+  .player-feeling {
+    width: 100%;
+    margin-top: 24px;
+    padding-top: 18px;
+  }
+  .player-feeling .section-title-row p {
+    display: none;
+  }
+  .sound-details-content {
+    padding: 54px 16px 72px;
+  }
+  .sound-details-panel {
+    min-height: auto;
+  }
+  .advanced-layout {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  .layer-row {
+    grid-template-columns: minmax(110px, 1fr) minmax(94px, 0.72fr) auto;
+    gap: 10px;
+    min-height: 0;
+    padding: 12px 0;
+  }
+  .layer-identity {
+    grid-column: 1 / -1;
+  }
+  .layer-value {
+    display: none;
+  }
+  .layer-profile small {
+    display: none;
+  }
+  .layer-name small {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .sound-character {
+    padding: 0;
+    border: 0;
+  }
+  .layer-profile select,
+  .source-tabs button {
+    min-height: 44px;
+  }
+  .layer-name small,
+  .layer-profile small,
+  .layer-profile select,
+  .layer-value,
+  .source-tabs button,
+  .source-list > button strong,
+  .source-list > button small,
+  .character-control small {
+    font-size: 12px;
+  }
+
+  .task-toast {
+    right: 12px;
+    bottom: calc(var(--player-height) + 12px);
+    left: 12px;
+    width: auto;
+  }
+  .app-shell[data-player-state="expanded"] .task-toast {
+    bottom: 16px;
+  }
+  .toast {
+    bottom: calc(var(--player-height) + 14px);
+  }
+  .app-shell[data-player-state="expanded"] .toast {
+    bottom: 18px;
+  }
+
+  .focus-header {
+    min-height: 64px;
+    padding: max(12px, env(safe-area-inset-top)) 14px 8px 16px;
+  }
+  .focus-copy {
+    top: 46%;
+    right: 22px;
+    left: 22px;
+    width: auto;
+  }
+  .focus-copy h2 {
+    font-size: 36px;
+  }
+  .focus-copy h2 + p {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 420px) {
+  .mobile-header {
+    padding-right: 8px;
+    padding-left: 12px;
+  }
+  .mobile-header .brand {
+    gap: 7px;
+  }
+  .mobile-header .brand-mark {
+    width: 23px;
+    height: 23px;
+  }
+  .mobile-header .brand-name {
+    font-size: 17px;
+  }
+  .mobile-public-link {
+    padding-right: 7px;
+    padding-left: 7px;
+    font-size: 11px;
+  }
+  .mobile-public-nav .nav-active-indicator {
+    right: 7px;
+    left: 7px;
+  }
+  .app-view {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+  .scene-grid,
+  .library-grid {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 10px;
+  }
+  .scene-grid.scene-grid--single {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .player-control-rail {
+    gap: 8px;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+  .player-main {
+    padding-right: 18px;
+    padding-left: 18px;
+  }
+  .player-hero-artwork {
+    width: min(60vw, 232px);
+  }
+  .player-elements {
+    max-height: 20px;
+    overflow: hidden;
+  }
+  .task-ready {
+    grid-template-columns: 44px minmax(0, 1fr) auto auto;
+    gap: 8px;
+  }
+  .task-ready img {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+@media (max-width: 820px) and (max-height: 700px) {
+  .player-main {
+    grid-template-columns: minmax(104px, 32vw) minmax(0, 1fr);
+    align-items: center;
+    gap: 14px;
+    min-height: 100%;
+    padding: max(48px, env(safe-area-inset-top)) 14px 58px;
+  }
+  .player-hero-artwork {
+    width: 100%;
+    max-width: 132px;
+  }
+  .player-expanded-copy h2 {
+    margin-top: 5px;
+    font-size: 24px;
+  }
+  .player-description {
+    display: -webkit-box;
+    margin-top: 5px;
+    overflow: hidden;
+    font-size: 11px;
+    line-height: 1.55;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+  .player-elements {
+    display: none;
+  }
+  .player-feeling {
+    margin-top: 10px;
+    padding-top: 9px;
+  }
+  .player-feeling .section-title-row h3 {
+    font-size: 12px;
+  }
+  .feeling-range {
+    grid-template-columns: 17px minmax(0, 1fr) 17px;
+    gap: 5px;
+    min-height: 32px;
+  }
+  .feeling-range:first-of-type {
+    margin-top: 4px;
+  }
+}
+
+@media (max-height: 700px) and (min-width: 821px) {
+  .player-main {
+    padding-top: 20px;
+    padding-bottom: 64px;
+  }
+  .player-hero-artwork {
+    width: min(100%, 260px);
+  }
+  .player-expanded-copy h2 {
+    font-size: 30px;
+  }
+  .player-feeling {
+    margin-top: 20px;
+    padding-top: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .player-focus-entry::before {
+    animation: none;
+    opacity: 0.22;
+  }
+}

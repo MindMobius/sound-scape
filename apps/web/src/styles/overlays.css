@@ -1,0 +1,288 @@
+/* Background work reports progress without taking over the current soundscape. */
+.task-toast {
+  position: fixed;
+  right: 24px;
+  bottom: calc(var(--player-height) + 16px);
+  z-index: 140;
+  width: min(370px, calc(100vw - 48px));
+  min-height: 74px;
+  padding: 11px 12px;
+  border-radius: 8px;
+  background: var(--surface-raised);
+  box-shadow: var(--shadow);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(12px);
+  transition:
+    opacity 180ms ease-out,
+    transform 240ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.app-shell[data-player-state="expanded"] .task-toast {
+  bottom: 24px;
+}
+.task-toast[data-state="running"],
+.task-toast[data-state="ready"] {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+.task-running {
+  display: grid;
+  grid-template-columns: 22px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  min-height: 52px;
+}
+.task-spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--line);
+  border-top-color: var(--active);
+  border-radius: 50%;
+  animation: task-spin 900ms linear infinite;
+}
+@keyframes task-spin {
+  to {
+    transform: rotate(1turn);
+  }
+}
+.task-running strong,
+.task-running small,
+.task-ready strong,
+.task-ready small {
+  display: block;
+}
+.task-running strong,
+.task-ready strong {
+  font-size: 12px;
+  font-weight: 660;
+}
+.task-running small,
+.task-ready small {
+  margin-top: 2px;
+  color: var(--ink-tertiary);
+  font-size: 11px;
+}
+.task-running > span:last-child {
+  color: var(--ink-tertiary);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+}
+.task-ready {
+  display: none;
+  grid-template-columns: 52px minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 11px;
+}
+.task-toast[data-state="ready"] .task-running {
+  display: none;
+}
+.task-toast[data-state="ready"] .task-ready {
+  display: grid;
+}
+.task-ready img {
+  width: 52px;
+  height: 52px;
+  object-fit: cover;
+  border-radius: 6px;
+  background: var(--surface-muted);
+}
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(var(--player-height) + 18px);
+  z-index: 160;
+  max-width: min(440px, calc(100vw - 48px));
+  padding: 10px 13px;
+  border-radius: 7px;
+  background: var(--ink);
+  color: var(--surface-raised);
+  box-shadow: var(--shadow);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, 10px);
+  transition:
+    opacity 160ms ease-out,
+    transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
+  font-size: 11px;
+  font-weight: 610;
+}
+.app-shell[data-player-state="expanded"] .toast {
+  bottom: 24px;
+}
+.toast.is-visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+/* Focus mode is the only fully immersive visual layer. */
+.focus-mode {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  overflow: hidden;
+  visibility: hidden;
+  background: #edf0ee;
+  color: #202522;
+  opacity: 0;
+  pointer-events: none;
+}
+.focus-mode[data-focus-theme="dark"] {
+  background: #151918;
+  color: #f1f3ef;
+}
+.focus-mode.is-open {
+  visibility: visible;
+  pointer-events: auto;
+}
+.focus-visual,
+.focus-static,
+#membrane-field,
+.focus-tone {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.focus-static {
+  background-position: center;
+  background-size: cover;
+  transform: scale(1.01);
+}
+#membrane-field {
+  display: block;
+  opacity: 0;
+  touch-action: none;
+  transition: opacity 560ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.focus-visual.is-field-ready #membrane-field {
+  opacity: 1;
+}
+.focus-tone {
+  pointer-events: none;
+  box-shadow: inset 0 -180px 170px rgba(25, 30, 27, 0.12);
+}
+.focus-mode[data-focus-theme="dark"] .focus-tone {
+  box-shadow: inset 0 -210px 190px rgba(0, 0, 0, 0.32);
+}
+.focus-header {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 78px;
+  padding: max(22px, env(safe-area-inset-top)) max(28px, env(safe-area-inset-right)) 16px
+    max(28px, env(safe-area-inset-left));
+}
+.app-shell:is([data-focus-open="true"], [data-focus-transitioning="true"])
+  .focus-mode
+  + .player-collapse-button {
+  background: rgba(246, 248, 244, 0.88);
+  color: #222824;
+  box-shadow: 0 8px 24px rgba(23, 30, 26, 0.12);
+}
+.app-shell:is([data-focus-open="true"], [data-focus-transitioning="true"])
+  .focus-mode
+  + .player-collapse-button:hover,
+.app-shell:is([data-focus-open="true"], [data-focus-transitioning="true"])
+  .focus-mode
+  + .player-collapse-button:focus-visible {
+  background: rgba(246, 248, 244, 0.96);
+}
+.app-shell:is([data-focus-open="true"], [data-focus-transitioning="true"])
+  .focus-mode[data-focus-theme="dark"]
+  + .player-collapse-button {
+  background: rgba(27, 32, 30, 0.88);
+  color: #eef1ec;
+}
+.app-shell:is([data-focus-open="true"], [data-focus-transitioning="true"])
+  .focus-mode[data-focus-theme="dark"]
+  + .player-collapse-button:hover,
+.app-shell:is([data-focus-open="true"], [data-focus-transitioning="true"])
+  .focus-mode[data-focus-theme="dark"]
+  + .player-collapse-button:focus-visible {
+  background: rgba(27, 32, 30, 0.96);
+}
+.focus-copy {
+  position: absolute;
+  top: 50%;
+  right: max(6vw, 72px);
+  z-index: 3;
+  width: min(42vw, 610px);
+  text-align: right;
+}
+.focus-copy p {
+  margin: 0;
+}
+.focus-copy > p:first-child {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 650;
+}
+.focus-copy h2 {
+  margin: 16px 0 0;
+  font-family: var(--font-display);
+  font-size: 54px;
+  font-weight: 590;
+  line-height: 1.1;
+}
+.focus-copy h2 + p {
+  margin-top: 14px;
+  font-size: 15px;
+}
+.app-shell:is([data-focus-open="true"], [data-focus-transitioning="true"])
+  .focus-mode
+  ~ .player-control-rail {
+  --surface-raised: #f9faf7;
+  --surface-muted: #e8ede9;
+  --ink: #1c231f;
+  --ink-secondary: #59635d;
+  --ink-tertiary: #606b64;
+  --line: #d4dbd6;
+  --line-strong: #aeb8b1;
+  --active: #365f54;
+  --active-soft: #dce8e2;
+  --focus: #2c705f;
+}
+.app-shell:is([data-focus-open="true"], [data-focus-transitioning="true"])
+  .focus-mode[data-focus-theme="dark"]
+  ~ .player-control-rail {
+  --surface-raised: #191f1d;
+  --surface-muted: #2a322f;
+  --ink: #f1f3ef;
+  --ink-secondary: #b8c1bb;
+  --ink-tertiary: #97a29b;
+  --line: #37403c;
+  --line-strong: #59665f;
+  --active: #a9c8bc;
+  --active-soft: #243b34;
+  --focus: #8cc7b5;
+}
+:root[data-theme]
+  .app-shell:is([data-focus-open="true"], [data-focus-transitioning="true"])
+  .player-control-rail {
+  z-index: 201;
+  border-top-color: transparent;
+  background: transparent;
+  box-shadow: none;
+}
+.app-shell:is([data-focus-open="true"], [data-focus-transitioning="true"]) .player-identity {
+  opacity: 0;
+  pointer-events: none;
+}
+.scene-transition-layer {
+  position: fixed;
+  z-index: 180;
+  display: block;
+  object-fit: cover;
+  background: var(--surface-muted);
+  pointer-events: none;
+  will-change: transform, opacity;
+}

@@ -36,7 +36,7 @@
 
 ### 素材目录
 
-- `apps/mobile/assets/catalog/sound-library.v1.json` 是客户端当前素材清单。
+- `assets/audio/sound-library.v1.json` 是跨端声音素材清单；Flutter 构建时生成包内路径版本。
 - `SoundAsset` 使用稳定 ID，不让场景直接引用文件路径。
 - 每份素材记录元数据版本、文件版本、SHA-256、分类、标签、本地化名称、可用状态、来源、作者、许可证、预览片段和正式片段。
 - 场景只能引用已注册的 `assetId + segmentIds`；启动时会做完整性校验。

@@ -3,9 +3,10 @@
   "id": "rain-cabin",
   "name": "雨夜木屋",
   "description": "雷雨夜里，点燃篝火的木屋。",
+  "prompt": "雷雨夜里，点燃篝火的木屋，屋檐雨幕、檐下水声与潮湿回响缓慢交织。",
   "status": "starter",
   "tags": ["weather", "interior", "night", "warm"],
-  "audioLayers": ["屋檐雨", "远雷", "松木火", "夜风"],
+  "audioLayers": ["屋檐雨", "窗外雨幕", "檐下水声", "潮湿回响"],
   "visualBrief": "蓝灰膜片表现雨幕与远雷，珊瑚层承担火光温度，暖灰与鼠尾草叠层形成包裹感；保持抽象材料语言，不画木屋、火焰或雨滴插画。",
   "slots": {
     "hero": { "status": "ready", "assetId": "scene.rain-cabin.hero.v1" },

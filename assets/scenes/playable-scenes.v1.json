@@ -1,0 +1,245 @@
+{
+  "schemaVersion": 1,
+  "scenes": [
+    {
+      "sceneId": "rain-cabin",
+      "previewAudioAssetId": "rain-cabin-development",
+      "palette": ["#aebbc7", "#c4b7ae", "#78877d", "#d36b54", "#8a8e90", "#bcc5ce", "#d3ccc2"],
+      "recipe": {
+        "schemaVersion": 1,
+        "sceneId": "rain-cabin",
+        "seed": 41827,
+        "macros": {
+          "intensity": 0.46,
+          "richness": 0.62
+        },
+        "layers": [
+          {
+            "id": "roof-rain",
+            "name": "屋檐雨",
+            "assetId": "rain-cabin-development",
+            "segmentIds": ["loop-main"],
+            "kind": "bed",
+            "baseGain": 0.3,
+            "intensityGain": 0.35,
+            "richnessGain": 0.02,
+            "pan": -0.05,
+            "enabledByDefault": true,
+            "eventPolicy": {
+              "minimumSilenceMs": 6000,
+              "maximumSilenceMs": 16000,
+              "scheduleLeadMs": 240,
+              "noImmediateRepeat": true
+            },
+            "dynamics": {
+              "gainVariation": 0.14,
+              "panVariation": 0.18,
+              "minimumChangeIntervalMs": 6000,
+              "maximumChangeIntervalMs": 11000,
+              "minimumTransitionMs": 4000,
+              "maximumTransitionMs": 8000
+            }
+          },
+          {
+            "id": "window-rain",
+            "name": "窗外雨幕",
+            "assetId": "rain-cabin-development",
+            "segmentIds": ["texture-window"],
+            "kind": "texture",
+            "baseGain": 0,
+            "intensityGain": 0.08,
+            "richnessGain": 0.2,
+            "pan": -0.32,
+            "enabledByDefault": true,
+            "eventPolicy": {
+              "minimumSilenceMs": 6000,
+              "maximumSilenceMs": 16000,
+              "scheduleLeadMs": 240,
+              "noImmediateRepeat": true
+            },
+            "dynamics": {
+              "gainVariation": 0.14,
+              "panVariation": 0.18,
+              "minimumChangeIntervalMs": 6000,
+              "maximumChangeIntervalMs": 11000,
+              "minimumTransitionMs": 4000,
+              "maximumTransitionMs": 8000
+            }
+          },
+          {
+            "id": "eaves-water",
+            "name": "檐下水声",
+            "assetId": "open-water-development",
+            "segmentIds": ["loop-eaves"],
+            "kind": "bed",
+            "baseGain": 0.04,
+            "intensityGain": 0.14,
+            "richnessGain": 0.01,
+            "pan": 0.16,
+            "enabledByDefault": true,
+            "eventPolicy": {
+              "minimumSilenceMs": 6000,
+              "maximumSilenceMs": 16000,
+              "scheduleLeadMs": 240,
+              "noImmediateRepeat": true
+            },
+            "dynamics": {
+              "gainVariation": 0.14,
+              "panVariation": 0.18,
+              "minimumChangeIntervalMs": 6000,
+              "maximumChangeIntervalMs": 11000,
+              "minimumTransitionMs": 4000,
+              "maximumTransitionMs": 8000
+            }
+          },
+          {
+            "id": "damp-echo",
+            "name": "潮湿回响",
+            "assetId": "open-water-development",
+            "segmentIds": ["event-a", "event-b", "event-c"],
+            "kind": "event",
+            "baseGain": 0.01,
+            "intensityGain": 0.07,
+            "richnessGain": 0.14,
+            "pan": 0.24,
+            "enabledByDefault": true,
+            "eventPolicy": {
+              "minimumSilenceMs": 8000,
+              "maximumSilenceMs": 18000,
+              "scheduleLeadMs": 240,
+              "noImmediateRepeat": true
+            },
+            "dynamics": {
+              "gainVariation": 0.14,
+              "panVariation": 0.18,
+              "minimumChangeIntervalMs": 6000,
+              "maximumChangeIntervalMs": 11000,
+              "minimumTransitionMs": 4000,
+              "maximumTransitionMs": 8000
+            }
+          }
+        ]
+      }
+    },
+    {
+      "sceneId": "coastal-night",
+      "previewAudioAssetId": "open-water-development",
+      "palette": ["#6b8290", "#7f7a70", "#4c6664", "#a95f4f", "#59656d", "#879197", "#706d65"],
+      "recipe": {
+        "schemaVersion": 1,
+        "sceneId": "coastal-night",
+        "seed": 84391,
+        "macros": {
+          "intensity": 0.52,
+          "richness": 0.56
+        },
+        "layers": [
+          {
+            "id": "near-water",
+            "name": "近岸潮水",
+            "assetId": "open-water-development",
+            "segmentIds": ["loop-main"],
+            "kind": "bed",
+            "baseGain": 0.28,
+            "intensityGain": 0.35,
+            "richnessGain": 0.02,
+            "pan": -0.06,
+            "enabledByDefault": true,
+            "eventPolicy": {
+              "minimumSilenceMs": 6000,
+              "maximumSilenceMs": 16000,
+              "scheduleLeadMs": 240,
+              "noImmediateRepeat": true
+            },
+            "dynamics": {
+              "gainVariation": 0.14,
+              "panVariation": 0.18,
+              "minimumChangeIntervalMs": 6000,
+              "maximumChangeIntervalMs": 11000,
+              "minimumTransitionMs": 4000,
+              "maximumTransitionMs": 8000
+            }
+          },
+          {
+            "id": "far-water",
+            "name": "远浪",
+            "assetId": "open-water-development",
+            "segmentIds": ["texture-far"],
+            "kind": "texture",
+            "baseGain": 0.03,
+            "intensityGain": 0.12,
+            "richnessGain": 0.2,
+            "pan": 0.28,
+            "enabledByDefault": true,
+            "eventPolicy": {
+              "minimumSilenceMs": 6000,
+              "maximumSilenceMs": 16000,
+              "scheduleLeadMs": 240,
+              "noImmediateRepeat": true
+            },
+            "dynamics": {
+              "gainVariation": 0.14,
+              "panVariation": 0.18,
+              "minimumChangeIntervalMs": 6000,
+              "maximumChangeIntervalMs": 11000,
+              "minimumTransitionMs": 4000,
+              "maximumTransitionMs": 8000
+            }
+          },
+          {
+            "id": "sea-mist",
+            "name": "海面细雨",
+            "assetId": "rain-cabin-development",
+            "segmentIds": ["texture-mist"],
+            "kind": "texture",
+            "baseGain": 0.02,
+            "intensityGain": 0.08,
+            "richnessGain": 0.03,
+            "pan": -0.22,
+            "enabledByDefault": true,
+            "eventPolicy": {
+              "minimumSilenceMs": 6000,
+              "maximumSilenceMs": 16000,
+              "scheduleLeadMs": 240,
+              "noImmediateRepeat": true
+            },
+            "dynamics": {
+              "gainVariation": 0.14,
+              "panVariation": 0.18,
+              "minimumChangeIntervalMs": 6000,
+              "maximumChangeIntervalMs": 11000,
+              "minimumTransitionMs": 4000,
+              "maximumTransitionMs": 8000
+            }
+          },
+          {
+            "id": "reef-echo",
+            "name": "礁石回响",
+            "assetId": "open-water-development",
+            "segmentIds": ["event-a", "event-b", "event-c"],
+            "kind": "event",
+            "baseGain": 0.01,
+            "intensityGain": 0.06,
+            "richnessGain": 0.16,
+            "pan": 0.34,
+            "enabledByDefault": true,
+            "eventPolicy": {
+              "minimumSilenceMs": 9000,
+              "maximumSilenceMs": 20000,
+              "scheduleLeadMs": 240,
+              "noImmediateRepeat": true
+            },
+            "dynamics": {
+              "gainVariation": 0.14,
+              "panVariation": 0.18,
+              "minimumChangeIntervalMs": 6000,
+              "maximumChangeIntervalMs": 11000,
+              "minimumTransitionMs": 4000,
+              "maximumTransitionMs": 8000
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

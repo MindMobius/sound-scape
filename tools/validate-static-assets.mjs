@@ -54,7 +54,9 @@ function pngSize(buffer) {
 
 function jpegSize(buffer) {
   if (buffer.length < 4 || buffer[0] !== 0xff || buffer[1] !== 0xd8) return null;
-  const startOfFrameMarkers = new Set([0xc0, 0xc1, 0xc2, 0xc3, 0xc5, 0xc6, 0xc7, 0xc9, 0xca, 0xcb, 0xcd, 0xce, 0xcf]);
+  const startOfFrameMarkers = new Set([
+    0xc0, 0xc1, 0xc2, 0xc3, 0xc5, 0xc6, 0xc7, 0xc9, 0xca, 0xcb, 0xcd, 0xce, 0xcf,
+  ]);
   let offset = 2;
 
   while (offset + 8 < buffer.length) {
@@ -105,7 +107,8 @@ if (catalog) {
     if (assetPaths.has(asset.path)) fail(`duplicate asset path: ${asset.path}`);
     assetPaths.add(asset.path);
 
-    const isStaticPath = asset.path.startsWith("assets/brand/") || asset.path.startsWith("assets/scenes/");
+    const isStaticPath =
+      asset.path.startsWith("assets/brand/") || asset.path.startsWith("assets/scenes/");
     if (!isStaticPath || asset.path.includes("/experiments/")) {
       fail(`${asset.id}: static catalog path must stay under assets/brand or assets/scenes`);
     }
@@ -122,13 +125,14 @@ if (catalog) {
     const buffer = await readFile(path.join(repoRoot, asset.path));
     const size = imageSize(buffer);
     if (!size || size.width !== asset.width || size.height !== asset.height) {
-      fail(`${asset.id}: expected ${asset.width}x${asset.height}, found ${size ? `${size.width}x${size.height}` : "unsupported raster"}`);
+      fail(
+        `${asset.id}: expected ${asset.width}x${asset.height}, found ${size ? `${size.width}x${size.height}` : "unsupported raster"}`,
+      );
     }
 
     const digest = createHash("sha256").update(buffer).digest("hex");
     if (digest !== asset.sha256) fail(`${asset.id}: SHA-256 mismatch`);
   }
-
 }
 
 if (derivatives) {
@@ -143,7 +147,10 @@ if (derivatives) {
     derivativePaths.add(derivative.path);
 
     const source = catalogById.get(derivative.sourceAssetId);
-    if (!source) fail(`${derivative.id}: sourceAssetId ${derivative.sourceAssetId} is not registered in assets/catalog.json`);
+    if (!source)
+      fail(
+        `${derivative.id}: sourceAssetId ${derivative.sourceAssetId} is not registered in assets/catalog.json`,
+      );
     if (!derivative.path.startsWith("assets/scenes/") || !/\.jpe?g$/i.test(derivative.path)) {
       fail(`${derivative.id}: Web raster derivative must be a JPEG under assets/scenes`);
     }
@@ -158,7 +165,9 @@ if (derivatives) {
     const buffer = await readFile(path.join(repoRoot, derivative.path));
     const size = imageSize(buffer);
     if (!size || size.width !== derivative.width || size.height !== derivative.height) {
-      fail(`${derivative.id}: expected ${derivative.width}x${derivative.height}, found ${size ? `${size.width}x${size.height}` : "unsupported raster"}`);
+      fail(
+        `${derivative.id}: expected ${derivative.width}x${derivative.height}, found ${size ? `${size.width}x${size.height}` : "unsupported raster"}`,
+      );
     }
     const digest = createHash("sha256").update(buffer).digest("hex");
     if (digest !== derivative.sha256) fail(`${derivative.id}: SHA-256 mismatch`);
@@ -168,12 +177,14 @@ if (derivatives) {
 if (catalog && derivatives) {
   const productionRasters = [
     ...(await listFiles("assets/brand")),
-    ...(await listFiles("assets/scenes"))
+    ...(await listFiles("assets/scenes")),
   ].filter((file) => /\.(?:png|jpe?g)$/i.test(file));
 
   for (const file of productionRasters) {
     if (!assetPaths.has(file) && !derivativePaths.has(file)) {
-      fail(`${file}: production raster is not registered in assets/catalog.json or assets/derivatives.json`);
+      fail(
+        `${file}: production raster is not registered in assets/catalog.json or assets/derivatives.json`,
+      );
     }
   }
 }
@@ -192,6 +203,7 @@ if (sceneIndex) {
     if (!scene) continue;
     if (scene.id !== entry.id) fail(`${entry.manifest}: id does not match scene index`);
     if (scene.status !== entry.status) fail(`${entry.manifest}: status does not match scene index`);
+    if (!scene.prompt?.trim()) fail(`${entry.manifest}: prompt is required`);
     if (!scene.visualBrief?.trim()) fail(`${entry.manifest}: visualBrief is required`);
     if (!Array.isArray(scene.audioLayers) || scene.audioLayers.length < 2) {
       fail(`${entry.manifest}: at least two audio layers are required`);
@@ -214,7 +226,10 @@ if (sceneIndex) {
           fail(`${entry.manifest}: ${slotName} references unknown asset ${slot.assetId}`);
         } else if (slot.status === "shared-fallback" && !asset.path.startsWith("assets/brand/")) {
           fail(`${entry.manifest}: shared ${slotName} must reference a brand asset`);
-        } else if (slot.status === "ready" && !asset.path.startsWith(`assets/scenes/${scene.id}/`)) {
+        } else if (
+          slot.status === "ready" &&
+          !asset.path.startsWith(`assets/scenes/${scene.id}/`)
+        ) {
           fail(`${entry.manifest}: ready ${slotName} must reference an asset owned by ${scene.id}`);
         }
       }
@@ -238,6 +253,6 @@ if (errors.length) {
   process.exitCode = 1;
 } else {
   console.log(
-    `Static asset validation passed: ${assetIds.size} catalog assets, ${derivativeIds.size} Web derivatives, ${sceneIds.size} scenes, ${readyBindings} ready bindings, ${fallbackBindings} explicit fallback bindings.`
+    `Static asset validation passed: ${assetIds.size} catalog assets, ${derivativeIds.size} Web derivatives, ${sceneIds.size} scenes, ${readyBindings} ready bindings, ${fallbackBindings} explicit fallback bindings.`,
   );
 }

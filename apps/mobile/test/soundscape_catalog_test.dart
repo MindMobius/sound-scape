@@ -1,4 +1,8 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter_test/flutter_test.dart';
+import 'package:soundscape_mobile/domain/scene_recipe.dart';
 import 'package:soundscape_mobile/domain/soundscape_catalog.dart';
 import 'package:soundscape_mobile/domain/soundscape_scene.dart';
 
@@ -36,4 +40,44 @@ void main() {
   test('unknown scene ids resolve to the initial scene', () {
     expect(SoundscapeCatalog.byId('missing'), SoundscapeCatalog.initialScene);
   });
+
+  test('generated scenes match the canonical cross-platform catalog', () {
+    final index = (jsonDecode(
+      File('../../assets/scenes/index.json').readAsStringSync(),
+    ) as Map).cast<String, Object?>();
+    final playableCatalog = (jsonDecode(
+      File('../../assets/scenes/playable-scenes.v1.json').readAsStringSync(),
+    ) as Map).cast<String, Object?>();
+    final playableById = {
+      for (final value in playableCatalog['scenes']! as List<Object?>)
+        (_jsonMap(value)['sceneId']! as String): _jsonMap(value),
+    };
+    final expectedIds = <String>[];
+
+    for (final value in index['scenes']! as List<Object?>) {
+      final entry = (value! as Map).cast<String, Object?>();
+      final sceneId = entry['id']! as String;
+      final playable = playableById[sceneId];
+      if (playable == null) continue;
+      expectedIds.add(sceneId);
+
+      final manifest = (jsonDecode(
+        File('../../${entry['manifest']! as String}').readAsStringSync(),
+      ) as Map).cast<String, Object?>();
+      final recipe = SceneRecipe.fromJson(
+        (playable['recipe']! as Map).cast<String, Object?>(),
+      );
+      final generated = SoundscapeCatalog.byId(sceneId);
+
+      expect(generated.name, manifest['name']);
+      expect(generated.description, manifest['description']);
+      expect(SceneRecipe.fromScene(generated).toJson(), recipe.toJson());
+    }
+
+    expect(SoundscapeCatalog.scenes.map((scene) => scene.id), expectedIds);
+    expect(SoundscapeCatalog.initialScene.id, index['defaultScene']);
+  });
 }
+
+Map<String, Object?> _jsonMap(Object? value) =>
+    (value! as Map).cast<String, Object?>();

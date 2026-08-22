@@ -2,7 +2,7 @@ import { Geometry, Mesh, Program, Renderer, RenderTarget, Texture } from "ogl";
 import { createIcons, Pause, Play, Volume2 } from "lucide";
 import atlasUrl from "../../assets/experiments/runtime/membrane-thickness-atlas-v2.png?url";
 import fallbackUrl from "../../assets/brand/backgrounds/hero-background-light-right-v1.png?url";
-import { backgroundShader, membraneShader, presentShader, vertexShader } from "./shaders.js";
+import { backgroundShader, membraneShader, presentShader, vertexShader } from "../../packages/web-visual/membrane-shaders.js";
 
 const VARIANT_NAMES = ["A", "B", "C"];
 const REDUCED_MOTION = window.matchMedia("(prefers-reduced-motion: reduce)").matches;

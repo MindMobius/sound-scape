@@ -3,6 +3,7 @@
   "id": "night-train",
   "name": "夜行列车",
   "description": "夜行列车穿过安静而连续的远方。",
+  "prompt": "夜行列车穿过安静而连续的远方，车轮节律与窗外风压缓慢交替。",
   "status": "starter",
   "tags": ["travel", "night", "motion", "interior"],
   "audioLayers": ["车轮节律", "车厢低鸣", "轨道接缝", "窗外风压"],

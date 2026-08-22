@@ -26,11 +26,11 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/catalog/sound-library.v1.json
-    - assets/audio/open-water.wav
-    - assets/audio/rain-cabin.mp3
-    - assets/images/coastal-night-cover.jpg
-    - assets/images/coastal-night-hero.jpg
-    - assets/images/rain-cabin-cover.jpg
-    - assets/images/rain-cabin-hero.jpg
-    - assets/images/soundscape-mark.png
+    - assets/generated/catalog/sound-library.v1.json
+    - assets/generated/audio/open-water.wav
+    - assets/generated/audio/rain-cabin.mp3
+    - assets/generated/images/coastal-night-cover.jpg
+    - assets/generated/images/coastal-night-hero.jpg
+    - assets/generated/images/rain-cabin-cover.jpg
+    - assets/generated/images/rain-cabin-hero.jpg
+    - assets/generated/images/soundscape-mark.png

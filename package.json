@@ -2,9 +2,20 @@
   "name": "sound-scape",
   "private": true,
   "version": "0.1.0",
+  "type": "module",
+  "engines": {
+    "node": "24.11.0"
+  },
+  "packageManager": "npm@11.6.1",
   "scripts": {
-    "dev": "npm --prefix prototypes/emotional-player run dev --",
-    "build": "npm --prefix prototypes/emotional-player run build",
+    "assets:sync": "node tools/sync-runtime-assets.mjs",
+    "contracts:sync": "node tools/validate-contracts.mjs --write",
+    "dev": "npm run assets:sync && npm --prefix apps/web run dev --",
+    "build": "npm run assets:sync && npm --prefix apps/web run build",
+    "format": "prettier --write .github apps/web/src apps/web/index.html apps/web/package.json assets/audio/sound-library.v1.json assets/runtime-pack.v1.json assets/scenes/playable-scenes.v1.json contracts eslint.config.js package.json packages tools",
+    "format:check": "prettier --check .github apps/web/src apps/web/index.html apps/web/package.json assets/audio/sound-library.v1.json assets/runtime-pack.v1.json assets/scenes/playable-scenes.v1.json contracts eslint.config.js package.json packages tools",
+    "lint": "eslint apps/web/src apps/web/vite.config.js packages tools",
+    "check:web": "npm run lint && npm run format:check && npm --prefix apps/web run check",
     "build:optical": "npm --prefix prototypes/optical-membrane-field run build",
     "mobile:setup": "node tools/flutter.mjs setup",
     "mobile:dev": "node tools/flutter.mjs run desktop",
@@ -16,7 +27,16 @@
     "mobile:integration:android": "node tools/flutter.mjs integration android",
     "mobile:build:windows": "node tools/flutter.mjs build windows",
     "mobile:build:android": "node tools/flutter.mjs build android",
-    "validate:assets": "node tools/validate-static-assets.mjs",
-    "check": "npm run validate:assets && npm run build"
+    "mobile:build:ios": "node tools/flutter.mjs build ios",
+    "validate:assets": "node tools/sync-runtime-assets.mjs --check && node tools/validate-static-assets.mjs",
+    "validate:contracts": "node tools/validate-contracts.mjs",
+    "check": "npm run assets:sync && npm run validate:assets && npm run validate:contracts && npm run check:web && npm run mobile:check"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "ajv": "8.20.0",
+    "eslint": "10.9.0",
+    "globals": "17.11.0",
+    "prettier": "3.9.6"
   }
 }

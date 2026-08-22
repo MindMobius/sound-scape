@@ -1,11 +1,15 @@
 # 仓库工具
 
 - `validate-static-assets.mjs`：校验正式 PNG、提示词、SHA-256、场景清单和资源槽位的完整性。
-- `flutter.mjs`：解析并校验 Flutter SDK，为子进程配置国内镜像，提供桌面热开发、Android 阶段验收、无设备检查和平台构建入口。
+- `sync-runtime-assets.mjs`：校验声音、场景、视觉和分段引用，并从根资源母版确定性生成 Flutter 包内资源与场景目录。
+- `validate-contracts.mjs`：使用 JSON Schema 验证共同样例和可播放场景目录，并检查自动生成的 Dart 契约版本和摘要。
+- `check-web.mjs`：检查正式 Web 的全部 JavaScript 模块语法。
+- `flutter.mjs`：同步运行时资源、解析并校验 Flutter SDK，为子进程配置国内镜像，提供桌面热开发、原生验收和跨平台构建入口。
 
 从仓库根目录运行：
 
 ```powershell
 npm run validate:assets
+npm run validate:contracts
 npm run mobile:check
 ```

@@ -1,0 +1,10 @@
+**/build/
+**/dist/
+**/node_modules/
+apps/mobile/
+assets/**/*.png
+assets/**/*.jpg
+assets/**/*.mp3
+assets/**/*.wav
+design/
+prototypes/

@@ -2,6 +2,8 @@
 node_modules/
 dist/
 .vite/
+apps/mobile/assets/generated/
+work/
 
 # Local runtime state
 *.log

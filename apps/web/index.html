@@ -1,0 +1,850 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#f4f6f3" />
+    <meta name="description" content="声景，把一句描述变成持续演化的声音环境。" />
+    <title>声景</title>
+    <link rel="icon" type="image/png" href="../../assets/brand/identity/soundscape-mark-ui.png" />
+    <link rel="stylesheet" href="./src/styles.css" />
+  </head>
+  <body>
+    <!--
+      THESIS: 公开 Web 是进入声音世界的门槛，不是缩小版客户端；拒绝用功能导航替代真实聆听。
+      OWN-WORLD: 冷白底、炭黑、矿物灰绿与雾蓝，珊瑚只标记动作；精密细线、6 至 8 像素圆角和 Image 2 膜片裁片共同构成界面。
+      STORY: 访客直接从探索页听见一处真实声景，再选择另一处场景或了解客户端；全局控制轨、完整播放器与沉浸场始终属于同一聆听体验。
+      FIRST VIEWPORT: 顶部只有品牌与下载入口；探索页先呈现可直接播放的精选声景，再自然接续其他可听内容。
+      FORM: 已建立视觉世界中的公开体验入口，延续 seed ac023634；内部创建、素材与设置仅在 lab 模式出现。
+      FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
+    -->
+    <div
+      class="app-shell"
+      id="app-shell"
+      data-view="explore"
+      data-job-state="idle"
+      data-lab-mode="false"
+    >
+      <header class="site-header side-rail" aria-label="主导航">
+        <a class="brand" href="#explore" data-view-link="explore" aria-label="声景，返回探索">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="brand-name">声景</span>
+        </a>
+
+        <nav class="primary-nav" aria-label="网站导航">
+          <a
+            class="nav-item site-download-link"
+            href="#client"
+            data-client-link
+            aria-label="查看客户端进展"
+          >
+            <span>客户端</span>
+          </a>
+          <button class="nav-item lab-only" type="button" data-view-link="create">
+            <span>创建</span>
+          </button>
+          <button class="nav-item lab-only" type="button" data-view-link="library">
+            <span>声景集</span>
+          </button>
+          <button class="nav-item lab-only" type="button" data-view-link="settings">
+            <span>设置</span>
+          </button>
+        </nav>
+      </header>
+
+      <header class="mobile-header">
+        <a class="brand" href="#explore" data-view-link="explore" aria-label="声景，返回探索">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span class="brand-name">声景</span>
+        </a>
+        <div class="mobile-header-actions">
+          <nav class="mobile-public-nav" aria-label="网站导航">
+            <a
+              class="mobile-public-link"
+              href="#client"
+              data-client-link
+              aria-label="查看客户端进展"
+              >客户端</a
+            >
+          </nav>
+          <button
+            class="icon-button lab-only"
+            id="mobile-more-button"
+            type="button"
+            aria-label="内部功能"
+            aria-expanded="false"
+            aria-controls="mobile-more-menu"
+            title="内部功能"
+          >
+            <i data-lucide="ellipsis" aria-hidden="true"></i>
+          </button>
+          <nav
+            class="mobile-more-menu mobile-nav lab-only"
+            id="mobile-more-menu"
+            aria-label="内部功能"
+            aria-hidden="true"
+            inert
+            hidden
+          >
+            <button class="lab-only" type="button" data-view-link="create">
+              <i data-lucide="plus" aria-hidden="true"></i><span>创建</span>
+            </button>
+            <button class="lab-only" type="button" data-view-link="library">
+              <i data-lucide="library" aria-hidden="true"></i><span>声景集</span>
+            </button>
+            <button class="lab-only" type="button" data-view-link="settings">
+              <i data-lucide="settings" aria-hidden="true"></i><span>设置</span>
+            </button>
+          </nav>
+        </div>
+      </header>
+
+      <main class="workspace" id="workspace">
+        <section
+          class="app-view explore-view is-active"
+          data-view="explore"
+          aria-labelledby="explore-view-title"
+        >
+          <header class="view-header">
+            <div>
+              <h1 id="explore-view-title">可听的声景</h1>
+              <p>从一处已经准备好的声音世界开始。</p>
+            </div>
+            <button
+              class="text-action"
+              type="button"
+              data-shuffle
+              aria-label="随机选择声景"
+              title="随便听听"
+            >
+              <i data-lucide="shuffle" aria-hidden="true"></i><span>随便听听</span>
+            </button>
+          </header>
+
+          <article class="featured-scene" id="featured-scene">
+            <img
+              id="featured-image"
+              src="../../assets/scenes/coastal-night/coastal-night-hero-web-v1.jpg"
+              alt=""
+              decoding="async"
+              fetchpriority="high"
+            />
+            <div class="featured-copy">
+              <h2 id="featured-title">深夜海岸</h2>
+              <p class="featured-elements" id="featured-elements">近岸潮水 · 远浪 · 海风</p>
+              <p class="featured-description" id="featured-description">
+                深夜海岸上，潮声持续靠近又缓缓退去。
+              </p>
+              <button class="light-action" type="button" id="featured-play">
+                <i
+                  class="featured-action-icon featured-action-icon--play"
+                  data-lucide="play"
+                  aria-hidden="true"
+                ></i>
+                <i
+                  class="featured-action-icon featured-action-icon--live"
+                  data-lucide="audio-lines"
+                  aria-hidden="true"
+                ></i>
+                <span>开始聆听</span>
+              </button>
+            </div>
+          </article>
+
+          <section class="scene-section" aria-labelledby="scene-section-title">
+            <div class="section-title-row">
+              <h2 id="scene-section-title">另一处声景</h2>
+            </div>
+            <div class="scene-grid" id="explore-grid"></div>
+          </section>
+
+          <div class="client-section" id="client">
+            <section class="download-intro" aria-labelledby="client-title">
+              <div class="download-copy">
+                <h2 id="client-title">把声景带在身边</h2>
+                <p>客户端会把生成、素材和持续播放留在设备上。现在仍在打磨，网页体验会继续开放。</p>
+                <p class="download-state"><span aria-hidden="true"></span>客户端正在开发中</p>
+              </div>
+              <figure class="download-visual">
+                <img
+                  id="download-visual-image"
+                  src="../../assets/scenes/rain-cabin/rain-cabin-hero-web-v1.jpg"
+                  alt="雨夜木屋的声景视觉"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </figure>
+            </section>
+
+            <section class="download-platforms" aria-labelledby="download-platforms-title">
+              <header class="public-section-heading">
+                <h2 id="download-platforms-title">完整体验，正在走向每一台设备</h2>
+                <p>开放时间与安装包会在这里如实更新。</p>
+              </header>
+              <div class="platform-list">
+                <article class="platform-row">
+                  <i data-lucide="smartphone" aria-hidden="true"></i>
+                  <div>
+                    <h3>iPhone 与 Android</h3>
+                    <p>后台播放、锁屏控制和随身聆听。</p>
+                  </div>
+                  <span>开发中</span>
+                </article>
+                <article class="platform-row">
+                  <i data-lucide="laptop" aria-hidden="true"></i>
+                  <div>
+                    <h3>Windows 与 macOS</h3>
+                    <p>本地素材、离线场景和更完整的编排能力。</p>
+                  </div>
+                  <span>规划中</span>
+                </article>
+                <article class="platform-row platform-row--available">
+                  <i data-lucide="waves" aria-hidden="true"></i>
+                  <div>
+                    <h3>网页体验</h3>
+                    <p>无需安装，直接聆听现有声景。</p>
+                  </div>
+                  <span>当前可用</span>
+                </article>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section
+          class="app-view create-view lab-only"
+          data-view="create"
+          aria-labelledby="create-view-title"
+          hidden
+        >
+          <header class="view-header">
+            <div>
+              <h1 id="create-view-title">创建声景</h1>
+              <p>写下一处想去的地方。</p>
+            </div>
+          </header>
+
+          <div class="create-layout">
+            <form class="create-form" id="create-form">
+              <div class="prompt-field">
+                <div class="prompt-heading">
+                  <label for="scene-prompt">你想听见什么？</label>
+                  <button
+                    class="text-action"
+                    type="button"
+                    id="random-prompt-button"
+                    aria-label="随机生成灵感"
+                    title="换个灵感"
+                  >
+                    <i data-lucide="shuffle" aria-hidden="true"></i><span>换个灵感</span>
+                  </button>
+                </div>
+                <textarea
+                  id="scene-prompt"
+                  rows="7"
+                  maxlength="180"
+                  aria-describedby="prompt-count prompt-hint"
+                  placeholder="例如，雨停前的玻璃温室，水珠沿着窗面缓慢滑落。"
+                ></textarea>
+              </div>
+              <div class="prompt-meta">
+                <span class="prompt-status"
+                  ><span id="prompt-count">0 / 180</span
+                  ><span id="prompt-hint">写下一处场景后即可开始</span></span
+                >
+                <button class="primary-action" id="compose-button" type="submit" disabled>
+                  <span>生成声景</span>
+                </button>
+              </div>
+            </form>
+
+            <aside class="create-notes" aria-labelledby="starter-title">
+              <div class="section-title-row">
+                <div>
+                  <h2 id="starter-title">从一个片刻开始</h2>
+                  <p>这些是描述模板，选择后仍可继续修改。</p>
+                </div>
+              </div>
+              <div class="template-list" id="template-list"></div>
+            </aside>
+          </div>
+        </section>
+
+        <section
+          class="app-view library-view lab-only"
+          data-view="library"
+          aria-labelledby="library-view-title"
+          hidden
+        >
+          <header class="view-header">
+            <div>
+              <h1 id="library-view-title">声景集</h1>
+              <p>想再回来时，就从这里开始。</p>
+            </div>
+            <button class="primary-action compact-primary" type="button" data-view-link="create">
+              <i data-lucide="plus" aria-hidden="true"></i><span>创建</span>
+            </button>
+          </header>
+          <div class="scene-grid library-grid" id="library-grid"></div>
+        </section>
+
+        <section
+          class="app-view settings-view lab-only"
+          data-view="settings"
+          aria-labelledby="settings-view-title"
+          hidden
+        >
+          <header class="view-header">
+            <div>
+              <h1 id="settings-view-title">设置</h1>
+            </div>
+          </header>
+
+          <div class="settings-sections">
+            <section class="settings-section" aria-labelledby="appearance-title">
+              <div class="settings-section-heading">
+                <h2 id="appearance-title">外观</h2>
+                <p>跟随声景时，界面会随当前声音世界切换明暗。</p>
+              </div>
+              <div class="theme-options" role="radiogroup" aria-label="外观模式">
+                <button type="button" role="radio" aria-checked="true" data-theme-mode="scene">
+                  <i data-lucide="blend" aria-hidden="true"></i
+                  ><span><strong>跟随声景</strong><small>随当前场景变化</small></span>
+                </button>
+                <button type="button" role="radio" aria-checked="false" data-theme-mode="light">
+                  <i data-lucide="sun" aria-hidden="true"></i
+                  ><span><strong>浅色</strong><small>保持明亮界面</small></span>
+                </button>
+                <button type="button" role="radio" aria-checked="false" data-theme-mode="dark">
+                  <i data-lucide="moon" aria-hidden="true"></i
+                  ><span><strong>深色</strong><small>保持低亮界面</small></span>
+                </button>
+              </div>
+            </section>
+
+            <section class="settings-section" aria-labelledby="playback-preferences-title">
+              <div class="settings-section-heading">
+                <h2 id="playback-preferences-title">聆听偏好</h2>
+                <p>这些选择不会改变声景本身。</p>
+              </div>
+              <div class="settings-list">
+                <label class="settings-row">
+                  <span
+                    ><strong>选择后直接播放</strong
+                    ><small>从探索或声景集选择时立即开始</small></span
+                  >
+                  <input id="auto-play-setting" type="checkbox" role="switch" checked />
+                </label>
+                <label class="settings-row">
+                  <span
+                    ><strong>保留上次听感</strong
+                    ><small>记住轻重、简繁、远近与设备质感</small></span
+                  >
+                  <input id="remember-mix-setting" type="checkbox" role="switch" checked />
+                </label>
+              </div>
+            </section>
+
+            <section class="settings-section" aria-labelledby="local-storage-title">
+              <div class="settings-section-heading">
+                <h2 id="local-storage-title">本地声音</h2>
+                <p>添加的音频只保存在这个浏览器中。</p>
+              </div>
+              <div class="storage-row">
+                <div class="storage-summary">
+                  <i data-lucide="database" aria-hidden="true"></i
+                  ><span
+                    ><strong id="storage-summary">正在读取</strong
+                    ><small id="storage-detail">统计本地声音素材</small></span
+                  >
+                </div>
+                <button class="quiet-danger" id="clear-storage-button" type="button" hidden>
+                  清空本地声音
+                </button>
+              </div>
+            </section>
+          </div>
+        </section>
+      </main>
+
+      <section class="global-player" id="global-player" aria-label="全局播放器">
+        <div class="player-surface">
+          <div class="player-expanded-content" id="player-expanded-content">
+            <div class="player-atmosphere" id="player-atmosphere" aria-hidden="true">
+              <img
+                id="player-atmosphere-image"
+                src="../../assets/scenes/rain-cabin/rain-cabin-hero-web-v1.jpg"
+                alt=""
+                decoding="async"
+              />
+              <span class="player-atmosphere-field"></span>
+            </div>
+            <div class="player-expanded-scroll" id="player-expanded-scroll">
+              <div class="player-main">
+                <figure class="player-hero-artwork">
+                  <img
+                    id="player-hero-cover"
+                    src="../../assets/scenes/rain-cabin/rain-cabin-cover-web-v1.jpg"
+                    alt=""
+                    decoding="async"
+                  />
+                  <button
+                    class="player-focus-entry"
+                    id="focus-button"
+                    type="button"
+                    aria-label="进入沉浸聆听"
+                  >
+                    <span class="focus-entry-cue" aria-hidden="true"
+                      ><i data-lucide="maximize-2"></i><span>沉浸聆听</span></span
+                    >
+                  </button>
+                </figure>
+
+                <div class="player-expanded-copy">
+                  <p class="player-status-line">
+                    <span class="live-dot" aria-hidden="true"></span
+                    ><span id="player-expanded-state">尚未播放</span>
+                  </p>
+                  <h2 id="player-expanded-title">雨夜木屋</h2>
+                  <p class="player-description" id="player-expanded-description">
+                    雷雨夜里，点燃篝火的木屋。
+                  </p>
+                  <div
+                    class="player-elements"
+                    id="player-expanded-elements"
+                    aria-label="声音元素"
+                  ></div>
+
+                  <section class="player-feeling" aria-labelledby="player-feeling-title">
+                    <div class="section-title-row">
+                      <div>
+                        <h3 id="player-feeling-title">整体感受</h3>
+                        <p id="feeling-summary">均衡 · 丰富，开始后会持续自然变化。</p>
+                      </div>
+                    </div>
+                    <label class="feeling-range"
+                      ><span>轻</span
+                      ><input
+                        id="intensity"
+                        type="range"
+                        min="0"
+                        max="100"
+                        value="52"
+                        data-intensity
+                        aria-label="轻重"
+                      /><span>重</span></label
+                    >
+                    <label class="feeling-range"
+                      ><span>简</span
+                      ><input
+                        id="richness"
+                        type="range"
+                        min="0"
+                        max="100"
+                        value="68"
+                        data-richness
+                        aria-label="简繁"
+                      /><span>繁</span></label
+                    >
+                  </section>
+                </div>
+              </div>
+
+              <section class="sound-details-panel" id="sound-details-panel" aria-label="声景调节">
+                <div class="sound-details-inner">
+                  <div class="sound-details-content">
+                    <div class="advanced-layout">
+                      <section class="layer-workspace" aria-labelledby="layers-title">
+                        <div class="section-title-row">
+                          <div>
+                            <h3 id="layers-title">此刻听见</h3>
+                            <p>让某一种声音靠近或退远。</p>
+                          </div>
+                        </div>
+                        <div class="layer-list" id="layer-list"></div>
+
+                        <section
+                          class="orchestration-controls"
+                          aria-labelledby="orchestration-title"
+                        >
+                          <div class="section-title-row">
+                            <div>
+                              <h3 id="orchestration-title">声音走势</h3>
+                              <p id="orchestration-summary">
+                                轻微起伏 · 稍近，开始后会持续自然变化。
+                              </p>
+                            </div>
+                          </div>
+                          <label class="feeling-range"
+                            ><span>平稳</span
+                            ><input
+                              id="movement"
+                              type="range"
+                              min="0"
+                              max="100"
+                              value="36"
+                              data-movement
+                              aria-label="声音起伏"
+                            /><span>起伏</span></label
+                          >
+                          <label class="feeling-range"
+                            ><span>贴近</span
+                            ><input
+                              id="distance"
+                              type="range"
+                              min="0"
+                              max="100"
+                              value="24"
+                              data-distance
+                              aria-label="声音远近"
+                            /><span>远处</span></label
+                          >
+                        </section>
+                      </section>
+
+                      <aside class="sound-character" aria-labelledby="character-title">
+                        <section>
+                          <h3 id="character-title">听感</h3>
+                          <label class="character-control" for="character-select">
+                            <select
+                              id="character-select"
+                              aria-labelledby="character-title"
+                              aria-describedby="character-description"
+                            >
+                              <option value="natural">自然</option>
+                              <option value="hifi">Hi-Fi</option>
+                              <option value="tube">胆机</option>
+                              <option value="radio">老式收音机</option>
+                              <option value="television">雪花电视</option>
+                              <option value="speaker">单声道喇叭</option>
+                              <option value="spatial">耳机空间</option>
+                            </select>
+                            <small id="character-description">保留原始层次</small>
+                          </label>
+                        </section>
+
+                        <section class="source-library" aria-labelledby="source-library-title">
+                          <div class="section-title-row">
+                            <div>
+                              <h3 id="source-library-title">添一处声音</h3>
+                              <p>从素材或自己的声音开始。</p>
+                            </div>
+                          </div>
+                          <div
+                            class="source-tabs"
+                            role="tablist"
+                            aria-label="声音分类"
+                            aria-orientation="horizontal"
+                          >
+                            <button
+                              class="is-selected"
+                              id="source-tab-environment"
+                              type="button"
+                              role="tab"
+                              aria-selected="true"
+                              aria-controls="source-list"
+                              tabindex="0"
+                              data-source-category="environment"
+                            >
+                              环境
+                            </button>
+                            <button
+                              id="source-tab-event"
+                              type="button"
+                              role="tab"
+                              aria-selected="false"
+                              aria-controls="source-list"
+                              tabindex="-1"
+                              data-source-category="event"
+                            >
+                              事件
+                            </button>
+                            <button
+                              id="source-tab-media"
+                              type="button"
+                              role="tab"
+                              aria-selected="false"
+                              aria-controls="source-list"
+                              tabindex="-1"
+                              data-source-category="media"
+                            >
+                              媒介
+                            </button>
+                            <button
+                              id="source-tab-mine"
+                              type="button"
+                              role="tab"
+                              aria-selected="false"
+                              aria-controls="source-list"
+                              tabindex="-1"
+                              data-source-category="mine"
+                            >
+                              我的声音
+                            </button>
+                          </div>
+                          <div
+                            class="source-list"
+                            id="source-list"
+                            role="tabpanel"
+                            aria-labelledby="source-tab-environment"
+                            tabindex="0"
+                          ></div>
+                          <button
+                            class="source-upload-action"
+                            type="button"
+                            id="browse-audio-button"
+                          >
+                            <i data-lucide="upload" aria-hidden="true"></i
+                            ><span
+                              ><strong>选择本地音频</strong
+                              ><small>最大 32 MB，只保存在这个浏览器中</small></span
+                            >
+                          </button>
+                        </section>
+                      </aside>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+
+          <section
+            class="focus-mode"
+            id="focus-mode"
+            role="dialog"
+            aria-hidden="true"
+            inert
+            tabindex="-1"
+            aria-labelledby="focus-title"
+          >
+            <div class="focus-visual" id="focus-visual">
+              <div class="focus-static" id="focus-static" aria-hidden="true"></div>
+              <canvas id="membrane-field" aria-hidden="true"></canvas>
+              <div class="focus-tone" aria-hidden="true"></div>
+            </div>
+            <header class="focus-header">
+              <a class="brand" href="#" aria-label="声景" tabindex="-1"
+                ><span class="brand-mark" aria-hidden="true"></span
+                ><span class="brand-name">声景</span></a
+              >
+            </header>
+            <div class="focus-copy">
+              <p>
+                <span class="live-dot" aria-hidden="true"></span
+                ><span id="focus-state">准备播放</span>
+              </p>
+              <h2 id="focus-title">雨夜木屋</h2>
+              <p id="focus-description">雷雨夜里，点燃篝火的木屋。</p>
+            </div>
+            <p class="render-status sr-only" id="render-status" aria-live="polite">准备视觉场域</p>
+          </section>
+
+          <button
+            class="icon-button player-collapse-button"
+            id="player-collapse-button"
+            type="button"
+            aria-label="收起播放器"
+            title="收起播放器"
+          >
+            <span class="player-collapse-icon player-collapse-icon--player" aria-hidden="true"
+              ><i data-lucide="chevron-down"></i
+            ></span>
+            <span class="player-collapse-icon player-collapse-icon--focus" aria-hidden="true"
+              ><i data-lucide="x"></i
+            ></span>
+          </button>
+
+          <footer class="player-control-rail" aria-label="播放控制">
+            <button
+              class="player-identity"
+              id="player-identity-button"
+              type="button"
+              aria-label="展开雨夜木屋播放器"
+            >
+              <img
+                id="player-cover"
+                src="../../assets/scenes/rain-cabin/rain-cabin-cover-web-v1.jpg"
+                alt=""
+                decoding="async"
+              />
+              <span
+                ><strong id="player-title">雨夜木屋</strong
+                ><small id="player-state">尚未播放</small></span
+              >
+            </button>
+
+            <div class="player-rail-actions">
+              <div class="rail-control-slot">
+                <button
+                  class="rail-control"
+                  id="sleep-timer-button"
+                  type="button"
+                  aria-expanded="false"
+                  aria-controls="sleep-timer-menu"
+                  aria-label="倒计时，未启动"
+                  title="设置睡眠倒计时"
+                >
+                  <i data-lucide="timer" aria-hidden="true"></i
+                  ><span
+                    class="rail-control-value"
+                    id="sleep-timer-label"
+                    data-mobile-label="未启动"
+                    >未启动</span
+                  >
+                </button>
+                <div
+                  class="control-popover sleep-timer-menu"
+                  id="sleep-timer-menu"
+                  role="menu"
+                  aria-label="睡眠倒计时"
+                  aria-hidden="true"
+                  inert
+                  hidden
+                >
+                  <header class="control-popover-header">
+                    <strong>倒计时</strong><span>到时暂停</span>
+                  </header>
+                  <div class="timer-scale">
+                    <button
+                      class="is-selected"
+                      type="button"
+                      role="menuitemradio"
+                      aria-checked="true"
+                      data-sleep-minutes="0"
+                    >
+                      <span class="scale-dot" aria-hidden="true"></span><span>关闭</span>
+                    </button>
+                    <button
+                      type="button"
+                      role="menuitemradio"
+                      aria-checked="false"
+                      data-sleep-minutes="15"
+                    >
+                      <span class="scale-dot" aria-hidden="true"></span><span>15 分</span>
+                    </button>
+                    <button
+                      type="button"
+                      role="menuitemradio"
+                      aria-checked="false"
+                      data-sleep-minutes="30"
+                    >
+                      <span class="scale-dot" aria-hidden="true"></span><span>30 分</span>
+                    </button>
+                    <button
+                      type="button"
+                      role="menuitemradio"
+                      aria-checked="false"
+                      data-sleep-minutes="60"
+                    >
+                      <span class="scale-dot" aria-hidden="true"></span><span>60 分</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="rail-control-slot">
+                <button
+                  class="rail-control"
+                  id="volume-button"
+                  type="button"
+                  aria-expanded="false"
+                  aria-controls="volume-popover"
+                  aria-label="总音量，64%"
+                  title="调整总音量"
+                >
+                  <i data-lucide="volume-2" aria-hidden="true"></i
+                  ><span class="rail-control-value" id="volume-label" data-mobile-label="64%"
+                    >64%</span
+                  >
+                </button>
+                <div
+                  class="control-popover volume-popover"
+                  id="volume-popover"
+                  role="dialog"
+                  aria-labelledby="volume-popover-title"
+                  aria-hidden="true"
+                  inert
+                  hidden
+                >
+                  <header class="control-popover-header">
+                    <strong id="volume-popover-title">音量</strong
+                    ><output id="volume-popover-value" for="volume">64%</output>
+                  </header>
+                  <label class="volume-fader">
+                    <span class="sr-only">总音量</span>
+                    <span class="volume-fader-track" aria-hidden="true"
+                      ><span class="volume-fader-fill"></span
+                    ></span>
+                    <span class="volume-fader-ticks" aria-hidden="true">
+                      <span style="--tick-position: 0%"><i></i><b>100</b></span>
+                      <span style="--tick-position: 25%"><i></i><b>75</b></span>
+                      <span style="--tick-position: 50%"><i></i><b>50</b></span>
+                      <span style="--tick-position: 75%"><i></i><b>25</b></span>
+                      <span style="--tick-position: 100%"><i></i><b>0</b></span>
+                    </span>
+                    <input
+                      class="vertical-volume-range"
+                      id="volume"
+                      type="range"
+                      min="0"
+                      max="100"
+                      value="64"
+                    />
+                  </label>
+                </div>
+              </div>
+
+              <button
+                class="rail-control rail-play-control play-button"
+                id="player-play-button"
+                type="button"
+                aria-label="播放"
+                title="播放"
+                data-labeled-play
+              >
+                <i data-lucide="play" aria-hidden="true"></i
+                ><span class="rail-control-value" data-mobile-label="播放">播放</span>
+              </button>
+            </div>
+          </footer>
+        </div>
+      </section>
+
+      <aside
+        class="task-toast"
+        id="task-toast"
+        aria-live="polite"
+        aria-hidden="true"
+        data-state="idle"
+        inert
+        hidden
+      >
+        <div class="task-running">
+          <span class="task-spinner" aria-hidden="true"></span>
+          <div>
+            <strong id="task-phase">理解场景</strong><small>本地编排 · 当前声景继续播放</small>
+          </div>
+          <span id="task-percent">0%</span>
+        </div>
+        <div class="task-ready">
+          <img
+            id="ready-cover"
+            src="../../assets/scenes/coastal-night/coastal-night-cover-web-v1.jpg"
+            alt=""
+          />
+          <div><small>可听声景已就绪</small><strong id="ready-title">深夜海岸</strong></div>
+          <button class="quiet-link" id="dismiss-ready" type="button">稍后</button>
+          <button class="primary-action compact-primary" id="switch-scene" type="button">
+            切换
+          </button>
+        </div>
+      </aside>
+
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+      <input id="audio-upload" type="file" accept="audio/*" hidden />
+    </div>
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>

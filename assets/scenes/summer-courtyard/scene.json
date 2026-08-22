@@ -3,6 +3,7 @@
   "id": "summer-courtyard",
   "name": "夏夜庭院",
   "description": "夏夜庭院里，风、虫鸣与远处生活声交织。",
+  "prompt": "夏夜庭院里，风穿过树叶，夜虫与远处生活声疏疏交织。",
   "status": "starter",
   "tags": ["summer", "night", "home", "insects"],
   "audioLayers": ["夜虫", "树影风声", "远处人声", "偶发水滴"],

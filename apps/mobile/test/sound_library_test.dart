@@ -45,7 +45,7 @@ void main() {
     () {
       final water = library.assetById('open-water-development');
 
-      expect(water.name.resolve(), '开阔水面原型录音');
+      expect(water.name.resolve(), '近岸潮水');
       expect(water.sha256, hasLength(64));
       expect(
         water.segmentById('event-a').duration,

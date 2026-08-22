@@ -57,6 +57,7 @@ Widget Test 会批量覆盖小屏、横屏、平板、桌面、深色和 1.3 倍
 npm run mobile:integration:windows
 npm run mobile:build:windows
 npm run mobile:build:android
+npm run mobile:build:ios
 ```
 
 连接 Android 设备后可用 `npm run mobile:integration:android` 运行同一条原生纵切。
@@ -68,15 +69,15 @@ npm run mobile:build:android
 - `SoundscapeAudioHandler` 持有系统媒体会话、音频焦点和倒计时生命周期。
 - `SoundscapeRuntime` 持有 SoLoud、声音句柄、三类总线和动态事件调度。
 - `SoundscapeController` 是界面唯一依赖的播放意图接口。
-- `SoundscapeScene` 与 `SoundscapeCatalog` 定义当前可播放场景和声音层。
+- `SoundscapeScene` 定义运行时模型；`SoundscapeCatalog` 消费由根场景清单和 `playable-scenes.v1.json` 确定性生成的目录，不在客户端手写场景副本。
 - `SoundLibrary` 负责声音来源、许可证、版本、哈希和分段；`SceneRecipe` 只通过稳定 ID 引用它。
 - `SoundscapeScheduler` 把配方编译为可复现的纹理变化与事件计划。
 - 页面只发送播放、暂停、换景、总音量、轻重、简繁和逐层调节意图，不持有音频句柄。
 
 ## MVP 边界
 
-当前没有自然语言生成、下载素材仓库、导入与用户预设界面、同步、账号或发布安装链路。内容寻址导入和版本化本地状态已经实现为客户端服务，但还没有进入默认播放路径。两份音频沿用仓库 Web 原型中的纵切验收素材，已经进入开发清单并被强制标记为不可发布；本 MVP 不引入 Moodist 或其他项目的代码和声音素材。
+当前没有自然语言生成、下载素材仓库、导入与用户预设界面、同步、账号或发布安装链路。内容寻址导入和版本化本地状态已经实现为客户端服务，但还没有进入默认播放路径。两份纵切验收音频以 `assets/audio/` 为唯一母版，已经进入开发清单并被强制标记为不可发布；Flutter 包内副本由根工具生成且不提交。本 MVP 不引入 Moodist 或其他项目的代码和声音素材。
 
 开源项目的采纳内容与许可证边界见 `../../docs/research/open-source-reference-adoption.md`。
 
-iOS 已配置后台音频，但本仓库当前只在 Windows 主机上完成 Windows 与 Android 构建和运行验收；iOS 仍需在 macOS、模拟器及真机上验证。
+iOS 已配置后台音频。仓库 CI 在 macOS 执行无签名构建，但 Simulator 与真机的锁屏、来电和蓝牙行为仍必须由真实设备验收。

@@ -3,6 +3,7 @@
   "id": "quiet-library",
   "name": "闭馆后的图书馆",
   "description": "闭馆后的图书馆，只剩纸张、木材与建筑轻响。",
+  "prompt": "闭馆后的旧图书馆，只剩纸页余响、木构轻响和远处空调。",
   "status": "starter",
   "tags": ["interior", "quiet", "study", "night"],
   "audioLayers": ["翻页余响", "木构轻响", "远处空调", "室内雨声"],

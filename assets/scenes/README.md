@@ -1,6 +1,8 @@
 # 场景静态资产
 
-一个场景对应一个目录和一份 `scene.json`。场景清单描述声音层、视觉方向和固定素材槽位，应用通过 `assets/scenes/index.json` 发现它们。
+一个场景对应一个目录和一份 `scene.json`。场景清单是名称、描述、创作提示、声音构成、视觉方向和固定素材槽位的唯一来源，应用通过 `assets/scenes/index.json` 发现它们。
+
+`playable-scenes.v1.json` 不复制上述内容，只登记已经具备真实声音的场景 ID、Web 试听素材、视觉调色板和完整 `SceneRecipe`。Web 在构建时把两份声明连接起来；Flutter 由 `tools/sync-runtime-assets.mjs` 从同一数据确定性生成 `soundscape_catalog.g.dart`。新增或修改可播放场景不得在应用代码里再写一份名称、描述或编排。
 
 ## 固定槽位
 

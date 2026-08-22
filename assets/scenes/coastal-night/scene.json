@@ -2,10 +2,11 @@
   "schemaVersion": 1,
   "id": "coastal-night",
   "name": "深夜海岸",
-  "description": "深夜海岸上持续靠近又退去的潮声。",
+  "description": "深夜海岸上，潮声持续靠近又缓缓退去。",
+  "prompt": "深夜海岸上，近岸潮水与远浪持续靠近又缓缓退去，间或传来海面细雨和礁石回响。",
   "status": "starter",
   "tags": ["water", "night", "open", "low-light"],
-  "audioLayers": ["近岸潮水", "远浪", "海风", "礁石回响"],
+  "audioLayers": ["近岸潮水", "远浪", "海面细雨", "礁石回响"],
   "visualBrief": "深炭纸面上用低反射蓝灰、烟色与极少珊瑚层建立水平张力；避免海景照片、星空、月亮和发光地平线。",
   "slots": {
     "hero": { "status": "ready", "assetId": "scene.coastal-night.hero.v1" },

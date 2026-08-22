@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 
+import 'generated/scene_recipe_contract.g.dart';
 import 'soundscape_scene.dart';
 
 @immutable
@@ -25,16 +26,21 @@ class SceneRecipe {
   }
 
   factory SceneRecipe.fromJson(Map<String, Object?> json) {
-    final macros = _map(json['macros']);
+    _expectKeys(json, _recipeKeys, 'recipe');
+    final macros = _map(json['macros'], 'macros');
+    _expectKeys(macros, _macroKeys, 'macros');
+    final layerValues = _list(json['layers'], 'layers');
+    final layers = <SoundLayerDefinition>[];
+    for (var index = 0; index < layerValues.length; index++) {
+      layers.add(_layerFromJson(_map(layerValues[index], 'layers[$index]')));
+    }
     final recipe = SceneRecipe(
-      schemaVersion: json['schemaVersion']! as int,
-      sceneId: json['sceneId']! as String,
-      seed: json['seed']! as int,
-      intensity: (macros['intensity']! as num).toDouble(),
-      richness: (macros['richness']! as num).toDouble(),
-      layers: [
-        for (final layer in _list(json['layers'])) _layerFromJson(_map(layer)),
-      ],
+      schemaVersion: _integer(json['schemaVersion'], 'schemaVersion'),
+      sceneId: _string(json['sceneId'], 'sceneId'),
+      seed: _integer(json['seed'], 'seed'),
+      intensity: _number(macros['intensity'], 'macros.intensity'),
+      richness: _number(macros['richness'], 'macros.richness'),
+      layers: layers,
     );
     final issues = recipe.validationIssues();
     if (issues.isNotEmpty) throw FormatException(issues.join('\n'));
@@ -58,7 +64,9 @@ class SceneRecipe {
 
   List<String> validationIssues() {
     final issues = <String>[];
-    if (schemaVersion != 1) issues.add('Unsupported recipe schema.');
+    if (schemaVersion != sceneRecipeSchemaVersion) {
+      issues.add('Unsupported recipe schema.');
+    }
     if (sceneId.trim().isEmpty) issues.add('sceneId is required.');
     if (seed <= 0) issues.add('seed must be positive.');
     if (intensity < 0 || intensity > 1) {
@@ -72,12 +80,15 @@ class SceneRecipe {
       issues.add('Layer ids must be unique.');
     }
     for (final layer in layers) {
-      if (layer.id.trim().isEmpty || layer.assetId.trim().isEmpty) {
-        issues.add('Every layer requires an id and assetId.');
+      if (layer.id.trim().isEmpty ||
+          layer.name.trim().isEmpty ||
+          layer.assetId.trim().isEmpty) {
+        issues.add('Every layer requires an id, name, and assetId.');
       }
       if (layer.segmentIds.isEmpty ||
+          layer.segmentIds.any((id) => id.trim().isEmpty) ||
           layer.segmentIds.toSet().length != layer.segmentIds.length) {
-        issues.add('${layer.id} requires unique segment ids.');
+        issues.add('${layer.id} requires non-empty, unique segment ids.');
       }
       if (layer.baseGain < 0 ||
           layer.baseGain > 1 ||
@@ -89,12 +100,19 @@ class SceneRecipe {
           layer.pan > 1) {
         issues.add('${layer.id} contains an out-of-range mix value.');
       }
-      if (layer.eventPolicy.maximumSilence < layer.eventPolicy.minimumSilence) {
+      if (layer.eventPolicy.minimumSilence.isNegative ||
+          layer.eventPolicy.maximumSilence.isNegative ||
+          layer.eventPolicy.scheduleLead.isNegative ||
+          layer.eventPolicy.maximumSilence < layer.eventPolicy.minimumSilence) {
         issues.add('${layer.id} has an inverted silence range.');
       }
       if (layer.dynamics.maximumChangeInterval <
               layer.dynamics.minimumChangeInterval ||
           layer.dynamics.maximumTransition < layer.dynamics.minimumTransition ||
+          layer.dynamics.minimumChangeInterval.isNegative ||
+          layer.dynamics.maximumChangeInterval.isNegative ||
+          layer.dynamics.minimumTransition.isNegative ||
+          layer.dynamics.maximumTransition.isNegative ||
           layer.dynamics.gainVariation < 0 ||
           layer.dynamics.gainVariation > 0.95 ||
           layer.dynamics.panVariation < 0 ||
@@ -129,44 +147,92 @@ class SceneRecipe {
 }
 
 SoundLayerDefinition _layerFromJson(Map<String, Object?> json) {
-  final event = _map(json['eventPolicy']);
-  final dynamics = _map(json['dynamics']);
+  _expectKeys(json, _layerKeys, 'layer');
+  final event = _map(json['eventPolicy'], 'layer.eventPolicy');
+  final dynamics = _map(json['dynamics'], 'layer.dynamics');
+  _expectKeys(event, _eventPolicyKeys, 'layer.eventPolicy');
+  _expectKeys(dynamics, _dynamicsKeys, 'layer.dynamics');
+  final segmentValues = _list(json['segmentIds'], 'layer.segmentIds');
+  final segmentIds = <String>[];
+  for (var index = 0; index < segmentValues.length; index++) {
+    segmentIds.add(_string(segmentValues[index], 'layer.segmentIds[$index]'));
+  }
+  final kind = _string(json['kind'], 'layer.kind');
   return SoundLayerDefinition(
-    id: json['id']! as String,
-    name: json['name']! as String,
-    assetId: json['assetId']! as String,
-    segmentIds: [for (final id in _list(json['segmentIds'])) id as String],
-    kind: switch (json['kind']! as String) {
+    id: _string(json['id'], 'layer.id'),
+    name: _string(json['name'], 'layer.name'),
+    assetId: _string(json['assetId'], 'layer.assetId'),
+    segmentIds: segmentIds,
+    kind: switch (kind) {
       'bed' => SoundLayerKind.bed,
       'texture' => SoundLayerKind.texture,
       'event' => SoundLayerKind.event,
       final value => throw FormatException('Unknown sound layer kind: $value.'),
     },
-    baseGain: (json['baseGain']! as num).toDouble(),
-    intensityGain: (json['intensityGain']! as num).toDouble(),
-    richnessGain: (json['richnessGain']! as num).toDouble(),
-    pan: (json['pan']! as num).toDouble(),
-    enabledByDefault: json['enabledByDefault']! as bool,
+    baseGain: _number(json['baseGain'], 'layer.baseGain'),
+    intensityGain: _number(json['intensityGain'], 'layer.intensityGain'),
+    richnessGain: _number(json['richnessGain'], 'layer.richnessGain'),
+    pan: _number(json['pan'], 'layer.pan'),
+    enabledByDefault: _boolean(
+      json['enabledByDefault'],
+      'layer.enabledByDefault',
+    ),
     eventPolicy: SoundEventPolicy(
-      minimumSilence: Duration(milliseconds: event['minimumSilenceMs']! as int),
-      maximumSilence: Duration(milliseconds: event['maximumSilenceMs']! as int),
-      scheduleLead: Duration(milliseconds: event['scheduleLeadMs']! as int),
-      noImmediateRepeat: event['noImmediateRepeat']! as bool,
+      minimumSilence: Duration(
+        milliseconds: _integer(
+          event['minimumSilenceMs'],
+          'layer.eventPolicy.minimumSilenceMs',
+        ),
+      ),
+      maximumSilence: Duration(
+        milliseconds: _integer(
+          event['maximumSilenceMs'],
+          'layer.eventPolicy.maximumSilenceMs',
+        ),
+      ),
+      scheduleLead: Duration(
+        milliseconds: _integer(
+          event['scheduleLeadMs'],
+          'layer.eventPolicy.scheduleLeadMs',
+        ),
+      ),
+      noImmediateRepeat: _boolean(
+        event['noImmediateRepeat'],
+        'layer.eventPolicy.noImmediateRepeat',
+      ),
     ),
     dynamics: SoundLayerDynamics(
-      gainVariation: (dynamics['gainVariation']! as num).toDouble(),
-      panVariation: (dynamics['panVariation']! as num).toDouble(),
+      gainVariation: _number(
+        dynamics['gainVariation'],
+        'layer.dynamics.gainVariation',
+      ),
+      panVariation: _number(
+        dynamics['panVariation'],
+        'layer.dynamics.panVariation',
+      ),
       minimumChangeInterval: Duration(
-        milliseconds: dynamics['minimumChangeIntervalMs']! as int,
+        milliseconds: _integer(
+          dynamics['minimumChangeIntervalMs'],
+          'layer.dynamics.minimumChangeIntervalMs',
+        ),
       ),
       maximumChangeInterval: Duration(
-        milliseconds: dynamics['maximumChangeIntervalMs']! as int,
+        milliseconds: _integer(
+          dynamics['maximumChangeIntervalMs'],
+          'layer.dynamics.maximumChangeIntervalMs',
+        ),
       ),
       minimumTransition: Duration(
-        milliseconds: dynamics['minimumTransitionMs']! as int,
+        milliseconds: _integer(
+          dynamics['minimumTransitionMs'],
+          'layer.dynamics.minimumTransitionMs',
+        ),
       ),
       maximumTransition: Duration(
-        milliseconds: dynamics['maximumTransitionMs']! as int,
+        milliseconds: _integer(
+          dynamics['maximumTransitionMs'],
+          'layer.dynamics.maximumTransitionMs',
+        ),
       ),
     ),
   );
@@ -201,8 +267,86 @@ Map<String, Object?> _layerToJson(SoundLayerDefinition layer) => {
   },
 };
 
-Map<String, Object?> _map(Object? value) {
-  return (value! as Map<Object?, Object?>).cast<String, Object?>();
+const _recipeKeys = {'schemaVersion', 'sceneId', 'seed', 'macros', 'layers'};
+const _macroKeys = {'intensity', 'richness'};
+const _layerKeys = {
+  'id',
+  'name',
+  'assetId',
+  'segmentIds',
+  'kind',
+  'baseGain',
+  'intensityGain',
+  'richnessGain',
+  'pan',
+  'enabledByDefault',
+  'eventPolicy',
+  'dynamics',
+};
+const _eventPolicyKeys = {
+  'minimumSilenceMs',
+  'maximumSilenceMs',
+  'scheduleLeadMs',
+  'noImmediateRepeat',
+};
+const _dynamicsKeys = {
+  'gainVariation',
+  'panVariation',
+  'minimumChangeIntervalMs',
+  'maximumChangeIntervalMs',
+  'minimumTransitionMs',
+  'maximumTransitionMs',
+};
+
+void _expectKeys(
+  Map<String, Object?> value,
+  Set<String> expected,
+  String label,
+) {
+  final actual = value.keys.toSet();
+  final missing = expected.difference(actual);
+  final unknown = actual.difference(expected);
+  if (missing.isEmpty && unknown.isEmpty) return;
+  throw FormatException(
+    '$label has invalid keys; missing=${missing.join(',')}, '
+    'unknown=${unknown.join(',')}.',
+  );
 }
 
-List<Object?> _list(Object? value) => value! as List<Object?>;
+Map<String, Object?> _map(Object? value, String label) {
+  if (value is! Map<Object?, Object?>) {
+    throw FormatException('$label must be an object.');
+  }
+  try {
+    return value.cast<String, Object?>();
+  } on TypeError {
+    throw FormatException('$label keys must be strings.');
+  }
+}
+
+List<Object?> _list(Object? value, String label) {
+  if (value is! List<Object?>) {
+    throw FormatException('$label must be an array.');
+  }
+  return value;
+}
+
+String _string(Object? value, String label) {
+  if (value is! String) throw FormatException('$label must be a string.');
+  return value;
+}
+
+int _integer(Object? value, String label) {
+  if (value is! int) throw FormatException('$label must be an integer.');
+  return value;
+}
+
+double _number(Object? value, String label) {
+  if (value is! num) throw FormatException('$label must be a number.');
+  return value.toDouble();
+}
+
+bool _boolean(Object? value, String label) {
+  if (value is! bool) throw FormatException('$label must be a boolean.');
+  return value;
+}

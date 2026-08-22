@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://shengjing.cn/contracts/playable-scenes.v1.schema.json",
+  "title": "声景可播放场景目录 v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "scenes"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "scenes": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/playableScene" }
+    }
+  },
+  "$defs": {
+    "playableScene": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sceneId", "previewAudioAssetId", "palette", "recipe"],
+      "properties": {
+        "sceneId": { "type": "string", "minLength": 1 },
+        "previewAudioAssetId": { "type": "string", "minLength": 1 },
+        "palette": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 12,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^#[0-9a-fA-F]{6}$"
+          }
+        },
+        "recipe": {
+          "$ref": "https://shengjing.cn/contracts/scene-recipe.v1.schema.json"
+        }
+      }
+    }
+  }
+}

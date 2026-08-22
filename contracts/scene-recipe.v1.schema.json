@@ -65,12 +65,7 @@
     "eventPolicy": {
       "type": "object",
       "additionalProperties": false,
-      "required": [
-        "minimumSilenceMs",
-        "maximumSilenceMs",
-        "scheduleLeadMs",
-        "noImmediateRepeat"
-      ],
+      "required": ["minimumSilenceMs", "maximumSilenceMs", "scheduleLeadMs", "noImmediateRepeat"],
       "properties": {
         "minimumSilenceMs": { "type": "integer", "minimum": 0 },
         "maximumSilenceMs": { "type": "integer", "minimum": 0 },

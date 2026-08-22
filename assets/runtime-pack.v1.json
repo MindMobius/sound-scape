@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "flutter": {
+    "outputRoot": "apps/mobile/assets/generated",
+    "catalogSource": "assets/audio/sound-library.v1.json",
+    "catalogTarget": "catalog/sound-library.v1.json",
+    "files": [
+      {
+        "source": "assets/audio/rain-cabin.mp3",
+        "target": "audio/rain-cabin.mp3"
+      },
+      {
+        "source": "assets/audio/open-water.wav",
+        "target": "audio/open-water.wav"
+      },
+      {
+        "source": "assets/scenes/coastal-night/coastal-night-cover-web-v1.jpg",
+        "target": "images/coastal-night-cover.jpg"
+      },
+      {
+        "source": "assets/scenes/coastal-night/coastal-night-hero-web-v1.jpg",
+        "target": "images/coastal-night-hero.jpg"
+      },
+      {
+        "source": "assets/scenes/rain-cabin/rain-cabin-cover-web-v1.jpg",
+        "target": "images/rain-cabin-cover.jpg"
+      },
+      {
+        "source": "assets/scenes/rain-cabin/rain-cabin-hero-web-v1.jpg",
+        "target": "images/rain-cabin-hero.jpg"
+      },
+      {
+        "source": "assets/brand/identity/soundscape-mark-ui.png",
+        "target": "images/soundscape-mark.png"
+      }
+    ]
+  }
+}

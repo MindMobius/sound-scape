@@ -43,6 +43,8 @@ npm run mobile:dev
 
 包装器默认使用 Flutter 官方列出的 CFUG 镜像，只对当前 Flutter 子进程生效。已有的 `PUB_HOSTED_URL` 与 `FLUTTER_STORAGE_BASE_URL` 会被保留。升级 SDK 时必须同时更新 `.flutter-version`、依赖锁文件，并重新运行分析、测试和两端构建。
 
+每个 setup、run、check、integration 和 build 命令都会先读取根目录 `assets/runtime-pack.v1.json`，重建 `apps/mobile/assets/generated/`。该目录不提交；声音、图片或目录变更必须修改根 `assets/` 母版和映射，不能直接编辑生成结果。
+
 ## 无设备覆盖
 
 Widget Test 固定覆盖以下视口：
@@ -63,4 +65,4 @@ Android 连接一台设备时可直接运行：
 npm run mobile:android
 ```
 
-多设备并存时必须显式传入设备 ID，避免误装或误测。iOS 构建和 Simulator 只能在 macOS 进行；Windows 日常循环不假装覆盖 iOS。自动测试通过只是合并门槛，后台播放和音频生命周期仍以真机证据为准。
+多设备并存时必须显式传入设备 ID，避免误装或误测。iOS 构建和 Simulator 只能在 macOS 进行；Windows 日常循环不假装覆盖 iOS。GitHub Actions 分别执行 Linux 分析与 Android 构建、Windows 原生集成、macOS iOS 无签名构建。自动测试通过只是合并门槛，后台播放和音频生命周期仍以真机证据为准。

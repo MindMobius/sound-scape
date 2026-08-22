@@ -1,0 +1,168 @@
+{
+  "schemaVersion": 1,
+  "valid": [
+    {
+      "name": "single texture layer",
+      "value": {
+        "schemaVersion": 1,
+        "sceneId": "rain-cabin",
+        "seed": 88421,
+        "macros": {
+          "intensity": 0.45,
+          "richness": 0.62
+        },
+        "layers": [
+          {
+            "id": "roof-rain",
+            "name": "屋檐雨",
+            "assetId": "rain-cabin-development",
+            "segmentIds": ["texture-window"],
+            "kind": "texture",
+            "baseGain": 0.52,
+            "intensityGain": 0.28,
+            "richnessGain": 0.16,
+            "pan": -0.12,
+            "enabledByDefault": true,
+            "eventPolicy": {
+              "minimumSilenceMs": 0,
+              "maximumSilenceMs": 0,
+              "scheduleLeadMs": 0,
+              "noImmediateRepeat": true
+            },
+            "dynamics": {
+              "gainVariation": 0.08,
+              "panVariation": 0.12,
+              "minimumChangeIntervalMs": 2500,
+              "maximumChangeIntervalMs": 6000,
+              "minimumTransitionMs": 1200,
+              "maximumTransitionMs": 2800
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "invalid": [
+    {
+      "name": "unknown root property",
+      "value": {
+        "schemaVersion": 1,
+        "sceneId": "rain-cabin",
+        "seed": 88421,
+        "unexpected": true,
+        "macros": {
+          "intensity": 0.45,
+          "richness": 0.62
+        },
+        "layers": [
+          {
+            "id": "roof-rain",
+            "name": "屋檐雨",
+            "assetId": "rain-cabin-development",
+            "segmentIds": ["texture-window"],
+            "kind": "texture",
+            "baseGain": 0.52,
+            "intensityGain": 0.28,
+            "richnessGain": 0.16,
+            "pan": -0.12,
+            "enabledByDefault": true,
+            "eventPolicy": {
+              "minimumSilenceMs": 0,
+              "maximumSilenceMs": 0,
+              "scheduleLeadMs": 0,
+              "noImmediateRepeat": true
+            },
+            "dynamics": {
+              "gainVariation": 0.08,
+              "panVariation": 0.12,
+              "minimumChangeIntervalMs": 2500,
+              "maximumChangeIntervalMs": 6000,
+              "minimumTransitionMs": 1200,
+              "maximumTransitionMs": 2800
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "macro outside declared range",
+      "value": {
+        "schemaVersion": 1,
+        "sceneId": "rain-cabin",
+        "seed": 88421,
+        "macros": {
+          "intensity": 1.2,
+          "richness": 0.62
+        },
+        "layers": [
+          {
+            "id": "roof-rain",
+            "name": "屋檐雨",
+            "assetId": "rain-cabin-development",
+            "segmentIds": ["texture-window"],
+            "kind": "texture",
+            "baseGain": 0.52,
+            "intensityGain": 0.28,
+            "richnessGain": 0.16,
+            "pan": -0.12,
+            "enabledByDefault": true,
+            "eventPolicy": {
+              "minimumSilenceMs": 0,
+              "maximumSilenceMs": 0,
+              "scheduleLeadMs": 0,
+              "noImmediateRepeat": true
+            },
+            "dynamics": {
+              "gainVariation": 0.08,
+              "panVariation": 0.12,
+              "minimumChangeIntervalMs": 2500,
+              "maximumChangeIntervalMs": 6000,
+              "minimumTransitionMs": 1200,
+              "maximumTransitionMs": 2800
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "empty segment id",
+      "value": {
+        "schemaVersion": 1,
+        "sceneId": "rain-cabin",
+        "seed": 88421,
+        "macros": {
+          "intensity": 0.45,
+          "richness": 0.62
+        },
+        "layers": [
+          {
+            "id": "roof-rain",
+            "name": "屋檐雨",
+            "assetId": "rain-cabin-development",
+            "segmentIds": [""],
+            "kind": "texture",
+            "baseGain": 0.52,
+            "intensityGain": 0.28,
+            "richnessGain": 0.16,
+            "pan": -0.12,
+            "enabledByDefault": true,
+            "eventPolicy": {
+              "minimumSilenceMs": 0,
+              "maximumSilenceMs": 0,
+              "scheduleLeadMs": 0,
+              "noImmediateRepeat": true
+            },
+            "dynamics": {
+              "gainVariation": 0.08,
+              "panVariation": 0.12,
+              "minimumChangeIntervalMs": 2500,
+              "maximumChangeIntervalMs": 6000,
+              "minimumTransitionMs": 1200,
+              "maximumTransitionMs": 2800
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

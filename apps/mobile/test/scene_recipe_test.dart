@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:soundscape_mobile/domain/scene_recipe.dart';
 import 'package:soundscape_mobile/domain/soundscape_catalog.dart';
@@ -37,5 +40,33 @@ void main() {
     json['schemaVersion'] = 2;
 
     expect(() => SceneRecipe.fromJson(json), throwsFormatException);
+  });
+
+  test('Dart decoder agrees with the shared contract fixtures', () {
+    final fixtureFile = File(
+      '../../contracts/fixtures/scene-recipe.v1.conformance.json',
+    );
+    final fixtures = (jsonDecode(fixtureFile.readAsStringSync()) as Map)
+        .cast<String, Object?>();
+
+    for (final fixtureValue in fixtures['valid']! as List<Object?>) {
+      final fixture = (fixtureValue! as Map).cast<String, Object?>();
+      final value = (fixture['value']! as Map).cast<String, Object?>();
+      expect(
+        () => SceneRecipe.fromJson(value),
+        returnsNormally,
+        reason: fixture['name']! as String,
+      );
+    }
+
+    for (final fixtureValue in fixtures['invalid']! as List<Object?>) {
+      final fixture = (fixtureValue! as Map).cast<String, Object?>();
+      final value = (fixture['value']! as Map).cast<String, Object?>();
+      expect(
+        () => SceneRecipe.fromJson(value),
+        throwsFormatException,
+        reason: fixture['name']! as String,
+      );
+    }
   });
 }

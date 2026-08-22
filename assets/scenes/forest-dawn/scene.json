@@ -3,6 +3,7 @@
   "id": "forest-dawn",
   "name": "林间清晨",
   "description": "薄雾尚未散去的林间清晨。",
+  "prompt": "清晨薄雾里的林间小路，远处有溪水、湿叶滴水和几声疏鸟。",
   "status": "starter",
   "tags": ["nature", "morning", "mist", "calm"],
   "audioLayers": ["林间风", "晨鸟", "湿叶滴水", "远处溪流"],

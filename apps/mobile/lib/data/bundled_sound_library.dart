@@ -7,7 +7,7 @@ import '../domain/sound_asset.dart';
 class BundledSoundLibrary {
   BundledSoundLibrary({AssetBundle? bundle}) : _bundle = bundle ?? rootBundle;
 
-  static const manifestPath = 'assets/catalog/sound-library.v1.json';
+  static const manifestPath = 'assets/generated/catalog/sound-library.v1.json';
 
   final AssetBundle _bundle;
 
