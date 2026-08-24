@@ -43,12 +43,12 @@
           {
             "id": "window-rain",
             "name": "窗外雨幕",
-            "assetId": "ambie.rain.v1",
-            "segmentIds": ["texture-window"],
+            "assetId": "freesound.rain-window.v1",
+            "segmentIds": ["loop-main"],
             "kind": "texture",
-            "baseGain": 0,
+            "baseGain": 0.02,
             "intensityGain": 0.08,
-            "richnessGain": 0.2,
+            "richnessGain": 0.18,
             "pan": -0.32,
             "enabledByDefault": true,
             "eventPolicy": {
@@ -69,13 +69,39 @@
           {
             "id": "fireplace",
             "name": "炉火细响",
-            "assetId": "ambie.fireplace.v1",
+            "assetId": "freesound.campfire.v1",
             "segmentIds": ["loop-main"],
             "kind": "texture",
-            "baseGain": 0.08,
-            "intensityGain": 0.08,
-            "richnessGain": 0.1,
+            "baseGain": 0.06,
+            "intensityGain": 0.1,
+            "richnessGain": 0.12,
             "pan": 0.16,
+            "enabledByDefault": true,
+            "eventPolicy": {
+              "minimumSilenceMs": 6000,
+              "maximumSilenceMs": 16000,
+              "scheduleLeadMs": 240,
+              "noImmediateRepeat": true
+            },
+            "dynamics": {
+              "gainVariation": 0.14,
+              "panVariation": 0.18,
+              "minimumChangeIntervalMs": 6000,
+              "maximumChangeIntervalMs": 11000,
+              "minimumTransitionMs": 4000,
+              "maximumTransitionMs": 8000
+            }
+          },
+          {
+            "id": "eave-water",
+            "name": "檐下流水",
+            "assetId": "freesound.river.v1",
+            "segmentIds": ["loop-main"],
+            "kind": "texture",
+            "baseGain": 0.015,
+            "intensityGain": 0.04,
+            "richnessGain": 0.07,
+            "pan": 0.08,
             "enabledByDefault": true,
             "eventPolicy": {
               "minimumSilenceMs": 6000,

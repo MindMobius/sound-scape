@@ -89,6 +89,35 @@ function makeBaseLayer(scene, audioAsset) {
   };
 }
 
+function makeRecipeLayers(playable, baseAssetId) {
+  const { intensity, richness } = playable.recipe.macros;
+  return playable.recipe.layers
+    .filter((layer) => layer.kind !== "event" && layer.assetId !== baseAssetId)
+    .map((layer) => {
+      const audioAsset = resolveAudioAsset(layer.assetId);
+      const level = Math.round(
+        Math.max(
+          0,
+          Math.min(
+            1,
+            layer.baseGain + layer.intensityGain * intensity + layer.richnessGain * richness,
+          ),
+        ) * 100,
+      );
+      return {
+        id: `${playable.sceneId}:recipe:${layer.id}`,
+        name: layer.name,
+        detail: "内置声音 · 实时编排",
+        catalogId: layer.assetId,
+        audioUrl: audioAsset.url,
+        level,
+        muted: !layer.enabledByDefault,
+        profile: "natural",
+        source: "builtin",
+      };
+    });
+}
+
 const scenes = sceneManifests
   .filter((scene) => playableBySceneId.has(scene.id))
   .map((scene) => {
@@ -107,7 +136,10 @@ const scenes = sceneManifests
       elements: playable.recipe.layers.map((layer) => layer.name).slice(0, 3),
       palette: playable.palette,
       recipe: playable.recipe,
-      layers: [makeBaseLayer(scene, audioAsset)],
+      layers: [
+        makeBaseLayer(scene, audioAsset),
+        ...makeRecipeLayers(playable, audioAsset.asset.id),
+      ],
     };
   });
 
@@ -123,19 +155,51 @@ const templates = sceneManifests
   }));
 
 const sourceIconByCategory = {
+  device: "timer",
+  fire: "audio-lines",
+  media: "audio-lines",
+  place: "house",
   water: "waves",
   weather: "cloud-rain",
+  wildlife: "audio-lines",
 };
-const sourceCatalog = {
-  environment: soundLibrary.assets.map((asset) => ({
+
+function bundledSourceCategory(asset) {
+  const eventOnly = asset.segments.every((segment) =>
+    ["event", "bridge"].includes(segment.purpose),
+  );
+  if (eventOnly) return "event";
+  if (["device", "media"].includes(asset.category)) return "media";
+  return "environment";
+}
+
+function makeBundledSource(asset) {
+  const license = asset.source.license.spdxId ?? asset.source.license.name;
+  const author = asset.source.authors?.[0]?.name;
+  return {
     id: asset.id,
     name: asset.name["zh-CN"] ?? asset.name.en,
-    detail: "内置声音 · 连续环境",
+    detail: `内置声音 · ${license}${author ? ` · ${author}` : ""}`,
     icon: sourceIconByCategory[asset.category] ?? "audio-lines",
     audio: resolveAudioAsset(asset.id).url,
     profile: "natural",
-  })),
+    bundled: true,
+  };
+}
+
+const bundledSources = soundLibrary.assets.map(makeBundledSource);
+const bundledByCategory = Object.fromEntries(
+  ["environment", "event", "media"].map((category) => [
+    category,
+    bundledSources.filter(
+      (source) => bundledSourceCategory(audioAssetById.get(source.id)) === category,
+    ),
+  ]),
+);
+const sourceCatalog = {
+  environment: bundledByCategory.environment,
   event: [
+    ...bundledByCategory.event,
     {
       id: "event-near",
       name: "偶尔靠近",
@@ -154,6 +218,7 @@ const sourceCatalog = {
     },
   ],
   media: [
+    ...bundledByCategory.media,
     {
       id: "media-radio",
       name: "老式收音机",

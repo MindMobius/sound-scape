@@ -155,9 +155,10 @@ audioCrossfader.setSoundscape({
   movement: state.movement,
   richness: state.richness,
 });
-scenes.forEach((scene) =>
-  scene.layers.filter((layer) => layer.source !== "base").forEach(registerLayerWithAudioEngine),
-);
+scenes.forEach((scene) => {
+  hydrateBuiltInLayers(scene);
+  scene.layers.filter((layer) => layer.source !== "base").forEach(registerLayerWithAudioEngine);
+});
 
 const field = new MembraneField({
   canvas: dom.canvas,
@@ -1246,11 +1247,17 @@ function syncSceneCardState(button, scene) {
   else button.removeAttribute("aria-current");
 }
 
+function findSourceById(sourceId) {
+  return Object.values(sourceCatalog)
+    .flat()
+    .find((source) => source.id === sourceId);
+}
+
 function restoreBuiltInAssignments(assignments) {
   if (!Array.isArray(assignments)) return;
   assignments.forEach((assignment) => {
     const scene = sceneById.get(assignment.sceneId);
-    const source = sourceCatalog.environment.find((item) => item.id === assignment.catalogId);
+    const source = findSourceById(assignment.catalogId);
     if (!scene || !source) return;
     if (scene.layers.some((layer) => layer.catalogId === source.id)) return;
     scene.layers.push({
@@ -1269,7 +1276,7 @@ function restoreBuiltInAssignments(assignments) {
 }
 
 function addBuiltInLayer(catalogId) {
-  const source = sourceCatalog.environment.find((item) => item.id === catalogId);
+  const source = findSourceById(catalogId);
   if (!source) return;
   const existing = state.currentScene.layers.find((layer) => layer.catalogId === catalogId);
   if (existing) {
@@ -1329,7 +1336,7 @@ function renderSourceLibrary() {
   const sources = sourceCatalog[state.sourceCategory] ?? sourceCatalog.environment;
   dom.sourceList.innerHTML = sources
     .map((source) => {
-      if (state.sourceCategory === "environment") {
+      if (source.bundled) {
         const layer = state.currentScene.layers.find((item) => item.catalogId === source.id);
         const isBase = layer?.source === "base";
         return `
@@ -1735,6 +1742,14 @@ function createLayerAudio(url) {
   audio.loop = true;
   audio.preload = "metadata";
   return audio;
+}
+
+function hydrateBuiltInLayers(scene) {
+  scene.layers.forEach((layer) => {
+    if (layer.source === "builtin" && !layer.audio && layer.audioUrl) {
+      layer.audio = createLayerAudio(layer.audioUrl);
+    }
+  });
 }
 
 function registerLayerWithAudioEngine(layer) {

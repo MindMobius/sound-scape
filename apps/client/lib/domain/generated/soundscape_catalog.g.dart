@@ -57,12 +57,12 @@ const generatedSoundscapeScenes = <SoundscapeScene>[
       SoundLayerDefinition(
         id: 'window-rain',
         name: '窗外雨幕',
-        assetId: 'ambie.rain.v1',
-        segmentIds: <String>['texture-window'],
+        assetId: 'freesound.rain-window.v1',
+        segmentIds: <String>['loop-main'],
         kind: SoundLayerKind.texture,
-        baseGain: 0.0,
+        baseGain: 0.02,
         intensityGain: 0.08,
-        richnessGain: 0.2,
+        richnessGain: 0.18,
         pan: -0.32,
         enabledByDefault: true,
         eventPolicy: SoundEventPolicy(
@@ -97,13 +97,53 @@ const generatedSoundscapeScenes = <SoundscapeScene>[
       SoundLayerDefinition(
         id: 'fireplace',
         name: '炉火细响',
-        assetId: 'ambie.fireplace.v1',
+        assetId: 'freesound.campfire.v1',
         segmentIds: <String>['loop-main'],
         kind: SoundLayerKind.texture,
-        baseGain: 0.08,
-        intensityGain: 0.08,
-        richnessGain: 0.1,
+        baseGain: 0.06,
+        intensityGain: 0.1,
+        richnessGain: 0.12,
         pan: 0.16,
+        enabledByDefault: true,
+        eventPolicy: SoundEventPolicy(
+          minimumSilence: Duration(
+            milliseconds: 6000,
+          ),
+          maximumSilence: Duration(
+            milliseconds: 16000,
+          ),
+          scheduleLead: Duration(
+            milliseconds: 240,
+          ),
+          noImmediateRepeat: true,
+        ),
+        dynamics: SoundLayerDynamics(
+          gainVariation: 0.14,
+          panVariation: 0.18,
+          minimumChangeInterval: Duration(
+            milliseconds: 6000,
+          ),
+          maximumChangeInterval: Duration(
+            milliseconds: 11000,
+          ),
+          minimumTransition: Duration(
+            milliseconds: 4000,
+          ),
+          maximumTransition: Duration(
+            milliseconds: 8000,
+          ),
+        ),
+      ),
+      SoundLayerDefinition(
+        id: 'eave-water',
+        name: '檐下流水',
+        assetId: 'freesound.river.v1',
+        segmentIds: <String>['loop-main'],
+        kind: SoundLayerKind.texture,
+        baseGain: 0.015,
+        intensityGain: 0.04,
+        richnessGain: 0.07,
+        pan: 0.08,
         enabledByDefault: true,
         eventPolicy: SoundEventPolicy(
           minimumSilence: Duration(

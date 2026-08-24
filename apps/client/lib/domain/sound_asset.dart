@@ -100,6 +100,7 @@ class SoundSource {
     required this.provenance,
     required this.license,
     this.url,
+    this.downloadUrl,
     List<SoundAuthor> authors = const [],
   }) : authors = List.unmodifiable(authors);
 
@@ -107,6 +108,7 @@ class SoundSource {
     return SoundSource(
       name: json['name']! as String,
       url: json['url'] as String?,
+      downloadUrl: json['downloadUrl'] as String?,
       provenance: _parseProvenance(json['provenance']! as String),
       license: SoundLicense.fromJson(_map(json['license'])),
       authors: [
@@ -118,6 +120,7 @@ class SoundSource {
 
   final String name;
   final String? url;
+  final String? downloadUrl;
   final SoundAssetProvenance provenance;
   final SoundLicense license;
   final List<SoundAuthor> authors;
@@ -125,6 +128,7 @@ class SoundSource {
   Map<String, Object?> toJson() => {
     'name': name,
     if (url != null) 'url': url,
+    if (downloadUrl != null) 'downloadUrl': downloadUrl,
     'provenance': _provenanceName(provenance),
     'authors': [for (final author in authors) author.toJson()],
     'license': license.toJson(),

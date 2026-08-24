@@ -58,6 +58,46 @@
         "target": "audio/ambie-wind.wav"
       },
       {
+        "source": "assets/audio/freesound-cafe.mp3",
+        "target": "audio/freesound-cafe.mp3"
+      },
+      {
+        "source": "assets/audio/freesound-campfire.mp3",
+        "target": "audio/freesound-campfire.mp3"
+      },
+      {
+        "source": "assets/audio/freesound-city-rain.mp3",
+        "target": "audio/freesound-city-rain.mp3"
+      },
+      {
+        "source": "assets/audio/freesound-clock-ticking.mp3",
+        "target": "audio/freesound-clock-ticking.mp3"
+      },
+      {
+        "source": "assets/audio/freesound-forest-birds.mp3",
+        "target": "audio/freesound-forest-birds.mp3"
+      },
+      {
+        "source": "assets/audio/freesound-rain-window.mp3",
+        "target": "audio/freesound-rain-window.mp3"
+      },
+      {
+        "source": "assets/audio/freesound-river.mp3",
+        "target": "audio/freesound-river.mp3"
+      },
+      {
+        "source": "assets/audio/freesound-singing-bowl.mp3",
+        "target": "audio/freesound-singing-bowl.mp3"
+      },
+      {
+        "source": "assets/audio/freesound-typewriter.mp3",
+        "target": "audio/freesound-typewriter.mp3"
+      },
+      {
+        "source": "assets/audio/freesound-wind-chimes.mp3",
+        "target": "audio/freesound-wind-chimes.mp3"
+      },
+      {
         "source": "assets/scenes/coastal-night/coastal-night-cover-web-v1.jpg",
         "target": "images/coastal-night-cover.jpg"
       },

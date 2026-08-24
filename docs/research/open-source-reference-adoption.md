@@ -20,17 +20,17 @@
 
 ## 采纳矩阵
 
-| 项目 | 许可证与边界 | 吸收内容 | 声景落点 | 明确不采用 |
-| --- | --- | --- | --- | --- |
-| [Noice](https://github.com/trynoice/android-app) | GPL-3.0；不复制代码 | 分段声音、随机静默、桥接片段、素材仓库、预设、后台服务 | `SoundSegment`、`SoundscapeScheduler`、逐层独立定时器、状态仓库接口 | Kotlin/Android 实现、GPL 源码和素材包 |
-| [Ambie](https://github.com/jenius-apps/ambie) | 代码 MIT；声音逐文件授权 | 素材 ID、元数据版本、文件版本、本地化、预览、来源、作者、许可证 | `SoundAsset`、`SoundSource`、`SoundLicense`、版本化 JSON 清单；固定提交引入 13 份逐文件核验的 CC0 录音 | 未核验授权的音频、应用代码和 Windows 专属 UI 架构 |
-| [Audio-Oscar](https://github.com/ziye26/Audio-Oscar) | Apache-2.0；模型和数据另有许可证；当前仍是部分发布 | Planner、Critic、Executor、Mixer 的职责拆分和结构化事件 | `SceneRecipe v1` 契约；未来 Agent 只产出声明式配方，客户端校验后执行 | 把固定时长成片逻辑直接套到无限声景、未经审核的模型输出直达播放器 |
-| [Generative.fm](https://github.com/generativefm) | MIT；原始播放器已归档 | seed、持续调度、样本与编排分离、无限演化而非长音频文件 | 自有确定性随机数、每层独立随机流、相同 seed 可复现 | Tone.js/Web Audio 实现和生成式音乐内容 |
-| [Moodist](https://github.com/remvze/moodist) | 代码 MIT；声音混合 Pixabay/CC0，仍需逐文件核验 | 分类、收藏、预设、淡入淡出、离线体验和分享心智 | 环境/事件/媒介/我的声音分类、收藏、用户片刻与动态声层进入正式 Flutter UI | 整包音频、Astro/React 运行时、工具集合式首页 |
-| [Blanket](https://github.com/rafaelmardojai/blanket) | GPL-3.0；有独立声音授权清单 | 克制交互、自定义声音、逐文件授权台账 | 内容寻址用户导入、逐文件来源与发布资格、导入/重命名/安全删除界面 | GPL 源码、GNOME/GTK 架构 |
-| [Spotube](https://github.com/KRTirtho/spotube) | BSD-4-Clause | Flutter 跨端媒体生命周期、本地文件、下载与系统媒体控制的工程经验 | `audio_service + audio_session`、客户端生命周期和跨端验收 | 歌曲队列、进度条、MPV 和流媒体业务模型 |
-| [Harmonoid](https://github.com/harmonoid/harmonoid) | PolyForm Strict；不适合产品代码复用 | 播放器层级、桌面与移动端信息密度参考 | 仅用于设计评审 | 任何代码、组件或商业复用 |
-| [Soundscape Agent](https://github.com/HaoZhang6720/Soundscape_agent) | 专有许可证；第三方模型和数据另行约束 | 检索优先、缺失时生成、显式时间层、局部替换、stems/mixer 概念 | 未来生成服务的检索与工具边界研究 | 源码、数据索引、模型封装和训练素材 |
+| 项目                                                                 | 许可证与边界                                       | 吸收内容                                                         | 声景落点                                                                                                                           | 明确不采用                                                       |
+| -------------------------------------------------------------------- | -------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| [Noice](https://github.com/trynoice/android-app)                     | GPL-3.0；不复制代码                                | 分段声音、随机静默、桥接片段、素材仓库、预设、后台服务           | `SoundSegment`、`SoundscapeScheduler`、逐层独立定时器、状态仓库接口                                                                | Kotlin/Android 实现、GPL 源码和素材包                            |
+| [Ambie](https://github.com/jenius-apps/ambie)                        | 代码 MIT；声音逐文件授权                           | 素材 ID、元数据版本、文件版本、本地化、预览、来源、作者、许可证  | `SoundAsset`、`SoundSource`、`SoundLicense`、版本化 JSON 清单；13 份已逐文件核验的 CC0 录音，当前另有 10 份独立 Freesound CC0 素材 | 未核验授权的音频、应用代码和 Windows 专属 UI 架构                |
+| [Audio-Oscar](https://github.com/ziye26/Audio-Oscar)                 | Apache-2.0；模型和数据另有许可证；当前仍是部分发布 | Planner、Critic、Executor、Mixer 的职责拆分和结构化事件          | `SceneRecipe v1` 契约；未来 Agent 只产出声明式配方，客户端校验后执行                                                               | 把固定时长成片逻辑直接套到无限声景、未经审核的模型输出直达播放器 |
+| [Generative.fm](https://github.com/generativefm)                     | MIT；原始播放器已归档                              | seed、持续调度、样本与编排分离、无限演化而非长音频文件           | 自有确定性随机数、每层独立随机流、相同 seed 可复现                                                                                 | Tone.js/Web Audio 实现和生成式音乐内容                           |
+| [Moodist](https://github.com/remvze/moodist)                         | 代码 MIT；声音混合 Pixabay/CC0，仍需逐文件核验     | 分类、收藏、预设、淡入淡出、离线体验和分享心智                   | 环境/事件/媒介/我的声音分类、收藏、用户片刻与动态声层进入正式 Flutter UI                                                           | 整包音频、Astro/React 运行时、工具集合式首页                     |
+| [Blanket](https://github.com/rafaelmardojai/blanket)                 | GPL-3.0；有独立声音授权清单                        | 克制交互、自定义声音、逐文件授权台账                             | 内容寻址用户导入、逐文件来源与发布资格、导入/重命名/安全删除界面                                                                   | GPL 源码、GNOME/GTK 架构                                         |
+| [Spotube](https://github.com/KRTirtho/spotube)                       | BSD-4-Clause                                       | Flutter 跨端媒体生命周期、本地文件、下载与系统媒体控制的工程经验 | `audio_service + audio_session`、客户端生命周期和跨端验收                                                                          | 歌曲队列、进度条、MPV 和流媒体业务模型                           |
+| [Harmonoid](https://github.com/harmonoid/harmonoid)                  | PolyForm Strict；不适合产品代码复用                | 播放器层级、桌面与移动端信息密度参考                             | 仅用于设计评审                                                                                                                     | 任何代码、组件或商业复用                                         |
+| [Soundscape Agent](https://github.com/HaoZhang6720/Soundscape_agent) | 专有许可证；第三方模型和数据另行约束               | 检索优先、缺失时生成、显式时间层、局部替换、stems/mixer 概念     | 未来生成服务的检索与工具边界研究                                                                                                   | 源码、数据索引、模型封装和训练素材                               |
 
 ## 已落地的能力
 
@@ -40,7 +40,7 @@
 - `SoundAsset` 使用稳定 ID，不让场景直接引用文件路径。
 - 每份素材记录元数据版本、文件版本、SHA-256、分类、标签、本地化名称、可用状态、来源、作者、许可证、预览片段和正式片段。
 - 场景只能引用已注册的 `assetId + segmentIds`；启动时会做完整性校验。
-- 当前发布声音包包含 13 份 CC0 录音；每份都记录固定上游地址、原始 Freesound 地址、作者、许可证与 SHA-256，并由发布资格校验阻止来源不完整的素材进入包内。
+- 当前发布声音包包含 23 份 CC0 录音：13 份来自 Ambie 的逐文件核验录音，另有 10 份直接从 Freesound CC0 页面重新选源的公开 HQ 预览；每份都记录原始页面、实际获取地址、作者、许可证与 SHA-256，并由发布资格校验阻止来源不完整的素材进入包内。
 
 ### 持续编排
 

@@ -40,6 +40,16 @@ flutter:
     - assets/generated/audio/ambie-waterfall.wav
     - assets/generated/audio/ambie-white-noise.wav
     - assets/generated/audio/ambie-wind.wav
+    - assets/generated/audio/freesound-cafe.mp3
+    - assets/generated/audio/freesound-campfire.mp3
+    - assets/generated/audio/freesound-city-rain.mp3
+    - assets/generated/audio/freesound-clock-ticking.mp3
+    - assets/generated/audio/freesound-forest-birds.mp3
+    - assets/generated/audio/freesound-rain-window.mp3
+    - assets/generated/audio/freesound-river.mp3
+    - assets/generated/audio/freesound-singing-bowl.mp3
+    - assets/generated/audio/freesound-typewriter.mp3
+    - assets/generated/audio/freesound-wind-chimes.mp3
     - assets/generated/images/coastal-night-cover.jpg
     - assets/generated/images/coastal-night-hero.jpg
     - assets/generated/images/rain-cabin-cover.jpg

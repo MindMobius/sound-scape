@@ -15,7 +15,7 @@ void main() {
   test('bundled manifest is versioned and all scene references resolve', () {
     expect(library.schemaVersion, 1);
     expect(library.catalogVersion, isNotEmpty);
-    expect(library.assets, hasLength(13));
+    expect(library.assets, hasLength(23));
     final issues = library.integrityIssues(scenes: SoundscapeCatalog.scenes);
     expect(issues.map((issue) => '${issue.code}: ${issue.message}'), isEmpty);
   });
@@ -52,6 +52,25 @@ void main() {
         const Duration(milliseconds: 4500),
       );
       expect(water.segmentById('event-c').start, const Duration(seconds: 16));
+
+      final forestBirds = library.assetById('freesound.forest-birds.v1');
+      expect(
+        forestBirds.source.downloadUrl,
+        'https://cdn.freesound.org/previews/723/723913_2008500-hq.mp3',
+      );
     },
   );
+
+  test('rain cabin layers use independently sourced CC0 details', () {
+    final rainCabin = SoundscapeCatalog.byId('rain-cabin');
+    final layerAssetIds = {for (final layer in rainCabin.layers) layer.assetId};
+
+    expect(layerAssetIds, contains('freesound.rain-window.v1'));
+    expect(layerAssetIds, contains('freesound.campfire.v1'));
+    expect(layerAssetIds, contains('freesound.river.v1'));
+    expect(
+      library.assetById('freesound.rain-window.v1').source.url,
+      'https://freesound.org/people/Nickisawsome74/sounds/669621/',
+    );
+  });
 }

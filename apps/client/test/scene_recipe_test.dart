@@ -17,7 +17,9 @@ void main() {
     expect(decoded.seed, scene.seed);
     expect(decoded.layers.map((layer) => layer.assetId), {
       'ambie.rain.v1',
-      'ambie.fireplace.v1',
+      'freesound.rain-window.v1',
+      'freesound.campfire.v1',
+      'freesound.river.v1',
       'ambie.thunder.v1',
     });
     expect(encoded.toString(), isNot(contains('assets/audio/')));
