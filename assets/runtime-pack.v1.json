@@ -116,6 +116,166 @@
       {
         "source": "assets/brand/identity/soundscape-mark-ui.png",
         "target": "images/soundscape-mark.png"
+      },
+      {
+        "source": "assets/audio/freesound-rain-summer-thunder.mp3",
+        "target": "audio/freesound-rain-summer-thunder.mp3"
+      },
+      {
+        "source": "assets/audio/freesound-rain-room.mp3",
+        "target": "audio/freesound-rain-room.mp3"
+      },
+      {
+        "source": "assets/audio/freesound-thunder-suburb.mp3",
+        "target": "audio/freesound-thunder-suburb.mp3"
+      },
+      {
+        "source": "assets/audio/freesound-thunder-clap.mp3",
+        "target": "audio/freesound-thunder-clap.mp3"
+      },
+      {
+        "source": "assets/audio/freesound-wind-forest.mp3",
+        "target": "audio/freesound-wind-forest.mp3"
+      },
+      {
+        "source": "assets/audio/freesound-wind-vent.mp3",
+        "target": "audio/freesound-wind-vent.mp3"
+      },
+      {
+        "source": "assets/audio/freesound-river-close.mp3",
+        "target": "audio/freesound-river-close.mp3"
+      },
+      {
+        "source": "assets/audio/freesound-river-layers.mp3",
+        "target": "audio/freesound-river-layers.mp3"
+      },
+      {
+        "source": "assets/audio/freesound-waves-calm.mp3",
+        "target": "audio/freesound-waves-calm.mp3"
+      },
+      {
+        "source": "assets/audio/freesound-waves-storm.mp3",
+        "target": "audio/freesound-waves-storm.mp3"
+      },
+      {
+        "source": "assets/audio/freesound-waterfall-hidden.mp3",
+        "target": "audio/freesound-waterfall-hidden.mp3"
+      },
+      {
+        "source": "assets/audio/freesound-fire-stove.mp3",
+        "target": "audio/freesound-fire-stove.mp3"
+      },
+      {
+        "source": "assets/audio/freesound-fire-metal.mp3",
+        "target": "audio/freesound-fire-metal.mp3"
+      },
+      {
+        "source": "assets/audio/freesound-birds-near-home.mp3",
+        "target": "audio/freesound-birds-near-home.mp3"
+      },
+      {
+        "source": "assets/audio/freesound-birds-spring.mp3",
+        "target": "audio/freesound-birds-spring.mp3"
+      },
+      {
+        "source": "assets/audio/freesound-crickets-night.mp3",
+        "target": "audio/freesound-crickets-night.mp3"
+      },
+      {
+        "source": "assets/audio/freesound-frogs-pond.mp3",
+        "target": "audio/freesound-frogs-pond.mp3"
+      },
+      {
+        "source": "assets/audio/freesound-owls-choir.mp3",
+        "target": "audio/freesound-owls-choir.mp3"
+      },
+      {
+        "source": "assets/audio/freesound-cafe-korea.mp3",
+        "target": "audio/freesound-cafe-korea.mp3"
+      },
+      {
+        "source": "assets/audio/freesound-library-te-atatu.mp3",
+        "target": "audio/freesound-library-te-atatu.mp3"
+      },
+      {
+        "source": "assets/audio/freesound-traffic-continuous.mp3",
+        "target": "audio/freesound-traffic-continuous.mp3"
+      },
+      {
+        "source": "assets/audio/freesound-train-station.mp3",
+        "target": "audio/freesound-train-station.mp3"
+      },
+      {
+        "source": "assets/audio/freesound-airplane-cabin.mp3",
+        "target": "audio/freesound-airplane-cabin.mp3"
+      },
+      {
+        "source": "assets/audio/freesound-clock-pendulum.mp3",
+        "target": "audio/freesound-clock-pendulum.mp3"
+      },
+      {
+        "source": "assets/audio/freesound-radio-vintage.mp3",
+        "target": "audio/freesound-radio-vintage.mp3"
+      },
+      {
+        "source": "assets/audio/freesound-projector-8mm.mp3",
+        "target": "audio/freesound-projector-8mm.mp3"
+      },
+      {
+        "source": "assets/audio/freesound-bubbles-sparkling.mp3",
+        "target": "audio/freesound-bubbles-sparkling.mp3"
+      },
+      {
+        "source": "assets/audio/freesound-chimes-indoor.mp3",
+        "target": "audio/freesound-chimes-indoor.mp3"
+      },
+      {
+        "source": "assets/audio/freesound-footsteps-stairs.mp3",
+        "target": "audio/freesound-footsteps-stairs.mp3"
+      },
+      {
+        "source": "assets/audio/freesound-paper-tear.mp3",
+        "target": "audio/freesound-paper-tear.mp3"
+      },
+      {
+        "source": "assets/audio/freesound-bubbles-synthetic.mp3",
+        "target": "audio/freesound-bubbles-synthetic.mp3"
+      },
+      {
+        "source": "assets/audio/freesound-radio-sweep.mp3",
+        "target": "audio/freesound-radio-sweep.mp3"
+      },
+      {
+        "source": "assets/audio/freesound-projector-super8.mp3",
+        "target": "audio/freesound-projector-super8.mp3"
+      },
+      {
+        "source": "assets/audio/freesound-bubbles-aquarium.mp3",
+        "target": "audio/freesound-bubbles-aquarium.mp3"
+      },
+      {
+        "source": "assets/audio/freesound-paper-rip.mp3",
+        "target": "audio/freesound-paper-rip.mp3"
+      },
+      {
+        "source": "assets/audio/freesound-footsteps-room.mp3",
+        "target": "audio/freesound-footsteps-room.mp3"
+      },
+      {
+        "source": "assets/audio/freesound-library-lisboa.mp3",
+        "target": "audio/freesound-library-lisboa.mp3"
+      },
+      {
+        "source": "assets/audio/freesound-train-platform.mp3",
+        "target": "audio/freesound-train-platform.mp3"
+      },
+      {
+        "source": "assets/audio/freesound-airplane-distant.mp3",
+        "target": "audio/freesound-airplane-distant.mp3"
+      },
+      {
+        "source": "assets/audio/freesound-traffic-evening.mp3",
+        "target": "audio/freesound-traffic-evening.mp3"
       }
     ]
   }

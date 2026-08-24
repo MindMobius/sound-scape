@@ -14,6 +14,8 @@
   ],
   "scripts": {
     "assets:sync": "node tools/sync-runtime-assets.mjs",
+    "assets:research:freesound": "node tools/research-freesound.mjs",
+    "assets:import:freesound": "node tools/import-freesound-expansion.mjs",
     "contracts:sync": "node tools/validate-contracts.mjs --write",
     "dev": "npm run assets:sync && npm run dev --workspace @soundscape/web --",
     "build": "npm run assets:sync && npm run build --workspace @soundscape/web",

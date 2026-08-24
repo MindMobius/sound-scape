@@ -43,3 +43,50 @@ Ambie 在 `Data.json` 中逐文件标注了原始 Freesound 条目和 Creative C
 
 完整 CC0-1.0 法律文本与摘要见
 [Creative Commons](https://creativecommons.org/publicdomain/zero/1.0/)。
+
+## 独立扩容素材（Freesound CC0）
+
+本批素材逐条打开 Freesound 原始页面核验 CC0，再下载公开 HQ 预览；没有复制 Moodist 或其他项目仓库中的音频文件。
+
+| 声景文件 | 类别 | 作者 | 原始页面 | 获取地址 | 授权 |
+| --- | --- | --- | --- | --- | --- |
+| `freesound-rain-summer-thunder.mp3` | weather | giddster | [662204](https://freesound.org/people/giddster/sounds/662204/) | [HQ preview](https://cdn.freesound.org/previews/662/662204_1738686-hq.mp3) | CC0-1.0 |
+| `freesound-rain-room.mp3` | weather | silencyo | [81819](https://freesound.org/people/silencyo/sounds/81819/) | [HQ preview](https://cdn.freesound.org/previews/81/81819_280284-hq.mp3) | CC0-1.0 |
+| `freesound-thunder-suburb.mp3` | weather | klankbeeld | [169534](https://freesound.org/people/klankbeeld/sounds/169534/) | [HQ preview](https://cdn.freesound.org/previews/169/169534_1648170-hq.mp3) | CC0-1.0 |
+| `freesound-thunder-clap.mp3` | weather | Dave Welsh | [194364](https://freesound.org/people/Dave%20Welsh/sounds/194364/) | [HQ preview](https://cdn.freesound.org/previews/194/194364_1985044-hq.mp3) | CC0-1.0 |
+| `freesound-wind-forest.mp3` | weather | teadrinker | [403051](https://freesound.org/people/teadrinker/sounds/403051/) | [HQ preview](https://cdn.freesound.org/previews/403/403051_338690-hq.mp3) | CC0-1.0 |
+| `freesound-wind-vent.mp3` | weather | Takkyi | [546871](https://freesound.org/people/Takkyi/sounds/546871/) | [HQ preview](https://cdn.freesound.org/previews/546/546871_4803028-hq.mp3) | CC0-1.0 |
+| `freesound-river-close.mp3` | water | bruno.auzet | [730154](https://freesound.org/people/bruno.auzet/sounds/730154/) | [HQ preview](https://cdn.freesound.org/previews/730/730154_11519060-hq.mp3) | CC0-1.0 |
+| `freesound-river-layers.mp3` | water | Sandy-Ogilvie | [828410](https://freesound.org/people/Sandy-Ogilvie/sounds/828410/) | [HQ preview](https://cdn.freesound.org/previews/828/828410_10711943-hq.mp3) | CC0-1.0 |
+| `freesound-waves-calm.mp3` | water | TRP | [573173](https://freesound.org/people/TRP/sounds/573173/) | [HQ preview](https://cdn.freesound.org/previews/573/573173_97550-hq.mp3) | CC0-1.0 |
+| `freesound-waves-storm.mp3` | water | chris_dagorne | [426076](https://freesound.org/people/chris_dagorne/sounds/426076/) | [HQ preview](https://cdn.freesound.org/previews/426/426076_3380363-hq.mp3) | CC0-1.0 |
+| `freesound-waterfall-hidden.mp3` | water | BassmanJourney | [632107](https://freesound.org/people/BassmanJourney/sounds/632107/) | [HQ preview](https://cdn.freesound.org/previews/632/632107_11993891-hq.mp3) | CC0-1.0 |
+| `freesound-fire-stove.mp3` | fire | antonXY | [657359](https://freesound.org/people/antonXY/sounds/657359/) | [HQ preview](https://cdn.freesound.org/previews/657/657359_1141252-hq.mp3) | CC0-1.0 |
+| `freesound-fire-metal.mp3` | fire | craigsmith | [483323](https://freesound.org/people/craigsmith/sounds/483323/) | [HQ preview](https://cdn.freesound.org/previews/483/483323_2524442-hq.mp3) | CC0-1.0 |
+| `freesound-birds-near-home.mp3` | wildlife | gurek | [433001](https://freesound.org/people/gurek/sounds/433001/) | [HQ preview](https://cdn.freesound.org/previews/433/433001_969948-hq.mp3) | CC0-1.0 |
+| `freesound-birds-spring.mp3` | wildlife | rbnx | [268080](https://freesound.org/people/rbnx/sounds/268080/) | [HQ preview](https://cdn.freesound.org/previews/268/268080_165310-hq.mp3) | CC0-1.0 |
+| `freesound-crickets-night.mp3` | wildlife | TRP | [616982](https://freesound.org/people/TRP/sounds/616982/) | [HQ preview](https://cdn.freesound.org/previews/616/616982_97550-hq.mp3) | CC0-1.0 |
+| `freesound-frogs-pond.mp3` | wildlife | TheLastOneOnEarth | [799293](https://freesound.org/people/TheLastOneOnEarth/sounds/799293/) | [HQ preview](https://cdn.freesound.org/previews/799/799293_13237592-hq.mp3) | CC0-1.0 |
+| `freesound-owls-choir.mp3` | wildlife | soundskeep | [352557](https://freesound.org/people/soundskeep/sounds/352557/) | [HQ preview](https://cdn.freesound.org/previews/352/352557_4176669-hq.mp3) | CC0-1.0 |
+| `freesound-cafe-korea.mp3` | place | Laughingdog911 | [627411](https://freesound.org/people/Laughingdog911/sounds/627411/) | [HQ preview](https://cdn.freesound.org/previews/627/627411_13478852-hq.mp3) | CC0-1.0 |
+| `freesound-library-te-atatu.mp3` | place | simongray | [347615](https://freesound.org/people/simongray/sounds/347615/) | [HQ preview](https://cdn.freesound.org/previews/347/347615_93361-hq.mp3) | CC0-1.0 |
+| `freesound-traffic-continuous.mp3` | place | klangfabrik | [570535](https://freesound.org/people/klangfabrik/sounds/570535/) | [HQ preview](https://cdn.freesound.org/previews/570/570535_181941-hq.mp3) | CC0-1.0 |
+| `freesound-train-station.mp3` | place | polinkins | [800741](https://freesound.org/people/polinkins/sounds/800741/) | [HQ preview](https://cdn.freesound.org/previews/800/800741_15293337-hq.mp3) | CC0-1.0 |
+| `freesound-airplane-cabin.mp3` | place | habbis92 | [204510](https://freesound.org/people/habbis92/sounds/204510/) | [HQ preview](https://cdn.freesound.org/previews/204/204510_878508-hq.mp3) | CC0-1.0 |
+| `freesound-clock-pendulum.mp3` | device | photogtony | [242008](https://freesound.org/people/photogtony/sounds/242008/) | [HQ preview](https://cdn.freesound.org/previews/242/242008_4363393-hq.mp3) | CC0-1.0 |
+| `freesound-radio-vintage.mp3` | media | exsil | [652596](https://freesound.org/people/exsil/sounds/652596/) | [HQ preview](https://cdn.freesound.org/previews/652/652596_13766510-hq.mp3) | CC0-1.0 |
+| `freesound-projector-8mm.mp3` | media | videofueralle | [613836](https://freesound.org/people/videofueralle/sounds/613836/) | [HQ preview](https://cdn.freesound.org/previews/613/613836_1130120-hq.mp3) | CC0-1.0 |
+| `freesound-bubbles-sparkling.mp3` | media | monosfera | [645909](https://freesound.org/people/monosfera/sounds/645909/) | [HQ preview](https://cdn.freesound.org/previews/645/645909_3625175-hq.mp3) | CC0-1.0 |
+| `freesound-chimes-indoor.mp3` | media | giddster | [437337](https://freesound.org/people/giddster/sounds/437337/) | [HQ preview](https://cdn.freesound.org/previews/437/437337_1738686-hq.mp3) | CC0-1.0 |
+| `freesound-footsteps-stairs.mp3` | place | onursamli | [846921](https://freesound.org/people/onursamli/sounds/846921/) | [HQ preview](https://cdn.freesound.org/previews/846/846921_5343877-hq.mp3) | CC0-1.0 |
+| `freesound-paper-tear.mp3` | device | Valerie-Vivegnis | [759323](https://freesound.org/people/Valerie-Vivegnis/sounds/759323/) | [HQ preview](https://cdn.freesound.org/previews/759/759323_15375955-hq.mp3) | CC0-1.0 |
+| `freesound-bubbles-synthetic.mp3` | media | cabled_mess | [756472](https://freesound.org/people/cabled_mess/sounds/756472/) | [HQ preview](https://cdn.freesound.org/previews/756/756472_5450487-hq.mp3) | CC0-1.0 |
+| `freesound-radio-sweep.mp3` | media | vedas | [396902](https://freesound.org/people/vedas/sounds/396902/) | [HQ preview](https://cdn.freesound.org/previews/396/396902_828209-hq.mp3) | CC0-1.0 |
+| `freesound-projector-super8.mp3` | media | StefanoPTesta | [447886](https://freesound.org/people/StefanoPTesta/sounds/447886/) | [HQ preview](https://cdn.freesound.org/previews/447/447886_1637116-hq.mp3) | CC0-1.0 |
+| `freesound-bubbles-aquarium.mp3` | media | ddaedalus | [418198](https://freesound.org/people/ddaedalus/sounds/418198/) | [HQ preview](https://cdn.freesound.org/previews/418/418198_1831797-hq.mp3) | CC0-1.0 |
+| `freesound-paper-rip.mp3` | device | zachfbstudios | [136495](https://freesound.org/people/zachfbstudios/sounds/136495/) | [HQ preview](https://cdn.freesound.org/previews/136/136495_2037808-hq.mp3) | CC0-1.0 |
+| `freesound-footsteps-room.mp3` | place | craigsmith | [480678](https://freesound.org/people/craigsmith/sounds/480678/) | [HQ preview](https://cdn.freesound.org/previews/480/480678_2524442-hq.mp3) | CC0-1.0 |
+| `freesound-library-lisboa.mp3` | place | djalgae | [527365](https://freesound.org/people/djalgae/sounds/527365/) | [HQ preview](https://cdn.freesound.org/previews/527/527365_6086608-hq.mp3) | CC0-1.0 |
+| `freesound-train-platform.mp3` | place | chhavi | [566506](https://freesound.org/people/chhavi/sounds/566506/) | [HQ preview](https://cdn.freesound.org/previews/566/566506_753542-hq.mp3) | CC0-1.0 |
+| `freesound-airplane-distant.mp3` | place | TRP | [573810](https://freesound.org/people/TRP/sounds/573810/) | [HQ preview](https://cdn.freesound.org/previews/573/573810_97550-hq.mp3) | CC0-1.0 |
+| `freesound-traffic-evening.mp3` | place | bkowshik | [439218](https://freesound.org/people/bkowshik/sounds/439218/) | [HQ preview](https://cdn.freesound.org/previews/439/439218_8998638-hq.mp3) | CC0-1.0 |

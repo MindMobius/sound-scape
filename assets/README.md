@@ -14,6 +14,16 @@
 - `derivatives.json`：从已登记母版导出的 Web 传输版本，记录来源、裁切策略、尺寸和哈希；未知的历史编码参数必须明确标记，不能补写猜测值。
 - `runtime-pack.v1.json`：Flutter 包内资源映射。`npm run assets:sync` 根据它生成忽略提交的运行时副本，应用目录不得手工维护同一素材。
 
+声音扩容流程：
+
+```powershell
+npm run assets:research:freesound
+npm run assets:import:freesound
+npm run validate:assets
+```
+
+`tools/freesound-expansion.v1.json` 是经过筛选的首发扩容清单；导入器会逐条打开原始页面确认 CC0，再下载公开 HQ 预览、计算 SHA-256，并同步 `sound-library.v1.json`、授权台账和 Flutter 运行时包。当前首发包包含 63 份逐文件核验的 CC0 录音。
+
 ## 静态资产规则
 
 1. 图片不得烘焙产品文字、按钮或状态；文字由真实界面排版。

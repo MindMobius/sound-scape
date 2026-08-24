@@ -1,14 +1,17 @@
 {
   "schemaVersion": 1,
-  "catalogVersion": "2026.08.24-release.2",
-  "updatedAt": "2026-08-24T00:00:00+08:00",
+  "catalogVersion": "2026.08.24-release.3",
+  "updatedAt": "2026-08-24T12:00:00+08:00",
   "assets": [
     {
       "id": "ambie.beach.v1",
       "metadataVersion": 1,
       "fileVersion": 1,
       "category": "water",
-      "name": { "zh-CN": "海岸潮声", "en": "Beach" },
+      "name": {
+        "zh-CN": "海岸潮声",
+        "en": "Beach"
+      },
       "tags": ["海岸", "潮水", "持续环境"],
       "availability": "bundled",
       "releaseStatus": "approved",
@@ -18,7 +21,12 @@
         "name": "Ambie 内置声音（Freesound CC0）",
         "url": "https://github.com/jenius-apps/ambie/blob/6888f324dadf70725b75aa8830844d97d827958a/src/AmbientSounds.Uwp/Assets/Sounds/beach.wav",
         "provenance": "verified",
-        "authors": [{ "name": "jordir", "url": "https://freesound.org/s/360578/" }],
+        "authors": [
+          {
+            "name": "jordir",
+            "url": "https://freesound.org/s/360578/"
+          }
+        ],
         "license": {
           "name": "Creative Commons Zero v1.0 Universal",
           "spdxId": "CC0-1.0",
@@ -46,7 +54,10 @@
       "metadataVersion": 1,
       "fileVersion": 1,
       "category": "wildlife",
-      "name": { "zh-CN": "林间鸟声", "en": "Birds" },
+      "name": {
+        "zh-CN": "林间鸟声",
+        "en": "Birds"
+      },
       "tags": ["鸟鸣", "清晨", "持续环境"],
       "availability": "bundled",
       "releaseStatus": "approved",
@@ -56,7 +67,12 @@
         "name": "Ambie 内置声音（Freesound CC0）",
         "url": "https://github.com/jenius-apps/ambie/blob/6888f324dadf70725b75aa8830844d97d827958a/src/AmbientSounds.Uwp/Assets/Sounds/birds.wav",
         "provenance": "verified",
-        "authors": [{ "name": "hargissssound", "url": "https://freesound.org/s/345851/" }],
+        "authors": [
+          {
+            "name": "hargissssound",
+            "url": "https://freesound.org/s/345851/"
+          }
+        ],
         "license": {
           "name": "Creative Commons Zero v1.0 Universal",
           "spdxId": "CC0-1.0",
@@ -78,7 +94,10 @@
       "metadataVersion": 1,
       "fileVersion": 1,
       "category": "place",
-      "name": { "zh-CN": "城市街角", "en": "City street" },
+      "name": {
+        "zh-CN": "城市街角",
+        "en": "City street"
+      },
       "tags": ["城市", "街道", "人群"],
       "availability": "bundled",
       "releaseStatus": "approved",
@@ -88,7 +107,12 @@
         "name": "Ambie 内置声音（Freesound CC0）",
         "url": "https://github.com/jenius-apps/ambie/blob/6888f324dadf70725b75aa8830844d97d827958a/src/AmbientSounds.Uwp/Assets/Sounds/citystreet.wav",
         "provenance": "verified",
-        "authors": [{ "name": "o_ciz", "url": "https://freesound.org/s/475513/" }],
+        "authors": [
+          {
+            "name": "o_ciz",
+            "url": "https://freesound.org/s/475513/"
+          }
+        ],
         "license": {
           "name": "Creative Commons Zero v1.0 Universal",
           "spdxId": "CC0-1.0",
@@ -110,7 +134,10 @@
       "metadataVersion": 1,
       "fileVersion": 1,
       "category": "place",
-      "name": { "zh-CN": "咖啡馆", "en": "Coffee shop" },
+      "name": {
+        "zh-CN": "咖啡馆",
+        "en": "Coffee shop"
+      },
       "tags": ["室内", "人声背景", "日常空间"],
       "availability": "bundled",
       "releaseStatus": "approved",
@@ -120,7 +147,12 @@
         "name": "Ambie 内置声音（Freesound CC0）",
         "url": "https://github.com/jenius-apps/ambie/blob/6888f324dadf70725b75aa8830844d97d827958a/src/AmbientSounds.Uwp/Assets/Sounds/coffeeshop.mp3",
         "provenance": "verified",
-        "authors": [{ "name": "C_Rogers", "url": "https://freesound.org/s/453074/" }],
+        "authors": [
+          {
+            "name": "C_Rogers",
+            "url": "https://freesound.org/s/453074/"
+          }
+        ],
         "license": {
           "name": "Creative Commons Zero v1.0 Universal",
           "spdxId": "CC0-1.0",
@@ -142,7 +174,10 @@
       "metadataVersion": 1,
       "fileVersion": 1,
       "category": "water",
-      "name": { "zh-CN": "林间溪流", "en": "Creek" },
+      "name": {
+        "zh-CN": "林间溪流",
+        "en": "Creek"
+      },
       "tags": ["溪流", "近水", "持续环境"],
       "availability": "bundled",
       "releaseStatus": "approved",
@@ -152,7 +187,12 @@
         "name": "Ambie 内置声音（Freesound CC0）",
         "url": "https://github.com/jenius-apps/ambie/blob/6888f324dadf70725b75aa8830844d97d827958a/src/AmbientSounds.Uwp/Assets/Sounds/creek.wav",
         "provenance": "verified",
-        "authors": [{ "name": "hargissssound", "url": "https://freesound.org/s/324591/" }],
+        "authors": [
+          {
+            "name": "hargissssound",
+            "url": "https://freesound.org/s/324591/"
+          }
+        ],
         "license": {
           "name": "Creative Commons Zero v1.0 Universal",
           "spdxId": "CC0-1.0",
@@ -174,7 +214,10 @@
       "metadataVersion": 1,
       "fileVersion": 1,
       "category": "fire",
-      "name": { "zh-CN": "壁炉火焰", "en": "Fireplace" },
+      "name": {
+        "zh-CN": "壁炉火焰",
+        "en": "Fireplace"
+      },
       "tags": ["炉火", "木柴", "室内"],
       "availability": "bundled",
       "releaseStatus": "approved",
@@ -184,7 +227,12 @@
         "name": "Ambie 内置声音（Freesound CC0）",
         "url": "https://github.com/jenius-apps/ambie/blob/6888f324dadf70725b75aa8830844d97d827958a/src/AmbientSounds.Uwp/Assets/Sounds/fireplace.wav",
         "provenance": "verified",
-        "authors": [{ "name": "16FThumaF", "url": "https://freesound.org/s/499032/" }],
+        "authors": [
+          {
+            "name": "16FThumaF",
+            "url": "https://freesound.org/s/499032/"
+          }
+        ],
         "license": {
           "name": "Creative Commons Zero v1.0 Universal",
           "spdxId": "CC0-1.0",
@@ -206,7 +254,10 @@
       "metadataVersion": 1,
       "fileVersion": 1,
       "category": "weather",
-      "name": { "zh-CN": "旷野大雨", "en": "Rain" },
+      "name": {
+        "zh-CN": "旷野大雨",
+        "en": "Rain"
+      },
       "tags": ["雨", "旷野", "持续环境"],
       "availability": "bundled",
       "releaseStatus": "approved",
@@ -216,7 +267,12 @@
         "name": "Ambie 内置声音（Freesound CC0）",
         "url": "https://github.com/jenius-apps/ambie/blob/6888f324dadf70725b75aa8830844d97d827958a/src/AmbientSounds.Uwp/Assets/Sounds/rain.wav",
         "provenance": "verified",
-        "authors": [{ "name": "jmbphilmes", "url": "https://freesound.org/s/200270/" }],
+        "authors": [
+          {
+            "name": "jmbphilmes",
+            "url": "https://freesound.org/s/200270/"
+          }
+        ],
         "license": {
           "name": "Creative Commons Zero v1.0 Universal",
           "spdxId": "CC0-1.0",
@@ -250,7 +306,10 @@
       "metadataVersion": 1,
       "fileVersion": 1,
       "category": "place",
-      "name": { "zh-CN": "热带雨林", "en": "Rainforest" },
+      "name": {
+        "zh-CN": "热带雨林",
+        "en": "Rainforest"
+      },
       "tags": ["雨林", "虫鸟", "持续环境"],
       "availability": "bundled",
       "releaseStatus": "approved",
@@ -260,7 +319,12 @@
         "name": "Ambie 内置声音（Freesound CC0）",
         "url": "https://github.com/jenius-apps/ambie/blob/6888f324dadf70725b75aa8830844d97d827958a/src/AmbientSounds.Uwp/Assets/Sounds/Rainforest.mp3",
         "provenance": "verified",
-        "authors": [{ "name": "INNORECORDS", "url": "https://freesound.org/s/457447/" }],
+        "authors": [
+          {
+            "name": "INNORECORDS",
+            "url": "https://freesound.org/s/457447/"
+          }
+        ],
         "license": {
           "name": "Creative Commons Zero v1.0 Universal",
           "spdxId": "CC0-1.0",
@@ -282,7 +346,10 @@
       "metadataVersion": 1,
       "fileVersion": 1,
       "category": "weather",
-      "name": { "zh-CN": "远雷", "en": "Thunder" },
+      "name": {
+        "zh-CN": "远雷",
+        "en": "Thunder"
+      },
       "tags": ["雷声", "偶发", "远处"],
       "availability": "bundled",
       "releaseStatus": "approved",
@@ -292,7 +359,12 @@
         "name": "Ambie 内置声音（Freesound CC0）",
         "url": "https://github.com/jenius-apps/ambie/blob/6888f324dadf70725b75aa8830844d97d827958a/src/AmbientSounds.Uwp/Assets/Sounds/thunder.mp3",
         "provenance": "verified",
-        "authors": [{ "name": "hifijohn", "url": "https://freesound.org/s/242735/" }],
+        "authors": [
+          {
+            "name": "hifijohn",
+            "url": "https://freesound.org/s/242735/"
+          }
+        ],
         "license": {
           "name": "Creative Commons Zero v1.0 Universal",
           "spdxId": "CC0-1.0",
@@ -329,7 +401,10 @@
       "metadataVersion": 1,
       "fileVersion": 1,
       "category": "water",
-      "name": { "zh-CN": "水下回响", "en": "Underwater" },
+      "name": {
+        "zh-CN": "水下回响",
+        "en": "Underwater"
+      },
       "tags": ["水下", "低频", "空间"],
       "availability": "bundled",
       "releaseStatus": "approved",
@@ -339,7 +414,12 @@
         "name": "Ambie 内置声音（Freesound CC0）",
         "url": "https://github.com/jenius-apps/ambie/blob/6888f324dadf70725b75aa8830844d97d827958a/src/AmbientSounds.Uwp/Assets/Sounds/underwater.wav",
         "provenance": "verified",
-        "authors": [{ "name": "Kinoton", "url": "https://freesound.org/s/393819/" }],
+        "authors": [
+          {
+            "name": "Kinoton",
+            "url": "https://freesound.org/s/393819/"
+          }
+        ],
         "license": {
           "name": "Creative Commons Zero v1.0 Universal",
           "spdxId": "CC0-1.0",
@@ -382,7 +462,10 @@
       "metadataVersion": 1,
       "fileVersion": 1,
       "category": "water",
-      "name": { "zh-CN": "山间瀑布", "en": "Waterfall" },
+      "name": {
+        "zh-CN": "山间瀑布",
+        "en": "Waterfall"
+      },
       "tags": ["瀑布", "流水", "持续环境"],
       "availability": "bundled",
       "releaseStatus": "approved",
@@ -392,7 +475,12 @@
         "name": "Ambie 内置声音（Freesound CC0）",
         "url": "https://github.com/jenius-apps/ambie/blob/6888f324dadf70725b75aa8830844d97d827958a/src/AmbientSounds.Uwp/Assets/Sounds/waterfall.wav",
         "provenance": "verified",
-        "authors": [{ "name": "askeseverin", "url": "https://freesound.org/s/376202/" }],
+        "authors": [
+          {
+            "name": "askeseverin",
+            "url": "https://freesound.org/s/376202/"
+          }
+        ],
         "license": {
           "name": "Creative Commons Zero v1.0 Universal",
           "spdxId": "CC0-1.0",
@@ -414,7 +502,10 @@
       "metadataVersion": 1,
       "fileVersion": 1,
       "category": "device",
-      "name": { "zh-CN": "棕色噪声", "en": "Brown noise" },
+      "name": {
+        "zh-CN": "棕色噪声",
+        "en": "Brown noise"
+      },
       "tags": ["噪声", "稳定", "专注"],
       "availability": "bundled",
       "releaseStatus": "approved",
@@ -424,7 +515,12 @@
         "name": "Ambie 内置声音（Freesound CC0）",
         "url": "https://github.com/jenius-apps/ambie/blob/6888f324dadf70725b75aa8830844d97d827958a/src/AmbientSounds.Uwp/Assets/Sounds/whitenoise.wav",
         "provenance": "verified",
-        "authors": [{ "name": "theundecided", "url": "https://freesound.org/s/165056/" }],
+        "authors": [
+          {
+            "name": "theundecided",
+            "url": "https://freesound.org/s/165056/"
+          }
+        ],
         "license": {
           "name": "Creative Commons Zero v1.0 Universal",
           "spdxId": "CC0-1.0",
@@ -446,7 +542,10 @@
       "metadataVersion": 1,
       "fileVersion": 1,
       "category": "weather",
-      "name": { "zh-CN": "穿林风声", "en": "Wind" },
+      "name": {
+        "zh-CN": "穿林风声",
+        "en": "Wind"
+      },
       "tags": ["风", "树木", "持续环境"],
       "availability": "bundled",
       "releaseStatus": "approved",
@@ -456,7 +555,12 @@
         "name": "Ambie 内置声音（Freesound CC0）",
         "url": "https://github.com/jenius-apps/ambie/blob/6888f324dadf70725b75aa8830844d97d827958a/src/AmbientSounds.Uwp/Assets/Sounds/wind.wav",
         "provenance": "verified",
-        "authors": [{ "name": "jorge0000", "url": "https://freesound.org/s/361053/" }],
+        "authors": [
+          {
+            "name": "jorge0000",
+            "url": "https://freesound.org/s/361053/"
+          }
+        ],
         "license": {
           "name": "Creative Commons Zero v1.0 Universal",
           "spdxId": "CC0-1.0",
@@ -484,7 +588,10 @@
       "metadataVersion": 1,
       "fileVersion": 1,
       "category": "wildlife",
-      "name": { "zh-CN": "林间鸟群", "en": "Forest birds" },
+      "name": {
+        "zh-CN": "林间鸟群",
+        "en": "Forest birds"
+      },
       "tags": ["鸟鸣", "森林", "环境", "循环"],
       "availability": "bundled",
       "releaseStatus": "approved",
@@ -495,7 +602,12 @@
         "url": "https://freesound.org/people/Magnesus/sounds/723913/",
         "downloadUrl": "https://cdn.freesound.org/previews/723/723913_2008500-hq.mp3",
         "provenance": "verified",
-        "authors": [{ "name": "Magnesus", "url": "https://freesound.org/people/Magnesus/" }],
+        "authors": [
+          {
+            "name": "Magnesus",
+            "url": "https://freesound.org/people/Magnesus/"
+          }
+        ],
         "license": {
           "name": "Creative Commons Zero v1.0 Universal",
           "spdxId": "CC0-1.0",
@@ -517,7 +629,10 @@
       "metadataVersion": 1,
       "fileVersion": 1,
       "category": "weather",
-      "name": { "zh-CN": "窗上雨声", "en": "Rain on window" },
+      "name": {
+        "zh-CN": "窗上雨声",
+        "en": "Rain on window"
+      },
       "tags": ["雨", "窗", "室内", "天气"],
       "availability": "bundled",
       "releaseStatus": "approved",
@@ -529,7 +644,10 @@
         "downloadUrl": "https://cdn.freesound.org/previews/669/669621_7738466-hq.mp3",
         "provenance": "verified",
         "authors": [
-          { "name": "Nickisawsome74", "url": "https://freesound.org/people/Nickisawsome74/" }
+          {
+            "name": "Nickisawsome74",
+            "url": "https://freesound.org/people/Nickisawsome74/"
+          }
         ],
         "license": {
           "name": "Creative Commons Zero v1.0 Universal",
@@ -552,7 +670,10 @@
       "metadataVersion": 1,
       "fileVersion": 1,
       "category": "fire",
-      "name": { "zh-CN": "篝火噼啪", "en": "Campfire crackle" },
+      "name": {
+        "zh-CN": "篝火噼啪",
+        "en": "Campfire crackle"
+      },
       "tags": ["篝火", "木柴", "噼啪", "夜晚"],
       "availability": "bundled",
       "releaseStatus": "approved",
@@ -563,7 +684,12 @@
         "url": "https://freesound.org/people/Defaultv/sounds/536935/",
         "downloadUrl": "https://cdn.freesound.org/previews/536/536935_11867884-hq.mp3",
         "provenance": "verified",
-        "authors": [{ "name": "Defaultv", "url": "https://freesound.org/people/Defaultv/" }],
+        "authors": [
+          {
+            "name": "Defaultv",
+            "url": "https://freesound.org/people/Defaultv/"
+          }
+        ],
         "license": {
           "name": "Creative Commons Zero v1.0 Universal",
           "spdxId": "CC0-1.0",
@@ -585,7 +711,10 @@
       "metadataVersion": 1,
       "fileVersion": 1,
       "category": "device",
-      "name": { "zh-CN": "老钟滴答", "en": "Clock ticking" },
+      "name": {
+        "zh-CN": "老钟滴答",
+        "en": "Clock ticking"
+      },
       "tags": ["时钟", "滴答", "室内", "稳定"],
       "availability": "bundled",
       "releaseStatus": "approved",
@@ -596,7 +725,12 @@
         "url": "https://freesound.org/people/seth-m/sounds/321582/",
         "downloadUrl": "https://cdn.freesound.org/previews/321/321582_3366749-hq.mp3",
         "provenance": "verified",
-        "authors": [{ "name": "seth-m", "url": "https://freesound.org/people/seth-m/" }],
+        "authors": [
+          {
+            "name": "seth-m",
+            "url": "https://freesound.org/people/seth-m/"
+          }
+        ],
         "license": {
           "name": "Creative Commons Zero v1.0 Universal",
           "spdxId": "CC0-1.0",
@@ -618,7 +752,10 @@
       "metadataVersion": 1,
       "fileVersion": 1,
       "category": "device",
-      "name": { "zh-CN": "机械打字机", "en": "Typewriter" },
+      "name": {
+        "zh-CN": "机械打字机",
+        "en": "Typewriter"
+      },
       "tags": ["打字机", "纸张", "工作", "事件"],
       "availability": "bundled",
       "releaseStatus": "approved",
@@ -629,7 +766,12 @@
         "url": "https://freesound.org/people/TOC1/sounds/244414/",
         "downloadUrl": "https://cdn.freesound.org/previews/244/244414_1943838-hq.mp3",
         "provenance": "verified",
-        "authors": [{ "name": "TOC1", "url": "https://freesound.org/people/TOC1/" }],
+        "authors": [
+          {
+            "name": "TOC1",
+            "url": "https://freesound.org/people/TOC1/"
+          }
+        ],
         "license": {
           "name": "Creative Commons Zero v1.0 Universal",
           "spdxId": "CC0-1.0",
@@ -652,7 +794,10 @@
       "metadataVersion": 1,
       "fileVersion": 1,
       "category": "media",
-      "name": { "zh-CN": "颂钵回响", "en": "Singing bowl" },
+      "name": {
+        "zh-CN": "颂钵回响",
+        "en": "Singing bowl"
+      },
       "tags": ["颂钵", "回响", "冥想", "事件"],
       "availability": "bundled",
       "releaseStatus": "approved",
@@ -664,7 +809,10 @@
         "downloadUrl": "https://cdn.freesound.org/previews/271/271370_5159066-hq.mp3",
         "provenance": "verified",
         "authors": [
-          { "name": "inoshirodesign", "url": "https://freesound.org/people/inoshirodesign/" }
+          {
+            "name": "inoshirodesign",
+            "url": "https://freesound.org/people/inoshirodesign/"
+          }
         ],
         "license": {
           "name": "Creative Commons Zero v1.0 Universal",
@@ -688,7 +836,10 @@
       "metadataVersion": 1,
       "fileVersion": 1,
       "category": "media",
-      "name": { "zh-CN": "风铃轻响", "en": "Wind chimes" },
+      "name": {
+        "zh-CN": "风铃轻响",
+        "en": "Wind chimes"
+      },
       "tags": ["风铃", "金属", "微风", "事件"],
       "availability": "bundled",
       "releaseStatus": "approved",
@@ -699,7 +850,12 @@
         "url": "https://freesound.org/people/Anthousai/sounds/398495/",
         "downloadUrl": "https://cdn.freesound.org/previews/398/398495_5923045-hq.mp3",
         "provenance": "verified",
-        "authors": [{ "name": "Anthousai", "url": "https://freesound.org/people/Anthousai/" }],
+        "authors": [
+          {
+            "name": "Anthousai",
+            "url": "https://freesound.org/people/Anthousai/"
+          }
+        ],
         "license": {
           "name": "Creative Commons Zero v1.0 Universal",
           "spdxId": "CC0-1.0",
@@ -722,7 +878,10 @@
       "metadataVersion": 1,
       "fileVersion": 1,
       "category": "place",
-      "name": { "zh-CN": "咖啡馆人声", "en": "Cafe ambience" },
+      "name": {
+        "zh-CN": "咖啡馆人声",
+        "en": "Cafe ambience"
+      },
       "tags": ["咖啡馆", "室内", "人群", "持续环境"],
       "availability": "bundled",
       "releaseStatus": "approved",
@@ -733,7 +892,12 @@
         "url": "https://freesound.org/people/evsecrets/sounds/332271/",
         "downloadUrl": "https://cdn.freesound.org/previews/332/332271_2367065-hq.mp3",
         "provenance": "verified",
-        "authors": [{ "name": "evsecrets", "url": "https://freesound.org/people/evsecrets/" }],
+        "authors": [
+          {
+            "name": "evsecrets",
+            "url": "https://freesound.org/people/evsecrets/"
+          }
+        ],
         "license": {
           "name": "Creative Commons Zero v1.0 Universal",
           "spdxId": "CC0-1.0",
@@ -755,7 +919,10 @@
       "metadataVersion": 1,
       "fileVersion": 1,
       "category": "water",
-      "name": { "zh-CN": "河岸流水", "en": "River ambience" },
+      "name": {
+        "zh-CN": "河岸流水",
+        "en": "River ambience"
+      },
       "tags": ["河流", "流水", "野外", "持续环境"],
       "availability": "bundled",
       "releaseStatus": "approved",
@@ -766,7 +933,12 @@
         "url": "https://freesound.org/people/Nice_Audio/sounds/420445/",
         "downloadUrl": "https://cdn.freesound.org/previews/420/420445_3117234-hq.mp3",
         "provenance": "verified",
-        "authors": [{ "name": "Nice_Audio", "url": "https://freesound.org/people/Nice_Audio/" }],
+        "authors": [
+          {
+            "name": "Nice_Audio",
+            "url": "https://freesound.org/people/Nice_Audio/"
+          }
+        ],
         "license": {
           "name": "Creative Commons Zero v1.0 Universal",
           "spdxId": "CC0-1.0",
@@ -788,7 +960,10 @@
       "metadataVersion": 1,
       "fileVersion": 1,
       "category": "weather",
-      "name": { "zh-CN": "雨夜街景", "en": "Rainy city ambience" },
+      "name": {
+        "zh-CN": "雨夜街景",
+        "en": "Rainy city ambience"
+      },
       "tags": ["雨夜", "城市", "车流", "持续环境"],
       "availability": "bundled",
       "releaseStatus": "approved",
@@ -799,7 +974,12 @@
         "url": "https://freesound.org/people/RyanKingArt/sounds/607228/",
         "downloadUrl": "https://cdn.freesound.org/previews/607/607228_11069322-hq.mp3",
         "provenance": "verified",
-        "authors": [{ "name": "RyanKingArt", "url": "https://freesound.org/people/RyanKingArt/" }],
+        "authors": [
+          {
+            "name": "RyanKingArt",
+            "url": "https://freesound.org/people/RyanKingArt/"
+          }
+        ],
         "license": {
           "name": "Creative Commons Zero v1.0 Universal",
           "spdxId": "CC0-1.0",
@@ -811,6 +991,1653 @@
         {
           "id": "loop-main",
           "path": "assets/audio/freesound-city-rain.mp3",
+          "purpose": "loop",
+          "startMs": 0
+        }
+      ]
+    },
+    {
+      "id": "freesound.rain-summer-thunder.v1",
+      "metadataVersion": 1,
+      "fileVersion": 1,
+      "category": "weather",
+      "name": {
+        "zh-CN": "夏日雷雨",
+        "en": "Summer rain and thunder"
+      },
+      "tags": ["雨", "雷声", "窗外", "天气", "持续环境"],
+      "availability": "bundled",
+      "releaseStatus": "approved",
+      "sha256": "9d05a2488065e7f8d071bc78647755d31129c7b54679254e85600bd310a9b1a0",
+      "previewSegmentId": "loop-main",
+      "source": {
+        "name": "Freesound CC0 公开 HQ 预览",
+        "url": "https://freesound.org/people/giddster/sounds/662204/",
+        "downloadUrl": "https://cdn.freesound.org/previews/662/662204_1738686-hq.mp3",
+        "provenance": "verified",
+        "authors": [
+          {
+            "name": "giddster",
+            "url": "https://freesound.org/people/giddster/"
+          }
+        ],
+        "license": {
+          "name": "Creative Commons Zero v1.0 Universal",
+          "spdxId": "CC0-1.0",
+          "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "redistributionAllowed": true
+        }
+      },
+      "segments": [
+        {
+          "id": "loop-main",
+          "path": "assets/audio/freesound-rain-summer-thunder.mp3",
+          "purpose": "loop",
+          "startMs": 0
+        }
+      ]
+    },
+    {
+      "id": "freesound.rain-room.v1",
+      "metadataVersion": 1,
+      "fileVersion": 1,
+      "category": "weather",
+      "name": {
+        "zh-CN": "室内听雨",
+        "en": "Rain from a room"
+      },
+      "tags": ["雨", "窗", "室内", "回响", "持续环境"],
+      "availability": "bundled",
+      "releaseStatus": "approved",
+      "sha256": "d7f6b86955312fd5c5484bec082652b12411d3daa638c8008736ea9d7351c537",
+      "previewSegmentId": "loop-main",
+      "source": {
+        "name": "Freesound CC0 公开 HQ 预览",
+        "url": "https://freesound.org/people/silencyo/sounds/81819/",
+        "downloadUrl": "https://cdn.freesound.org/previews/81/81819_280284-hq.mp3",
+        "provenance": "verified",
+        "authors": [
+          {
+            "name": "silencyo",
+            "url": "https://freesound.org/people/silencyo/"
+          }
+        ],
+        "license": {
+          "name": "Creative Commons Zero v1.0 Universal",
+          "spdxId": "CC0-1.0",
+          "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "redistributionAllowed": true
+        }
+      },
+      "segments": [
+        {
+          "id": "loop-main",
+          "path": "assets/audio/freesound-rain-room.mp3",
+          "purpose": "loop",
+          "startMs": 0
+        }
+      ]
+    },
+    {
+      "id": "freesound.thunder-suburb.v1",
+      "metadataVersion": 1,
+      "fileVersion": 1,
+      "category": "weather",
+      "name": {
+        "zh-CN": "远处闷雷",
+        "en": "Distant suburban thunder"
+      },
+      "tags": ["雷声", "远处", "闷雷", "天气", "事件"],
+      "availability": "bundled",
+      "releaseStatus": "approved",
+      "sha256": "a207f5bc6601addfdd074139656e4486f1200ff746a01f9a6c9268bafb736ae8",
+      "previewSegmentId": "event-main",
+      "source": {
+        "name": "Freesound CC0 公开 HQ 预览",
+        "url": "https://freesound.org/people/klankbeeld/sounds/169534/",
+        "downloadUrl": "https://cdn.freesound.org/previews/169/169534_1648170-hq.mp3",
+        "provenance": "verified",
+        "authors": [
+          {
+            "name": "klankbeeld",
+            "url": "https://freesound.org/people/klankbeeld/"
+          }
+        ],
+        "license": {
+          "name": "Creative Commons Zero v1.0 Universal",
+          "spdxId": "CC0-1.0",
+          "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "redistributionAllowed": true
+        }
+      },
+      "segments": [
+        {
+          "id": "event-main",
+          "path": "assets/audio/freesound-thunder-suburb.mp3",
+          "purpose": "event",
+          "startMs": 0,
+          "durationMs": 89680
+        }
+      ]
+    },
+    {
+      "id": "freesound.thunder-clap.v1",
+      "metadataVersion": 1,
+      "fileVersion": 1,
+      "category": "weather",
+      "name": {
+        "zh-CN": "近处雷击",
+        "en": "Thunder clap"
+      },
+      "tags": ["雷声", "近处", "爆发", "天气", "事件"],
+      "availability": "bundled",
+      "releaseStatus": "approved",
+      "sha256": "eccec72a7155f7002a62d6926393eeb600337efb5c738be7ac9c0c11d6296c0f",
+      "previewSegmentId": "event-main",
+      "source": {
+        "name": "Freesound CC0 公开 HQ 预览",
+        "url": "https://freesound.org/people/Dave%20Welsh/sounds/194364/",
+        "downloadUrl": "https://cdn.freesound.org/previews/194/194364_1985044-hq.mp3",
+        "provenance": "verified",
+        "authors": [
+          {
+            "name": "Dave Welsh",
+            "url": "https://freesound.org/people/Dave%20Welsh/"
+          }
+        ],
+        "license": {
+          "name": "Creative Commons Zero v1.0 Universal",
+          "spdxId": "CC0-1.0",
+          "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "redistributionAllowed": true
+        }
+      },
+      "segments": [
+        {
+          "id": "event-main",
+          "path": "assets/audio/freesound-thunder-clap.mp3",
+          "purpose": "event",
+          "startMs": 0,
+          "durationMs": 76072
+        }
+      ]
+    },
+    {
+      "id": "freesound.wind-forest.v1",
+      "metadataVersion": 1,
+      "fileVersion": 1,
+      "category": "weather",
+      "name": {
+        "zh-CN": "林间强风",
+        "en": "Strong wind in forest"
+      },
+      "tags": ["风", "树林", "户外", "持续环境"],
+      "availability": "bundled",
+      "releaseStatus": "approved",
+      "sha256": "e83241dd2780ebb9771e6163deac01e731c2d0d9cea8f987755df45fbaa681e6",
+      "previewSegmentId": "loop-main",
+      "source": {
+        "name": "Freesound CC0 公开 HQ 预览",
+        "url": "https://freesound.org/people/teadrinker/sounds/403051/",
+        "downloadUrl": "https://cdn.freesound.org/previews/403/403051_338690-hq.mp3",
+        "provenance": "verified",
+        "authors": [
+          {
+            "name": "teadrinker",
+            "url": "https://freesound.org/people/teadrinker/"
+          }
+        ],
+        "license": {
+          "name": "Creative Commons Zero v1.0 Universal",
+          "spdxId": "CC0-1.0",
+          "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "redistributionAllowed": true
+        }
+      },
+      "segments": [
+        {
+          "id": "loop-main",
+          "path": "assets/audio/freesound-wind-forest.mp3",
+          "purpose": "loop",
+          "startMs": 0
+        }
+      ]
+    },
+    {
+      "id": "freesound.wind-vent.v1",
+      "metadataVersion": 1,
+      "fileVersion": 1,
+      "category": "weather",
+      "name": {
+        "zh-CN": "屋内风啸",
+        "en": "Wind through ventilation"
+      },
+      "tags": ["风", "屋内", "通风口", "低频", "持续环境"],
+      "availability": "bundled",
+      "releaseStatus": "approved",
+      "sha256": "633fedcd9a6ce780ca4968da249b680ae96a33a6ba3340b55c516ee1c6226575",
+      "previewSegmentId": "loop-main",
+      "source": {
+        "name": "Freesound CC0 公开 HQ 预览",
+        "url": "https://freesound.org/people/Takkyi/sounds/546871/",
+        "downloadUrl": "https://cdn.freesound.org/previews/546/546871_4803028-hq.mp3",
+        "provenance": "verified",
+        "authors": [
+          {
+            "name": "Takkyi",
+            "url": "https://freesound.org/people/Takkyi/"
+          }
+        ],
+        "license": {
+          "name": "Creative Commons Zero v1.0 Universal",
+          "spdxId": "CC0-1.0",
+          "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "redistributionAllowed": true
+        }
+      },
+      "segments": [
+        {
+          "id": "loop-main",
+          "path": "assets/audio/freesound-wind-vent.mp3",
+          "purpose": "loop",
+          "startMs": 0
+        }
+      ]
+    },
+    {
+      "id": "freesound.river-close.v1",
+      "metadataVersion": 1,
+      "fileVersion": 1,
+      "category": "water",
+      "name": {
+        "zh-CN": "近岸河流",
+        "en": "Close river murmur"
+      },
+      "tags": ["河流", "流水", "近岸", "自然", "持续环境"],
+      "availability": "bundled",
+      "releaseStatus": "approved",
+      "sha256": "9a205ec925d0d6448466e42209c48277d86cbe69de4cc14ab5fe1f4d5f5fbcae",
+      "previewSegmentId": "loop-main",
+      "source": {
+        "name": "Freesound CC0 公开 HQ 预览",
+        "url": "https://freesound.org/people/bruno.auzet/sounds/730154/",
+        "downloadUrl": "https://cdn.freesound.org/previews/730/730154_11519060-hq.mp3",
+        "provenance": "verified",
+        "authors": [
+          {
+            "name": "bruno.auzet",
+            "url": "https://freesound.org/people/bruno.auzet/"
+          }
+        ],
+        "license": {
+          "name": "Creative Commons Zero v1.0 Universal",
+          "spdxId": "CC0-1.0",
+          "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "redistributionAllowed": true
+        }
+      },
+      "segments": [
+        {
+          "id": "loop-main",
+          "path": "assets/audio/freesound-river-close.mp3",
+          "purpose": "loop",
+          "startMs": 0
+        }
+      ]
+    },
+    {
+      "id": "freesound.river-layers.v1",
+      "metadataVersion": 1,
+      "fileVersion": 1,
+      "category": "water",
+      "name": {
+        "zh-CN": "河瀑交叠",
+        "en": "Layered river and waterfall"
+      },
+      "tags": ["河流", "瀑布", "流水", "层次", "持续环境"],
+      "availability": "bundled",
+      "releaseStatus": "approved",
+      "sha256": "6eff0041c9a43f31ba7adb6ecba77740ec5103331b68f69594b83bce9ac5d331",
+      "previewSegmentId": "loop-main",
+      "source": {
+        "name": "Freesound CC0 公开 HQ 预览",
+        "url": "https://freesound.org/people/Sandy-Ogilvie/sounds/828410/",
+        "downloadUrl": "https://cdn.freesound.org/previews/828/828410_10711943-hq.mp3",
+        "provenance": "verified",
+        "authors": [
+          {
+            "name": "Sandy-Ogilvie",
+            "url": "https://freesound.org/people/Sandy-Ogilvie/"
+          }
+        ],
+        "license": {
+          "name": "Creative Commons Zero v1.0 Universal",
+          "spdxId": "CC0-1.0",
+          "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "redistributionAllowed": true
+        }
+      },
+      "segments": [
+        {
+          "id": "loop-main",
+          "path": "assets/audio/freesound-river-layers.mp3",
+          "purpose": "loop",
+          "startMs": 0
+        }
+      ]
+    },
+    {
+      "id": "freesound.waves-calm.v1",
+      "metadataVersion": 1,
+      "fileVersion": 1,
+      "category": "water",
+      "name": {
+        "zh-CN": "明亮海浪",
+        "en": "Bright calm ocean waves"
+      },
+      "tags": ["海浪", "海岸", "浪花", "平静", "持续环境"],
+      "availability": "bundled",
+      "releaseStatus": "approved",
+      "sha256": "e6299dda41aab115e4ca037fe29589d5b2363ec6f14128abbfb6b159ae7c5566",
+      "previewSegmentId": "loop-main",
+      "source": {
+        "name": "Freesound CC0 公开 HQ 预览",
+        "url": "https://freesound.org/people/TRP/sounds/573173/",
+        "downloadUrl": "https://cdn.freesound.org/previews/573/573173_97550-hq.mp3",
+        "provenance": "verified",
+        "authors": [
+          {
+            "name": "TRP",
+            "url": "https://freesound.org/people/TRP/"
+          }
+        ],
+        "license": {
+          "name": "Creative Commons Zero v1.0 Universal",
+          "spdxId": "CC0-1.0",
+          "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "redistributionAllowed": true
+        }
+      },
+      "segments": [
+        {
+          "id": "loop-main",
+          "path": "assets/audio/freesound-waves-calm.mp3",
+          "purpose": "loop",
+          "startMs": 0
+        }
+      ]
+    },
+    {
+      "id": "freesound.waves-storm.v1",
+      "metadataVersion": 1,
+      "fileVersion": 1,
+      "category": "water",
+      "name": {
+        "zh-CN": "夜岸风浪",
+        "en": "Storm waves at night"
+      },
+      "tags": ["海浪", "夜晚", "海岸", "风浪", "持续环境"],
+      "availability": "bundled",
+      "releaseStatus": "approved",
+      "sha256": "931332ae6d38cc03cf3fd794c05996b94f4cbe68713e28afd6f23f446507be3b",
+      "previewSegmentId": "loop-main",
+      "source": {
+        "name": "Freesound CC0 公开 HQ 预览",
+        "url": "https://freesound.org/people/chris_dagorne/sounds/426076/",
+        "downloadUrl": "https://cdn.freesound.org/previews/426/426076_3380363-hq.mp3",
+        "provenance": "verified",
+        "authors": [
+          {
+            "name": "chris_dagorne",
+            "url": "https://freesound.org/people/chris_dagorne/"
+          }
+        ],
+        "license": {
+          "name": "Creative Commons Zero v1.0 Universal",
+          "spdxId": "CC0-1.0",
+          "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "redistributionAllowed": true
+        }
+      },
+      "segments": [
+        {
+          "id": "loop-main",
+          "path": "assets/audio/freesound-waves-storm.mp3",
+          "purpose": "loop",
+          "startMs": 0
+        }
+      ]
+    },
+    {
+      "id": "freesound.waterfall-hidden.v1",
+      "metadataVersion": 1,
+      "fileVersion": 1,
+      "category": "water",
+      "name": {
+        "zh-CN": "林中隐瀑",
+        "en": "Hidden forest waterfall"
+      },
+      "tags": ["瀑布", "森林", "水花", "自然", "持续环境"],
+      "availability": "bundled",
+      "releaseStatus": "approved",
+      "sha256": "5aa44a4a1acd1889b4f865ebf6a66f8b9416b9427ebab6776a2a3b1abf22f847",
+      "previewSegmentId": "loop-main",
+      "source": {
+        "name": "Freesound CC0 公开 HQ 预览",
+        "url": "https://freesound.org/people/BassmanJourney/sounds/632107/",
+        "downloadUrl": "https://cdn.freesound.org/previews/632/632107_11993891-hq.mp3",
+        "provenance": "verified",
+        "authors": [
+          {
+            "name": "BassmanJourney",
+            "url": "https://freesound.org/people/BassmanJourney/"
+          }
+        ],
+        "license": {
+          "name": "Creative Commons Zero v1.0 Universal",
+          "spdxId": "CC0-1.0",
+          "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "redistributionAllowed": true
+        }
+      },
+      "segments": [
+        {
+          "id": "loop-main",
+          "path": "assets/audio/freesound-waterfall-hidden.mp3",
+          "purpose": "loop",
+          "startMs": 0
+        }
+      ]
+    },
+    {
+      "id": "freesound.fire-stove.v1",
+      "metadataVersion": 1,
+      "fileVersion": 1,
+      "category": "fire",
+      "name": {
+        "zh-CN": "远处炉火",
+        "en": "Fire in a distant stove"
+      },
+      "tags": ["炉火", "木柴", "金属炉门", "室内", "持续环境"],
+      "availability": "bundled",
+      "releaseStatus": "approved",
+      "sha256": "8516a94182943316117e83195276f0faaf760d4f791679162dfc4fe5afadca41",
+      "previewSegmentId": "loop-main",
+      "source": {
+        "name": "Freesound CC0 公开 HQ 预览",
+        "url": "https://freesound.org/people/antonXY/sounds/657359/",
+        "downloadUrl": "https://cdn.freesound.org/previews/657/657359_1141252-hq.mp3",
+        "provenance": "verified",
+        "authors": [
+          {
+            "name": "antonXY",
+            "url": "https://freesound.org/people/antonXY/"
+          }
+        ],
+        "license": {
+          "name": "Creative Commons Zero v1.0 Universal",
+          "spdxId": "CC0-1.0",
+          "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "redistributionAllowed": true
+        }
+      },
+      "segments": [
+        {
+          "id": "loop-main",
+          "path": "assets/audio/freesound-fire-stove.mp3",
+          "purpose": "loop",
+          "startMs": 0
+        }
+      ]
+    },
+    {
+      "id": "freesound.fire-metal.v1",
+      "metadataVersion": 1,
+      "fileVersion": 1,
+      "category": "fire",
+      "name": {
+        "zh-CN": "铁桶篝火",
+        "en": "Fire and metal crackle"
+      },
+      "tags": ["篝火", "木柴", "金属", "噼啪", "持续环境"],
+      "availability": "bundled",
+      "releaseStatus": "approved",
+      "sha256": "28d750bb4850261e4c2b3e073912c05150e146565cadf1f439544e70a076f5e0",
+      "previewSegmentId": "loop-main",
+      "source": {
+        "name": "Freesound CC0 公开 HQ 预览",
+        "url": "https://freesound.org/people/craigsmith/sounds/483323/",
+        "downloadUrl": "https://cdn.freesound.org/previews/483/483323_2524442-hq.mp3",
+        "provenance": "verified",
+        "authors": [
+          {
+            "name": "craigsmith",
+            "url": "https://freesound.org/people/craigsmith/"
+          }
+        ],
+        "license": {
+          "name": "Creative Commons Zero v1.0 Universal",
+          "spdxId": "CC0-1.0",
+          "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "redistributionAllowed": true
+        }
+      },
+      "segments": [
+        {
+          "id": "loop-main",
+          "path": "assets/audio/freesound-fire-metal.mp3",
+          "purpose": "loop",
+          "startMs": 0
+        }
+      ]
+    },
+    {
+      "id": "freesound.birds-near-home.v1",
+      "metadataVersion": 1,
+      "fileVersion": 1,
+      "category": "wildlife",
+      "name": {
+        "zh-CN": "窗外晨鸟",
+        "en": "Birds near home"
+      },
+      "tags": ["鸟鸣", "清晨", "窗外", "自然", "持续环境"],
+      "availability": "bundled",
+      "releaseStatus": "approved",
+      "sha256": "280d0449ce3cea520d5714d864d49a4ba3161c79b58fd975103dea730c27ecb1",
+      "previewSegmentId": "loop-main",
+      "source": {
+        "name": "Freesound CC0 公开 HQ 预览",
+        "url": "https://freesound.org/people/gurek/sounds/433001/",
+        "downloadUrl": "https://cdn.freesound.org/previews/433/433001_969948-hq.mp3",
+        "provenance": "verified",
+        "authors": [
+          {
+            "name": "gurek",
+            "url": "https://freesound.org/people/gurek/"
+          }
+        ],
+        "license": {
+          "name": "Creative Commons Zero v1.0 Universal",
+          "spdxId": "CC0-1.0",
+          "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "redistributionAllowed": true
+        }
+      },
+      "segments": [
+        {
+          "id": "loop-main",
+          "path": "assets/audio/freesound-birds-near-home.mp3",
+          "purpose": "loop",
+          "startMs": 0
+        }
+      ]
+    },
+    {
+      "id": "freesound.birds-spring.v1",
+      "metadataVersion": 1,
+      "fileVersion": 1,
+      "category": "wildlife",
+      "name": {
+        "zh-CN": "春日鸟群",
+        "en": "Spring birds"
+      },
+      "tags": ["鸟鸣", "春天", "户外", "城市远景", "持续环境"],
+      "availability": "bundled",
+      "releaseStatus": "approved",
+      "sha256": "0802064240aea9d38699d67d7fd1d90acbb000cbddc5c220febaab616666424a",
+      "previewSegmentId": "loop-main",
+      "source": {
+        "name": "Freesound CC0 公开 HQ 预览",
+        "url": "https://freesound.org/people/rbnx/sounds/268080/",
+        "downloadUrl": "https://cdn.freesound.org/previews/268/268080_165310-hq.mp3",
+        "provenance": "verified",
+        "authors": [
+          {
+            "name": "rbnx",
+            "url": "https://freesound.org/people/rbnx/"
+          }
+        ],
+        "license": {
+          "name": "Creative Commons Zero v1.0 Universal",
+          "spdxId": "CC0-1.0",
+          "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "redistributionAllowed": true
+        }
+      },
+      "segments": [
+        {
+          "id": "loop-main",
+          "path": "assets/audio/freesound-birds-spring.mp3",
+          "purpose": "loop",
+          "startMs": 0
+        }
+      ]
+    },
+    {
+      "id": "freesound.crickets-night.v1",
+      "metadataVersion": 1,
+      "fileVersion": 1,
+      "category": "wildlife",
+      "name": {
+        "zh-CN": "夜虫低鸣",
+        "en": "Tree crickets at night"
+      },
+      "tags": ["蟋蟀", "夜晚", "虫鸣", "夏夜", "持续环境"],
+      "availability": "bundled",
+      "releaseStatus": "approved",
+      "sha256": "9b0fd4a798ae9d3d3bf6c0aa4a5a1588ed744ceef921b6a7d646c17ae448c8bd",
+      "previewSegmentId": "loop-main",
+      "source": {
+        "name": "Freesound CC0 公开 HQ 预览",
+        "url": "https://freesound.org/people/TRP/sounds/616982/",
+        "downloadUrl": "https://cdn.freesound.org/previews/616/616982_97550-hq.mp3",
+        "provenance": "verified",
+        "authors": [
+          {
+            "name": "TRP",
+            "url": "https://freesound.org/people/TRP/"
+          }
+        ],
+        "license": {
+          "name": "Creative Commons Zero v1.0 Universal",
+          "spdxId": "CC0-1.0",
+          "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "redistributionAllowed": true
+        }
+      },
+      "segments": [
+        {
+          "id": "loop-main",
+          "path": "assets/audio/freesound-crickets-night.mp3",
+          "purpose": "loop",
+          "startMs": 0
+        }
+      ]
+    },
+    {
+      "id": "freesound.frogs-pond.v1",
+      "metadataVersion": 1,
+      "fileVersion": 1,
+      "category": "wildlife",
+      "name": {
+        "zh-CN": "池塘蛙鸣",
+        "en": "Frogs at a pond"
+      },
+      "tags": ["青蛙", "池塘", "夜晚", "自然", "持续环境"],
+      "availability": "bundled",
+      "releaseStatus": "approved",
+      "sha256": "2d2b234ac097c4cc7d3d28a6b61b91df1de23f80285e8da9fbfffdf8a4f6947a",
+      "previewSegmentId": "loop-main",
+      "source": {
+        "name": "Freesound CC0 公开 HQ 预览",
+        "url": "https://freesound.org/people/TheLastOneOnEarth/sounds/799293/",
+        "downloadUrl": "https://cdn.freesound.org/previews/799/799293_13237592-hq.mp3",
+        "provenance": "verified",
+        "authors": [
+          {
+            "name": "TheLastOneOnEarth",
+            "url": "https://freesound.org/people/TheLastOneOnEarth/"
+          }
+        ],
+        "license": {
+          "name": "Creative Commons Zero v1.0 Universal",
+          "spdxId": "CC0-1.0",
+          "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "redistributionAllowed": true
+        }
+      },
+      "segments": [
+        {
+          "id": "loop-main",
+          "path": "assets/audio/freesound-frogs-pond.mp3",
+          "purpose": "loop",
+          "startMs": 0
+        }
+      ]
+    },
+    {
+      "id": "freesound.owls-choir.v1",
+      "metadataVersion": 1,
+      "fileVersion": 1,
+      "category": "wildlife",
+      "name": {
+        "zh-CN": "林间猫头鹰",
+        "en": "A choir of scops owls"
+      },
+      "tags": ["猫头鹰", "森林", "夜晚", "远处", "持续环境"],
+      "availability": "bundled",
+      "releaseStatus": "approved",
+      "sha256": "82710a079bef593f94741ac1b462d78d6ac3249624d348c7adab7e7823df7244",
+      "previewSegmentId": "loop-main",
+      "source": {
+        "name": "Freesound CC0 公开 HQ 预览",
+        "url": "https://freesound.org/people/soundskeep/sounds/352557/",
+        "downloadUrl": "https://cdn.freesound.org/previews/352/352557_4176669-hq.mp3",
+        "provenance": "verified",
+        "authors": [
+          {
+            "name": "soundskeep",
+            "url": "https://freesound.org/people/soundskeep/"
+          }
+        ],
+        "license": {
+          "name": "Creative Commons Zero v1.0 Universal",
+          "spdxId": "CC0-1.0",
+          "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "redistributionAllowed": true
+        }
+      },
+      "segments": [
+        {
+          "id": "loop-main",
+          "path": "assets/audio/freesound-owls-choir.mp3",
+          "purpose": "loop",
+          "startMs": 0
+        }
+      ]
+    },
+    {
+      "id": "freesound.cafe-korea.v1",
+      "metadataVersion": 1,
+      "fileVersion": 1,
+      "category": "place",
+      "name": {
+        "zh-CN": "午后咖啡馆",
+        "en": "Afternoon cafe"
+      },
+      "tags": ["咖啡馆", "人声", "杯盏", "室内", "持续环境"],
+      "availability": "bundled",
+      "releaseStatus": "approved",
+      "sha256": "bb4bbb51fe721970c194216354c62b89d1a8b2505d6321187d7d56dd9812701a",
+      "previewSegmentId": "loop-main",
+      "source": {
+        "name": "Freesound CC0 公开 HQ 预览",
+        "url": "https://freesound.org/people/Laughingdog911/sounds/627411/",
+        "downloadUrl": "https://cdn.freesound.org/previews/627/627411_13478852-hq.mp3",
+        "provenance": "verified",
+        "authors": [
+          {
+            "name": "Laughingdog911",
+            "url": "https://freesound.org/people/Laughingdog911/"
+          }
+        ],
+        "license": {
+          "name": "Creative Commons Zero v1.0 Universal",
+          "spdxId": "CC0-1.0",
+          "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "redistributionAllowed": true
+        }
+      },
+      "segments": [
+        {
+          "id": "loop-main",
+          "path": "assets/audio/freesound-cafe-korea.mp3",
+          "purpose": "loop",
+          "startMs": 0
+        }
+      ]
+    },
+    {
+      "id": "freesound.library-te-atatu.v1",
+      "metadataVersion": 1,
+      "fileVersion": 1,
+      "category": "place",
+      "name": {
+        "zh-CN": "安静图书馆",
+        "en": "Quiet library"
+      },
+      "tags": ["图书馆", "室内", "翻页", "安静", "持续环境"],
+      "availability": "bundled",
+      "releaseStatus": "approved",
+      "sha256": "a33c02327a5d5ffb43b045bf3ab71901b57153c7fd7a3d6fc323616ceb6957a5",
+      "previewSegmentId": "loop-main",
+      "source": {
+        "name": "Freesound CC0 公开 HQ 预览",
+        "url": "https://freesound.org/people/simongray/sounds/347615/",
+        "downloadUrl": "https://cdn.freesound.org/previews/347/347615_93361-hq.mp3",
+        "provenance": "verified",
+        "authors": [
+          {
+            "name": "simongray",
+            "url": "https://freesound.org/people/simongray/"
+          }
+        ],
+        "license": {
+          "name": "Creative Commons Zero v1.0 Universal",
+          "spdxId": "CC0-1.0",
+          "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "redistributionAllowed": true
+        }
+      },
+      "segments": [
+        {
+          "id": "loop-main",
+          "path": "assets/audio/freesound-library-te-atatu.mp3",
+          "purpose": "loop",
+          "startMs": 0
+        }
+      ]
+    },
+    {
+      "id": "freesound.traffic-continuous.v1",
+      "metadataVersion": 1,
+      "fileVersion": 1,
+      "category": "place",
+      "name": {
+        "zh-CN": "持续车流",
+        "en": "Continuous traffic"
+      },
+      "tags": ["车流", "公路", "城市", "远景", "持续环境"],
+      "availability": "bundled",
+      "releaseStatus": "approved",
+      "sha256": "4b968a966f6360e76f175f45cc91d2b367ac7aff46d61aef8f0d99e703de1e69",
+      "previewSegmentId": "loop-main",
+      "source": {
+        "name": "Freesound CC0 公开 HQ 预览",
+        "url": "https://freesound.org/people/klangfabrik/sounds/570535/",
+        "downloadUrl": "https://cdn.freesound.org/previews/570/570535_181941-hq.mp3",
+        "provenance": "verified",
+        "authors": [
+          {
+            "name": "klangfabrik",
+            "url": "https://freesound.org/people/klangfabrik/"
+          }
+        ],
+        "license": {
+          "name": "Creative Commons Zero v1.0 Universal",
+          "spdxId": "CC0-1.0",
+          "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "redistributionAllowed": true
+        }
+      },
+      "segments": [
+        {
+          "id": "loop-main",
+          "path": "assets/audio/freesound-traffic-continuous.mp3",
+          "purpose": "loop",
+          "startMs": 0
+        }
+      ]
+    },
+    {
+      "id": "freesound.train-station.v1",
+      "metadataVersion": 1,
+      "fileVersion": 1,
+      "category": "place",
+      "name": {
+        "zh-CN": "火车站候车厅",
+        "en": "Train station ambience"
+      },
+      "tags": ["火车站", "候车厅", "人群", "交通", "持续环境"],
+      "availability": "bundled",
+      "releaseStatus": "approved",
+      "sha256": "5c654768117dd895424939c19162247a8d473fb2ebfa1d6610e67a61e46159a2",
+      "previewSegmentId": "loop-main",
+      "source": {
+        "name": "Freesound CC0 公开 HQ 预览",
+        "url": "https://freesound.org/people/polinkins/sounds/800741/",
+        "downloadUrl": "https://cdn.freesound.org/previews/800/800741_15293337-hq.mp3",
+        "provenance": "verified",
+        "authors": [
+          {
+            "name": "polinkins",
+            "url": "https://freesound.org/people/polinkins/"
+          }
+        ],
+        "license": {
+          "name": "Creative Commons Zero v1.0 Universal",
+          "spdxId": "CC0-1.0",
+          "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "redistributionAllowed": true
+        }
+      },
+      "segments": [
+        {
+          "id": "loop-main",
+          "path": "assets/audio/freesound-train-station.mp3",
+          "purpose": "loop",
+          "startMs": 0
+        }
+      ]
+    },
+    {
+      "id": "freesound.airplane-cabin.v1",
+      "metadataVersion": 1,
+      "fileVersion": 1,
+      "category": "place",
+      "name": {
+        "zh-CN": "飞机舱内",
+        "en": "Airplane cabin"
+      },
+      "tags": ["飞机", "舱内", "低频", "旅行", "持续环境"],
+      "availability": "bundled",
+      "releaseStatus": "approved",
+      "sha256": "576cc8ba8d404a207365d0d3017a580b66be18df6e54d4c44ebb5103ffc968fb",
+      "previewSegmentId": "loop-main",
+      "source": {
+        "name": "Freesound CC0 公开 HQ 预览",
+        "url": "https://freesound.org/people/habbis92/sounds/204510/",
+        "downloadUrl": "https://cdn.freesound.org/previews/204/204510_878508-hq.mp3",
+        "provenance": "verified",
+        "authors": [
+          {
+            "name": "habbis92",
+            "url": "https://freesound.org/people/habbis92/"
+          }
+        ],
+        "license": {
+          "name": "Creative Commons Zero v1.0 Universal",
+          "spdxId": "CC0-1.0",
+          "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "redistributionAllowed": true
+        }
+      },
+      "segments": [
+        {
+          "id": "loop-main",
+          "path": "assets/audio/freesound-airplane-cabin.mp3",
+          "purpose": "loop",
+          "startMs": 0
+        }
+      ]
+    },
+    {
+      "id": "freesound.clock-pendulum.v1",
+      "metadataVersion": 1,
+      "fileVersion": 1,
+      "category": "device",
+      "name": {
+        "zh-CN": "摆钟滴答",
+        "en": "Pendulum clock"
+      },
+      "tags": ["时钟", "滴答", "摆钟", "室内", "持续环境"],
+      "availability": "bundled",
+      "releaseStatus": "approved",
+      "sha256": "443871cb65419e641db9f8862aebab0c8384079aa4b3390503396a589a961af0",
+      "previewSegmentId": "loop-main",
+      "source": {
+        "name": "Freesound CC0 公开 HQ 预览",
+        "url": "https://freesound.org/people/photogtony/sounds/242008/",
+        "downloadUrl": "https://cdn.freesound.org/previews/242/242008_4363393-hq.mp3",
+        "provenance": "verified",
+        "authors": [
+          {
+            "name": "photogtony",
+            "url": "https://freesound.org/people/photogtony/"
+          }
+        ],
+        "license": {
+          "name": "Creative Commons Zero v1.0 Universal",
+          "spdxId": "CC0-1.0",
+          "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "redistributionAllowed": true
+        }
+      },
+      "segments": [
+        {
+          "id": "loop-main",
+          "path": "assets/audio/freesound-clock-pendulum.mp3",
+          "purpose": "loop",
+          "startMs": 0
+        }
+      ]
+    },
+    {
+      "id": "freesound.radio-vintage.v1",
+      "metadataVersion": 1,
+      "fileVersion": 1,
+      "category": "media",
+      "name": {
+        "zh-CN": "老式收音机调谐",
+        "en": "Vintage radio tuning"
+      },
+      "tags": ["收音机", "调频", "静电", "模拟", "持续环境"],
+      "availability": "bundled",
+      "releaseStatus": "approved",
+      "sha256": "a37f60216080574aa970908e659a70665a47e52fae2e5bc29fd767ee7e9541f3",
+      "previewSegmentId": "loop-main",
+      "source": {
+        "name": "Freesound CC0 公开 HQ 预览",
+        "url": "https://freesound.org/people/exsil/sounds/652596/",
+        "downloadUrl": "https://cdn.freesound.org/previews/652/652596_13766510-hq.mp3",
+        "provenance": "verified",
+        "authors": [
+          {
+            "name": "exsil",
+            "url": "https://freesound.org/people/exsil/"
+          }
+        ],
+        "license": {
+          "name": "Creative Commons Zero v1.0 Universal",
+          "spdxId": "CC0-1.0",
+          "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "redistributionAllowed": true
+        }
+      },
+      "segments": [
+        {
+          "id": "loop-main",
+          "path": "assets/audio/freesound-radio-vintage.mp3",
+          "purpose": "loop",
+          "startMs": 0
+        }
+      ]
+    },
+    {
+      "id": "freesound.projector-8mm.v1",
+      "metadataVersion": 1,
+      "fileVersion": 1,
+      "category": "media",
+      "name": {
+        "zh-CN": "8毫米放映机",
+        "en": "8mm projector"
+      },
+      "tags": ["放映机", "胶片", "风扇", "机械", "持续环境"],
+      "availability": "bundled",
+      "releaseStatus": "approved",
+      "sha256": "c088f1734d787034abac8e600204ccf8f6b4a84eeca67952c24b38656c84f96b",
+      "previewSegmentId": "loop-main",
+      "source": {
+        "name": "Freesound CC0 公开 HQ 预览",
+        "url": "https://freesound.org/people/videofueralle/sounds/613836/",
+        "downloadUrl": "https://cdn.freesound.org/previews/613/613836_1130120-hq.mp3",
+        "provenance": "verified",
+        "authors": [
+          {
+            "name": "videofueralle",
+            "url": "https://freesound.org/people/videofueralle/"
+          }
+        ],
+        "license": {
+          "name": "Creative Commons Zero v1.0 Universal",
+          "spdxId": "CC0-1.0",
+          "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "redistributionAllowed": true
+        }
+      },
+      "segments": [
+        {
+          "id": "loop-main",
+          "path": "assets/audio/freesound-projector-8mm.mp3",
+          "purpose": "loop",
+          "startMs": 0
+        }
+      ]
+    },
+    {
+      "id": "freesound.bubbles-sparkling.v1",
+      "metadataVersion": 1,
+      "fileVersion": 1,
+      "category": "media",
+      "name": {
+        "zh-CN": "气泡细响",
+        "en": "Sparkling bubbles"
+      },
+      "tags": ["气泡", "水声", "细节", "近景", "持续环境"],
+      "availability": "bundled",
+      "releaseStatus": "approved",
+      "sha256": "8710a402875753dc146a1fea7556c1478215886e1881f6e6ebb67604c876b360",
+      "previewSegmentId": "loop-main",
+      "source": {
+        "name": "Freesound CC0 公开 HQ 预览",
+        "url": "https://freesound.org/people/monosfera/sounds/645909/",
+        "downloadUrl": "https://cdn.freesound.org/previews/645/645909_3625175-hq.mp3",
+        "provenance": "verified",
+        "authors": [
+          {
+            "name": "monosfera",
+            "url": "https://freesound.org/people/monosfera/"
+          }
+        ],
+        "license": {
+          "name": "Creative Commons Zero v1.0 Universal",
+          "spdxId": "CC0-1.0",
+          "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "redistributionAllowed": true
+        }
+      },
+      "segments": [
+        {
+          "id": "loop-main",
+          "path": "assets/audio/freesound-bubbles-sparkling.mp3",
+          "purpose": "loop",
+          "startMs": 0
+        }
+      ]
+    },
+    {
+      "id": "freesound.chimes-indoor.v1",
+      "metadataVersion": 1,
+      "fileVersion": 1,
+      "category": "media",
+      "name": {
+        "zh-CN": "室内风铃",
+        "en": "Indoor wind chimes"
+      },
+      "tags": ["风铃", "金属", "轻响", "室内", "事件"],
+      "availability": "bundled",
+      "releaseStatus": "approved",
+      "sha256": "8238c214fedcb24343f78f25fb2db990bb3ab8c4a035d18455d5df03106bbb88",
+      "previewSegmentId": "event-main",
+      "source": {
+        "name": "Freesound CC0 公开 HQ 预览",
+        "url": "https://freesound.org/people/giddster/sounds/437337/",
+        "downloadUrl": "https://cdn.freesound.org/previews/437/437337_1738686-hq.mp3",
+        "provenance": "verified",
+        "authors": [
+          {
+            "name": "giddster",
+            "url": "https://freesound.org/people/giddster/"
+          }
+        ],
+        "license": {
+          "name": "Creative Commons Zero v1.0 Universal",
+          "spdxId": "CC0-1.0",
+          "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "redistributionAllowed": true
+        }
+      },
+      "segments": [
+        {
+          "id": "event-main",
+          "path": "assets/audio/freesound-chimes-indoor.mp3",
+          "purpose": "event",
+          "startMs": 0,
+          "durationMs": 89125
+        }
+      ]
+    },
+    {
+      "id": "freesound.footsteps-stairs.v1",
+      "metadataVersion": 1,
+      "fileVersion": 1,
+      "category": "place",
+      "name": {
+        "zh-CN": "木楼梯脚步",
+        "en": "Footsteps on wooden stairs"
+      },
+      "tags": ["脚步", "木楼梯", "室内", "靠近", "事件"],
+      "availability": "bundled",
+      "releaseStatus": "approved",
+      "sha256": "a29c606f7a721afb13ed7029cf5c5ca4b89508015c6f5cd2a9376e4d095a0dc3",
+      "previewSegmentId": "event-main",
+      "source": {
+        "name": "Freesound CC0 公开 HQ 预览",
+        "url": "https://freesound.org/people/onursamli/sounds/846921/",
+        "downloadUrl": "https://cdn.freesound.org/previews/846/846921_5343877-hq.mp3",
+        "provenance": "verified",
+        "authors": [
+          {
+            "name": "onursamli",
+            "url": "https://freesound.org/people/onursamli/"
+          }
+        ],
+        "license": {
+          "name": "Creative Commons Zero v1.0 Universal",
+          "spdxId": "CC0-1.0",
+          "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "redistributionAllowed": true
+        }
+      },
+      "segments": [
+        {
+          "id": "event-main",
+          "path": "assets/audio/freesound-footsteps-stairs.mp3",
+          "purpose": "event",
+          "startMs": 0,
+          "durationMs": 60993
+        }
+      ]
+    },
+    {
+      "id": "freesound.paper-tear.v1",
+      "metadataVersion": 1,
+      "fileVersion": 1,
+      "category": "device",
+      "name": {
+        "zh-CN": "撕纸声",
+        "en": "Tearing paper"
+      },
+      "tags": ["纸张", "撕裂", "近景", "事件"],
+      "availability": "bundled",
+      "releaseStatus": "approved",
+      "sha256": "74eb5b46642bee4cf9714b533882c3d662b9b76fd4322b1cb636680a7c6dc4a6",
+      "previewSegmentId": "event-main",
+      "source": {
+        "name": "Freesound CC0 公开 HQ 预览",
+        "url": "https://freesound.org/people/Valerie-Vivegnis/sounds/759323/",
+        "downloadUrl": "https://cdn.freesound.org/previews/759/759323_15375955-hq.mp3",
+        "provenance": "verified",
+        "authors": [
+          {
+            "name": "Valerie-Vivegnis",
+            "url": "https://freesound.org/people/Valerie-Vivegnis/"
+          }
+        ],
+        "license": {
+          "name": "Creative Commons Zero v1.0 Universal",
+          "spdxId": "CC0-1.0",
+          "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "redistributionAllowed": true
+        }
+      },
+      "segments": [
+        {
+          "id": "event-main",
+          "path": "assets/audio/freesound-paper-tear.mp3",
+          "purpose": "event",
+          "startMs": 0,
+          "durationMs": 74162
+        }
+      ]
+    },
+    {
+      "id": "freesound.bubbles-synthetic.v1",
+      "metadataVersion": 1,
+      "fileVersion": 1,
+      "category": "media",
+      "name": {
+        "zh-CN": "合成水泡",
+        "en": "Synthetic watery bubbles"
+      },
+      "tags": ["气泡", "合成器", "水声", "纹理", "持续环境"],
+      "availability": "bundled",
+      "releaseStatus": "approved",
+      "sha256": "9620f62e5d20e0c6893f426dbff5b958cb05799f87ef4988698c441b8910c091",
+      "previewSegmentId": "loop-main",
+      "source": {
+        "name": "Freesound CC0 公开 HQ 预览",
+        "url": "https://freesound.org/people/cabled_mess/sounds/756472/",
+        "downloadUrl": "https://cdn.freesound.org/previews/756/756472_5450487-hq.mp3",
+        "provenance": "verified",
+        "authors": [
+          {
+            "name": "cabled_mess",
+            "url": "https://freesound.org/people/cabled_mess/"
+          }
+        ],
+        "license": {
+          "name": "Creative Commons Zero v1.0 Universal",
+          "spdxId": "CC0-1.0",
+          "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "redistributionAllowed": true
+        }
+      },
+      "segments": [
+        {
+          "id": "loop-main",
+          "path": "assets/audio/freesound-bubbles-synthetic.mp3",
+          "purpose": "loop",
+          "startMs": 0
+        }
+      ]
+    },
+    {
+      "id": "freesound.radio-sweep.v1",
+      "metadataVersion": 1,
+      "fileVersion": 1,
+      "category": "media",
+      "name": {
+        "zh-CN": "全频段电台扫频",
+        "en": "Full radio sweep"
+      },
+      "tags": ["收音机", "扫频", "静电", "老设备", "持续环境"],
+      "availability": "bundled",
+      "releaseStatus": "approved",
+      "sha256": "90c9da1fa14fd91f4842116d5592a8f3e8a61340eb3b82d1a05ef4cb3c27a911",
+      "previewSegmentId": "loop-main",
+      "source": {
+        "name": "Freesound CC0 公开 HQ 预览",
+        "url": "https://freesound.org/people/vedas/sounds/396902/",
+        "downloadUrl": "https://cdn.freesound.org/previews/396/396902_828209-hq.mp3",
+        "provenance": "verified",
+        "authors": [
+          {
+            "name": "vedas",
+            "url": "https://freesound.org/people/vedas/"
+          }
+        ],
+        "license": {
+          "name": "Creative Commons Zero v1.0 Universal",
+          "spdxId": "CC0-1.0",
+          "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "redistributionAllowed": true
+        }
+      },
+      "segments": [
+        {
+          "id": "loop-main",
+          "path": "assets/audio/freesound-radio-sweep.mp3",
+          "purpose": "loop",
+          "startMs": 0
+        }
+      ]
+    },
+    {
+      "id": "freesound.projector-super8.v1",
+      "metadataVersion": 1,
+      "fileVersion": 1,
+      "category": "media",
+      "name": {
+        "zh-CN": "超级8放映机",
+        "en": "Super 8 projector"
+      },
+      "tags": ["放映机", "胶片", "机械", "风扇", "持续环境"],
+      "availability": "bundled",
+      "releaseStatus": "approved",
+      "sha256": "300bc0eb913ca634b8476de0e451204c256928fd9ec4ab604047188a377519ef",
+      "previewSegmentId": "loop-main",
+      "source": {
+        "name": "Freesound CC0 公开 HQ 预览",
+        "url": "https://freesound.org/people/StefanoPTesta/sounds/447886/",
+        "downloadUrl": "https://cdn.freesound.org/previews/447/447886_1637116-hq.mp3",
+        "provenance": "verified",
+        "authors": [
+          {
+            "name": "StefanoPTesta",
+            "url": "https://freesound.org/people/StefanoPTesta/"
+          }
+        ],
+        "license": {
+          "name": "Creative Commons Zero v1.0 Universal",
+          "spdxId": "CC0-1.0",
+          "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "redistributionAllowed": true
+        }
+      },
+      "segments": [
+        {
+          "id": "loop-main",
+          "path": "assets/audio/freesound-projector-super8.mp3",
+          "purpose": "loop",
+          "startMs": 0
+        }
+      ]
+    },
+    {
+      "id": "freesound.bubbles-aquarium.v1",
+      "metadataVersion": 1,
+      "fileVersion": 1,
+      "category": "media",
+      "name": {
+        "zh-CN": "鱼缸气泵",
+        "en": "Aquarium aerator"
+      },
+      "tags": ["鱼缸", "气泡", "水声", "机械", "持续环境"],
+      "availability": "bundled",
+      "releaseStatus": "approved",
+      "sha256": "d7667a4780e161050cc2702c14734a9240223444c6b7c301a742a1ba87611483",
+      "previewSegmentId": "loop-main",
+      "source": {
+        "name": "Freesound CC0 公开 HQ 预览",
+        "url": "https://freesound.org/people/ddaedalus/sounds/418198/",
+        "downloadUrl": "https://cdn.freesound.org/previews/418/418198_1831797-hq.mp3",
+        "provenance": "verified",
+        "authors": [
+          {
+            "name": "ddaedalus",
+            "url": "https://freesound.org/people/ddaedalus/"
+          }
+        ],
+        "license": {
+          "name": "Creative Commons Zero v1.0 Universal",
+          "spdxId": "CC0-1.0",
+          "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "redistributionAllowed": true
+        }
+      },
+      "segments": [
+        {
+          "id": "loop-main",
+          "path": "assets/audio/freesound-bubbles-aquarium.mp3",
+          "purpose": "loop",
+          "startMs": 0
+        }
+      ]
+    },
+    {
+      "id": "freesound.paper-rip.v1",
+      "metadataVersion": 1,
+      "fileVersion": 1,
+      "category": "device",
+      "name": {
+        "zh-CN": "纸张撕裂",
+        "en": "Paper rip"
+      },
+      "tags": ["纸张", "撕裂", "近景", "事件"],
+      "availability": "bundled",
+      "releaseStatus": "approved",
+      "sha256": "32783a6c0e87eecf83ab061303accb750246b0220d6839eccd06446619552da5",
+      "previewSegmentId": "event-main",
+      "source": {
+        "name": "Freesound CC0 公开 HQ 预览",
+        "url": "https://freesound.org/people/zachfbstudios/sounds/136495/",
+        "downloadUrl": "https://cdn.freesound.org/previews/136/136495_2037808-hq.mp3",
+        "provenance": "verified",
+        "authors": [
+          {
+            "name": "zachfbstudios",
+            "url": "https://freesound.org/people/zachfbstudios/"
+          }
+        ],
+        "license": {
+          "name": "Creative Commons Zero v1.0 Universal",
+          "spdxId": "CC0-1.0",
+          "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "redistributionAllowed": true
+        }
+      },
+      "segments": [
+        {
+          "id": "event-main",
+          "path": "assets/audio/freesound-paper-rip.mp3",
+          "purpose": "event",
+          "startMs": 0,
+          "durationMs": 20747
+        }
+      ]
+    },
+    {
+      "id": "freesound.footsteps-room.v1",
+      "metadataVersion": 1,
+      "fileVersion": 1,
+      "category": "place",
+      "name": {
+        "zh-CN": "空房间脚步",
+        "en": "Footsteps in a small room"
+      },
+      "tags": ["脚步", "空房间", "回响", "靠近", "事件"],
+      "availability": "bundled",
+      "releaseStatus": "approved",
+      "sha256": "292479c88d4317126ab8f00cbf590d4552b5d3931c5d6b888238ce508431c987",
+      "previewSegmentId": "event-main",
+      "source": {
+        "name": "Freesound CC0 公开 HQ 预览",
+        "url": "https://freesound.org/people/craigsmith/sounds/480678/",
+        "downloadUrl": "https://cdn.freesound.org/previews/480/480678_2524442-hq.mp3",
+        "provenance": "verified",
+        "authors": [
+          {
+            "name": "craigsmith",
+            "url": "https://freesound.org/people/craigsmith/"
+          }
+        ],
+        "license": {
+          "name": "Creative Commons Zero v1.0 Universal",
+          "spdxId": "CC0-1.0",
+          "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "redistributionAllowed": true
+        }
+      },
+      "segments": [
+        {
+          "id": "event-main",
+          "path": "assets/audio/freesound-footsteps-room.mp3",
+          "purpose": "event",
+          "startMs": 0,
+          "durationMs": 48519
+        }
+      ]
+    },
+    {
+      "id": "freesound.library-lisboa.v1",
+      "metadataVersion": 1,
+      "fileVersion": 1,
+      "category": "place",
+      "name": {
+        "zh-CN": "里斯本图书馆",
+        "en": "Lisbon library"
+      },
+      "tags": ["图书馆", "室内", "安静", "空间", "持续环境"],
+      "availability": "bundled",
+      "releaseStatus": "approved",
+      "sha256": "a16908dec563bc641be7dcd6ba3176686a490a9917c9a56b69933695a1e2b415",
+      "previewSegmentId": "loop-main",
+      "source": {
+        "name": "Freesound CC0 公开 HQ 预览",
+        "url": "https://freesound.org/people/djalgae/sounds/527365/",
+        "downloadUrl": "https://cdn.freesound.org/previews/527/527365_6086608-hq.mp3",
+        "provenance": "verified",
+        "authors": [
+          {
+            "name": "djalgae",
+            "url": "https://freesound.org/people/djalgae/"
+          }
+        ],
+        "license": {
+          "name": "Creative Commons Zero v1.0 Universal",
+          "spdxId": "CC0-1.0",
+          "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "redistributionAllowed": true
+        }
+      },
+      "segments": [
+        {
+          "id": "loop-main",
+          "path": "assets/audio/freesound-library-lisboa.mp3",
+          "purpose": "loop",
+          "startMs": 0
+        }
+      ]
+    },
+    {
+      "id": "freesound.train-platform.v1",
+      "metadataVersion": 1,
+      "fileVersion": 1,
+      "category": "place",
+      "name": {
+        "zh-CN": "列车进站",
+        "en": "Train arriving at platform"
+      },
+      "tags": ["火车", "站台", "车轮", "交通", "持续环境"],
+      "availability": "bundled",
+      "releaseStatus": "approved",
+      "sha256": "087df3ef0b07355d168843616b6110e14825a5004e922b0e107072c036bc3138",
+      "previewSegmentId": "loop-main",
+      "source": {
+        "name": "Freesound CC0 公开 HQ 预览",
+        "url": "https://freesound.org/people/chhavi/sounds/566506/",
+        "downloadUrl": "https://cdn.freesound.org/previews/566/566506_753542-hq.mp3",
+        "provenance": "verified",
+        "authors": [
+          {
+            "name": "chhavi",
+            "url": "https://freesound.org/people/chhavi/"
+          }
+        ],
+        "license": {
+          "name": "Creative Commons Zero v1.0 Universal",
+          "spdxId": "CC0-1.0",
+          "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "redistributionAllowed": true
+        }
+      },
+      "segments": [
+        {
+          "id": "loop-main",
+          "path": "assets/audio/freesound-train-platform.mp3",
+          "purpose": "loop",
+          "startMs": 0
+        }
+      ]
+    },
+    {
+      "id": "freesound.airplane-distant.v1",
+      "metadataVersion": 1,
+      "fileVersion": 1,
+      "category": "place",
+      "name": {
+        "zh-CN": "远处飞机",
+        "en": "Distant airplane drone"
+      },
+      "tags": ["飞机", "远处", "低频", "户外", "持续环境"],
+      "availability": "bundled",
+      "releaseStatus": "approved",
+      "sha256": "4f48c67c4a22fdac2d7d42d9f19062b124e82e6bd573e6b08ec6ca06978e7b7b",
+      "previewSegmentId": "loop-main",
+      "source": {
+        "name": "Freesound CC0 公开 HQ 预览",
+        "url": "https://freesound.org/people/TRP/sounds/573810/",
+        "downloadUrl": "https://cdn.freesound.org/previews/573/573810_97550-hq.mp3",
+        "provenance": "verified",
+        "authors": [
+          {
+            "name": "TRP",
+            "url": "https://freesound.org/people/TRP/"
+          }
+        ],
+        "license": {
+          "name": "Creative Commons Zero v1.0 Universal",
+          "spdxId": "CC0-1.0",
+          "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "redistributionAllowed": true
+        }
+      },
+      "segments": [
+        {
+          "id": "loop-main",
+          "path": "assets/audio/freesound-airplane-distant.mp3",
+          "purpose": "loop",
+          "startMs": 0
+        }
+      ]
+    },
+    {
+      "id": "freesound.traffic-evening.v1",
+      "metadataVersion": 1,
+      "fileVersion": 1,
+      "category": "place",
+      "name": {
+        "zh-CN": "傍晚车流",
+        "en": "Evening traffic"
+      },
+      "tags": ["车流", "傍晚", "城市", "街道", "持续环境"],
+      "availability": "bundled",
+      "releaseStatus": "approved",
+      "sha256": "0614b71744b2a75a6ed2c1f52e71f910ec2139896683254f36fc5f3a99fa56e3",
+      "previewSegmentId": "loop-main",
+      "source": {
+        "name": "Freesound CC0 公开 HQ 预览",
+        "url": "https://freesound.org/people/bkowshik/sounds/439218/",
+        "downloadUrl": "https://cdn.freesound.org/previews/439/439218_8998638-hq.mp3",
+        "provenance": "verified",
+        "authors": [
+          {
+            "name": "bkowshik",
+            "url": "https://freesound.org/people/bkowshik/"
+          }
+        ],
+        "license": {
+          "name": "Creative Commons Zero v1.0 Universal",
+          "spdxId": "CC0-1.0",
+          "url": "https://creativecommons.org/publicdomain/zero/1.0/",
+          "redistributionAllowed": true
+        }
+      },
+      "segments": [
+        {
+          "id": "loop-main",
+          "path": "assets/audio/freesound-traffic-evening.mp3",
           "purpose": "loop",
           "startMs": 0
         }

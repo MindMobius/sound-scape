@@ -1,0 +1,322 @@
+[
+  {
+    "sourceId": 662204,
+    "fileName": "freesound-rain-summer-thunder.mp3",
+    "category": "weather",
+    "purpose": "loop",
+    "name": { "zh-CN": "夏日雷雨", "en": "Summer rain and thunder" },
+    "tags": ["雨", "雷声", "窗外", "天气", "持续环境"]
+  },
+  {
+    "sourceId": 81819,
+    "fileName": "freesound-rain-room.mp3",
+    "category": "weather",
+    "purpose": "loop",
+    "name": { "zh-CN": "室内听雨", "en": "Rain from a room" },
+    "tags": ["雨", "窗", "室内", "回响", "持续环境"]
+  },
+  {
+    "sourceId": 169534,
+    "fileName": "freesound-thunder-suburb.mp3",
+    "category": "weather",
+    "purpose": "event",
+    "name": { "zh-CN": "远处闷雷", "en": "Distant suburban thunder" },
+    "tags": ["雷声", "远处", "闷雷", "天气", "事件"]
+  },
+  {
+    "sourceId": 194364,
+    "fileName": "freesound-thunder-clap.mp3",
+    "category": "weather",
+    "purpose": "event",
+    "name": { "zh-CN": "近处雷击", "en": "Thunder clap" },
+    "tags": ["雷声", "近处", "爆发", "天气", "事件"]
+  },
+  {
+    "sourceId": 403051,
+    "fileName": "freesound-wind-forest.mp3",
+    "category": "weather",
+    "purpose": "loop",
+    "name": { "zh-CN": "林间强风", "en": "Strong wind in forest" },
+    "tags": ["风", "树林", "户外", "持续环境"]
+  },
+  {
+    "sourceId": 546871,
+    "fileName": "freesound-wind-vent.mp3",
+    "category": "weather",
+    "purpose": "loop",
+    "name": { "zh-CN": "屋内风啸", "en": "Wind through ventilation" },
+    "tags": ["风", "屋内", "通风口", "低频", "持续环境"]
+  },
+  {
+    "sourceId": 730154,
+    "fileName": "freesound-river-close.mp3",
+    "category": "water",
+    "purpose": "loop",
+    "name": { "zh-CN": "近岸河流", "en": "Close river murmur" },
+    "tags": ["河流", "流水", "近岸", "自然", "持续环境"]
+  },
+  {
+    "sourceId": 828410,
+    "fileName": "freesound-river-layers.mp3",
+    "category": "water",
+    "purpose": "loop",
+    "name": { "zh-CN": "河瀑交叠", "en": "Layered river and waterfall" },
+    "tags": ["河流", "瀑布", "流水", "层次", "持续环境"]
+  },
+  {
+    "sourceId": 573173,
+    "fileName": "freesound-waves-calm.mp3",
+    "category": "water",
+    "purpose": "loop",
+    "name": { "zh-CN": "明亮海浪", "en": "Bright calm ocean waves" },
+    "tags": ["海浪", "海岸", "浪花", "平静", "持续环境"]
+  },
+  {
+    "sourceId": 426076,
+    "fileName": "freesound-waves-storm.mp3",
+    "category": "water",
+    "purpose": "loop",
+    "name": { "zh-CN": "夜岸风浪", "en": "Storm waves at night" },
+    "tags": ["海浪", "夜晚", "海岸", "风浪", "持续环境"]
+  },
+  {
+    "sourceId": 632107,
+    "fileName": "freesound-waterfall-hidden.mp3",
+    "category": "water",
+    "purpose": "loop",
+    "name": { "zh-CN": "林中隐瀑", "en": "Hidden forest waterfall" },
+    "tags": ["瀑布", "森林", "水花", "自然", "持续环境"]
+  },
+  {
+    "sourceId": 657359,
+    "fileName": "freesound-fire-stove.mp3",
+    "category": "fire",
+    "purpose": "loop",
+    "name": { "zh-CN": "远处炉火", "en": "Fire in a distant stove" },
+    "tags": ["炉火", "木柴", "金属炉门", "室内", "持续环境"]
+  },
+  {
+    "sourceId": 483323,
+    "fileName": "freesound-fire-metal.mp3",
+    "category": "fire",
+    "purpose": "loop",
+    "name": { "zh-CN": "铁桶篝火", "en": "Fire and metal crackle" },
+    "tags": ["篝火", "木柴", "金属", "噼啪", "持续环境"]
+  },
+  {
+    "sourceId": 433001,
+    "fileName": "freesound-birds-near-home.mp3",
+    "category": "wildlife",
+    "purpose": "loop",
+    "name": { "zh-CN": "窗外晨鸟", "en": "Birds near home" },
+    "tags": ["鸟鸣", "清晨", "窗外", "自然", "持续环境"]
+  },
+  {
+    "sourceId": 268080,
+    "fileName": "freesound-birds-spring.mp3",
+    "category": "wildlife",
+    "purpose": "loop",
+    "name": { "zh-CN": "春日鸟群", "en": "Spring birds" },
+    "tags": ["鸟鸣", "春天", "户外", "城市远景", "持续环境"]
+  },
+  {
+    "sourceId": 616982,
+    "fileName": "freesound-crickets-night.mp3",
+    "category": "wildlife",
+    "purpose": "loop",
+    "name": { "zh-CN": "夜虫低鸣", "en": "Tree crickets at night" },
+    "tags": ["蟋蟀", "夜晚", "虫鸣", "夏夜", "持续环境"]
+  },
+  {
+    "sourceId": 799293,
+    "fileName": "freesound-frogs-pond.mp3",
+    "category": "wildlife",
+    "purpose": "loop",
+    "name": { "zh-CN": "池塘蛙鸣", "en": "Frogs at a pond" },
+    "tags": ["青蛙", "池塘", "夜晚", "自然", "持续环境"]
+  },
+  {
+    "sourceId": 352557,
+    "fileName": "freesound-owls-choir.mp3",
+    "category": "wildlife",
+    "purpose": "loop",
+    "name": { "zh-CN": "林间猫头鹰", "en": "A choir of scops owls" },
+    "tags": ["猫头鹰", "森林", "夜晚", "远处", "持续环境"]
+  },
+  {
+    "sourceId": 627411,
+    "fileName": "freesound-cafe-korea.mp3",
+    "category": "place",
+    "purpose": "loop",
+    "name": { "zh-CN": "午后咖啡馆", "en": "Afternoon cafe" },
+    "tags": ["咖啡馆", "人声", "杯盏", "室内", "持续环境"]
+  },
+  {
+    "sourceId": 347615,
+    "fileName": "freesound-library-te-atatu.mp3",
+    "category": "place",
+    "purpose": "loop",
+    "name": { "zh-CN": "安静图书馆", "en": "Quiet library" },
+    "tags": ["图书馆", "室内", "翻页", "安静", "持续环境"]
+  },
+  {
+    "sourceId": 570535,
+    "fileName": "freesound-traffic-continuous.mp3",
+    "category": "place",
+    "purpose": "loop",
+    "name": { "zh-CN": "持续车流", "en": "Continuous traffic" },
+    "tags": ["车流", "公路", "城市", "远景", "持续环境"]
+  },
+  {
+    "sourceId": 800741,
+    "fileName": "freesound-train-station.mp3",
+    "category": "place",
+    "purpose": "loop",
+    "name": { "zh-CN": "火车站候车厅", "en": "Train station ambience" },
+    "tags": ["火车站", "候车厅", "人群", "交通", "持续环境"]
+  },
+  {
+    "sourceId": 204510,
+    "fileName": "freesound-airplane-cabin.mp3",
+    "category": "place",
+    "purpose": "loop",
+    "name": { "zh-CN": "飞机舱内", "en": "Airplane cabin" },
+    "tags": ["飞机", "舱内", "低频", "旅行", "持续环境"]
+  },
+  {
+    "sourceId": 242008,
+    "fileName": "freesound-clock-pendulum.mp3",
+    "category": "device",
+    "purpose": "loop",
+    "name": { "zh-CN": "摆钟滴答", "en": "Pendulum clock" },
+    "tags": ["时钟", "滴答", "摆钟", "室内", "持续环境"]
+  },
+  {
+    "sourceId": 652596,
+    "fileName": "freesound-radio-vintage.mp3",
+    "category": "media",
+    "purpose": "loop",
+    "name": { "zh-CN": "老式收音机调谐", "en": "Vintage radio tuning" },
+    "tags": ["收音机", "调频", "静电", "模拟", "持续环境"]
+  },
+  {
+    "sourceId": 613836,
+    "fileName": "freesound-projector-8mm.mp3",
+    "category": "media",
+    "purpose": "loop",
+    "name": { "zh-CN": "8毫米放映机", "en": "8mm projector" },
+    "tags": ["放映机", "胶片", "风扇", "机械", "持续环境"]
+  },
+  {
+    "sourceId": 645909,
+    "fileName": "freesound-bubbles-sparkling.mp3",
+    "category": "media",
+    "purpose": "loop",
+    "name": { "zh-CN": "气泡细响", "en": "Sparkling bubbles" },
+    "tags": ["气泡", "水声", "细节", "近景", "持续环境"]
+  },
+  {
+    "sourceId": 437337,
+    "fileName": "freesound-chimes-indoor.mp3",
+    "category": "media",
+    "purpose": "event",
+    "name": { "zh-CN": "室内风铃", "en": "Indoor wind chimes" },
+    "tags": ["风铃", "金属", "轻响", "室内", "事件"]
+  },
+  {
+    "sourceId": 846921,
+    "fileName": "freesound-footsteps-stairs.mp3",
+    "category": "place",
+    "purpose": "event",
+    "name": { "zh-CN": "木楼梯脚步", "en": "Footsteps on wooden stairs" },
+    "tags": ["脚步", "木楼梯", "室内", "靠近", "事件"]
+  },
+  {
+    "sourceId": 759323,
+    "fileName": "freesound-paper-tear.mp3",
+    "category": "device",
+    "purpose": "event",
+    "name": { "zh-CN": "撕纸声", "en": "Tearing paper" },
+    "tags": ["纸张", "撕裂", "近景", "事件"]
+  },
+  {
+    "sourceId": 756472,
+    "fileName": "freesound-bubbles-synthetic.mp3",
+    "category": "media",
+    "purpose": "loop",
+    "name": { "zh-CN": "合成水泡", "en": "Synthetic watery bubbles" },
+    "tags": ["气泡", "合成器", "水声", "纹理", "持续环境"]
+  },
+  {
+    "sourceId": 396902,
+    "fileName": "freesound-radio-sweep.mp3",
+    "category": "media",
+    "purpose": "loop",
+    "name": { "zh-CN": "全频段电台扫频", "en": "Full radio sweep" },
+    "tags": ["收音机", "扫频", "静电", "老设备", "持续环境"]
+  },
+  {
+    "sourceId": 447886,
+    "fileName": "freesound-projector-super8.mp3",
+    "category": "media",
+    "purpose": "loop",
+    "name": { "zh-CN": "超级8放映机", "en": "Super 8 projector" },
+    "tags": ["放映机", "胶片", "机械", "风扇", "持续环境"]
+  },
+  {
+    "sourceId": 418198,
+    "fileName": "freesound-bubbles-aquarium.mp3",
+    "category": "media",
+    "purpose": "loop",
+    "name": { "zh-CN": "鱼缸气泵", "en": "Aquarium aerator" },
+    "tags": ["鱼缸", "气泡", "水声", "机械", "持续环境"]
+  },
+  {
+    "sourceId": 136495,
+    "fileName": "freesound-paper-rip.mp3",
+    "category": "device",
+    "purpose": "event",
+    "name": { "zh-CN": "纸张撕裂", "en": "Paper rip" },
+    "tags": ["纸张", "撕裂", "近景", "事件"]
+  },
+  {
+    "sourceId": 480678,
+    "fileName": "freesound-footsteps-room.mp3",
+    "category": "place",
+    "purpose": "event",
+    "name": { "zh-CN": "空房间脚步", "en": "Footsteps in a small room" },
+    "tags": ["脚步", "空房间", "回响", "靠近", "事件"]
+  },
+  {
+    "sourceId": 527365,
+    "fileName": "freesound-library-lisboa.mp3",
+    "category": "place",
+    "purpose": "loop",
+    "name": { "zh-CN": "里斯本图书馆", "en": "Lisbon library" },
+    "tags": ["图书馆", "室内", "安静", "空间", "持续环境"]
+  },
+  {
+    "sourceId": 566506,
+    "fileName": "freesound-train-platform.mp3",
+    "category": "place",
+    "purpose": "loop",
+    "name": { "zh-CN": "列车进站", "en": "Train arriving at platform" },
+    "tags": ["火车", "站台", "车轮", "交通", "持续环境"]
+  },
+  {
+    "sourceId": 573810,
+    "fileName": "freesound-airplane-distant.mp3",
+    "category": "place",
+    "purpose": "loop",
+    "name": { "zh-CN": "远处飞机", "en": "Distant airplane drone" },
+    "tags": ["飞机", "远处", "低频", "户外", "持续环境"]
+  },
+  {
+    "sourceId": 439218,
+    "fileName": "freesound-traffic-evening.mp3",
+    "category": "place",
+    "purpose": "loop",
+    "name": { "zh-CN": "傍晚车流", "en": "Evening traffic" },
+    "tags": ["车流", "傍晚", "城市", "街道", "持续环境"]
+  }
+]

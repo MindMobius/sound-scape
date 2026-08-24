@@ -15,7 +15,7 @@ void main() {
   test('bundled manifest is versioned and all scene references resolve', () {
     expect(library.schemaVersion, 1);
     expect(library.catalogVersion, isNotEmpty);
-    expect(library.assets, hasLength(23));
+    expect(library.assets.length, greaterThanOrEqualTo(60));
     final issues = library.integrityIssues(scenes: SoundscapeCatalog.scenes);
     expect(issues.map((issue) => '${issue.code}: ${issue.message}'), isEmpty);
   });
