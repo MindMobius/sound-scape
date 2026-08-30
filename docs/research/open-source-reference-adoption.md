@@ -1,6 +1,6 @@
 # 开源声景项目采纳矩阵
 
-更新时间：2026-08-23
+更新时间：2026-08-31
 
 ## 结论
 
@@ -23,7 +23,7 @@
 | 项目                                                                 | 许可证与边界                                       | 吸收内容                                                         | 声景落点                                                                                                                           | 明确不采用                                                       |
 | -------------------------------------------------------------------- | -------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
 | [Noice](https://github.com/trynoice/android-app)                     | GPL-3.0；不复制代码                                | 分段声音、随机静默、桥接片段、素材仓库、预设、后台服务           | `SoundSegment`、`SoundscapeScheduler`、逐层独立定时器、状态仓库接口                                                                | Kotlin/Android 实现、GPL 源码和素材包                            |
-| [Ambie](https://github.com/jenius-apps/ambie)                        | 代码 MIT；声音逐文件授权                           | 素材 ID、元数据版本、文件版本、本地化、预览、来源、作者、许可证  | `SoundAsset`、`SoundSource`、`SoundLicense`、版本化 JSON 清单；13 份已逐文件核验的 CC0 录音，当前另有 10 份独立 Freesound CC0 素材 | 未核验授权的音频、应用代码和 Windows 专属 UI 架构                |
+| [Ambie](https://github.com/jenius-apps/ambie)                        | 代码 MIT；声音逐文件授权                           | 素材 ID、元数据版本、文件版本、本地化、预览、来源、作者、许可证  | `SoundAsset`、`SoundSource`、`SoundLicense`、版本化 JSON 清单；13 份 Ambie 溯源 CC0 录音，另有 50 份独立 Freesound CC0 素材        | 未核验授权的音频、应用代码和 Windows 专属 UI 架构                |
 | [Audio-Oscar](https://github.com/ziye26/Audio-Oscar)                 | Apache-2.0；模型和数据另有许可证；当前仍是部分发布 | Planner、Critic、Executor、Mixer 的职责拆分和结构化事件          | `SceneRecipe v1` 契约；未来 Agent 只产出声明式配方，客户端校验后执行                                                               | 把固定时长成片逻辑直接套到无限声景、未经审核的模型输出直达播放器 |
 | [Generative.fm](https://github.com/generativefm)                     | MIT；原始播放器已归档                              | seed、持续调度、样本与编排分离、无限演化而非长音频文件           | 自有确定性随机数、每层独立随机流、相同 seed 可复现                                                                                 | Tone.js/Web Audio 实现和生成式音乐内容                           |
 | [Moodist](https://github.com/remvze/moodist)                         | 代码 MIT；声音混合 Pixabay/CC0，仍需逐文件核验     | 分类、收藏、预设、淡入淡出、离线体验和分享心智                   | 环境/事件/媒介/我的声音分类、收藏、用户片刻与动态声层进入正式 Flutter UI                                                           | 整包音频、Astro/React 运行时、工具集合式首页                     |

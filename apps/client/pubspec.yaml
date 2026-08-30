@@ -1,5 +1,5 @@
 name: soundscape_client
-description: "声景本地优先的持续自然声客户端 MVP。"
+description: "声景本地优先的持续自然声客户端。"
 publish_to: 'none'
 version: 0.1.0+1
 

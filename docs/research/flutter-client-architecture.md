@@ -177,14 +177,14 @@ iOS 需要 `AVAudioSessionCategory.playback` 和 `UIBackgroundModes = audio`。�
 
 只要第 3、4 或 5 项无法稳定通过，就不继续用纯 Flutter 插件堆补丁，而是把 `SceneRuntime` 接口保留，评估自有 miniaudio / AVAudioEngine / Oboe 原生实现。
 
-## 本机准备状态
+## 调研时的本机准备状态（历史）
 
-- 当前 Windows 主机没有安装 Flutter，也没有发现 `ANDROID_HOME` 或 `ANDROID_SDK_ROOT`。
+- 2026-08-21 调研时的 Windows 主机没有安装 Flutter，也没有发现 `ANDROID_HOME` 或 `ANDROID_SDK_ROOT`。
 - Java 21 已安装。
 - 2026-08-21 官方 Windows stable 清单为 Flutter `3.47.1` / Dart `3.13.1`，满足 `flutter_soloud` 要求的 Flutter `>= 3.41.0`。
 - 国内网络安装时使用 Flutter 官方文档列出的 CFUG 镜像：`PUB_HOSTED_URL=https://pub.flutter-io.cn` 与 `FLUTTER_STORAGE_BASE_URL=https://storage.flutter-io.cn`，并保留官方 SHA-256 校验。
 
-该方案现已落地为 `apps/client/` 纵切客户端；Flutter SDK、Android SDK、原生音频集成以及 Windows、Android 构建均由仓库脚本和 CI 持续验收，Web 界面不作为客户端运行时来源。
+该方案现已落地为 `apps/client/` 客户端；当前环境要求和平台证据以 `../development/new-machine-setup.md` 与 `../status/current-development-state.md` 为准，Web 界面不作为客户端运行时来源。
 
 ## 主要来源
 

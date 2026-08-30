@@ -1,6 +1,6 @@
-# 声景 Flutter 客户端 MVP
+# 声景 Flutter 客户端
 
-`apps/client/` 是声景面向 Android、iOS 和 Windows 的本地优先客户端纵切。它验证的不是普通歌单播放器，而是同一条持续声景在首页、展开播放器、沉浸聆听和系统媒体控制之间保持连续。
+`apps/client/` 是声景面向 Android、iOS 和 Windows 的本地优先客户端。它不是普通歌单播放器：同一条持续声景必须在首页、展开播放器、沉浸聆听和系统媒体控制之间保持连续。新设备先阅读 `../../docs/development/new-machine-setup.md`，当前能力证据见 `../../docs/status/current-development-state.md`。
 
 ## 当前能力
 
@@ -24,13 +24,13 @@
 npm run client:setup
 ```
 
-日常开发只运行本机桌面端：
+Windows 日常开发只运行桌面端：
 
 ```powershell
 npm run client:dev
 ```
 
-推荐从 VS Code 选择“声景：桌面日常开发”并按 `F5` 启动。仓库已配置保存后自动热重载；终端命令则可在运行期间按 `r` 热重载。Android 模拟器或设备只在阶段验收时运行：
+仓库当前没有 macOS 或 Linux 桌面宿主，`client:dev` 会明确拒绝不存在的平台工程。推荐在 Windows 从 VS Code 选择“声景：桌面日常开发”并按 `F5` 启动。仓库已配置保存后自动热重载；终端命令则可在运行期间按 `r` 热重载。Android 模拟器或设备只在阶段验收时运行：
 
 ```powershell
 npm run client:devices
@@ -42,6 +42,8 @@ npm run client:android
 ```powershell
 node tools/flutter.mjs run android YOUR_DEVICE_ID
 ```
+
+macOS 上使用 `npm run client:ios` 启动一个 iOS Simulator 或 iPhone；多设备时使用 `node tools/flutter.mjs run ios YOUR_DEVICE_ID`。
 
 SDK 依次从仓库 `.fvm/flutter_sdk`、`FLUTTER_ROOT`、`PATH` 和 Android `local.properties` 查找。国内镜像只注入 Flutter 子进程，不改写系统级配置。
 
@@ -76,7 +78,7 @@ npm run client:build:ios
 - `SoundscapeScheduler` 把配方编译为可复现的纹理变化与事件计划。
 - 页面只发送播放、暂停、换景、总音量、轻重、简繁、素材导入、动态声层和逐层听感意图，不持有音频句柄。
 
-## MVP 边界
+## 当前产品边界
 
 当前没有自然语言 Agent、在线下载素材仓库、同步、账号或发布安装链路。内置的 63 份录音以 `assets/audio/` 为唯一母版，每份都在 `sound-library.v1.json` 与 `THIRD_PARTY.md` 记录原始页面、获取地址、作者、许可证和 SHA-256；Flutter 包内副本由根工具生成且不提交。用户导入始终视为本机私有素材，不能进入发布包或被再次分发。
 
