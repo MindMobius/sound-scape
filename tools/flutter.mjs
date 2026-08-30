@@ -126,19 +126,22 @@ function verifyFlutterVersion(flutterExecutable) {
   );
 }
 
-function selectAndroidDevice(flutterExecutable, requestedDeviceId) {
+function selectDevice(
+  flutterExecutable,
+  { requestedDeviceId, targetPlatformPrefix, label, startInstruction },
+) {
   const devices = JSON.parse(
     run(flutterExecutable, ["devices", "--machine"], { capture: true }),
-  ).filter((device) => device.targetPlatform?.startsWith("android"));
+  ).filter((device) => device.targetPlatform?.startsWith(targetPlatformPrefix));
 
   if (requestedDeviceId) {
     if (!/^[a-zA-Z0-9._:-]+$/.test(requestedDeviceId)) {
-      throw new Error(`Android device id '${requestedDeviceId}' is invalid.`);
+      throw new Error(`${label} device id '${requestedDeviceId}' is invalid.`);
     }
     const requested = devices.find((device) => device.id === requestedDeviceId);
     if (!requested) {
       throw new Error(
-        `Android device '${requestedDeviceId}' is not connected. ` +
+        `${label} device '${requestedDeviceId}' is not connected. ` +
           "Run npm run client:devices to inspect available targets.",
       );
     }
@@ -146,33 +149,65 @@ function selectAndroidDevice(flutterExecutable, requestedDeviceId) {
   }
 
   if (devices.length === 0) {
-    throw new Error("No Android device is connected. Start one emulator or connect one phone.");
+    throw new Error(`No ${label} device is connected. ${startInstruction}`);
   }
   if (devices.length > 1) {
     const choices = devices.map((device) => device.id).join(", ");
     throw new Error(
-      `Multiple Android devices are connected (${choices}). ` +
-        'Pass one id after "node tools/flutter.mjs run android".',
+      `Multiple ${label} devices are connected (${choices}). ` +
+        `Pass one id after "node tools/flutter.mjs run ${targetPlatformPrefix}".`,
     );
   }
   return devices[0].id;
 }
 
+function selectAndroidDevice(flutterExecutable, requestedDeviceId) {
+  return selectDevice(flutterExecutable, {
+    requestedDeviceId,
+    targetPlatformPrefix: "android",
+    label: "Android",
+    startInstruction: "Start one emulator or connect one phone.",
+  });
+}
+
+function selectIosDevice(flutterExecutable, requestedDeviceId) {
+  if (process.platform !== "darwin") {
+    throw new Error("iOS development requires macOS and Xcode.");
+  }
+  return selectDevice(flutterExecutable, {
+    requestedDeviceId,
+    targetPlatformPrefix: "ios",
+    label: "iOS",
+    startInstruction: "Start one Simulator or connect one iPhone.",
+  });
+}
+
 function desktopDeviceId() {
-  if (process.platform === "win32") return "windows";
-  if (process.platform === "darwin") return "macos";
-  if (process.platform === "linux") return "linux";
-  throw new Error(`Desktop development is unsupported on ${process.platform}.`);
+  const target =
+    process.platform === "win32"
+      ? "windows"
+      : process.platform === "darwin"
+        ? "macos"
+        : process.platform === "linux"
+          ? "linux"
+          : null;
+  if (target && fs.existsSync(path.join(applicationRoot, target))) return target;
+  throw new Error(
+    `This checkout has no ${target ?? process.platform} desktop host. ` +
+      "Use Windows for desktop development, or run a configured mobile target.",
+  );
 }
 
 function printHelp() {
   console.log(`Usage: node tools/flutter.mjs <command>
 
 Commands:
+  doctor                   Validate the pinned SDK and report platform toolchains
   setup                    Validate the SDK, restore packages, and run doctor
   devices                  List connected Flutter targets
   run desktop              Run the native desktop app in debug mode
   run android [device-id]  Run the Android app on one connected target
+  run ios [device-id]      Run the iOS app on one connected macOS target
   check                    Check formatting, analyze, and run headless tests
   test                     Run headless Flutter tests
   integration windows      Run the native integration test on Windows
@@ -189,7 +224,7 @@ function main() {
     return;
   }
 
-  if (command !== "devices") syncRuntimeAssets();
+  if (command !== "devices" && command !== "doctor") syncRuntimeAssets();
 
   const sdkRoot = resolveFlutterSdk();
   const pathKey =
@@ -203,6 +238,9 @@ function main() {
   verifyFlutterVersion(flutterExecutable);
 
   switch (command) {
+    case "doctor":
+      run(flutterExecutable, ["doctor", "-v"]);
+      return;
     case "setup":
       if (isWindows) {
         run(flutterExecutable, ["config", "--enable-windows-desktop"]);
@@ -223,7 +261,12 @@ function main() {
         run(flutterExecutable, ["run", "-d", selectedDevice, "--debug"]);
         return;
       }
-      throw new Error("Run target must be either desktop or android.");
+      if (target === "ios") {
+        const selectedDevice = selectIosDevice(flutterExecutable, deviceId);
+        run(flutterExecutable, ["run", "-d", selectedDevice, "--debug"]);
+        return;
+      }
+      throw new Error("Run target must be desktop, android, or ios.");
     }
     case "check":
       run(dartExecutable, [

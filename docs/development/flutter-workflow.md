@@ -6,31 +6,34 @@
 
 ## 四层反馈环
 
-| 层级 | 运行方式 | 解决的问题 | 频率 |
-| --- | --- | --- | --- |
-| 桌面热重载 | VS Code“声景：桌面日常开发”或 `npm run client:dev` | UI、动效、状态、声景编排和桌面音频 | 持续 |
-| 无设备检查 | `npm run client:check` | 格式、静态分析、领域逻辑、组件行为、溢出和响应式 | 每个改动边界 |
-| 原生阶段验收 | `npm run client:integration:windows` 或 `npm run client:integration:android` | 真实音频运行时、展开播放器、播放状态和平台插件 | 完成一段平台能力后 |
-| Android 人工验收 | `npm run client:android` | 触控、返回手势、通知和后台切换 | 完成一段移动端能力后 |
-| 真机发布验收 | Android 手机与 iPhone | 锁屏、来电、耳机、蓝牙、长播、系统回收和性能 | 发布候选版本 |
+| 层级               | 运行方式                                                                     | 解决的问题                                       | 频率                 |
+| ------------------ | ---------------------------------------------------------------------------- | ------------------------------------------------ | -------------------- |
+| Windows 桌面热重载 | VS Code“声景：桌面日常开发”或 `npm run client:dev`                           | UI、动效、状态、声景编排和桌面音频               | 持续                 |
+| 无设备检查         | `npm run client:check`                                                       | 格式、静态分析、领域逻辑、组件行为、溢出和响应式 | 每个改动边界         |
+| 原生阶段验收       | `npm run client:integration:windows` 或 `npm run client:integration:android` | 真实音频运行时、展开播放器、播放状态和平台插件   | 完成一段平台能力后   |
+| Android 人工验收   | `npm run client:android`                                                     | 触控、返回手势、通知和后台切换                   | 完成一段移动端能力后 |
+| 真机发布验收       | Android 手机与 iPhone                                                        | 锁屏、来电、耳机、蓝牙、长播、系统回收和性能     | 发布候选版本         |
 
 ## 日常入口
 
 首次运行：
 
 ```powershell
+npm run doctor
 npm run client:setup
 ```
 
 推荐在 VS Code 安装仓库建议的 Dart 与 Flutter 扩展，选择“声景：桌面日常开发”并按 `F5`。工作区会在保存 Dart 文件后执行热重载，保留当前播放器状态。修改原生 Kotlin、Swift、C++、Manifest、插件注册或启动初始化时，必须热重启或完整重启。
 
-纯终端入口为：
+Windows 纯终端入口为：
 
 ```powershell
 npm run client:dev
 ```
 
 终端模式运行期间按 `r` 热重载，按 `R` 热重启。
+
+仓库当前没有 macOS 或 Linux 桌面宿主，这两个系统不会伪装成桌面目标。macOS 日常开发 iOS 时使用 `npm run client:ios`；Linux 只承担 Web、Dart 测试或 Android 工作。
 
 ## SDK 与网络
 
@@ -66,3 +69,10 @@ npm run client:android
 ```
 
 多设备并存时必须显式传入设备 ID，避免误装或误测。iOS 构建和 Simulator 只能在 macOS 进行；Windows 日常循环不假装覆盖 iOS。GitHub Actions 分别执行 Linux 分析与 Android 构建、Windows 原生集成、macOS iOS 无签名构建。自动测试通过只是合并门槛，后台播放和音频生命周期仍以真机证据为准。
+
+macOS 运行 iOS：
+
+```powershell
+npm run client:devices
+npm run client:ios
+```
